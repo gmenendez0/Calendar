@@ -1,6 +1,6 @@
 # Calendar
 ## Participantes:
 
-**Guido **, ....
+**Guido**, ....
 
 **Mauro N. Jackunas**, 109723
