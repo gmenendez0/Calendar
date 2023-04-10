@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 public class AppointmentTest {
 
+    //Post: Tests that setTitle sets the title correctly.
     @Test
     public void setTitle(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
@@ -16,6 +17,7 @@ public class AppointmentTest {
         assertEquals("Hello2", title);
     }
 
+    //Post: Tests that setDescription sets the description correctly.
     @Test
     public void setDescription(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
@@ -26,6 +28,7 @@ public class AppointmentTest {
         assertEquals("Hello from Paris", description);
     }
 
+    //Post: Tests that setCompleted sets the completed attribute correctly.
     @Test
     public void setCompleted(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
@@ -36,6 +39,7 @@ public class AppointmentTest {
         assertTrue(completed);
     }
 
+    //Post: Tests that destroy method sets the destroyed attribute on true.
     @Test
     public void destroy(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
@@ -46,6 +50,7 @@ public class AppointmentTest {
         assertTrue(destroyed);
     }
 
+    //Post: Tests the getTitle return value.
     @Test
     public void getTitle(){
         var appointment = new Appointment(1, "Hello", "");
@@ -55,6 +60,7 @@ public class AppointmentTest {
         assertEquals("Hello", titulo);
     }
 
+    //Post: Tests the getDescription return value.
     @Test
     public void getDescription(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
@@ -64,6 +70,7 @@ public class AppointmentTest {
         assertEquals("Hello from Buenos Aires", description);
     }
 
+    //Post: Tests the isCompleted return value.
     @Test
     public void isCompleted(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
@@ -73,6 +80,7 @@ public class AppointmentTest {
         assertFalse(completed);
     }
 
+    //Post: Tests the isDestroyed return value.
     @Test
     public void isDestroyed(){
         var appointment = new Appointment(1, "Hello", "Hello from Buenos Aires");
