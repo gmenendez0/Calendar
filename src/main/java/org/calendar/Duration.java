@@ -9,16 +9,16 @@ public class Duration {
     private LocalDateTime endingDateTime;
 
     //Constructs a task with wholeDay = false;
-    public Duration(boolean wholeDay, LocalDateTime startDateTime, LocalDateTime endingDateTime){
-        this.wholeDay = wholeDay;
+    public Duration(LocalDateTime startDateTime, LocalDateTime endingDateTime){
+        this.wholeDay = false;
         this.startDateTime = startDateTime;
         this.endingDateTime = endingDateTime;
     }
 
     //la hora final del events sera a las 23:59:59 del misdo dia.
     //Constructs a task with wholeDay = true;
-    public Duration(boolean wholeDay, LocalDate eventDate){
-        this.wholeDay = wholeDay;
+    public Duration(LocalDate eventDate){
+        this.wholeDay = true;
         this.startDateTime = eventDate.atStartOfDay();
         final LocalTime EndingTime = LocalTime.of(23,59,59);
         this.endingDateTime = eventDate.atTime(EndingTime);
@@ -32,6 +32,11 @@ public class Duration {
     //Post: Returns the startDateTime;
     public LocalDateTime startEvent(){
         return this.startDateTime;
+    }
+
+    //Post: Returns the endingDateTime;
+    public LocalDateTime endEvent(){
+        return this.endingDateTime;
     }
 
     //Post: Updates the wholeDay;
