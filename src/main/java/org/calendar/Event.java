@@ -9,108 +9,56 @@ public class Event extends Appointment{
 
     private boolean isRepeated;
     private Duration duration;
-    private char frecuency;
-    private Daily frecuencyDay;
-    private Weekly frecuencyWeek;
-    private Monthly frecuencyMonth;
-    private Annual frecuencyYear;
+    private Frecuency frecuency;
 
-    //El event tiene dos constructores debido a que la clase Duration puede tiene dos constructores.
-    //Basicamente si queremos crear un evento que dure un dia entero, simplemente pasandole la  fecha es suficiente.
-    //y si queremos fecha y hora especifica, se envia por argumento y listo.
-
-    //Calculo que con el UI nos enviara un 'mensaje' a la clase con el tipo de frecuencia que tendra
-    //este mensaje sera: D (daily), W(weekly), M(Monthly) y A(annual), son letras que seran string.
-
-    public Event(int id, String title, String description, boolean isRepeated,
-                 LocalDateTime startEvent, LocalDateTime endingEvent, char frecuency){
+    public Event(int id, String title, String description,
+                 LocalDateTime startEvent, LocalDateTime endingEvent){
         super(id, title, description);
-        this.isRepeated = isRepeated;
+        this.isRepeated = false;
         this.duration = new Duration(startEvent, endingEvent);
-        this.frecuency = frecuency;
-        switch(frecuency){
-            case 'M':
-                this.frecuencyMonth = new Monthly();
-                break;
-            case 'Y':
-                this.frecuencyYear = new Annual();
-                break;    
-        }
     }
 
-    public Event(int id, String title, String description, boolean isRepeated,
-                 LocalDate eventDate, char frecuency){
+    public Event(int id, String title, String description,
+                 LocalDate eventDate){
         super(id, title, description);
-        this.isRepeated = isRepeated;
+        this.isRepeated = false;
         this.duration = new Duration(eventDate);
-        this.frecuency = frecuency;
-        switch(frecuency){
-            case 'M':
-                this.frecuencyMonth = new Monthly();
-                break;
-            case 'Y':
-                this.frecuencyYear = new Annual();
-                break;
-        }
     }
 
-    public Event(int id, String title, String description, boolean isRepeated,
-                 LocalDateTime startEvent, LocalDateTime endingEvent, char frecuency,
-                 ArrayList<DayOfWeek> weekDay){
-        super(id, title, description);
-        this.isRepeated = isRepeated;
-        this.duration = new Duration(startEvent, endingEvent);
-        this.frecuency = frecuency;
-        this.frecuencyWeek = new Weekly(weekDay);
+    public boolean eventIsRepeated(){
+        return this.isRepeated;
     }
 
-    public Event(int id, String title, String description, boolean isRepeated,
-                 LocalDate eventDate, char frecuency, ArrayList<DayOfWeek> weekDay){
-        super(id, title, description);
-        this.isRepeated = isRepeated;
-        this.duration = new Duration(eventDate);
-        this.frecuency = frecuency;
-        this.frecuencyWeek = new Weekly(weekDay);
+    public void noRepeat(){
+        this.isRepeated = false;
+        this.frecuency = null;
     }
 
-    public Event(int id, String title, String description, boolean isRepeated,
-                 LocalDateTime startEvent, LocalDateTime endingEvent, char frecuency,
-                 int interval){
-        super(id, title, description);
-        this.isRepeated = isRepeated;
-        this.duration = new Duration(startEvent, endingEvent);
-        this.frecuency = frecuency;
-        this.frecuencyDay = new Daily(interval);
+    public void repeatEvent(char frecuencyType){
+        this.isRepeated = true;
+        this.frecuency = new Frecuency(frecuencyType);
     }
 
-    public Event(int id, String title, String description, boolean isRepeated,
-                 LocalDate eventDate, char frecuency, int interval){
-        super(id, title, description);
-        this.isRepeated = isRepeated;
-        this.duration = new Duration(eventDate);
-        this.frecuency = frecuency;
-        this.frecuencyDay = new Daily(interval);
+    public void repeatEvent(char frecuencyType, int interval){
+        this.isRepeated = true;
+        this.frecuency = new Frecuency(frecuencyType, interval);
     }
-    
-    public LocalDateTime nextDateEvent(LocalDateTime date){
-        LocalDateTime next = date;
-        switch (this.frecuency){
-            case 'D':
-                next = this.frecuencyDay.nextDate(date);
-                break;
-            case 'W':
-                next = this.frecuencyWeek.nextDate(date);
-                break;
-            case 'M':
-                next = this.frecuencyMonth.nextDate(date);
-                break;
-            case 'Y':
-                next = this.frecuencyYear.nextDate(date);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + this.frecuency);
-        }
-        return next;
+
+    public void repeatEvent(char frecuencyType, ArrayList<DayOfWeek> weekDays){
+        this.isRepeated = true;
+        this.frecuency = new Frecuency(frecuencyType, weekDays);
     }
-    
+
+    public void changeEventReplays(char frecuencyType){
+        this.frecuency.changeFrecuency(frecuencyType);
+    }
+
+    public void changeEventReplays(char frecuencyType, int interval){
+        this.frecuency.changeFrecuency(frecuencyType, interval);
+    }
+
+    public void changeEventReplays(char frecuencyType, ArrayList<DayOfWeek> weekDays){
+        this.frecuency.changeFrecuency(frecuencyType, weekDays);
+    }
+
 }
