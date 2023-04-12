@@ -29,12 +29,12 @@ public class Duration {
     }
 
     //Post: Returns the startDateTime;
-    public LocalDateTime startEvent(){
+    public LocalDateTime whenItStarts(){
         return this.startDateTime;
     }
 
     //Post: Returns the endingDateTime;
-    public LocalDateTime endEvent(){
+    public LocalDateTime whenItEnds(){
         return this.endingDateTime;
     }
 

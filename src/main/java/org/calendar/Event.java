@@ -10,6 +10,10 @@ public class Event extends Appointment{
     private boolean isRepeated;
     private Duration duration;
     private Frecuency frecuency;
+    private LocalDate deadline;
+
+    //Por defecto, el limitDate sera null, por ende, la repeticion sera infinita (isRepeated == true)
+    //si no
 
     //Constructor: if the event has a duration other than the whole day.
     public Event(int id, String title, String description,
@@ -71,10 +75,52 @@ public class Event extends Appointment{
         this.frecuency.changeFrecuency(frecuencyType, weekDays);
     }
 
+    //conditionInfinity: esta condicion sirve para cumplir que un evento se pueda repetir infinitamente.
+    //conditionLimit: esta sirve para cumplir que un evento se pueda repetir pero con una fecha limite.
+
     //Pre: receives a date and time of the event.
-    //Post: returns the next date of the event.
+    //Post: If the event repeats, returns the next date of the event. If not, return null
     public LocalDateTime nextEventDate(LocalDateTime date){
-        return this.frecuency.nextDate(date);
+        boolean conditionInfinity = this.eventIsRepeated() && this.getDeadline() == null;
+        boolean conditionLimit = this.eventIsRepeated() && !date.toLocalDate().isAfter(this.getDeadline());
+
+        if (conditionInfinity || conditionLimit){
+            date = this.frecuency.nextDate(date);
+            if (!date.toLocalDate().isAfter(this.getDeadline())) {
+                return date;
+            }
+        }
+        return null;
+    }
+
+    //Post: returns the deadline.
+    public LocalDate getDeadline(){
+        return this.deadline;
+    }
+
+    //Pre: receive a date and now what will be the deadline.
+    public void setDeadline(LocalDate date){
+        this.deadline = date;
+    }
+
+    //Pre: receives the number of times the event can be repeated.
+    //Post:
+    public void setDeadline(int repetitions){
+        LocalDateTime date = this.whenTheEventStart();
+        for(int i = 1; i <= repetitions; i++){
+            date = this.nextEventDate(date);
+            if (i == repetitions){
+                this.deadline = date.toLocalDate();
+            }
+        }
+    }
+
+    public LocalDateTime whenTheEventStart(){
+        return this.duration.whenItStarts();
+    }
+
+    public LocalDateTime whenTheEventEnd(){
+        return this.duration.whenItEnds();
     }
 
     //Pre: receives the dates and times of the new duration.
