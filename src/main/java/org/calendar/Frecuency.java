@@ -55,6 +55,10 @@ public class Frecuency {
                 next = date.plus(this.interval, ChronoUnit.YEARS);
                 break;
             case 'W':
+                if (this.weekDays == null){
+                    next = date.plus(this.interval, ChronoUnit.WEEKS);
+                    break;
+                }
                 DayOfWeek day = date.getDayOfWeek();
                 DayOfWeek nextDay;
                 int indexDay = this.weekDays.indexOf(day);
@@ -66,6 +70,8 @@ public class Frecuency {
                 int numberOfDays = (nextDay.getValue() - day.getValue() + 7) % 7;
                 next = date.plusDays(numberOfDays);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + this.frecuency);
         }
         return next;
     }
@@ -86,6 +92,10 @@ public class Frecuency {
     public void changeFrecuency(char frecuency, ArrayList<DayOfWeek> weekDays){
         this.frecuency = frecuency;
         this.weekDays = weekDays;
+    }
+
+    public char getFrecuency(){
+        return this.frecuency;
     }
 
 }
