@@ -18,22 +18,30 @@ public class Frecuency {
         Collections.sort(this.weekDays);
     }
 
+    //Pre: receives the type of frequency (M or Y).
+    //Constructor: monthly and yearly.
     public Frecuency(char frecuency){
         this.frecuency = frecuency;
         this.interval = 1;
     }
 
+    //Pre: receives the type of frequency (W).
+    //Constructor: weekly.
     public Frecuency(char frecuency, ArrayList<DayOfWeek> weekDays){
         this.frecuency = frecuency;
         this.weekDays = weekDays;
         this.sortArrayOfDay();
     }
 
+    //Pre: receives the type of frequency (D).
+    //Constructor: daily.
     public Frecuency(char frecuency, int interval){
         this.frecuency = frecuency;
         this.interval = interval;
     }
 
+    //Pre: get a date.
+    //Post: returns the next date according to the frequency.
     public LocalDateTime nextDate(LocalDateTime date){
         LocalDateTime next = date;
         switch (this.frecuency){
@@ -62,16 +70,19 @@ public class Frecuency {
         return next;
     }
 
+    //Pre: receives the type of frequency (M or Y).
     public void changeFrecuency(char frecuency){
         this.frecuency = frecuency;
         this.interval = 1;
     }
 
+    //Pre: receives the type of frequency (D) and interval of days.
     public void changeFrecuency(char frecuency, int interval){
         this.frecuency = frecuency;
         this.interval = interval;
     }
 
+    //Pre: receives the type of frequency (W) and array of days of the week.
     public void changeFrecuency(char frecuency, ArrayList<DayOfWeek> weekDays){
         this.frecuency = frecuency;
         this.weekDays = weekDays;

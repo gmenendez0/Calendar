@@ -15,13 +15,12 @@ public class Duration {
         this.endingDateTime = endingDateTime;
     }
 
-    //la hora final del events sera a las 23:59:59 del misdo dia.
     //Constructs a task with wholeDay = true;
-    public Duration(LocalDate eventDate){
+    public Duration(LocalDate date){
         this.wholeDay = true;
-        this.startDateTime = eventDate.atStartOfDay();
+        this.startDateTime = date.atStartOfDay();
         final LocalTime EndingTime = LocalTime.of(23,59,59);
-        this.endingDateTime = eventDate.atTime(EndingTime);
+        this.endingDateTime = date.atTime(EndingTime);
     }
 
     //Post: Returns wholeDay;
@@ -39,18 +38,22 @@ public class Duration {
         return this.endingDateTime;
     }
 
-    //Post: Updates the wholeDay;
-    public void setWholeDay(boolean wholeDay){
-        this.wholeDay = wholeDay;
-    }
-
-    //Post: Updates the startDateTime;
-    public void setStartDateTime(LocalDateTime startDateTime){
+    //Pre: method receives the date and time of how long the object should last.
+    //Post: update the wholeDay, the startDateTime and the endingDateTime.
+    public void changeDuration(LocalDateTime startDateTime, LocalDateTime endingDateTime){
+        this.wholeDay = true;
         this.startDateTime = startDateTime;
-    }
-
-    //Post: Updates the endingDateTime;
-    public void setEndingDateTime(LocalDateTime endingDateTime) {
         this.endingDateTime = endingDateTime;
     }
+
+    //Pre: method receives the date when the object occurs.
+    //Post: update the wholeDay, the startDateTime and the endingDateTime.
+    public void changeDuration(LocalDate date){
+        this.wholeDay = true;
+        this.startDateTime = date.atStartOfDay();
+        final LocalTime EndingTime = LocalTime.of(23,59,59);
+        this.endingDateTime = date.atTime(EndingTime);
+    }
+
+
 }
