@@ -17,42 +17,42 @@ public class Appointment{
     }
 
     //Post: Sets the title.
-    public void setTitle(String title) {
+    protected void setTitle(String title) {
         this.title = title;
     }
 
     //Post: Sets the description.
-    public void setDescription(String description){
+    protected void setDescription(String description){
         this.description = description;
     }
 
     //Post: Sets the "completed" attribute.
-    public void setCompleted(boolean completed){
+    protected void setCompleted(boolean completed){
         this.completed = completed;
     }
 
     //Post: Sets the destroyed attribute as true.
-    public void destroy(){
+    protected void destroy(){
         destroyed = true;
     }
 
     //Post: Returns the title.
-    public String getTitle(){
+    protected String getTitle(){
         return title;
     }
 
     //Post: Returns the description.
-    public String getDescription(){
+    protected String getDescription(){
         return description;
     }
 
     //Post: Returns the state of the appointment. True if completed, false otherwise
-    public boolean isCompleted(){
+    protected boolean isCompleted(){
         return completed;
     }
 
     //Post: Returns the state of the appointment. True if destroyed, false otherwise
-    public boolean isDestroyed(){
+    protected boolean isDestroyed(){
         return destroyed;
     }
 }
