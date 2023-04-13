@@ -16,6 +16,10 @@ public class Appointment{
         destroyed = false;
     }
 
+    protected int getId(){
+        return id;
+    }
+
     //Post: Sets the title.
     protected void setTitle(String title) {
         this.title = title;
