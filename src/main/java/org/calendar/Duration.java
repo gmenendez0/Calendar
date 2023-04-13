@@ -9,6 +9,7 @@ public class Duration {
     private LocalDateTime endingDateTime;
 
     //Constructs a task with wholeDay = false;
+    //Pre: the 'startDateTime' must be before the 'endingDateTime';
     public Duration(LocalDateTime startDateTime, LocalDateTime endingDateTime){
         this.wholeDay = false;
         this.startDateTime = startDateTime;

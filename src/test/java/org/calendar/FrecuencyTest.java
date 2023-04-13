@@ -111,4 +111,19 @@ public class FrecuencyTest {
 
         assertEquals(friday, response);
     }
+
+    @Test
+    public void changeFrecuencyMonthlyToAnnual(){
+        char type = 'Y';
+        var frecuency = new Frecuency(type);
+        char newType = 'M';
+        frecuency.changeFrecuency(newType);
+
+        LocalDateTime day = LocalDateTime.of(2023, 4, 13, 10, 30);
+        LocalDateTime nextDay = LocalDateTime.of(2023, 5, 13, 10, 30);
+
+        LocalDateTime response = frecuency.nextDate(day);
+
+        assertEquals(nextDay, response);
+    }
 }
