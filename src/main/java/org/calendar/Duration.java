@@ -43,7 +43,7 @@ public class Duration {
     //Pre: method receives the date and time of how long the object should last.
     //Post: update the wholeDay, the startDateTime and the endingDateTime.
     public void changeDuration(LocalDateTime startDateTime, LocalDateTime endingDateTime){
-        this.wholeDay = true;
+        this.wholeDay = false;
         this.startDateTime = startDateTime;
         this.endingDateTime = endingDateTime;
     }

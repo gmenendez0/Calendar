@@ -9,14 +9,8 @@ import java.util.Collections;
 public class Frecuency {
 
     private int interval;
-
     private ArrayList<DayOfWeek> weekDays;
-
     private char frecuency;
-
-    private void sortArrayOfDay(){
-        Collections.sort(this.weekDays);
-    }
 
     //Pre: receives the type of frequency (M or Y).
     //Constructor: monthly and yearly.
@@ -30,7 +24,6 @@ public class Frecuency {
     public Frecuency(char frecuency, ArrayList<DayOfWeek> weekDays){
         this.frecuency = frecuency;
         this.weekDays = weekDays;
-        this.sortArrayOfDay();
     }
 
     //Pre: receives the type of frequency (D).

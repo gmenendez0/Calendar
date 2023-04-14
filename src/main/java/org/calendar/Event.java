@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Event extends Appointment{
-
     private boolean isRepeated;
     private Duration duration;
     private Frecuency frecuency;
@@ -83,7 +82,6 @@ public class Event extends Appointment{
     public LocalDateTime nextEventDate(LocalDateTime date){
         boolean conditionInfinity = this.eventIsRepeated() && this.getDeadline() == null;
         boolean conditionLimit = this.eventIsRepeated() && !date.toLocalDate().isAfter(this.getDeadline());
-
         if (conditionInfinity || conditionLimit){
             date = this.frecuency.nextDate(date);
             if (!date.toLocalDate().isAfter(this.getDeadline())) {
