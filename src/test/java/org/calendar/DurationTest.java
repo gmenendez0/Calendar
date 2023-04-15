@@ -10,14 +10,6 @@ import static org.junit.Assert.*;
 public class DurationTest {
 
     @Test
-    public void durationAllDay(){
-        LocalDate day = LocalDate.now();
-        var duration = new Duration(day);
-        boolean isWholeDate = duration.isWholeDay();
-        assertTrue(isWholeDate);
-    }
-
-    @Test
     public void theSameDay(){
         LocalDate day = LocalDate.now();
         LocalDateTime dayStart = day.atStartOfDay();
@@ -50,6 +42,25 @@ public class DurationTest {
         LocalDateTime tenDaysLater = now2.plus(10, ChronoUnit.DAYS);
         duration.changeDuration(now2, tenDaysLater);
 
-        assertFalse(duration.isWholeDay());
+        LocalDateTime start = duration.whenItStarts();
+        LocalDateTime end = duration.whenItEnds();
+
+        assertEquals(now2, start);
+        assertEquals(tenDaysLater, end);
+    }
+
+    @Test
+    public void changeDurationOfMoreToOne(){
+        LocalDateTime now1 = LocalDateTime.now();
+        LocalDateTime tenDaysLater = now1.plus(10, ChronoUnit.DAYS);
+        LocalDate now2 = LocalDate.now();
+        var duration = new Duration(now1, tenDaysLater);
+
+        duration.changeDuration(now2);
+        LocalDateTime start = duration.whenItStarts();
+        LocalDateTime end = duration.whenItEnds();
+
+        assertEquals(now2.atTime(0,0,0), start);
+        assertEquals(now2.atTime(23,59,59), end);
     }
 }

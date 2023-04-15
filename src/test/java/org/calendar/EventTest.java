@@ -12,41 +12,49 @@ import static org.junit.Assert.*;
 public class EventTest {
 
     @Test
-    public void verifyEventNoRepeat(){
-        Event event = new Event(1, "Titulo", "Primer Evento", LocalDate.now());
-        boolean repeat = event.eventIsRepeated();
-        assertFalse(repeat);
+    public void viewDataOfEvent(){
+        String title = "title of event";
+        String description = "description of event";
+        Event newEvent = new Event(1, title, description, LocalDate.now());
+
+        int idResponse = newEvent.getId();
+        String titleResponse = newEvent.getTitle();
+        String descriptionResponse = newEvent.getDescription();
+
+        assertEquals(idResponse, 1);
+        assertEquals(titleResponse, title);
+        assertEquals(descriptionResponse, description);
+    }
+
+    public void verifyDurationWholeDay(){
+        String title = "title of event";
+        String description = "description of event";
+        LocalDate now = LocalDate.now();
+        Event newEvent = new Event(2, title, description, now);
+
+        LocalDateTime start = now.atTime(0,0,0);
+        LocalDateTime end = now.atTime(23,59,59);
+
+        LocalDateTime startResponse = newEvent.whenTheEventStart();
+        LocalDateTime endResponse = newEvent.whenTheEventEnd();
+
+        assertEquals(startResponse, start);
+        assertEquals(endResponse, end);
     }
 
     @Test
-    public void verifyEventYesRepeat(){
-        Event event = new Event(2, "Titulo", "Segundo Evento", LocalDate.now());
-        event.repeatEvent('M');
-        boolean repeat = event.eventIsRepeated();
-        assertTrue(repeat);
-    }
+    public void verifyDuration(){
+        String title = "title of event";
+        String description = "description of event";
+        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
+        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
+        Event newEvent = new Event(3, title, description, start, end);
 
-    @Test
-    public void cancelReplay(){
-        Event event = new Event(3, "Titulo", "Tercero Evento", LocalDate.now());
-        event.repeatEvent('M');
-        event.noRepeat();
-        boolean repeat = event.eventIsRepeated();
-        assertFalse(repeat);
-    }
+        LocalDateTime startResponse = newEvent.whenTheEventStart();
+        LocalDateTime endResponse = newEvent.whenTheEventEnd();
 
-    @Test
-    public void repeatEventWithWeek(){
-        Event event = new Event(2, "Titulo", "Segundo Evento", LocalDate.of(2023,4,12));
-        ArrayList<DayOfWeek> weekDays = new ArrayList<>();
-        weekDays.add(DayOfWeek.WEDNESDAY);
-        weekDays.add(DayOfWeek.FRIDAY);
-        weekDays.add(DayOfWeek.SATURDAY);
-        event.repeatEvent('W', weekDays);
-        LocalDateTime wednesday = LocalDateTime.of(2023,4,12,00,00);
-        LocalDateTime nextDate = event.nextEventDate(wednesday);
-        LocalDateTime friday = LocalDateTime.of(2023,4,14,00,00);
-        assertEquals(nextDate, friday);
+        assertEquals(startResponse, start);
+        assertEquals(endResponse, end);
     }
 
 }
