@@ -6,21 +6,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Event extends Appointment{
-    private Duration duration;
+
+    private LocalDateTime startDateTime;
+    private LocalDateTime endingDateTime;
     private Frecuency frecuency;
+
+    private LocalDate searchDeadline(int repetitions){
+        LocalDateTime date = this.whenTheEventStart();
+        LocalDate next = null;
+        for(int i = 1; i <= repetitions; i++){
+            date = this.nextEventDate(date);
+            if (i == repetitions){
+                next = date.toLocalDate();
+            }
+        }
+        return next;
+    }
 
     //Constructor: if the event has a duration other than the whole day.
     public Event(int id, String title, String description,
-                 LocalDateTime startEvent, LocalDateTime endingEvent){
+                 LocalDateTime startDateTime, LocalDateTime endingDateTime){
         super(id, title, description);
-        this.duration = new Duration(startEvent, endingEvent);
-    }
-
-    //Constructor: if the event lasts a whole day.
-    public Event(int id, String title, String description,
-                 LocalDate eventDate){
-        super(id, title, description);
-        this.duration = new Duration(eventDate);
+        this.startDateTime = startDateTime;
+        this.endingDateTime = endingDateTime;
     }
 
     //Post: Return the isRepeated.
@@ -47,15 +55,20 @@ public class Event extends Appointment{
         this.frecuency = new FrecuencyMonthly();
     }
 
-    //Post: adds the frequency to the event, to weekly frequency.
-    public void repeatEventWeeklyWithInterval(ArrayList<DayOfWeek> weekDays){
-        this.frecuency = new FrecuencyWeekly(weekDays);
+    public void repeatEventWeekly(ArrayList<DayOfWeek> weekDay){
+        this.frecuency = new FrecuencyWeekly(weekDay);
     }
 
-    public void repeatEventWeekly(){
-        this.frecuency = new FrecuencyWeekly();
+    public void addDeadline(LocalDate date){
+        this.frecuency.setDeadline(date);
     }
 
+    public void addDeadline(int repetitions){
+        LocalDate date = this.searchDeadline(repetitions);
+        this.frecuency.setDeadline(date);
+    }
+
+    //Post: devuelve la fecha del sig evento repetido.
     public LocalDateTime nextEventDate(LocalDateTime date){
         if(this.eventIsRepeated()){
             return this.frecuency.nextDate(date);
@@ -64,22 +77,20 @@ public class Event extends Appointment{
     }
 
     public LocalDateTime whenTheEventStart(){
-        return this.duration.whenItStarts();
+        return this.startDateTime;
     }
 
     public LocalDateTime whenTheEventEnd(){
-        return this.duration.whenItEnds();
+        return this.endingDateTime;
     }
 
     //Pre: receives the dates and times of the new duration.
     //Post:  the duration
-    public void changeEventDuration(LocalDateTime startDateEventTime, LocalDateTime endingDateEventTime){
-        this.duration.changeDuration(startDateEventTime, endingDateEventTime);
+    public void changeEventStart(LocalDateTime startDateEventTime){
+        this.startDateTime = startDateEventTime;
     }
 
-    //Pre: receives the day the event takes place.
-    //Post: change the duration
-    public void changeEventDuration(LocalDate dateEvent){
-        this.duration.changeDuration(dateEvent);
+    public void changeEventEnd(LocalDateTime endingDateTime){
+        this.endingDateTime = endingDateTime;
     }
 }
