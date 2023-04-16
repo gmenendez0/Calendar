@@ -11,16 +11,14 @@ public class Event extends Appointment{
     private LocalDateTime endingDateTime;
     private Frecuency frecuency;
 
+    //Post: receives an integer representing the occurrences of the event.
+    //Pre: return the deadline.
     private LocalDate searchDeadline(int repetitions){
         LocalDateTime date = this.whenTheEventStart();
-        LocalDate next = null;
-        for(int i = 1; i <= repetitions; i++){
+        for(int i = 0; i < repetitions; i++){
             date = this.nextEventDate(date);
-            if (i == repetitions){
-                next = date.toLocalDate();
-            }
         }
-        return next;
+        return date.toLocalDate();
     }
 
     //Constructor: if the event has a duration other than the whole day.
@@ -51,24 +49,32 @@ public class Event extends Appointment{
         this.frecuency = new FrecuencyAnnual();
     }
 
+    //Post: adds the frequency to the event, to monthly frequency.
     public void repeatEventMonthly(){
         this.frecuency = new FrecuencyMonthly();
     }
 
+    //Pre: receives the array of days in which the events take place
+    //Post: adds the frequency to the event, to weekly frequency.
     public void repeatEventWeekly(ArrayList<DayOfWeek> weekDay){
         this.frecuency = new FrecuencyWeekly(weekDay);
     }
 
+    //Pre: receive the date that will be the deadline.
+    //Post: adds the deadline to the event.
     public void addDeadline(LocalDate date){
         this.frecuency.setDeadline(date);
     }
 
+    //Pre: receives the number of repetitions of the event.
+    //Post: adds the deadline to the event, counting the number of repetitions.
     public void addDeadline(int repetitions){
         LocalDate date = this.searchDeadline(repetitions);
         this.frecuency.setDeadline(date);
     }
 
-    //Post: devuelve la fecha del sig evento repetido.
+    //Pre: receive a date to know your next event.
+    //Post: returns the following date in case it has repetitions.
     public LocalDateTime nextEventDate(LocalDateTime date){
         if(this.eventIsRepeated()){
             return this.frecuency.nextDate(date);
@@ -84,12 +90,14 @@ public class Event extends Appointment{
         return this.endingDateTime;
     }
 
-    //Pre: receives the dates and times of the new duration.
-    //Post:  the duration
+    //Pre: receives the dates and times of the new start dateTime.}
+    //Post: change the startDateEventTime.
     public void changeEventStart(LocalDateTime startDateEventTime){
         this.startDateTime = startDateEventTime;
     }
 
+    //Pre: receives the dates and times of the new end dateTime.
+    //Post: change the endingDateTime.
     public void changeEventEnd(LocalDateTime endingDateTime){
         this.endingDateTime = endingDateTime;
     }

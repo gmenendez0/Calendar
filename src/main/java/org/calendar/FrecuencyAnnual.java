@@ -7,15 +7,20 @@ import java.time.temporal.ChronoUnit;
 public class FrecuencyAnnual extends Frecuency{
     private int interval;
 
+    //Constructor.
     public FrecuencyAnnual(){
         this.interval = 1;
     }
+
+    //Pre: receives the LocalDateTime.
+    //Post: returns the next event date.
     @Override
     public LocalDateTime nextDate(LocalDateTime date){
-        LocalDate day = date.plus(this.interval, ChronoUnit.YEARS).toLocalDate();
+        LocalDateTime dayTime = date.plus(this.interval, ChronoUnit.YEARS);
+        LocalDate day = dayTime.toLocalDate();
         if (super.getDeadline() != null){
             LocalDate lastDay = super.getDeadline();
-            if (day.compareTo(lastDay) >= 0){
+            if (day.compareTo(lastDay) > 0){
                 return null;
             }
         }

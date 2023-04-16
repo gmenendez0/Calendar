@@ -8,11 +8,15 @@ import java.util.ArrayList;
 
 public class FrecuencyWeekly extends Frecuency{
     private ArrayList<DayOfWeek> weekDays;
+    final int NUM_DAY = 7;
 
+    //Constructor.
     public FrecuencyWeekly(ArrayList<DayOfWeek> weekDays){
         this.weekDays = weekDays;
     }
 
+    //Pre: receives the LocalDateTime.
+    //Post: returns the next event date.
     @Override
     public LocalDateTime nextDate(LocalDateTime date){
         DayOfWeek day = date.getDayOfWeek();
@@ -23,14 +27,14 @@ public class FrecuencyWeekly extends Frecuency{
         } else {
             nextDay = this.weekDays.get(indexDay+1);
         }
-        int numberOfDays = (nextDay.getValue() - day.getValue() + 7) % 7;
+        int numberOfDays = (nextDay.getValue() - day.getValue() + NUM_DAY) % NUM_DAY;
         if (numberOfDays == 0){
-            numberOfDays = 7;
+            numberOfDays = NUM_DAY;
         }
         LocalDate datePlus = date.plusDays(numberOfDays).toLocalDate();
         if (super.getDeadline() != null){
             LocalDate lastDate = super.getDeadline();
-            if (datePlus.compareTo(lastDate) >= 0){
+            if (datePlus.compareTo(lastDate) > 0){
                 return null;
             }
         }
