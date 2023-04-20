@@ -17,9 +17,8 @@ public class FrecuencyDiary extends Frecuency{
     public LocalDateTime nextDate(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.interval, ChronoUnit.DAYS);
         LocalDate day = dayTime.toLocalDate();
-        if (super.getDeadline() != null){
-            LocalDate lastDay = super.getDeadline();
-            if (day.compareTo(lastDay) > 0){
+        if (super.hasADeadline()){
+            if (super.hasExceededDeadline(day)){
                 return null;
             }
         }

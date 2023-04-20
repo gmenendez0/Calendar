@@ -32,9 +32,8 @@ public class FrecuencyWeekly extends Frecuency{
             numberOfDays = NUM_DAY;
         }
         LocalDate datePlus = date.plusDays(numberOfDays).toLocalDate();
-        if (super.getDeadline() != null){
-            LocalDate lastDate = super.getDeadline();
-            if (datePlus.compareTo(lastDate) > 0){
+        if (super.hasADeadline()){
+            if (super.hasExceededDeadline(datePlus)){
                 return null;
             }
         }
