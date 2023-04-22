@@ -1,17 +1,17 @@
-package org.calendar;
+package org.calendar.task;
 
-import org.calendar.task.Task;
 import org.junit.Test;
 import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
-public class TaskTest {
+public class ExpirationTimeTaskTest {
+
     final int ONE_DAY = 1;
 
     //Post: Tests that setExpirationDateTime sets the value correctly.
     @Test
     public void setExpirationDateTime() {
-        var task = new Task(1, "title", "description", LocalDateTime.now());
+        var task = new ExpirationTimeTask(1, "title", "description", LocalDateTime.now());
         LocalDateTime yesterday = LocalDateTime.now().minusDays(ONE_DAY);
 
         task.setExpirationDateTime(yesterday);
@@ -24,7 +24,7 @@ public class TaskTest {
     @Test
     public void getExpirationDateTime() {
         LocalDateTime now = LocalDateTime.now();
-        var task = new Task(1, "title", "description", now);
+        var task = new ExpirationTimeTask(1, "title", "description", now);
 
         var time = task.getExpirationDateTime();
 

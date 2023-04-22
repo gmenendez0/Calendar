@@ -1,6 +1,6 @@
 package org.calendar.event;
 
-import org.calendar.Appointment;
+import org.calendar.appointment.Appointment;
 import org.calendar.event.frequency.Frequency;
 
 import java.time.LocalDateTime;

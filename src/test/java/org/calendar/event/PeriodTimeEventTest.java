@@ -1,9 +1,7 @@
-package org.calendar;
+package org.calendar.event;
 
-import org.calendar.event.PeriodTimeEvent;
 import org.calendar.event.frequency.*;
 import org.junit.Test;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -97,8 +95,8 @@ public class PeriodTimeEventTest {
         LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
         LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
         PeriodTimeEvent eventWithoutFrequency = new PeriodTimeEvent(4, title, description, start, end);
-        Frequency frecuencyEvent = new FrequencyDiary(2);
-        eventWithoutFrequency.setEventFrequency(frecuencyEvent);
+        Frequency frequencyEvent = new FrequencyDiary(2);
+        eventWithoutFrequency.setEventFrequency(frequencyEvent);
         eventWithoutFrequency.setNoRepeat();
         assertFalse(eventWithoutFrequency.IsRepeated());
         assertNull(eventWithoutFrequency.nextEventDateTime(start));

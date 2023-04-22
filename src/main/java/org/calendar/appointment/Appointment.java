@@ -1,4 +1,4 @@
-package org.calendar;
+package org.calendar.appointment;
 
 public class Appointment{
     private final int id;
@@ -16,47 +16,47 @@ public class Appointment{
         destroyed = false;
     }
 
-    protected int getId(){
+    public int getId(){
         return id;
     }
 
     //Post: Sets the title.
-    protected void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
     //Post: Sets the description.
-    protected void setDescription(String description){
+    public void setDescription(String description){
         this.description = description;
     }
 
     //Post: Sets the "completed" attribute.
-    protected void setCompleted(boolean completed){
+    public void setCompleted(boolean completed){
         this.completed = completed;
     }
 
     //Post: Sets the destroyed attribute as true.
-    protected void destroy(){
+    public void destroy(){
         destroyed = true;
     }
 
     //Post: Returns the title.
-    protected String getTitle(){
+    public String getTitle(){
         return title;
     }
 
     //Post: Returns the description.
-    protected String getDescription(){
+    public String getDescription(){
         return description;
     }
 
     //Post: Returns the state of the appointment. True if completed, false otherwise
-    protected boolean isCompleted(){
+    public boolean isCompleted(){
         return completed;
     }
 
     //Post: Returns the state of the appointment. True if destroyed, false otherwise
-    protected boolean isDestroyed(){
+    public boolean isDestroyed(){
         return destroyed;
     }
 }

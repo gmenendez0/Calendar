@@ -1,5 +1,6 @@
 package org.calendar;
 
+import org.calendar.appointment.Appointment;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

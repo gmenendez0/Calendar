@@ -1,11 +1,8 @@
-package org.calendar;
+package org.calendar.event;
 
-import org.calendar.event.WholeDayEvent;
 import org.junit.Test;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import static org.junit.Assert.*;
 
 public class WholeDayEventTest {
@@ -16,7 +13,7 @@ public class WholeDayEventTest {
         String description = "Description";
         LocalDate now = LocalDate.now();
         LocalDateTime start = now.atStartOfDay();
-        LocalDateTime end = now.atTime(23,59,59);
+        LocalDateTime end = now.plusDays(1).atStartOfDay();
 
         WholeDayEvent event = new WholeDayEvent(1, title, description, now);
 

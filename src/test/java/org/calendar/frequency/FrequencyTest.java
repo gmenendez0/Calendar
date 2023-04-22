@@ -1,4 +1,4 @@
-package org.calendar;
+package org.calendar.frequency;
 
 import org.calendar.event.frequency.FrequencyAnnual;
 import org.calendar.event.frequency.FrequencyDiary;

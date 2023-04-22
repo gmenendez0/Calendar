@@ -1,6 +1,6 @@
 package org.calendar.task;
 
-import org.calendar.Appointment;
+import org.calendar.appointment.Appointment;
 
 import java.time.LocalDateTime;
 

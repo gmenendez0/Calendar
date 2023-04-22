@@ -14,7 +14,7 @@ public class WholeDayTask extends Task {
         this.startDateTime = startDate.atStartOfDay();
     }
 
-    //Post: Updates the startDate and the expirationDateTime consequentially.
+    //Post: Updates the startDate and, consequentially, the expirationDateTime.
     public void setStartDate(LocalDate startDate) {
         this.startDateTime = startDate.atStartOfDay();
 

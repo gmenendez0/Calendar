@@ -1,6 +1,4 @@
-package org.alarms;
-
-import org.alarms.Alarm;
+package org.calendar.alarms;
 
 import java.time.LocalDateTime;
 
