@@ -1,8 +1,10 @@
-package org.calendar;
+package org.alarms;
+
+import org.alarms.Alarm;
 
 import java.time.LocalDateTime;
 
-public class NotificationAlarm extends Alarm{
+public class NotificationAlarm extends Alarm {
     private String message;
 
     //Constructor

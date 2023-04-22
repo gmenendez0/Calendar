@@ -1,43 +1,43 @@
-package org.calendar;
+package org.calendar.event.frequency;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-public class FrecuencyWeekly extends Frecuency{
-    private ArrayList<DayOfWeek> weekDays;
-    final int NUM_DAY = 7;
+public class FrequencyWeekly extends Frequency {
+    private final ArrayList<DayOfWeek> weekDays;
+    final int NUM_DAY = 7;  //! Esto que significa? Estaría más claro si la constante tuviera un nombre más descriptivo.
 
     //Constructor.
-    public FrecuencyWeekly(ArrayList<DayOfWeek> weekDays){
+    public FrequencyWeekly(ArrayList<DayOfWeek> weekDays){
         this.weekDays = weekDays;
     }
 
-    //Pre: receives the LocalDateTime.
-    //Post: returns the next event date.
+    //! ESTO HAY QUE REFACTORIZARLO PORQUE NO SE ENTIENDE. ADEMAS, HAY QUE CORREGIR LITERALES.
+    //Pre: receives the DateTime.
+    //Post: Given a date, returns the following event s date.
     @Override
-    public LocalDateTime nextDate(LocalDateTime date){
+    public LocalDateTime nextEventDateTime(LocalDateTime date){
         DayOfWeek day = date.getDayOfWeek();
         DayOfWeek nextDay;
+
         int indexDay = this.weekDays.indexOf(day);
         if (indexDay == weekDays.size()-1){
             nextDay = this.weekDays.get(0);
         } else {
             nextDay = this.weekDays.get(indexDay+1);
         }
+
         int numberOfDays = (nextDay.getValue() - day.getValue() + NUM_DAY) % NUM_DAY;
         if (numberOfDays == 0){
             numberOfDays = NUM_DAY;
         }
         LocalDate datePlus = date.plusDays(numberOfDays).toLocalDate();
-        if (super.hasADeadline()){
-            if (super.hasExceededDeadline(datePlus)){
-                return null;
-            }
-        }
+
+
+        if (noNextEvent(datePlus)) return null;
+
         return date.plusDays(numberOfDays);
     }
-
 }

@@ -1,28 +1,29 @@
-package org.calendar;
+package org.calendar.event.frequency;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class FrecuencyAnnual extends Frecuency{
-    private int interval;
+public class FrequencyAnnual extends Frequency {
+    final int ONE_YEAR = 1;
+
+
+    private final int interval;
 
     //Constructor.
-    public FrecuencyAnnual(){
-        this.interval = 1;
+    public FrequencyAnnual(){
+        this.interval = ONE_YEAR;
     }
 
     //Pre: receives the LocalDateTime.
     //Post: returns the next event date.
     @Override
-    public LocalDateTime nextDate(LocalDateTime date){
+    public LocalDateTime nextEventDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.interval, ChronoUnit.YEARS);
         LocalDate day = dayTime.toLocalDate();
-        if (super.hasADeadline()){
-            if (super.hasExceededDeadline(day)){
-                return null;
-            }
-        }
+
+        if (noNextEvent(day)) return null;
+
         return date.plus(this.interval, ChronoUnit.YEARS);
     }
 }

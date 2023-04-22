@@ -1,5 +1,6 @@
 package org.calendar;
 
+import org.calendar.task.Task;
 import org.junit.Test;
 import java.time.LocalDateTime;
 import static org.junit.Assert.*;

@@ -1,18 +1,19 @@
-package org.calendar;
+package org.calendar.event.frequency;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collections;
 
-public abstract class Frecuency {
-
+public abstract class Frequency {
     private LocalDate deadline;
 
+    //Returns false if there is a next event, true otherwise
+    protected boolean noNextEvent(LocalDate day){
+        return (hasADeadline() && hasExceededDeadline(day));
+    }
+
+    //Post: Returns true if the date received is after the deadLine, false otherwise.
     public boolean hasExceededDeadline(LocalDate date){
-        return date.compareTo(this.deadline) > 0;
+        return date.isAfter(this.deadline);
     }
 
     //Post: returns true if there is a deadline. If not, return false.
@@ -26,16 +27,16 @@ public abstract class Frecuency {
         this.deadline = date;
     }
 
-    //Pre: receives the number of repetitions of the event.
+    //Pre: receives the number of repetitions of the event and a date.
     //Post: adds the deadline to the event, counting the number of repetitions.
     public void addDeadlineWithRepetitions(int repetitions, LocalDateTime date){
         for(int i = 0; i < repetitions; i++){
-            date = this.nextDate(date);
+            date = this.nextEventDateTime(date);
         }
+
         this.addDeadline(date.toLocalDate());
     }
 
     //Pre: receive a date and time what will be the deadline.
-    public abstract LocalDateTime nextDate(LocalDateTime date);
-
+    public abstract LocalDateTime nextEventDateTime(LocalDateTime date);
 }

@@ -1,5 +1,8 @@
 package org.calendar;
 
+import org.calendar.event.Event;
+import org.calendar.event.frequency.*;
+import org.calendar.frequency.*;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
@@ -82,7 +85,7 @@ public class EventTest {
         LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
         LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
         Event eventWithFrecuency = new Event(4, title, description, start, end);
-        Frecuency frecuencyEvent = new FrecuencyDiary(2);
+        Frequency frecuencyEvent = new FrequencyDiary(2);
         eventWithFrecuency.repeatEvent(frecuencyEvent);
         assertTrue(eventWithFrecuency.eventIsRepeated());
     }
@@ -95,7 +98,7 @@ public class EventTest {
         LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
         LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
         Event eventWithoutFrecuency = new Event(4, title, description, start, end);
-        Frecuency frecuencyEvent = new FrecuencyDiary(2);
+        Frequency frecuencyEvent = new FrequencyDiary(2);
         eventWithoutFrecuency.repeatEvent(frecuencyEvent);
         eventWithoutFrecuency.noRepeat();
         assertFalse(eventWithoutFrecuency.eventIsRepeated());
@@ -110,7 +113,7 @@ public class EventTest {
         LocalDateTime start = LocalDateTime.of(2023,04,16, 12,0);
         LocalDateTime end = start.plusDays(1);
         Event event = new Event(5, title, description, start, end);
-        Frecuency frecuencyEvent = new FrecuencyDiary(1);
+        Frequency frecuencyEvent = new FrequencyDiary(1);
         frecuencyEvent.addDeadline(LocalDate.of(2023,04,20));
         event.repeatEvent(frecuencyEvent);
 
@@ -143,7 +146,7 @@ public class EventTest {
         LocalDateTime thursday = LocalDateTime.of(2023, 4, 20, 10, 30);
         LocalDateTime saturday = LocalDateTime.of(2023, 4, 22, 10, 30);
 
-        Frecuency frecuency = new FrecuencyWeekly(array);
+        Frequency frecuency = new FrequencyWeekly(array);
         frecuency.addDeadline(LocalDate.of(2023,4,25));
 
         Event event = new Event(6, title, description, start, end);
@@ -170,7 +173,7 @@ public class EventTest {
         LocalDateTime start = LocalDateTime.of(2023,04,20, 12,00);
         LocalDateTime end = start.plusHours(5);
 
-        Frecuency frecuency = new FrecuencyAnnual();
+        Frequency frecuency = new FrequencyAnnual();
         frecuency.addDeadlineWithRepetitions(5, start);
 
         Event event = new Event(7, title, description, start, end);
@@ -198,7 +201,7 @@ public class EventTest {
         String description = "description of event";
         LocalDateTime start = LocalDateTime.of(2023,04,20, 12,00);
         LocalDateTime end = start.plusHours(5);
-        Frecuency frecuency = new FrecuencyMonthly();
+        Frequency frecuency = new FrequencyMonthly();
         frecuency.addDeadlineWithRepetitions(5, start);
 
         Event event = new Event(7, title, description, start, end);

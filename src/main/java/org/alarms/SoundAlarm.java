@@ -1,8 +1,10 @@
-package org.calendar;
+package org.alarms;
+
+import org.alarms.Alarm;
 
 import java.time.LocalDateTime;
 
-public class SoundAlarm extends Alarm{
+public class SoundAlarm extends Alarm {
 
 //    private ALGUNALIBRERIA sound;
 

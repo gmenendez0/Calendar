@@ -1,5 +1,6 @@
 package org.calendar;
 
+import org.calendar.event.WholeDayEvent;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ public class wholeDayEventTest {
         LocalDateTime start = now.atStartOfDay();
         LocalDateTime end = now.atTime(23,59,59);
 
-        wholeDayEvent event = new wholeDayEvent(1, title, description, now);
+        WholeDayEvent event = new WholeDayEvent(1, title, description, now);
 
         assertEquals(start, event.whenTheEventStart());
         assertEquals(end, event.whenTheEventEnd());
@@ -29,7 +30,7 @@ public class wholeDayEventTest {
         String description = "Description";
         LocalDate now = LocalDate.now();
 
-        wholeDayEvent event = new wholeDayEvent(2, title, description, now);
+        WholeDayEvent event = new WholeDayEvent(2, title, description, now);
 
         assertTrue(event.isWholeDay());
     }
@@ -42,7 +43,7 @@ public class wholeDayEventTest {
         LocalDateTime start = now.atStartOfDay();
         LocalDateTime end = now.atTime(23,59,59);
 
-        wholeDayEvent event = new wholeDayEvent(1, title, description, now);
+        WholeDayEvent event = new WholeDayEvent(1, title, description, now);
 
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         LocalDateTime startTomorrow = tomorrow.atStartOfDay();

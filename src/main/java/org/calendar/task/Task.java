@@ -1,18 +1,15 @@
-package org.calendar;
+package org.calendar.task;
+
+import org.calendar.Appointment;
 
 import java.time.LocalDateTime;
 
-public class Task extends Appointment {
-    private LocalDateTime expirationDateTime;
+public abstract class Task extends Appointment {
+    protected LocalDateTime expirationDateTime;
 
     //Constructs a task
     public Task(int id, String title, String description, LocalDateTime expirationDateTime) {
         super(id, title, description);
-        this.expirationDateTime = expirationDateTime;
-    }
-
-    //Post: Updates the expirationDateTime.
-    public void setExpirationDateTime(LocalDateTime expirationDateTime) {
         this.expirationDateTime = expirationDateTime;
     }
 
