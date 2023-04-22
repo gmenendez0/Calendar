@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
-public class wholeDayTaskTest {
+public class WholeDayTaskTest {
     //Post: Tests the return value of getStartDate.
     @Test
     public void getStartDate() {

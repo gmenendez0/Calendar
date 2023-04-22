@@ -7,27 +7,33 @@ import java.util.ArrayList;
 
 public class FrequencyWeekly extends Frequency {
     private final ArrayList<DayOfWeek> weekDays;
-    final int NUMBER_OF_DAYS = 7;  
+    final int NUMBER_OF_DAYS = 7;
+    final int ZERO_DAYS = 0;
+    final int NOT_PRESENT = -1;
 
     //Constructor.
     public FrequencyWeekly(ArrayList<DayOfWeek> weekDays){
         this.weekDays = weekDays;
     }
 
+    //Pre: ???
+    //Post: ???
     private int daysToAddToDate(DayOfWeek day, DayOfWeek nextDay){
         int valueOfDay = day.getValue();
         int valueOfNextDay = nextDay.getValue();
         int daysToAdd = (valueOfNextDay - valueOfDay + NUMBER_OF_DAYS) % NUMBER_OF_DAYS;
-        if (daysToAdd == 0){
-            daysToAdd = NUMBER_OF_DAYS;
-        }
+
+        if (daysToAdd == ZERO_DAYS) daysToAdd = NUMBER_OF_DAYS;
+
         return daysToAdd;
     }
 
+    //Pre: ???
+    //Post: ???
     private DayOfWeek whatIsTheNextDay(int indexDay){
-        final int lastIndexInArray = this.weekDays.size()-1;
-        DayOfWeek next = indexDay == lastIndexInArray ? this.weekDays.get(0) : this.weekDays.get(indexDay+1);
-        return next;
+        final int lastIndexInArray = this.weekDays.size() - 1;
+
+        return indexDay == lastIndexInArray ? this.weekDays.get(0) : this.weekDays.get(indexDay + 1);
     }
 
     //Pre: receives the DateTime.
@@ -37,8 +43,7 @@ public class FrequencyWeekly extends Frequency {
         DayOfWeek day = date.getDayOfWeek();
         int dayIndexInArray = this.weekDays.indexOf(day);
         
-        //En caso que el dia proporcionado no este en el array de la frecuencia.
-        if (dayIndexInArray == -1) return null;
+        if (dayIndexInArray == NOT_PRESENT) return null;
 
         DayOfWeek nextDay = this.whatIsTheNextDay(dayIndexInArray); 
         int numberOfDays = this.daysToAddToDate(day, nextDay);

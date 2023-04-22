@@ -1,6 +1,5 @@
 package org.calendar;
 
-import org.calendar.event.Event;
 import org.calendar.event.PeriodTimeEvent;
 import org.calendar.event.frequency.*;
 import org.junit.Test;
@@ -35,8 +34,8 @@ public class PeriodTimeEventTest {
     public void verifyDuration(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
+        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
         PeriodTimeEvent newEvent = new PeriodTimeEvent(3, title, description, start, end);
 
         LocalDateTime startResponse = newEvent.getStartDateTime();
@@ -51,10 +50,10 @@ public class PeriodTimeEventTest {
     public void verifyChangeDuration(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start1 = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
-        LocalDateTime end1 = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
-        LocalDateTime start2 = LocalDateTime.now().withHour(00).withMinute(00).withSecond(00);
-        LocalDateTime end2 = LocalDateTime.now().plusDays(2).withHour(18).withMinute(00).withSecond(00);
+        LocalDateTime start1 = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime end1 = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime start2 = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
+        LocalDateTime end2 = LocalDateTime.now().plusDays(2).withHour(18).withMinute(0).withSecond(0);
 
         PeriodTimeEvent newEvent = new PeriodTimeEvent(3, title, description, start1, end1);
         newEvent.setEventStartDateTime(start2);
@@ -71,10 +70,10 @@ public class PeriodTimeEventTest {
     public void eventDontHaveReplay(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
-        PeriodTimeEvent eventWithoutFrecuency = new PeriodTimeEvent(4, title, description, start, end);
-        assertFalse(eventWithoutFrecuency.IsRepeated());
+        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        PeriodTimeEvent eventWithoutFrequency = new PeriodTimeEvent(4, title, description, start, end);
+        assertFalse(eventWithoutFrequency.IsRepeated());
     }
 
     //Post: test to verify if it has repetition
@@ -82,12 +81,12 @@ public class PeriodTimeEventTest {
     public void eventHaveReplay(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
-        PeriodTimeEvent eventWithFrecuency = new PeriodTimeEvent(4, title, description, start, end);
-        Frequency frecuencyEvent = new FrequencyDiary(2);
-        eventWithFrecuency.setEventFrequency(frecuencyEvent);
-        assertTrue(eventWithFrecuency.IsRepeated());
+        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        PeriodTimeEvent eventWithFrequency = new PeriodTimeEvent(4, title, description, start, end);
+        Frequency frequencyEvent = new FrequencyDiary(2);
+        eventWithFrequency.setEventFrequency(frequencyEvent);
+        assertTrue(eventWithFrequency.IsRepeated());
     }
 
     //Post: test to verify if canceling repeats works.
@@ -95,14 +94,14 @@ public class PeriodTimeEventTest {
     public void eventNoRepeat(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(00).withSecond(00);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(00).withSecond(00);
-        PeriodTimeEvent eventWithoutFrecuency = new PeriodTimeEvent(4, title, description, start, end);
+        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        PeriodTimeEvent eventWithoutFrequency = new PeriodTimeEvent(4, title, description, start, end);
         Frequency frecuencyEvent = new FrequencyDiary(2);
-        eventWithoutFrecuency.setEventFrequency(frecuencyEvent);
-        eventWithoutFrecuency.setNoRepeat();
-        assertFalse(eventWithoutFrecuency.IsRepeated());
-        assertNull(eventWithoutFrecuency.nextEventDateTime(start));
+        eventWithoutFrequency.setEventFrequency(frecuencyEvent);
+        eventWithoutFrequency.setNoRepeat();
+        assertFalse(eventWithoutFrequency.IsRepeated());
+        assertNull(eventWithoutFrequency.nextEventDateTime(start));
     }
 
     //Post: test to check if it returns the following event on a daily basis.
@@ -110,12 +109,12 @@ public class PeriodTimeEventTest {
     public void nextEventDayTest(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.of(2023,04,16, 12,0);
+        LocalDateTime start = LocalDateTime.of(2023, 4,16, 12,0);
         LocalDateTime end = start.plusDays(1);
         PeriodTimeEvent event = new PeriodTimeEvent(5, title, description, start, end);
-        Frequency frecuencyEvent = new FrequencyDiary(1);
-        frecuencyEvent.addDeadline(LocalDate.of(2023,04,20));
-        event.setEventFrequency(frecuencyEvent);
+        Frequency frequencyEvent = new FrequencyDiary(1);
+        frequencyEvent.addDeadline(LocalDate.of(2023, 4,20));
+        event.setEventFrequency(frequencyEvent);
 
         LocalDateTime day1 = event.getStartDateTime();
         LocalDateTime day2 = event.nextEventDateTime(day1);
@@ -135,10 +134,10 @@ public class PeriodTimeEventTest {
     public void nextEventWeekTest(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.of(2023,04,16, 10,30);
+        LocalDateTime start = LocalDateTime.of(2023, 4,16, 10,30);
         LocalDateTime end = start.plusDays(1);
 
-        ArrayList<DayOfWeek> array = new ArrayList<DayOfWeek>();
+        ArrayList<DayOfWeek> array = new ArrayList<>();
         array.add(DayOfWeek.TUESDAY);
         array.add(DayOfWeek.THURSDAY);
         array.add(DayOfWeek.SATURDAY);
@@ -146,11 +145,11 @@ public class PeriodTimeEventTest {
         LocalDateTime thursday = LocalDateTime.of(2023, 4, 20, 10, 30);
         LocalDateTime saturday = LocalDateTime.of(2023, 4, 22, 10, 30);
 
-        Frequency frecuency = new FrequencyWeekly(array);
-        frecuency.addDeadline(LocalDate.of(2023,4,25));
+        Frequency frequency = new FrequencyWeekly(array);
+        frequency.addDeadline(LocalDate.of(2023,4,25));
 
         PeriodTimeEvent event = new PeriodTimeEvent(6, title, description, start, end);
-        event.setEventFrequency(frecuency);
+        event.setEventFrequency(frequency);
 
         LocalDateTime day1 = event.getStartDateTime();
         LocalDateTime day2 = event.nextEventDateTime(day1);
@@ -170,14 +169,14 @@ public class PeriodTimeEventTest {
     public void eventWithRepetitionsAnnual(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.of(2023,04,20, 12,00);
+        LocalDateTime start = LocalDateTime.of(2023, 4,20, 12,0);
         LocalDateTime end = start.plusHours(5);
 
-        Frequency frecuency = new FrequencyAnnual();
-        frecuency.addDeadlineWithRepetitions(5, start);
+        Frequency frequency = new FrequencyAnnual();
+        frequency.addDeadlineWithRepetitions(5, start);
 
         PeriodTimeEvent event = new PeriodTimeEvent(7, title, description, start, end);
-        event.setEventFrequency(frecuency);
+        event.setEventFrequency(frequency);
 
         LocalDateTime day = event.getStartDateTime();
         LocalDateTime rep1 = event.nextEventDateTime(day);
@@ -199,13 +198,13 @@ public class PeriodTimeEventTest {
     public void eventWithRepetitionsMonthly(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.of(2023,04,20, 12,00);
+        LocalDateTime start = LocalDateTime.of(2023, 4,20, 12,0);
         LocalDateTime end = start.plusHours(5);
-        Frequency frecuency = new FrequencyMonthly();
-        frecuency.addDeadlineWithRepetitions(5, start);
+        Frequency frequency = new FrequencyMonthly();
+        frequency.addDeadlineWithRepetitions(5, start);
 
         PeriodTimeEvent event = new PeriodTimeEvent(7, title, description, start, end);
-        event.setEventFrequency(frecuency);
+        event.setEventFrequency(frequency);
 
         LocalDateTime day = event.getStartDateTime();
         LocalDateTime rep1 = event.nextEventDateTime(day);

@@ -38,5 +38,6 @@ public abstract class Frequency {
     }
 
     //Pre: receive a date and time what will be the deadline.
+    //Post: returns the next event date, null if there is no next event.
     public abstract LocalDateTime nextEventDateTime(LocalDateTime date);
 }
