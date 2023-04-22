@@ -1,21 +1,26 @@
 package org.calendar.appointment;
 
 public class Appointment{
-    private final int id;
+    private int id;
     private String title;
     private String description;
     private boolean completed;
     private boolean destroyed;
 
     //Constructor.
-    public Appointment(int id, String title, String description){
-        this.id = id;
+    public Appointment(String title, String description){
+        this.id = -1;
         this.title = title;
         this.description = description;
         completed = false;
         destroyed = false;
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
+
+    //Post: Sets the id.
     public int getId(){
         return id;
     }
