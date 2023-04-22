@@ -21,7 +21,7 @@ public class FrequencyTest {
 
         var frequency = new FrequencyDiary(interval);
 
-        LocalDateTime laterOfClass = frequency.nextEventDate(now);
+        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(later, laterOfClass);
     }
 
@@ -30,7 +30,7 @@ public class FrequencyTest {
         LocalDateTime now = LocalDateTime.now();
         int interval = 0;
         var frequency = new FrequencyDiary(interval);
-        LocalDateTime laterOfClass = frequency.nextEventDate(now);
+        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(laterOfClass, now);
     }
 
@@ -39,7 +39,7 @@ public class FrequencyTest {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime later = now.plus(1, ChronoUnit.YEARS);
         var frequency = new FrequencyAnnual();
-        LocalDateTime laterOfClass = frequency.nextEventDate(now);
+        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(later, laterOfClass);
     }
 
@@ -48,7 +48,7 @@ public class FrequencyTest {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime later = now.plus(1, ChronoUnit.MONTHS);
         var frequency = new FrequencyMonthly();
-        LocalDateTime laterOfClass = frequency.nextEventDate(now);
+        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(later, laterOfClass);
     }
 
@@ -62,7 +62,7 @@ public class FrequencyTest {
         LocalDateTime friday = LocalDateTime.of(2023, 4, 14, 10, 30);
         var frequency = new FrequencyWeekly(array);
 
-        LocalDateTime response = frequency.nextEventDate(wednesday);
+        LocalDateTime response = frequency.nextEventDateTime(wednesday);
 
         assertEquals(friday, response);
     }
@@ -78,8 +78,8 @@ public class FrequencyTest {
         LocalDateTime saturday = LocalDateTime.of(2023, 4, 15, 10, 30);
         var frequency = new FrequencyWeekly(array);
 
-        LocalDateTime response1 = frequency.nextEventDate(tuesday);
-        LocalDateTime response2 = frequency.nextEventDate(response1);
+        LocalDateTime response1 = frequency.nextEventDateTime(tuesday);
+        LocalDateTime response2 = frequency.nextEventDateTime(response1);
 
         assertEquals(response1, thursday);
         assertEquals(response2, saturday);
@@ -93,9 +93,9 @@ public class FrequencyTest {
         array.add(DayOfWeek.WEDNESDAY);
         var frequency = new FrequencyWeekly(array);
 
-        LocalDateTime response1 = frequency.nextEventDate(LocalDateTime.of(2023, 4, 11, 10, 30));
+        LocalDateTime response1 = frequency.nextEventDateTime(LocalDateTime.of(2023, 4, 11, 10, 30));
         assertEquals(wednesday1, response1);
-        LocalDateTime response2 = frequency.nextEventDate(response1);
+        LocalDateTime response2 = frequency.nextEventDateTime(response1);
         assertEquals(wednesday2, response2);
     }
 }

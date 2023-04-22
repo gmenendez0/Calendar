@@ -7,34 +7,42 @@ import java.util.ArrayList;
 
 public class FrequencyWeekly extends Frequency {
     private final ArrayList<DayOfWeek> weekDays;
-    final int NUM_DAY = 7;  //! Esto que significa? Estaría más claro si la constante tuviera un nombre más descriptivo.
+    final int NUMBER_OF_DAYS = 7;  
 
     //Constructor.
     public FrequencyWeekly(ArrayList<DayOfWeek> weekDays){
         this.weekDays = weekDays;
     }
 
-    //! ESTO HAY QUE REFACTORIZARLO PORQUE NO SE ENTIENDE. ADEMAS, HAY QUE CORREGIR LITERALES.
+    private int daysToAddToDate(DayOfWeek day, DayOfWeek nextDay){
+        int valueOfDay = day.getValue();
+        int valueOfNextDay = nextDay.getValue();
+        int daysToAdd = (valueOfNextDay - valueOfDay + NUMBER_OF_DAYS) % NUMBER_OF_DAYS;
+        if (daysToAdd == 0){
+            daysToAdd = NUMBER_OF_DAYS;
+        }
+        return daysToAdd;
+    }
+
+    private DayOfWeek whatIsTheNextDay(int indexDay){
+        final int lastIndexInArray = this.weekDays.size()-1;
+        DayOfWeek next = indexDay == lastIndexInArray ? this.weekDays.get(0) : this.weekDays.get(indexDay+1);
+        return next;
+    }
+
     //Pre: receives the DateTime.
     //Post: Given a date, returns the following event s date.
     @Override
     public LocalDateTime nextEventDateTime(LocalDateTime date){
         DayOfWeek day = date.getDayOfWeek();
-        DayOfWeek nextDay;
+        int dayIndexInArray = this.weekDays.indexOf(day);
+        
+        //En caso que el dia proporcionado no este en el array de la frecuencia.
+        if (dayIndexInArray == -1) return null;
 
-        int indexDay = this.weekDays.indexOf(day);
-        if (indexDay == weekDays.size()-1){
-            nextDay = this.weekDays.get(0);
-        } else {
-            nextDay = this.weekDays.get(indexDay+1);
-        }
-
-        int numberOfDays = (nextDay.getValue() - day.getValue() + NUM_DAY) % NUM_DAY;
-        if (numberOfDays == 0){
-            numberOfDays = NUM_DAY;
-        }
+        DayOfWeek nextDay = this.whatIsTheNextDay(dayIndexInArray); 
+        int numberOfDays = this.daysToAddToDate(day, nextDay);
         LocalDate datePlus = date.plusDays(numberOfDays).toLocalDate();
-
 
         if (noNextEvent(datePlus)) return null;
 

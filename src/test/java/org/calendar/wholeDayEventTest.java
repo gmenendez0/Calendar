@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
-public class wholeDayEventTest {
+public class WholeDayEventTest {
 
     @Test
     public void oneDayEvent(){
@@ -20,8 +20,8 @@ public class wholeDayEventTest {
 
         WholeDayEvent event = new WholeDayEvent(1, title, description, now);
 
-        assertEquals(start, event.whenTheEventStart());
-        assertEquals(end, event.whenTheEventEnd());
+        assertEquals(start, event.getStartDateTime());
+        assertEquals(end, event.getEndingDateTime());
     }
 
     @Test
@@ -29,10 +29,13 @@ public class wholeDayEventTest {
         String title = "Title";
         String description = "Description";
         LocalDate now = LocalDate.now();
+        LocalDateTime start = now.atStartOfDay();
+        LocalDateTime end = now.plusDays(1).atStartOfDay();
 
         WholeDayEvent event = new WholeDayEvent(2, title, description, now);
 
-        assertTrue(event.isWholeDay());
+        assertEquals(event.getStartDateTime(), start);    
+        assertEquals(event.getEndingDateTime(), end);
     }
 
     @Test
@@ -40,17 +43,17 @@ public class wholeDayEventTest {
         String title = "Title";
         String description = "Description";
         LocalDate now = LocalDate.now();
-        LocalDateTime start = now.atStartOfDay();
-        LocalDateTime end = now.atTime(23,59,59);
 
         WholeDayEvent event = new WholeDayEvent(1, title, description, now);
 
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         LocalDateTime startTomorrow = tomorrow.atStartOfDay();
-        LocalDateTime endTomorrow = tomorrow.atTime(23,59,59);
+        LocalDateTime endTomorrow = tomorrow.plusDays(1).atStartOfDay();
 
         event.setStartDate(tomorrow);
 
-        assertEquals(tomorrow, event.getStartDate());
+        assertEquals(startTomorrow, event.getStartDateTime());
+        assertEquals(endTomorrow, event.getEndingDateTime());
     }
+
 }
