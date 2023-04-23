@@ -32,7 +32,7 @@ public class Calendar {
         return true;
     }
 
-    //Post: Returns true if there is not an appointment with the ID recived, false otherwise.
+    //Post: Returns true if there is not an appointment with the ID received, false otherwise.
     private boolean idNotFound(int id, int appointmentsSize){
         return (id <= ID_NEGATIVE || appointmentsSize == WITHOUT_APPOINTMENT  || appointments.size() < id);
     }

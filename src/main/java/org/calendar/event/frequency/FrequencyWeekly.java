@@ -19,7 +19,7 @@ public class FrequencyWeekly extends Frequency {
         this.weekDays = weekDays;
     }
 
-    //Post: Returns the amout of days until the next event.
+    //Post: Returns the amount of days until the next event.
     private int daysToAddToDate(DayOfWeek day, DayOfWeek nextDay){
         int valueOfDay = day.getValue();
         int valueOfNextDay = nextDay.getValue();
@@ -37,7 +37,6 @@ public class FrequencyWeekly extends Frequency {
         return indexDay == lastIndexInArray ? this.weekDays.get(FIRST_INDEX) : this.weekDays.get(indexDay + ONE_POSITION);
     }
 
-    //Pre: receives the DateTime.
     //Post: Given a date, returns the following event s date.
     @Override
     public LocalDateTime nextEventDateTime(LocalDateTime date){
