@@ -10,14 +10,16 @@ public class FrequencyWeekly extends Frequency {
     final int NUMBER_OF_DAYS = 7;
     final int ZERO_DAYS = 0;
     final int NOT_PRESENT = -1;
+    final int FIRST_INDEX = 0;
+    final int ONE_POSITION = 1;
+    final int ARRAY_POSITION_DIFFERENCE = 1;
 
     //Constructor.
     public FrequencyWeekly(ArrayList<DayOfWeek> weekDays){
         this.weekDays = weekDays;
     }
 
-    //Pre: ???
-    //Post: ???
+    //Post: Returns the amout of days until the next event.
     private int daysToAddToDate(DayOfWeek day, DayOfWeek nextDay){
         int valueOfDay = day.getValue();
         int valueOfNextDay = nextDay.getValue();
@@ -28,12 +30,11 @@ public class FrequencyWeekly extends Frequency {
         return daysToAdd;
     }
 
-    //Pre: ???
-    //Post: ???
+    //Post: Returns the next day in the weekDays array.
     private DayOfWeek whatIsTheNextDay(int indexDay){
-        final int lastIndexInArray = this.weekDays.size() - 1;
+        final int lastIndexInArray = this.weekDays.size() - ARRAY_POSITION_DIFFERENCE;
 
-        return indexDay == lastIndexInArray ? this.weekDays.get(0) : this.weekDays.get(indexDay + 1);
+        return indexDay == lastIndexInArray ? this.weekDays.get(FIRST_INDEX) : this.weekDays.get(indexDay + ONE_POSITION);
     }
 
     //Pre: receives the DateTime.
@@ -42,10 +43,10 @@ public class FrequencyWeekly extends Frequency {
     public LocalDateTime nextEventDateTime(LocalDateTime date){
         DayOfWeek day = date.getDayOfWeek();
         int dayIndexInArray = this.weekDays.indexOf(day);
-        
+
         if (dayIndexInArray == NOT_PRESENT) return null;
 
-        DayOfWeek nextDay = this.whatIsTheNextDay(dayIndexInArray); 
+        DayOfWeek nextDay = this.whatIsTheNextDay(dayIndexInArray);
         int numberOfDays = this.daysToAddToDate(day, nextDay);
         LocalDate datePlus = date.plusDays(numberOfDays).toLocalDate();
 

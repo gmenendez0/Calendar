@@ -15,7 +15,7 @@ public class WholeDayEventTest {
         LocalDateTime start = now.atStartOfDay();
         LocalDateTime end = now.plusDays(1).atStartOfDay();
 
-        WholeDayEvent event = new WholeDayEvent(1, title, description, now);
+        WholeDayEvent event = new WholeDayEvent(title, description, now);
 
         assertEquals(start, event.getStartDateTime());
         assertEquals(end, event.getEndingDateTime());
@@ -29,7 +29,7 @@ public class WholeDayEventTest {
         LocalDateTime start = now.atStartOfDay();
         LocalDateTime end = now.plusDays(1).atStartOfDay();
 
-        WholeDayEvent event = new WholeDayEvent(2, title, description, now);
+        WholeDayEvent event = new WholeDayEvent(title, description, now);
 
         assertEquals(event.getStartDateTime(), start);    
         assertEquals(event.getEndingDateTime(), end);
@@ -41,7 +41,7 @@ public class WholeDayEventTest {
         String description = "Description";
         LocalDate now = LocalDate.now();
 
-        WholeDayEvent event = new WholeDayEvent(1, title, description, now);
+        WholeDayEvent event = new WholeDayEvent(title, description, now);
 
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         LocalDateTime startTomorrow = tomorrow.atStartOfDay();

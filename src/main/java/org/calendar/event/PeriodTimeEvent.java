@@ -3,8 +3,8 @@ package org.calendar.event;
 import java.time.LocalDateTime;
 
 public class PeriodTimeEvent extends Event {
-    public PeriodTimeEvent(int id, String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime) {
-        super(id, title, description, startDateTime, endingDateTime);
+    public PeriodTimeEvent(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime) {
+        super(title, description, startDateTime, endingDateTime);
     }
 
     //Post: changes the startDateTime of the event.

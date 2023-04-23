@@ -8,8 +8,8 @@ public abstract class Task extends Appointment {
     protected LocalDateTime expirationDateTime;
 
     //Constructs a task
-    public Task(int id, String title, String description, LocalDateTime expirationDateTime) {
-        super(id, title, description);
+    public Task(String title, String description, LocalDateTime expirationDateTime) {
+        super(title, description);
         this.expirationDateTime = expirationDateTime;
     }
 

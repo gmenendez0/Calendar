@@ -93,7 +93,7 @@ public class FrequencyTest {
         array.add(DayOfWeek.WEDNESDAY);
         var frequency = new FrequencyWeekly(array);
 
-        LocalDateTime response1 = frequency.nextEventDateTime(LocalDateTime.of(2023, 4, 11, 10, 30));
+        LocalDateTime response1 = frequency.nextEventDateTime(LocalDateTime.of(2023, 4, 5, 10, 30));
         assertEquals(wednesday1, response1);
         LocalDateTime response2 = frequency.nextEventDateTime(response1);
         assertEquals(wednesday2, response2);

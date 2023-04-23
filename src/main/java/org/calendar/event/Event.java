@@ -11,15 +11,15 @@ public abstract class Event extends Appointment {
     private org.calendar.event.frequency.Frequency Frequency;
 
     //Constructor
-    public Event(int id, String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){
-        super(id, title, description);
+    public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){
+        super(title, description);
         this.startDateTime = startDateTime;
         this.endingDateTime = endingDateTime;
     }
 
     //Post: Return the true if the event repeats, false otherwise.
     public boolean IsRepeated(){
-        return this.Frequency != null;
+         return this.Frequency != null;
     }
 
     //Post: changes the frequency state of the event, to not repeat.

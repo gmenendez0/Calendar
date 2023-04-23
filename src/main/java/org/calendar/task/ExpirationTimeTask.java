@@ -3,8 +3,8 @@ package org.calendar.task;
 import java.time.LocalDateTime;
 
 public class ExpirationTimeTask extends Task {
-    public ExpirationTimeTask(int id, String title, String description, LocalDateTime expirationDateTime) {
-        super(id, title, description, expirationDateTime);
+    public ExpirationTimeTask(String title, String description, LocalDateTime expirationDateTime) {
+        super(title, description, expirationDateTime);
     }
 
     //Post: Sets the expirationDateTime.

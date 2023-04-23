@@ -11,7 +11,7 @@ public class ExpirationTimeTaskTest {
     //Post: Tests that setExpirationDateTime sets the value correctly.
     @Test
     public void setExpirationDateTime() {
-        var task = new ExpirationTimeTask(1, "title", "description", LocalDateTime.now());
+        var task = new ExpirationTimeTask("title", "description", LocalDateTime.now());
         LocalDateTime yesterday = LocalDateTime.now().minusDays(ONE_DAY);
 
         task.setExpirationDateTime(yesterday);
@@ -24,7 +24,7 @@ public class ExpirationTimeTaskTest {
     @Test
     public void getExpirationDateTime() {
         LocalDateTime now = LocalDateTime.now();
-        var task = new ExpirationTimeTask(1, "title", "description", now);
+        var task = new ExpirationTimeTask("title", "description", now);
 
         var time = task.getExpirationDateTime();
 
