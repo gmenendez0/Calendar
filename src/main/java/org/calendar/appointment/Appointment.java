@@ -1,9 +1,6 @@
 package org.calendar.appointment;
 
 public class Appointment{
-
-    final int NO_ID = -1;
-
     private int id;
     private String title;
     private String description;
@@ -12,7 +9,7 @@ public class Appointment{
 
     //Constructor.
     public Appointment(String title, String description){
-        this.id = NO_ID;
+        this.id = -1;
         this.title = title;
         this.description = description;
         completed = false;

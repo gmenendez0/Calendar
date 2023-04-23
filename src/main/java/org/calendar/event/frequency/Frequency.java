@@ -12,12 +12,12 @@ public abstract class Frequency {
     }
 
     //Post: Returns true if the date received is after the deadLine, false otherwise.
-    private boolean hasExceededDeadline(LocalDate date){
+    public boolean hasExceededDeadline(LocalDate date){
         return date.isAfter(this.deadline);
     }
 
     //Post: returns true if there is a deadline. If not, return false.
-    private boolean hasADeadline(){
+    public boolean hasADeadline(){
         return this.deadline != null;
     }
 
