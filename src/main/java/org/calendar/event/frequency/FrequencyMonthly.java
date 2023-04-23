@@ -6,18 +6,17 @@ import java.time.temporal.ChronoUnit;
 
 public class FrequencyMonthly extends Frequency {
     final int ONE_MONTH = 1;
-    private final int interval;
+    private final int monthsToAdd;
 
     //Constructor.
     public FrequencyMonthly(){
-        this.interval = ONE_MONTH;
+        this.monthsToAdd = ONE_MONTH;
     }
 
-    //Pre: receives the LocalDateTime.
     //Post: returns the next event date, null if there is no next event.
     @Override
     public LocalDateTime nextEventDateTime(LocalDateTime date){
-        LocalDateTime dayTime = date.plus(this.interval, ChronoUnit.MONTHS);
+        LocalDateTime dayTime = date.plus(this.monthsToAdd, ChronoUnit.MONTHS);
         LocalDate day = dayTime.toLocalDate();
 
         if (noNextEvent(day)) return null;

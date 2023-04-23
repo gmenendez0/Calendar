@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class Frequency {
+    final int FIRST_REPETITION = 1;
     private LocalDate deadline;
 
     //Returns false if there is a next event, true otherwise
@@ -30,10 +31,9 @@ public abstract class Frequency {
     //Pre: receives the number of repetitions of the event and a date.
     //Post: adds the deadline to the event, counting the number of repetitions.
     public void addDeadlineWithRepetitions(int repetitions, LocalDateTime date){
-        for(int i = 0; i < repetitions; i++){
+        for(int i = FIRST_REPETITION; i <= repetitions; i++){
             date = this.nextEventDateTime(date);
         }
-
         this.addDeadline(date.toLocalDate());
     }
 
