@@ -7,23 +7,19 @@ import java.time.temporal.ChronoUnit;
 public class FrequencyAnnual extends Frequency {
     final int ONE_YEAR = 1;
 
-
-    private final int interval;
+    private final int yearsToAdd;
 
     //Constructor.
     public FrequencyAnnual(){
-        this.interval = ONE_YEAR;
+        this.yearsToAdd = ONE_YEAR;
     }
 
-    //Pre: receives the LocalDateTime.
     //Post: returns the next event date.
     @Override
     public LocalDateTime nextEventDateTime(LocalDateTime date){
-        LocalDateTime dayTime = date.plus(this.interval, ChronoUnit.YEARS);
+        LocalDateTime dayTime = date.plus(this.yearsToAdd, ChronoUnit.YEARS);
         LocalDate day = dayTime.toLocalDate();
-
         if (noNextEvent(day)) return null;
-
-        return date.plus(this.interval, ChronoUnit.YEARS);
+        return date.plus(this.yearsToAdd, ChronoUnit.YEARS);
     }
 }

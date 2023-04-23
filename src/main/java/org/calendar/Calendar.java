@@ -5,6 +5,10 @@ import org.calendar.appointment.Appointment;
 import java.util.ArrayList;
 
 public class Calendar {
+
+    final int ID_NEGATIVE = 0;
+    final int WITHOUT_APPOINTMENT = 0;
+
     private final ArrayList<Appointment> appointments = new ArrayList<>();
 
     public Calendar(){}
@@ -30,9 +34,9 @@ public class Calendar {
         return true;
     }
 
-    //Post: Returns true if there is not an appointment with the ID recived, false otherwise.
+    //Post: Returns true if there is not an appointment with the ID received, false otherwise.
     private boolean idNotFound(int id, int appointmentsSize){
-        return (id < 0 || appointmentsSize == 0  || appointments.size() < id);
+        return (id < ID_NEGATIVE || appointmentsSize == WITHOUT_APPOINTMENT  || appointments.size() < id);
     }
 
     //Pre: ID Must not be a negative number.
