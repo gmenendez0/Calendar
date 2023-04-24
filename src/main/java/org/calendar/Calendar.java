@@ -1,5 +1,6 @@
 package org.calendar;
 
+import org.calendar.alarms.Alarm;
 import org.calendar.appointment.Appointment;
 
 import java.util.ArrayList;
@@ -46,6 +47,16 @@ public class Calendar {
 
         appointment.setId(id);
         appointments.set(id, appointment);
+        return true;
+    }
+
+    //Pre: ID Must not be a negative number.
+    //Post: Adds an alarm to the appointment with the given id.
+    public boolean addAlarmToAppointment(int id, Alarm alarm){
+        if(idNotFound(id, appointments.size())) return false;
+
+        getAppointment(id).addObserver(alarm);
+
         return true;
     }
 }

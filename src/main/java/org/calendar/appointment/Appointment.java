@@ -1,8 +1,10 @@
 package org.calendar.appointment;
 
-public abstract class Appointment{
+import org.observable_subject.ObservableObject;
 
+public abstract class Appointment extends ObservableObject {
     final int NO_ID = -1;
+
     private int id;
     private String title;
     private String description;
@@ -61,5 +63,13 @@ public abstract class Appointment{
     //Post: Returns the state of the appointment. True if destroyed, false otherwise
     public boolean isDestroyed(){
         return destroyed;
+    }
+
+    //Post: Orders the Observers to update their status. In case of alarms, it will make them check if it is time to ring or not.
+    @Override
+    public void checkObservers(){
+        for (var observer : observers) {
+            observer.update();
+        }
     }
 }

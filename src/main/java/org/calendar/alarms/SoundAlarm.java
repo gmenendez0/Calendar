@@ -1,8 +1,19 @@
 package org.calendar.alarms;
 
-public class SoundAlarm implements Alarm {
+import java.time.LocalDateTime;
+
+public class SoundAlarm extends Alarm {
+    public SoundAlarm(int id, LocalDateTime ringDateTime){
+        super(id, ringDateTime);
+    }
+
     @Override
     public void ring() {
         System.out.println("Sounding...");
+    }
+
+    @Override
+    public void update() {
+        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }

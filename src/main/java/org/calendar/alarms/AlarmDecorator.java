@@ -1,10 +1,12 @@
 package org.calendar.alarms;
 
-public abstract class AlarmDecorator implements Alarm {
+import java.time.LocalDateTime;
+
+public abstract class AlarmDecorator extends Alarm {
     public Alarm alarm;
 
-    public AlarmDecorator(Alarm alarm){
-        //? Aquí, al constructor del decorador le llegara uno de 3 tipos de alarma: Notif, sonido o email.
+    public AlarmDecorator(int id, LocalDateTime ringDateTime, Alarm alarm){
+        super(id, ringDateTime);
         this.alarm = alarm;
     }
 

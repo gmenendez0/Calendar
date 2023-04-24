@@ -1,8 +1,19 @@
 package org.calendar.alarms;
 
-public class NotificationAlarm implements Alarm {
+import java.time.LocalDateTime;
+
+public class NotificationAlarm extends Alarm {
+    public NotificationAlarm(int id, LocalDateTime ringDateTime){
+        super(id, ringDateTime);
+    }
+
     @Override
     public void ring() {
         System.out.println("Sending notification...");
+    }
+
+    @Override
+    public void update() {
+        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }
