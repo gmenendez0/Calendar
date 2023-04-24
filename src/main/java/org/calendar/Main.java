@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
-        /*
+    /*
 
         //El usuario viene y dice que quiere agregarle a X appointment una alarma de notification.
         Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
@@ -23,7 +23,7 @@ public class Main {
         //La alarma suena, y se disparan las 3 acciones al mismo tiempo.
         alarmaDeSonidoDecorator.ring();
 
-         */
+*/
 
         Calendar calendario = new Calendar();
         calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));
@@ -31,5 +31,6 @@ public class Main {
         Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
         calendario.addAlarmToAppointment(0, alarmDeNotif);
 
+        calendario.removeAlarmFromAppointment(0, 1);
     }
 }

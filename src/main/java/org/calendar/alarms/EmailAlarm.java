@@ -7,13 +7,9 @@ public class EmailAlarm extends Alarm {
         super(id, ringDateTime);
     }
 
+    //Post: Rings and sends an email to the user.
     @Override
-    public void ring() {
+    protected void ring() {
         System.out.println("Sending mail...");
-    }
-
-    @Override
-    public void update() {
-        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }

@@ -11,7 +11,7 @@ public abstract class AlarmDecorator extends Alarm {
     }
 
     @Override
-    public void ring() {
+    protected void ring() {
         alarm.ring();
     }
 }

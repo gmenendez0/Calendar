@@ -1,10 +1,8 @@
 package org.calendar.alarms;
 
-import org.observable_subject.Observer;
-
 import java.time.LocalDateTime;
 
-public abstract class Alarm implements Observer {
+public abstract class Alarm {
     protected int id;
     protected LocalDateTime ringDateTime;
 
@@ -13,5 +11,16 @@ public abstract class Alarm implements Observer {
         this.ringDateTime = ringDateTime;
     }
 
-    public abstract void ring();
+    //Post: Returns the id
+    public int getId() {
+        return id;
+    }
+
+    //Post: Rings the alarm.
+    protected abstract void ring();
+
+    //Post: Checks if it is time to ring.
+    public void update(){
+        if(LocalDateTime.now().equals(ringDateTime)) ring();
+    }
 }

@@ -7,13 +7,9 @@ public class SoundAlarm extends Alarm {
         super(id, ringDateTime);
     }
 
+    //Post: Rings and makes a sound.
     @Override
-    public void ring() {
+    protected void ring() {
         System.out.println("Sounding...");
-    }
-
-    @Override
-    public void update() {
-        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }

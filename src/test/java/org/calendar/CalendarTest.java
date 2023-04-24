@@ -1,5 +1,7 @@
 package org.calendar;
 
+import org.calendar.alarms.Alarm;
+import org.calendar.alarms.NotificationAlarm;
 import org.calendar.event.WholeDayEvent;
 import org.calendar.task.ExpirationTimeTask;
 import org.calendar.task.WholeDayTask;
@@ -67,5 +69,19 @@ public class CalendarTest {
         var storedWholeDayAppointment = calendar.getAppointment(0);
 
         assertEquals(editedTask.getTitle(), storedWholeDayAppointment.getTitle());
+    }
+
+    //Tests the correct behaviour of the addAlarmToAppointment method.
+    @Test
+    public void addAlarmToAppointment(){
+        Calendar calendario = new Calendar();
+        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));
+        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
+
+        boolean expectedSuccess = calendario.addAlarmToAppointment(0, alarmDeNotif);
+        boolean expectedFailure = calendario.addAlarmToAppointment(1, alarmDeNotif);
+
+        assertTrue(expectedSuccess);
+        assertFalse(expectedFailure);
     }
 }

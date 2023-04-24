@@ -7,14 +7,10 @@ public class EmailAlarmDecorator extends AlarmDecorator {
         super(id, ringDateTime, alarm);
     }
 
+    //Post: Makes the "alarm" attribute ring and also sends email to the user.
     @Override
-    public void ring(){
+    protected void ring(){
         System.out.println("Sending email...");
         if(alarm != null) alarm.ring();
-    }
-
-    @Override
-    public void update() {
-        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }

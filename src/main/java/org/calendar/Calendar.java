@@ -37,7 +37,7 @@ public class Calendar {
 
     //Post: Returns true if there is not an appointment with the ID received, false otherwise.
     private boolean idNotFound(int id, int appointmentsSize){
-        return (id <= INVALID_ID || appointmentsSize == EMPTY  || appointments.size() < id);
+        return (id <= INVALID_ID || appointmentsSize == EMPTY  || appointments.size() <= id);
     }
 
     //Pre: ID Must not be a negative number.
@@ -51,12 +51,20 @@ public class Calendar {
     }
 
     //Pre: ID Must not be a negative number.
-    //Post: Adds an alarm to the appointment with the given id.
+    //Post: Adds an alarm to the appointment with the given id. Returns true in case of success, false otherwise.
     public boolean addAlarmToAppointment(int id, Alarm alarm){
         if(idNotFound(id, appointments.size())) return false;
 
-        getAppointment(id).addObserver(alarm);
+        getAppointment(id).addAlarm(alarm);
 
         return true;
+    }
+
+    //Pre: ID and alarmId Must not be negative numbers.
+    //Post: Removes the alarm with id = alarmId at the appointment with id = appointmentId. Returns true in case of success, false otherwise.
+    public boolean removeAlarmFromAppointment(int appointmentId, int alarmId){
+        if(idNotFound(appointmentId, appointments.size())) return false;
+
+        return appointments.get(appointmentId).removeAlarm(alarmId);
     }
 }

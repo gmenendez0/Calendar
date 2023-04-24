@@ -7,14 +7,10 @@ public class SoundAlarmDecorator extends AlarmDecorator {
         super(id, ringDateTime, alarm);
     }
 
+    //Post: Rings making a sound and makes the "alarm" attribute ring.
     @Override
-    public void ring(){
+    protected void ring(){
         System.out.println("Sounding...");
         if(alarm != null) alarm.ring();
-    }
-
-    @Override
-    public void update() {
-        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }

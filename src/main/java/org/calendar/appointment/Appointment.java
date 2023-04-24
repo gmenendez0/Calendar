@@ -1,8 +1,11 @@
 package org.calendar.appointment;
 
-import org.observable_subject.ObservableObject;
+import org.calendar.alarms.Alarm;
 
-public abstract class Appointment extends ObservableObject {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Appointment{
     final int NO_ID = -1;
 
     private int id;
@@ -10,6 +13,7 @@ public abstract class Appointment extends ObservableObject {
     private String description;
     private boolean completed;
     private boolean destroyed;
+    protected final List<Alarm> alarms = new ArrayList<>();
 
     //Constructor.
     public Appointment(String title, String description){
@@ -65,11 +69,31 @@ public abstract class Appointment extends ObservableObject {
         return destroyed;
     }
 
-    //Post: Orders the Observers to update their status. In case of alarms, it will make them check if it is time to ring or not.
-    @Override
-    public void checkObservers(){
-        for (var observer : observers) {
-            observer.update();
+    //Post: Adds an alarm to the alarm array.
+    public void addAlarm(Alarm alarm){
+        alarms.add(alarm);
+    }
+
+    //post: Removes the alarm with id = alarmId. Returns true in case of success, false otherwise.
+    public boolean removeAlarm(int alarmId){
+        boolean isRemoved = false;
+        int i = 0;
+
+        while(!isRemoved && i < alarms.size()){
+            if (alarms.get(i).getId() == alarmId){
+                isRemoved = true;
+                alarms.remove(i);
+            }
+            i++;
+        }
+
+        return isRemoved;
+    }
+
+    //Post: Orders the alarms to check if it is time to ring or not.
+    public void checkAlarms(){
+        for (var alarm : alarms) {
+            alarm.update();
         }
     }
 }

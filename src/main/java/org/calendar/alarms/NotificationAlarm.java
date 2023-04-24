@@ -7,13 +7,9 @@ public class NotificationAlarm extends Alarm {
         super(id, ringDateTime);
     }
 
+    //Post: Rings and sends a notification to the user.
     @Override
-    public void ring() {
+    protected void ring() {
         System.out.println("Sending notification...");
-    }
-
-    @Override
-    public void update() {
-        if(LocalDateTime.now().equals(ringDateTime)) ring();
     }
 }
