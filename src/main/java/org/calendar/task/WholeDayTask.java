@@ -9,9 +9,10 @@ public class WholeDayTask extends Task {
     private LocalDateTime startDateTime;
 
     //Constructs a WholeDayTask
-    public WholeDayTask(String title, String description, LocalDate startDate, LocalDateTime expirationDateTime) {
-        super(title, description, expirationDateTime);
+    public WholeDayTask(String title, String description, LocalDate startDate) {
+        super(title, description, null);
         this.startDateTime = startDate.atStartOfDay();
+        expirationDateTime = startDateTime.plusDays(ONE_DAY);
     }
 
     //Post: Updates the startDate and, consequentially, the expirationDateTime.

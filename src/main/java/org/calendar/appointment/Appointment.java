@@ -1,6 +1,6 @@
 package org.calendar.appointment;
 
-public class Appointment{
+public abstract class Appointment{
 
     final int NO_ID = -1;
     private int id;
@@ -18,13 +18,9 @@ public class Appointment{
         destroyed = false;
     }
 
+    //Post: Sets the id.
     public void setId(int id){
         this.id = id;
-    }
-
-    //Post: Sets the id.
-    public int getId(){
-        return id;
     }
 
     //Post: Sets the title.
