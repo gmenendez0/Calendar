@@ -29,6 +29,11 @@ public abstract class Appointment{
         this.id = id;
     }
 
+    //Post: Returns the id.
+    public int getId(){
+        return id;
+    }
+
     //Post: Sets the title.
     public void setTitle(String title) {
         this.title = title;

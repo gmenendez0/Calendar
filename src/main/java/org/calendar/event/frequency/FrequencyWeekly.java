@@ -3,10 +3,10 @@ package org.calendar.event.frequency;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 public class FrequencyWeekly extends Frequency {
-    private final ArrayList<DayOfWeek> weekDays;
+    private final List<DayOfWeek> weekDays;
     final int NUMBER_OF_DAYS = 7;
     final int ZERO_DAYS = 0;
     final int NOT_PRESENT = -1;
@@ -15,7 +15,7 @@ public class FrequencyWeekly extends Frequency {
     final int ARRAY_POSITION_DIFFERENCE = 1;
 
     //Constructor.
-    public FrequencyWeekly(ArrayList<DayOfWeek> weekDays){
+    public FrequencyWeekly(List<DayOfWeek> weekDays){
         this.weekDays = weekDays;
     }
 

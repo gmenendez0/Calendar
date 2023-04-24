@@ -1,32 +1,26 @@
-Alarmas:
-        Se crea alarma -> Se agrega via calendar a appointment X -> Appointment X lo agrega a su array de observadores.
-        Se pide a calendar que se elimine la alarma de ID 1 en el appointment de ID 32 -> Appointment id=32 recorre todas sus alarmas y elimina la de id = 1
+MOSTRAR TODAS LOS EVENTOS ENTRE 1/04/23 Y 31/04/23 INCLUSIVE
 
+1)El evento tiene: (fecha de inicio mayor o igual a 1-04-23 y menor o igual a 31-04-23)? || (fecha de inicio menor a 1-04-23 y fecha de final mayor o igual al 1-04-23)?
+-Si la respuesta es SI, incluyo el evento y paso al siguiente evento de la lista
+-Si la respuesta es NO, paso al punto 2:
 
-Para considerar la posibilidad de que en un futuro pueda haber una misma alarma que suena de diferentes maneras (notif e email por ejemplo), se implementa el patron Decorator, el cual tiene el siguiente funcionamiento:
--El usuario decide que quiere agregar una alarma de tipo Notificacion. Se crea una "NotificationAlarm" con su Id, su fecha y hora de expiracion correspondiente a lo pedido por el usuario, y se agrega a traves del objeto calendario a su appointment. 
+2)Pregunto, "el evento se repite?"
+-Si la respuesta es NO, paso al siguiente evento de la lista
+-Si la respuesta es SI, paso al punto 3.
 
-        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));      //Appointment que entrara con el ID = 0
+3)Si se llego hasta aca es que el evento original no esta dentro de 1-04-23 y 31-04-23, pero se repite, entonces podria tener alguna repeticion en ese rango. 
+Pregunto: "la fecha de inicio del evento original es menor al 1-04-23 y (La fecha de inicio de la ultima repeticion es menor o igual a 1-04-23 y la fecha de finalizacion mayor a 1-04-23 o La fecha de inicio de la ultima repeticion es mayor o igual a 1-04-23 y menor o igual a 31-04-23)?
 
-        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
-        calendario.addAlarmToAppointment(0, alarmDeNotif);                      //Se agrega la alarma de notificacion al appointment de ID = 0
+*Se pregunta si la fecha de inicio del evento original es menor al 1-04-23 para determinar si el evento con repeticion empieza a tomar lugar antes o despues de las fechas validas (1-4 a 31-4). Si empieza a tomar lugar despues, ninguna repetiticion estara dentro de las fechas validas. Si empieza a tomar lugar antes, es posible que alguna repeticion caiga dentro de las fechas validas.
 
--Supongamos que el usuario quiere crear una alarma de tipo Notificacion y Email. Se crea una "NotificationAlarm" con su Id, su fecha y hora de expiracion correspondiente a lo pedido por el usuario. Luego se crea una "EmailAlarmDecorator" con su ID, su fecha y hora de expiracion y como ultimo parametro se le pasa la "notificationAlarm" creada anteriormente. Luego, se le agrega via objeto Calendar esta EmailAlarmDecorator al appointment correspondiente.
+*Si lo anterior es valido, Se pregunta si algunas de las siguientes se cumplen:
+a)La fecha de inicio de la ultima repeticion es menor o igual a 1-04-23 y la fecha de finalizacion mayor a 1-04-23.
+b)La fecha de inicio de la ultima repeticion es mayor o igual a 1-04-23 y menor o igual a 31-04-23.
 
-        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));      //Appointment que entrara con el ID = 0
-
-        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
-        Alarm alarmaDeEmailDecorator = new EmailAlarmDecorator(2, LocalDateTime.now(), alarmDeNotif);
-        calendario.addAlarmToAppointment(0, alarmaDeEmailDecorator);                      //Se agrega la alarma de notificacion y email al appointment de ID = 0
-
-IMPORTANTE:
--Desde la GUI, cuando se muestre un Appointment, se debera tener acceso al array de alarmas de dicho appointment para saber que ID ponerle a la alarma a crear.
-
--Para agregar una alarma a X appointment, se debe saber cual es el ID del appointment X.
-
--Se debe resolver el problema de que las alarmas cuando suenan, no tienen manera de acceder a la info del appointment a la que estan asociadas, por lo que no pueden mostrar info de esta. Se podria resolver agregandole un atributo "titulo" a las alarmas, pero hay que analizarlo a fondo porque podria llegar a traer problemas con las alarmas de sonido.
-
--Se debe encontrar la manera de hacer pasar el tiempo para que se haga el siguiente ciclo:
-Calendar Para cada Appointment-> Chequea tus Observers -> Appointment para cada Observer -> Chequea si la hora actual es igual a tu ringDateTime ->  Si la es, sona la alarma. 
-
--Ahora mismo, los eventos con repeticion infinita no tendrian alarmas. Encontrar una manera de acoplar las dos cosas.
+if(fecha de inicio_evento_original < 1-04-23 && (fecha_de_inicio_ultima_repeticion <= 1-04-23 && fecha_de_finalizacion_ultima_repeticion > 1-04-23) || (fecha_de_inicio_ultima_repeticion >= 1-04-23 && fecha_de_inicio_ultima_repeticion <= 31-04-23){
+HAY QUE VER QUE SE HACE DENTRO DEL IF PARA ACOMODAR LAS FECHAS DE LA REPETICION COMO CORRESPONDA.
+-CONSIDERAR OPCIONES DE QUE HAYA MAS DE UNA REPETICION ENTRE LAS FECHAS VALIDAS
+-CONSIDERAR OPCIONES DE VISTA DE DIA, PARA ESO HABRIA QUE EMPEZAR A TOMAR EN CUENTA LAS HORAS Y NO SOLO LAS FECHAS
+}
+...
+paso a siguiente evento

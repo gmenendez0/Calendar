@@ -1,0 +1,32 @@
+Alarmas:
+        Se crea alarma -> Se agrega via calendar a appointment X -> Appointment X lo agrega a su array de observadores.
+        Se pide a calendar que se elimine la alarma de ID 1 en el appointment de ID 32 -> Appointment id=32 recorre todas sus alarmas y elimina la de id = 1
+
+
+Para considerar la posibilidad de que en un futuro pueda haber una misma alarma que suena de diferentes maneras (notif e email por ejemplo), se implementa el patron Decorator, el cual tiene el siguiente funcionamiento:
+-El usuario decide que quiere agregar una alarma de tipo Notificacion. Se crea una "NotificationAlarm" con su Id, su fecha y hora de expiracion correspondiente a lo pedido por el usuario, y se agrega a traves del objeto calendario a su appointment. 
+
+        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));      //Appointment que entrara con el ID = 0
+
+        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
+        calendario.addAlarmToAppointment(0, alarmDeNotif);                      //Se agrega la alarma de notificacion al appointment de ID = 0
+
+-Supongamos que el usuario quiere crear una alarma de tipo Notificacion y Email. Se crea una "NotificationAlarm" con su Id, su fecha y hora de expiracion correspondiente a lo pedido por el usuario. Luego se crea una "EmailAlarmDecorator" con su ID, su fecha y hora de expiracion y como ultimo parametro se le pasa la "notificationAlarm" creada anteriormente. Luego, se le agrega via objeto Calendar esta EmailAlarmDecorator al appointment correspondiente.
+
+        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));      //Appointment que entrara con el ID = 0
+
+        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
+        Alarm alarmaDeEmailDecorator = new EmailAlarmDecorator(2, LocalDateTime.now(), alarmDeNotif);
+        calendario.addAlarmToAppointment(0, alarmaDeEmailDecorator);                      //Se agrega la alarma de notificacion y email al appointment de ID = 0
+
+IMPORTANTE:
+-Desde la GUI, cuando se muestre un Appointment, se debera tener acceso al array de alarmas de dicho appointment para saber que ID ponerle a la alarma a crear.
+
+-Para agregar una alarma a X appointment, se debe saber cual es el ID del appointment X.
+
+-Se debe resolver el problema de que las alarmas cuando suenan, no tienen manera de acceder a la info del appointment a la que estan asociadas, por lo que no pueden mostrar info de esta. Se podria resolver agregandole un atributo "titulo" a las alarmas, pero hay que analizarlo a fondo porque podria llegar a traer problemas con las alarmas de sonido.
+
+-Se debe encontrar la manera de hacer pasar el tiempo para que se haga el siguiente ciclo:
+Calendar Para cada Appointment-> Chequea tus Observers -> Appointment para cada Observer -> Chequea si la hora actual es igual a tu ringDateTime ->  Si la es, sona la alarma. 
+
+-Ahora mismo, los eventos con repeticion infinita no tendrian alarmas. Encontrar una manera de acoplar las dos cosas.
