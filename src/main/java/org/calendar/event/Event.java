@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public abstract class Event extends Appointment {
     protected LocalDateTime startDateTime;
     protected LocalDateTime endingDateTime;
-    private org.calendar.event.frequency.Frequency Frequency;
+    private Frequency Frequency;
 
     //Constructor
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){
