@@ -1,56 +1,15 @@
 package org.calendar.frequency;
 
-import org.calendar.event.frequency.FrequencyAnnual;
-import org.calendar.event.frequency.FrequencyDiary;
-import org.calendar.event.frequency.FrequencyMonthly;
 import org.calendar.event.frequency.FrequencyWeekly;
 import org.junit.Test;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import static org.junit.Assert.*;
 
-public class FrequencyTest {
+import static org.junit.Assert.assertEquals;
 
-    @Test
-    public void diaryWithCommonInterval(){
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime later = now.plus(20, ChronoUnit.DAYS);
-        int interval = 20;
-
-        var frequency = new FrequencyDiary(interval);
-
-        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
-        assertEquals(later, laterOfClass);
-    }
-
-    @Test
-    public void diaryWithZeroInterval(){
-        LocalDateTime now = LocalDateTime.now();
-        int interval = 0;
-        var frequency = new FrequencyDiary(interval);
-        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
-        assertEquals(laterOfClass, now);
-    }
-
-    @Test
-    public void annualFrequency(){
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime later = now.plus(1, ChronoUnit.YEARS);
-        var frequency = new FrequencyAnnual();
-        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
-        assertEquals(later, laterOfClass);
-    }
-
-    @Test
-    public void monthlyFrequency(){
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime later = now.plus(1, ChronoUnit.MONTHS);
-        var frequency = new FrequencyMonthly();
-        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
-        assertEquals(later, laterOfClass);
-    }
+public class FrequencyWeeklyTest {
 
     @Test
     public void weeklyFrequency1(){
