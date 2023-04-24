@@ -3,12 +3,13 @@ package org.calendar;
 import org.calendar.appointment.Appointment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calendar {
     final int INVALID_ID = -1;
     final int EMPTY = 0;
 
-    private final ArrayList<Appointment> appointments = new ArrayList<>();
+    private final List<Appointment> appointments = new ArrayList<>();
 
     public Calendar(){}
 
