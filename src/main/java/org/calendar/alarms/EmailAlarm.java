@@ -9,7 +9,7 @@ public class EmailAlarm extends Alarm {
 
     //Post: Rings and sends an email to the user.
     @Override
-    protected void ring() {
-        System.out.println("Sending mail...");
+    protected boolean ring() {
+        return true;
     }
 }

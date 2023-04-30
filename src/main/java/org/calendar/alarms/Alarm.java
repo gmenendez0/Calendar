@@ -16,11 +16,12 @@ public abstract class Alarm {
         return id;
     }
 
-    //Post: Rings the alarm.
-    protected abstract void ring();
+    //Post: Rings the alarm. Returns true if it's called (for testing reasons).
+    protected abstract boolean ring();
 
     //Post: Checks if it is time to ring.
-    public void update(){
-        if(LocalDateTime.now().equals(ringDateTime)) ring();
+    public boolean update(){
+        if(LocalDateTime.now().equals(ringDateTime)) return ring();
+        return false;
     }
 }

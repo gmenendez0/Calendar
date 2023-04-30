@@ -9,7 +9,7 @@ public class SoundAlarm extends Alarm {
 
     //Post: Rings and makes a sound.
     @Override
-    protected void ring() {
-        System.out.println("Sounding...");
+    protected boolean ring() {
+        return true;
     }
 }

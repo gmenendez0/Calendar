@@ -9,8 +9,8 @@ public class SoundAlarmDecorator extends AlarmDecorator {
 
     //Post: Rings making a sound and makes the "alarm" attribute ring.
     @Override
-    protected void ring(){
-        System.out.println("Sounding...");
-        if(alarm != null) alarm.ring();
+    protected boolean ring(){
+        if(alarm != null) return alarm.ring();
+        return true;
     }
 }
