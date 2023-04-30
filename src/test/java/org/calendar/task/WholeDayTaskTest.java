@@ -33,7 +33,7 @@ public class WholeDayTaskTest {
     //Post: Tests that setTitle sets the title correctly.
     @Test
     public void setTitle(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
         appointment.setTitle("Hello2");
 
         var title = appointment.getTitle();
@@ -44,7 +44,7 @@ public class WholeDayTaskTest {
     //Post: Tests that setDescription sets the description correctly.
     @Test
     public void setDescription(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
         appointment.setDescription("Hello from Paris");
 
         var description = appointment.getDescription();
@@ -55,7 +55,7 @@ public class WholeDayTaskTest {
     //Post: Tests that setCompleted sets the completed attribute correctly.
     @Test
     public void setCompleted(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
 
         appointment.setCompleted(true);
         var completed = appointment.isCompleted();
@@ -66,7 +66,7 @@ public class WholeDayTaskTest {
     //Post: Tests that destroy method sets the destroyed attribute on true.
     @Test
     public void destroy(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
 
         appointment.destroy();
         var destroyed = appointment.isDestroyed();
@@ -77,7 +77,7 @@ public class WholeDayTaskTest {
     //Post: Tests the getTitle return value.
     @Test
     public void getTitle(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
 
         var titulo = appointment.getTitle();
 
@@ -87,7 +87,7 @@ public class WholeDayTaskTest {
     //Post: Tests the getDescription return value.
     @Test
     public void getDescription(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
 
         var description = appointment.getDescription();
 
@@ -97,7 +97,7 @@ public class WholeDayTaskTest {
     //Post: Tests the isCompleted return value.
     @Test
     public void isCompleted(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
 
         var completed = appointment.isCompleted();
 
@@ -107,7 +107,7 @@ public class WholeDayTaskTest {
     //Post: Tests the isDestroyed return value.
     @Test
     public void isDestroyed(){
-        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.now());
+        var appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
 
         var destroyed = appointment.isDestroyed();
 

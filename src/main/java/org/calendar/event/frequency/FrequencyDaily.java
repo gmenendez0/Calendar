@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class FrequencyDiary extends Frequency {
+public class FrequencyDaily extends Frequency {
     private final int daysToAdd;
 
     //Constructor.
-    public FrequencyDiary(int interval){
+    public FrequencyDaily(int interval){
         this.daysToAdd = interval;
     }
 

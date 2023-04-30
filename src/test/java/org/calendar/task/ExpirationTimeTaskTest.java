@@ -1,6 +1,7 @@
 package org.calendar.task;
 
 import org.junit.Test;
+
 import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
@@ -11,8 +12,9 @@ public class ExpirationTimeTaskTest {
     //Post: Tests that setExpirationDateTime sets the value correctly.
     @Test
     public void setExpirationDateTime() {
-        var task = new ExpirationTimeTask("title", "description", LocalDateTime.now());
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(ONE_DAY);
+        LocalDateTime dateTime = LocalDateTime.of(2020,1,1,12,0,0);
+        var task = new ExpirationTimeTask("title", "description", dateTime);
+        LocalDateTime yesterday = dateTime.minusDays(ONE_DAY);
 
         task.setExpirationDateTime(yesterday);
         var time = task.getExpirationDateTime();
@@ -23,11 +25,11 @@ public class ExpirationTimeTaskTest {
     //Post: Tests that getExpirationDateTime returns the correct value.
     @Test
     public void getExpirationDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        var task = new ExpirationTimeTask("title", "description", now);
+        LocalDateTime dateTime = LocalDateTime.of(2020,1,1,12,0,0);
+        var task = new ExpirationTimeTask("title", "description", dateTime);
 
-        var time = task.getExpirationDateTime();
+        var expirationDateTime = task.getExpirationDateTime();
 
-        assertEquals(now, time);
+        assertEquals(dateTime, expirationDateTime);
     }
 }

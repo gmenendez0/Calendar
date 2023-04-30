@@ -66,7 +66,7 @@ public class PeriodTimeEventTest {
         LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
         LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
         PeriodTimeEvent eventWithFrequency = new PeriodTimeEvent(title, description, start, end);
-        Frequency frequencyEvent = new FrequencyDiary(2);
+        Frequency frequencyEvent = new FrequencyDaily(2);
         eventWithFrequency.setEventFrequency(frequencyEvent);
         assertTrue(eventWithFrequency.IsRepeated());
     }
@@ -79,7 +79,7 @@ public class PeriodTimeEventTest {
         LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
         LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
         PeriodTimeEvent eventWithoutFrequency = new PeriodTimeEvent(title, description, start, end);
-        Frequency frequencyEvent = new FrequencyDiary(2);
+        Frequency frequencyEvent = new FrequencyDaily(2);
         eventWithoutFrequency.setEventFrequency(frequencyEvent);
         eventWithoutFrequency.setNoRepeat();
         assertFalse(eventWithoutFrequency.IsRepeated());
@@ -94,7 +94,7 @@ public class PeriodTimeEventTest {
         LocalDateTime start = LocalDateTime.of(2023, 4,16, 12,0);
         LocalDateTime end = start.plusDays(1);
         PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
-        Frequency frequencyEvent = new FrequencyDiary(1);
+        Frequency frequencyEvent = new FrequencyDaily(1);
         frequencyEvent.addDeadline(LocalDate.of(2023, 4,20));
         event.setEventFrequency(frequencyEvent);
 

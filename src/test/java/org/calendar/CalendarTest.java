@@ -20,7 +20,7 @@ public class CalendarTest {
         var calendar = new Calendar();
 
         //WholeDayTask insertion and get test
-        var wholeDayTask = new WholeDayTask("title", "description", LocalDate.now());
+        var wholeDayTask = new WholeDayTask("title", "description", LocalDate.of(2020, 1, 1));
 
         calendar.addAppointment(wholeDayTask);
         var storedWholeDayAppointment = calendar.getAppointment(0);
@@ -28,7 +28,7 @@ public class CalendarTest {
         assertEquals(wholeDayTask, storedWholeDayAppointment);
 
         //PeriodTimeTask insertion and get test
-        var periodTimeTask = new ExpirationTimeTask("title", "description", LocalDateTime.now().plusDays(1));
+        var periodTimeTask = new ExpirationTimeTask("title", "description", LocalDateTime.of(2020,1,1,12,0,0));
 
         calendar.addAppointment(periodTimeTask);
         var storedPeriodAppointment = calendar.getAppointment(1);
@@ -36,7 +36,7 @@ public class CalendarTest {
         assertEquals(periodTimeTask, storedPeriodAppointment);
 
         //WholeDayEvent insertion and get test
-        var wholeDayEvent = new WholeDayEvent("title", "description", LocalDate.now());
+        var wholeDayEvent = new WholeDayEvent("title", "description", LocalDate.of(2020, 1, 1));
 
         calendar.addAppointment(wholeDayEvent);
         var storedWholeDayEvent = calendar.getAppointment(2);
@@ -48,7 +48,7 @@ public class CalendarTest {
     @Test
     public void destroyAppointment() {
         var calendar = new Calendar();
-        var wholeDayTask = new WholeDayTask("title", "description", LocalDate.now());
+        var wholeDayTask = new WholeDayTask("title", "description", LocalDate.of(2020, 1, 1));
 
         calendar.addAppointment(wholeDayTask);
         calendar.destroyAppointment(0);
@@ -61,8 +61,8 @@ public class CalendarTest {
     @Test
     public void editAppointment(){
         var calendar = new Calendar();
-        var wholeDayTask = new WholeDayTask("title", "description", LocalDate.now());
-        var editedTask = new WholeDayTask("Edited Title.", "description", LocalDate.now());
+        var wholeDayTask = new WholeDayTask("title", "description", LocalDate.of(2020, 1, 1));
+        var editedTask = new WholeDayTask("Edited Title.", "description", LocalDate.of(2020, 1, 1));
 
         calendar.addAppointment(wholeDayTask);
         calendar.editAppointment(0, editedTask);
@@ -75,8 +75,8 @@ public class CalendarTest {
     @Test
     public void addAlarmToAppointment(){
         Calendar calendario = new Calendar();
-        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.now()));
-        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.now());
+        calendario.addAppointment(new WholeDayTask("titulo", "description", LocalDate.of(2020, 1, 1)));
+        Alarm alarmDeNotif = new NotificationAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
 
         boolean expectedSuccess = calendario.addAlarmToAppointment(0, alarmDeNotif);
         boolean expectedFailure = calendario.addAlarmToAppointment(1, alarmDeNotif);
