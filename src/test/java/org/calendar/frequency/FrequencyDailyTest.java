@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class FrequencyDailyTest {
     @Test
     public void diaryWithCommonInterval(){
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 04, 30, 12, 30);
         LocalDateTime later = now.plus(20, ChronoUnit.DAYS);
         int interval = 20;
 
@@ -23,7 +23,7 @@ public class FrequencyDailyTest {
 
     @Test
     public void diaryWithZeroInterval(){
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 04, 30, 12, 30);
         int interval = 0;
         var frequency = new FrequencyDaily(interval);
         LocalDateTime laterOfClass = frequency.nextEventDateTime(now);

@@ -18,7 +18,7 @@ public class FrequencyDaily extends Frequency {
         LocalDateTime dayTime = date.plus(this.daysToAdd, ChronoUnit.DAYS);
         LocalDate day = dayTime.toLocalDate();
 
-        if (noNextEvent(day)) return null;
+        if (super.noNextEvent(day)) return null;
 
         return dayTime;
     }

@@ -16,8 +16,8 @@ public class PeriodTimeEventTest {
     public void verifyDuration(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime start = LocalDateTime.of(2023,4,30,12,0,0);
+        LocalDateTime end = start.plusDays(2);
         PeriodTimeEvent newEvent = new PeriodTimeEvent(title, description, start, end);
 
         LocalDateTime startResponse = newEvent.getStartDateTime();
@@ -32,10 +32,10 @@ public class PeriodTimeEventTest {
     public void verifyChangeDuration(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start1 = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
-        LocalDateTime end1 = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
-        LocalDateTime start2 = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
-        LocalDateTime end2 = LocalDateTime.now().plusDays(2).withHour(18).withMinute(0).withSecond(0);
+        LocalDateTime start1 = LocalDateTime.of(2023,4,30,12,0,0);
+        LocalDateTime end1 = start1.plusDays(2);
+        LocalDateTime start2 = LocalDateTime.of(2023,4,30,0,0,0);
+        LocalDateTime end2 = start2.plusDays(2);
 
         PeriodTimeEvent newEvent = new PeriodTimeEvent(title, description, start1, end1);
         newEvent.setEventStartDateTime(start2);
@@ -49,11 +49,11 @@ public class PeriodTimeEventTest {
 
     //Post: test to verify if it has no repetition
     @Test
-    public void eventDontHaveReplay(){
+    public void eventDon_tHaveReplay(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime start = LocalDateTime.of(2023,4,30,12,0,0);
+        LocalDateTime end = start.plusDays(2);
         PeriodTimeEvent eventWithoutFrequency = new PeriodTimeEvent(title, description, start, end);
         assertFalse(eventWithoutFrequency.IsRepeated());
     }
@@ -63,8 +63,8 @@ public class PeriodTimeEventTest {
     public void eventHaveReplay(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime start = LocalDateTime.of(2023,4,30,12,0,0);
+        LocalDateTime end = start.plusDays(2);
         PeriodTimeEvent eventWithFrequency = new PeriodTimeEvent(title, description, start, end);
         Frequency frequencyEvent = new FrequencyDaily(2);
         eventWithFrequency.setEventFrequency(frequencyEvent);
@@ -76,8 +76,8 @@ public class PeriodTimeEventTest {
     public void eventNoRepeat(){
         String title = "title of event";
         String description = "description of event";
-        LocalDateTime start = LocalDateTime.now().withHour(12).withMinute(0).withSecond(0);
-        LocalDateTime end = LocalDateTime.now().plusDays(2).withHour(12).withMinute(0).withSecond(0);
+        LocalDateTime start = LocalDateTime.of(2023,4,30,12,0,0);
+        LocalDateTime end = start.plusDays(2);
         PeriodTimeEvent eventWithoutFrequency = new PeriodTimeEvent(title, description, start, end);
         Frequency frequencyEvent = new FrequencyDaily(2);
         eventWithoutFrequency.setEventFrequency(frequencyEvent);
@@ -95,7 +95,8 @@ public class PeriodTimeEventTest {
         LocalDateTime end = start.plusDays(1);
         PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
         Frequency frequencyEvent = new FrequencyDaily(1);
-        frequencyEvent.addDeadline(LocalDate.of(2023, 4,20));
+        LocalDate deadline = LocalDate.of(2023, 4,20);
+        frequencyEvent.addDeadline(deadline);
         event.setEventFrequency(frequencyEvent);
 
         LocalDateTime day1 = event.getStartDateTime();

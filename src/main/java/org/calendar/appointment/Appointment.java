@@ -7,7 +7,6 @@ import java.util.List;
 
 public abstract class Appointment{
     final int NO_ID = -1;
-
     private int id;
     private String title;
     private String description;

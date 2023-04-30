@@ -19,7 +19,7 @@ public class FrequencyMonthly extends Frequency {
         LocalDateTime dayTime = date.plus(this.monthsToAdd, ChronoUnit.MONTHS);
         LocalDate day = dayTime.toLocalDate();
 
-        if (noNextEvent(day)) return null;
+        if (super.noNextEvent(day)) return null;
 
         return dayTime;
     }

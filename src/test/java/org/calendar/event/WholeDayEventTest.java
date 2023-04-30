@@ -11,7 +11,7 @@ public class WholeDayEventTest {
     public void oneDayEvent(){
         String title = "Title";
         String description = "Description";
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.of(2023,4,30);
         LocalDateTime start = now.atStartOfDay();
         LocalDateTime end = now.plusDays(1).atStartOfDay();
 
@@ -25,7 +25,7 @@ public class WholeDayEventTest {
     public void isWholeDayEvent(){
         String title = "Title";
         String description = "Description";
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.of(2023,4,30);
         LocalDateTime start = now.atStartOfDay();
         LocalDateTime end = now.plusDays(1).atStartOfDay();
 
@@ -39,11 +39,11 @@ public class WholeDayEventTest {
     public void changeDayEvent(){
         String title = "Title";
         String description = "Description";
-        LocalDate now = LocalDate.now();
+        LocalDate now = LocalDate.of(2023,4,30);
 
         WholeDayEvent event = new WholeDayEvent(title, description, now);
 
-        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        LocalDate tomorrow = now.plusDays(1);
         LocalDateTime startTomorrow = tomorrow.atStartOfDay();
         LocalDateTime endTomorrow = tomorrow.plusDays(1).atStartOfDay();
 
