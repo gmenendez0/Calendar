@@ -2,6 +2,7 @@ package org.calendar.appointment;
 
 import org.calendar.alarms.Alarm;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,9 +96,9 @@ public abstract class Appointment{
     }
 
     //Post: Orders the alarms to check if it is time to ring or not.
-    public void checkAlarms(){
+    public void checkAlarms(LocalDateTime nowTime){
         for (var alarm : alarms) {
-            alarm.update();
+            alarm.update(nowTime);
         }
     }
 }

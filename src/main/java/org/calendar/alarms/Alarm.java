@@ -20,8 +20,8 @@ public abstract class Alarm {
     protected abstract boolean ring();
 
     //Post: Checks if it is time to ring.
-    public boolean update(){
-        if(LocalDateTime.now().equals(ringDateTime)) return ring();
+    public boolean update(LocalDateTime nowTime){
+        if(nowTime.equals(ringDateTime)) return ring();
         return false;
     }
 }
