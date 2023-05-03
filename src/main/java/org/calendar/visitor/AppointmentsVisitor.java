@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class AppointmentsVisitor implements Visitor {
-    //Pre: firstDateTime must be before secondDateTime.
-    //Post:
+    //@inheritDoc
     @Override
     public void visitPeriodTimeEvent(PeriodTimeEvent periodTimeEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
@@ -20,8 +19,7 @@ public class AppointmentsVisitor implements Visitor {
         //return selectedAppointments;
     }
 
-    //Pre: firstDateTime must be before secondDateTime.
-    //Post:
+    //@inheritDoc
     @Override
     public void visitWholeDayEvent(WholeDayEvent wholeDayEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
@@ -36,8 +34,7 @@ public class AppointmentsVisitor implements Visitor {
         return (dateTime.isEqual(firstDateTime)) || (dateTime.isAfter(firstDateTime) && dateTime.isBefore(secondDateTime)) || (dateTime.isEqual(secondDateTime));
     }
 
-    //Pre: firstDateTime must be before secondDateTime.
-    //Post:
+    //@inheritDoc
     @Override
     public void visitWholeDayTask(WholeDayTask wholeDayTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
@@ -47,9 +44,8 @@ public class AppointmentsVisitor implements Visitor {
 
         //return selectedAppointments;
     }
-
-    //Pre: firstDateTime must be before secondDateTime.
-    //Post:
+    
+    //@inheritDoc
     @Override
     public void visitExpirationTimeTask(ExpirationTimeTask expirationTimeTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();

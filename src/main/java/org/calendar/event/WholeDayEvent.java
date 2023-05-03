@@ -19,7 +19,7 @@ public class WholeDayEvent extends Event {
         this.endingDateTime = startDate.plusDays(ONE_DAY).atStartOfDay();
     }
 
-    //Post: Accepts a visitor and returns the "visit" return value.
+    //@inheritDoc
     @Override
     public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);

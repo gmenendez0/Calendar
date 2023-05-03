@@ -7,7 +7,7 @@ public class SoundAlarm extends Alarm {
         super(id, ringDateTime);
     }
 
-    //Post: Rings and makes a sound.
+    //Post: Rings making a sound.
     @Override
     protected boolean ring() {
         return true;

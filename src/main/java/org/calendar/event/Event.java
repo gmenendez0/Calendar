@@ -17,36 +17,34 @@ public abstract class Event extends Appointment {
         this.endingDateTime = endingDateTime;
     }
 
-    //Post: Return the true if the event repeats, false otherwise.
+    //Post: Returns true if the event repeats, false otherwise.
     public boolean IsRepeated(){
          return this.frequency != null;
     }
 
-    //Post: changes the frequency state of the event, to not repeat.
+    //Post: Sets frequency to null.
     public void setNoRepeat(){
         this.frequency = null;
     }
 
-    //Pre: receives the frequency that the event will have.
-    //Post: Changes the event s frequency.
+    //Post: Sets the event's frequency.
     public void setEventFrequency(Frequency frequency){
         this.frequency = frequency;
     }
 
-    //Pre: receive a date to know your next event s date.
-    //Post: If the event repeats, it returns the next repetition dateTime. Otherwise, it returns null
+    //Post: Returns the date of following repetition event from the received date, or null if there is no repetition or no next event.
     public LocalDateTime nextEventDateTime(LocalDateTime date){
         if(this.IsRepeated()) return this.frequency.nextEventDateTime(date);
 
         return null;
     }
 
-    //post: Returns the start date time of the event
+    //post: Returns the start date time of the event.
     public LocalDateTime getStartDateTime(){
         return this.startDateTime;
     }
 
-    //post: Returns the ending date time of the event
+    //post: Returns the ending date time of the event.
     public LocalDateTime getEndingDateTime(){
         return this.endingDateTime;
     }

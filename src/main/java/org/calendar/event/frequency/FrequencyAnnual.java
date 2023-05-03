@@ -13,7 +13,7 @@ public class FrequencyAnnual extends Frequency{
         this.yearsToAdd = ONE_YEAR;
     }
 
-    //Post: returns the next event date.
+    //@inheritDoc
     @Override
     public LocalDateTime nextEventDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.yearsToAdd, ChronoUnit.YEARS);

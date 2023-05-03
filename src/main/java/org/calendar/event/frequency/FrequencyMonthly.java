@@ -13,7 +13,7 @@ public class FrequencyMonthly extends Frequency {
         this.monthsToAdd = ONE_MONTH;
     }
 
-    //Post: returns the next event date, null if there is no next event.
+    //@inheritDoc
     @Override
     public LocalDateTime nextEventDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.monthsToAdd, ChronoUnit.MONTHS);

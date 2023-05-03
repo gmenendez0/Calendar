@@ -30,7 +30,7 @@ public class WholeDayTask extends Task {
         return this.startDateTime;
     }
 
-    //Post: Accepts a visitor and returns the "visit" return value.
+    //@inheritDoc
     @Override
     public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);

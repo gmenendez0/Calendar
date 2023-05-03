@@ -10,6 +10,7 @@ public abstract class AlarmDecorator extends Alarm {
         this.alarm = alarm;
     }
 
+    //@inheritDoc
     @Override
     protected boolean ring() {
         return alarm.ring();

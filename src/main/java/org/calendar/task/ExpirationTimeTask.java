@@ -14,7 +14,8 @@ public class ExpirationTimeTask extends Task {
         this.expirationDateTime = expirationDateTime;
     }
 
-    //Post: Accepts a visitor and returns the "visit" return value.
+
+    //@inheritDoc
     @Override
     public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         visitor.visitExpirationTimeTask(this, firstDayTime, secondDayTime);
