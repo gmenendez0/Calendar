@@ -2,7 +2,9 @@ package org.calendar;
 
 import org.calendar.alarms.Alarm;
 import org.calendar.appointment.Appointment;
+import org.calendar.visitor.AppointmentsVisitor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,22 @@ public class Calendar {
         return appointments.get(id);
     }
 
+    //Pre:inicialDateTime must be before finalDateTime
+    //Post: Returns all non-destroyed appointments that take place at the same moment or after the inicialDateTime and before or at the same moment as the finalDateTime.
+    //Example: To get all the appointments of 04/23, dates should be: inicialDateTime = 01/04/23 00:00:00 and finalDateTime = 31/04/23 23:59:59
+    public ArrayList<Appointment> getAppointmentsBetween(LocalDateTime inicialDateTime, LocalDateTime finalDateTime){
+        var selectedAppointments = new ArrayList<Appointment>();
+        var visitor = new AppointmentsVisitor();
+
+        for (var appointment : appointments) {
+            if(!appointment.isDestroyed()){
+                appointment.acceptVisitor(visitor, inicialDateTime, finalDateTime);
+            }
+        }
+
+        return selectedAppointments;
+    }
+
     //Pre: ID Must not be a negative number.
     //Post: Destroys the appointment with the given ID. Returns true in case of success, false otherwise.
     public boolean destroyAppointment(int id){
@@ -47,6 +65,7 @@ public class Calendar {
 
         appointment.setId(id);
         appointments.set(id, appointment);
+
         return true;
     }
 

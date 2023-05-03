@@ -1,5 +1,7 @@
 package org.calendar.task;
 
+import org.calendar.visitor.Visitor;
+
 import java.time.LocalDateTime;
 
 public class ExpirationTimeTask extends Task {
@@ -10,5 +12,11 @@ public class ExpirationTimeTask extends Task {
     //Post: Sets the expirationDateTime.
     public void setExpirationDateTime(LocalDateTime expirationDateTime) {
         this.expirationDateTime = expirationDateTime;
+    }
+
+    //Post: Accepts a visitor and returns the "visit" return value.
+    @Override
+    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        visitor.visitExpirationTimeTask(this, firstDayTime, secondDayTime);
     }
 }

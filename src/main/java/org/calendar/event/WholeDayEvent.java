@@ -1,6 +1,9 @@
 package org.calendar.event;
 
+import org.calendar.visitor.Visitor;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class WholeDayEvent extends Event {
     final static int ONE_DAY = 1;
@@ -14,5 +17,11 @@ public class WholeDayEvent extends Event {
     public void setStartDate(LocalDate startDate){
         this.startDateTime = startDate.atStartOfDay();
         this.endingDateTime = startDate.plusDays(ONE_DAY).atStartOfDay();
+    }
+
+    //Post: Accepts a visitor and returns the "visit" return value.
+    @Override
+    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);
     }
 }

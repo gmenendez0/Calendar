@@ -1,5 +1,7 @@
 package org.calendar.task;
 
+import org.calendar.visitor.Visitor;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -26,5 +28,11 @@ public class WholeDayTask extends Task {
     //Post: Returns startDateTime of the event.
     public LocalDateTime getStartDateTime() {
         return this.startDateTime;
+    }
+
+    //Post: Accepts a visitor and returns the "visit" return value.
+    @Override
+    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);
     }
 }

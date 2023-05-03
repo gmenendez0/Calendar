@@ -1,6 +1,7 @@
 package org.calendar.appointment;
 
 import org.calendar.alarms.Alarm;
+import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -101,4 +102,6 @@ public abstract class Appointment{
             alarm.update(nowTime);
         }
     }
+
+    public abstract void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
 }
