@@ -59,9 +59,9 @@ public class CalendarTest {
     public void destroyAppointment() {
         calendar.addAppointment(wholeDayTask);
         calendar.destroyAppointment(0);
-        var storedWholeDayAppointment = calendar.getAppointment(0);
+        var storedAppointment = calendar.getAppointment(0);
 
-        assertTrue(storedWholeDayAppointment.isDestroyed());
+        assertTrue(storedAppointment.isDestroyed());
     }
 
     //Tests the correct behaviour of the edit method.
@@ -71,9 +71,9 @@ public class CalendarTest {
 
         calendar.addAppointment(wholeDayTask);
         calendar.editAppointment(0, editedTask);
-        var storedWholeDayAppointment = calendar.getAppointment(0);
+        var storedAppointment = calendar.getAppointment(0);
 
-        assertEquals(editedTask.getTitle(), storedWholeDayAppointment.getTitle());
+        assertEquals(editedTask.getTitle(), storedAppointment.getTitle());
     }
 
     //Tests the correct behaviour of the addAlarmToAppointment method.
