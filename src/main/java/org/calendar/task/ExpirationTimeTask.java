@@ -1,8 +1,10 @@
 package org.calendar.task;
 
+import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ExpirationTimeTask extends Task {
     public ExpirationTimeTask(String title, String description, LocalDateTime expirationDateTime) {
@@ -17,7 +19,7 @@ public class ExpirationTimeTask extends Task {
 
     //@inheritDoc
     @Override
-    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
-        visitor.visitExpirationTimeTask(this, firstDayTime, secondDayTime);
+    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        return visitor.visitExpirationTimeTask(this, firstDayTime, secondDayTime);
     }
 }

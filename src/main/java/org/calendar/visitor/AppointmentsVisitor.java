@@ -48,12 +48,12 @@ public class AppointmentsVisitor implements Visitor {
     //Pre: Given event must repeat.
     //Post: Checks if any of the event s repetitions fit between given dates. If so, adds them to selectedAppointments.
     private void checkRepetitions(PeriodTimeEvent periodTimeEvent, List<Appointment> selectedAppointments, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
-
+        //? ANTES DE SEGUIR CON ESTE METODO, TESTEAR QUE TODO LO PREVIAMENTE HECHO FUNCIONE CORRECTAMENTE.
     }
 
     //@inheritDoc
     @Override
-    public void visitPeriodTimeEvent(PeriodTimeEvent periodTimeEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
+    public List<Appointment> visitPeriodTimeEvent(PeriodTimeEvent periodTimeEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
         var eventStartTime = periodTimeEvent.getStartDateTime();
         var eventEndingTime = periodTimeEvent.getEndingDateTime();
@@ -62,17 +62,19 @@ public class AppointmentsVisitor implements Visitor {
 
         if(periodTimeEvent.IsRepeated()) checkRepetitions(periodTimeEvent, selectedAppointments, firstDateTime, secondDateTime);
 
-        //return selectedAppointments;
+        return selectedAppointments;
     }
 
     //@inheritDoc
     @Override
-    public void visitWholeDayEvent(WholeDayEvent wholeDayEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
+    public List<Appointment> visitWholeDayEvent(WholeDayEvent wholeDayEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
         System.out.println("Visiting...");
 
-        //return selectedAppointments;
+        return selectedAppointments;
     }
+
+    //? --------------------TASKS----------------------------------------------------------------------------------------------------------------------------------------
 
     //Pre: firstDateTime must be before secondDateTime.
     //Post: Returns true if date received is between firstDateTime and secondDateTime or if it is equal to any of them, returns false otherwise.
@@ -82,23 +84,23 @@ public class AppointmentsVisitor implements Visitor {
 
     //@inheritDoc
     @Override
-    public void visitWholeDayTask(WholeDayTask wholeDayTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
+    public List<Appointment> visitWholeDayTask(WholeDayTask wholeDayTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
         var taskStartDateTime = wholeDayTask.getStartDateTime();
 
         if(dateIsBetweenDates(taskStartDateTime, firstDateTime, secondDateTime)) selectedAppointments.add(wholeDayTask);
 
-        //return selectedAppointments;
+        return selectedAppointments;
     }
     
     //@inheritDoc
     @Override
-    public void visitExpirationTimeTask(ExpirationTimeTask expirationTimeTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
+    public List<Appointment> visitExpirationTimeTask(ExpirationTimeTask expirationTimeTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
         var taskExpirationDateTime = expirationTimeTask.getExpirationDateTime();
 
         if(dateIsBetweenDates(taskExpirationDateTime, firstDateTime, secondDateTime)) selectedAppointments.add(expirationTimeTask);
 
-        //return selectedAppointments;
+        return selectedAppointments;
     }
 }

@@ -1,8 +1,10 @@
 package org.calendar.event;
 
+import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PeriodTimeEvent extends Event {
     public PeriodTimeEvent(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime) {
@@ -21,7 +23,7 @@ public class PeriodTimeEvent extends Event {
 
     //@inheritDoc
     @Override
-    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
-        visitor.visitPeriodTimeEvent(this, firstDayTime, secondDayTime);
+    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        return visitor.visitPeriodTimeEvent(this, firstDayTime, secondDayTime);
     }
 }

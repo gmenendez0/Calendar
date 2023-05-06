@@ -1,9 +1,11 @@
 package org.calendar.task;
 
+import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class WholeDayTask extends Task {
     final int ONE_DAY = 1;
@@ -32,7 +34,7 @@ public class WholeDayTask extends Task {
 
     //@inheritDoc
     @Override
-    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
-        visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);
+    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        return visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);
     }
 }

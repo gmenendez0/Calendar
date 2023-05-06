@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class ExpirationTimeTaskTest {
-
     final int ONE_DAY = 1;
 
     //Post: Tests that setExpirationDateTime sets the value correctly.

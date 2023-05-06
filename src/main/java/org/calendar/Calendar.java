@@ -31,7 +31,7 @@ public class Calendar {
     //Pre:inicialDateTime must be before finalDateTime
     //Post: Returns all non-destroyed appointments that take place at the same moment or after the inicialDateTime and before or at the same moment as the finalDateTime.
     //Example: To get all the appointments of 04/23, dates should be: inicialDateTime = 01/04/23 00:00:00 and finalDateTime = 31/04/23 23:59:59
-    public ArrayList<Appointment> getAppointmentsBetween(LocalDateTime inicialDateTime, LocalDateTime finalDateTime){
+    public List<Appointment> getAppointmentsBetween(LocalDateTime inicialDateTime, LocalDateTime finalDateTime){
         var selectedAppointments = new ArrayList<Appointment>();
         var visitor = new AppointmentsVisitor();
 

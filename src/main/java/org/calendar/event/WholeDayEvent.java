@@ -1,9 +1,11 @@
 package org.calendar.event;
 
+import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class WholeDayEvent extends Event {
     final static int ONE_DAY = 1;
@@ -21,7 +23,7 @@ public class WholeDayEvent extends Event {
 
     //@inheritDoc
     @Override
-    public void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
-        visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);
+    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+        return visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);
     }
 }

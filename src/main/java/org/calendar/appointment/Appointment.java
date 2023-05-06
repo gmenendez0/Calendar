@@ -104,5 +104,5 @@ public abstract class Appointment{
     }
 
     //Post: Accepts a visitor and returns the "visit" return value.
-    public abstract void acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
+    public abstract List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
 }
