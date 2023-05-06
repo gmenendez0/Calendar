@@ -13,10 +13,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class WholeDayTaskVisitorTest{
-    AppointmentsVisitor appointmentVisitor;
-    List<Appointment> selectedAppointments = new ArrayList<>();
-    LocalDateTime firstDateTime;
-    LocalDateTime secondDateTime;
+    private AppointmentsVisitor appointmentVisitor;
+    private List<Appointment> selectedAppointments = new ArrayList<>();
+    private LocalDateTime firstDateTime;
+    private LocalDateTime secondDateTime;
 
     @Before
     public void initialize() {

@@ -7,20 +7,23 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class EmailAlarmDecoratorTest {
-    //Tests ring method.
+    //Tests ring method when decorator inner alarm != null
     @Test
-    public void testRing() {
-        //Tests ring when decorator inner alarm == null
+    public void testRingInnerAlarmNotNull() {
+        //Tests ring when innerAlarm != null
+        Alarm soundAlarm = new SoundAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
+        Alarm emailAlarmDecorator = new EmailAlarmDecorator(1, LocalDateTime.of(2020,1,1,12,0,0), soundAlarm);
+        boolean result = emailAlarmDecorator.ring();
+
+        assertTrue(result);
+    }
+
+    //Tests ring method when decorator inner alarm == null
+    @Test
+    public void testRingInnerAlarmNull() {
         Alarm emailAlarmDecorator = new EmailAlarmDecorator(1, LocalDateTime.of(2020,1,1,12,0,0), null);
         boolean result = emailAlarmDecorator.ring();
 
         assertTrue(result);
-
-        //Tests ring when innerAlarm != null
-        Alarm soundAlarm = new SoundAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
-        Alarm emailAlarmDecorator2 = new EmailAlarmDecorator(1, LocalDateTime.of(2020,1,1,12,0,0), soundAlarm);
-        boolean result2 = emailAlarmDecorator2.ring();
-
-        assertTrue(result2);
     }
 }
