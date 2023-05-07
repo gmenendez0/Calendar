@@ -18,7 +18,7 @@ public abstract class Event extends Appointment {
     }
 
     //Post: Returns true if the event repeats, false otherwise.
-    public boolean IsRepeated(){
+    public boolean isRepeated(){
          return this.frequency != null;
     }
 
@@ -33,8 +33,8 @@ public abstract class Event extends Appointment {
     }
 
     //Post: Returns the date of following repetition event from the received date, or null if there is no repetition or no next event.
-    public LocalDateTime nextEventDateTime(LocalDateTime date){
-        if(this.IsRepeated()) return this.frequency.nextEventDateTime(date);
+    public LocalDateTime getNextEventDateTime(LocalDateTime date){
+        if(isRepeated()) return frequency.nextEventDateTime(date);
 
         return null;
     }

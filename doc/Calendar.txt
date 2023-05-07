@@ -22,7 +22,14 @@ Pregunto, "el evento se repite?"
 
 TERCERO:
 Si se llegó hasta aca es que el evento original puede o no estar dentro de 1-04-23 y 31-04-23, pero se repite, entonces podria tener alguna repeticion (más) en ese rango.
-Pregunto:
+Preguntar si el evento cumple alguna de las siguientes condiciones, usando primeraRepeticion.TiempoDeInicio = A y ultimaRepeticion.TiempoDeFinalizacion = b
+A)A mayor o igual a 1-04-23 y B menor o igual a 31/04/23?
+B)A menor a 1-04-23 y B mayor o igual al 1-04-23 y menor o igual al 31-04-23?
+C)A mayor o igual a 1-04-23 y menor o igual al 31-04-23 y B mayor a 31-04-23?
+D)A menor a 1-04-23 y B mayor a 31-04-23?
+
+---TESTEADO HASTA ACA----
+
 "La fecha de inicio del evento original es menor al 1-04-23 y (La fecha de inicio de la última repeticion es menor o igual a 1-04-23 y la fecha de finalizacion mayor a 1-04-23 o La fecha de inicio de la ultima repeticion es mayor o igual a 1-04-23 y menor o igual a 31-04-23)?
 
 *Se pregunta si la fecha de inicio del evento original es menor al 1-04-23 para determinar si el evento con repeticion empieza a tomar lugar antes o despues de las fechas validas (1-4 a 31-4). Si empieza a tomar lugar despues, ninguna repetiticion estara dentro de las fechas validas. Si empieza a tomar lugar antes, es posible que alguna repeticion caiga dentro de las fechas validas.

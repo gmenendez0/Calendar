@@ -38,7 +38,7 @@ public class AppointmentsVisitor implements Visitor {
 
     //Pre: eventStartTime and firstDateTime must be before eventEndingTime and secondDateTime respectively.
     //Post: Returns true if event is taking place between the two dates given. False otherwise.
-    private boolean eventTakesPlacesBetweenDates(LocalDateTime eventStartTime, LocalDateTime eventEndingTime, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
+    private boolean eventTakesPlaceBetweenDates(LocalDateTime eventStartTime, LocalDateTime eventEndingTime, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
         return eventIsBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime) ||
                eventEndsBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime) ||
                eventStartsBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime) ||
@@ -48,7 +48,25 @@ public class AppointmentsVisitor implements Visitor {
     //Pre: Given event must repeat.
     //Post: Checks if any of the event s repetitions fit between given dates. If so, adds them to selectedAppointments.
     private void checkRepetitions(PeriodTimeEvent periodTimeEvent, List<Appointment> selectedAppointments, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
-        //? ANTES DE SEGUIR CON ESTE METODO, TESTEAR QUE TODO LO PREVIAMENTE HECHO FUNCIONE CORRECTAMENTE.
+        /*
+        var originalEventStartDateTime = periodTimeEvent.getStartDateTime();
+        var lastRepetitionEndingDateTime = periodTimeEvent.getLastRepetitionEndingDateTime();
+
+        if(eventTakesPlaceBetweenDates(originalEventStartDateTime, lastRepetitionEndingDateTime, firstDateTime, secondDateTime)){
+        //? Si el if da true, entonces quiere decir que las repeticiones toman lugar entre las dos fechas pedidas.
+            var latestCheckedEventStartDateTime = periodTimeEvent.getStartDateTime();
+            var latestCheckedEventEndingDateTime = periodTimeEvent.getEndingDateTime();
+
+            while(periodTimeEvent.thereIsNextEvent(latestCheckedEventEndingDateTime)){
+                latestCheckedEventStartDateTime = periodTimeEvent.getNextEventStartDateTime(latestCheckedEventEndingDateTime);
+                latestCheckedEventEndingDateTime = periodTimeEvent.getNextEventEndingDateTime(latestCheckedEventEndingDateTime);
+
+                if(eventTakesPlaceBetweenDates(latestCheckedEventStartDateTime, latestCheckedEventEndingDateTime, firstDateTime, secondDateTime)){
+                   //selectedAppointments.add(nuevo evento con mismos datos que evento original pero con fechas actualizadas.);
+                }
+            }
+        }
+         */
     }
 
     //@inheritDoc
@@ -58,9 +76,9 @@ public class AppointmentsVisitor implements Visitor {
         var eventStartTime = periodTimeEvent.getStartDateTime();
         var eventEndingTime = periodTimeEvent.getEndingDateTime();
 
-        if(eventTakesPlacesBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime)) selectedAppointments.add(periodTimeEvent);
+        if(eventTakesPlaceBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime)) selectedAppointments.add(periodTimeEvent);
 
-        if(periodTimeEvent.IsRepeated()) checkRepetitions(periodTimeEvent, selectedAppointments, firstDateTime, secondDateTime);
+        if(periodTimeEvent.isRepeated()) checkRepetitions(periodTimeEvent, selectedAppointments, firstDateTime, secondDateTime);
 
         return selectedAppointments;
     }

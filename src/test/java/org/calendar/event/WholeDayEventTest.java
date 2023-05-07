@@ -72,7 +72,7 @@ public class WholeDayEventTest {
         // Este evento se repetira un millon de veces.
         for (int i = 5; i <= 5000000; i += 5){
             LocalDateTime plusDay = day.plusDays(5);
-            LocalDateTime nextDayEvent = eventInfinity.nextEventDateTime(day);
+            LocalDateTime nextDayEvent = eventInfinity.getNextEventDateTime(day);
             assertEquals(plusDay, nextDayEvent);
             day = nextDayEvent;
         }
