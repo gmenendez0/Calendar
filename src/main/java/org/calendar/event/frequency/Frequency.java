@@ -2,6 +2,7 @@ package org.calendar.event.frequency;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public abstract class Frequency {
     final int FIRST_REPETITION = 1;
@@ -37,6 +38,20 @@ public abstract class Frequency {
         this.addDeadline(date.toLocalDate());
     }
 
-    //Post: Returns the date of following repetition event from the received date, or null if there is no next event.
+    //Pre: receives the LocalTime that represents the time at which an event date ends.
+    //Post: returns the deadline LocalDate converted to a LocalDateTime
+    public LocalDateTime getDeadlineDateTime(LocalTime finalTime){
+        if (this.hasADeadline()) {
+            return this.deadline.atTime(finalTime);
+        }
+        return null;
+    }
+
+    //Post: returns true if there is a next date for the received date, false otherwise.
+    public boolean hasNextDate(LocalDateTime date) {
+        return this.nextEventDateTime(date) != null;
+    }
+
+    //Post: returns the next date with respect to the received date, or null if there is no next event.
     public abstract LocalDateTime nextEventDateTime(LocalDateTime date);
 }

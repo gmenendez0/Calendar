@@ -3,6 +3,7 @@ package org.calendar.event;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,4 +27,19 @@ public class PeriodTimeEvent extends Event {
     public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         return visitor.visitPeriodTimeEvent(this, firstDayTime, secondDayTime);
     }
+
+//    @Override
+//    public Event nextEvent() {
+//        LocalDateTime dateTimeStartEvent = this.getStartDateTime();
+//        LocalDateTime dateTimeEndEvent = this.getEndingDateTime();
+//        if (!this.thereIsNextEvent(dateTimeStartEvent)) return null;
+//
+//        String title = this.getTitle();
+//        String description = this.getDescription();
+//        LocalDateTime dateTimeStartRepeat = this.getNextEventRegardDateTime(dateTimeStartEvent);
+//        LocalDateTime dateTimeEndRepeat = this.getNextEventRegardDateTime(dateTimeEndEvent);
+//
+//        Event eventRepeat = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
+//        return eventRepeat;
+//    }
 }
