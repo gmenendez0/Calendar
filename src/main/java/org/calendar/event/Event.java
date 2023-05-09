@@ -39,25 +39,43 @@ public abstract class Event extends Appointment {
         return null;
     }
 
-    //Pre: Receive any random LocalDateTime.
-    //Post: Returns the next date with the time the event starts, returns null if it does not repeat.
+    //Pre: ???
+    //Post: ???
+    private LocalDateTime modularizable(LocalDateTime startOrEnding, LocalDateTime date){
+        while(date.isAfter(startOrEnding) || date.isEqual(startOrEnding)){
+            startOrEnding = this.getNextEventRegardDateTime(startOrEnding);
+        }
+
+        return startOrEnding;
+    }
+
+    //Pre: Receive any LocalDateTime.
+    //Post: Returns the immediate next event s startDateTime, returns null if it does not repeat.
     public LocalDateTime getNextStartDateTime(LocalDateTime date){
         if (!this.isRepeated()) return null;
+
         LocalDateTime start = this.startDateTime;
         while(date.isAfter(start) || date.isEqual(start)){
             start = this.getNextEventRegardDateTime(start);
         }
+
+        //start = modularizable(start, date);
+
         return start;
     }
 
-    //Pre: Receive any random LocalDateTime.
-    //Post: Returns the next date with the time the event ends, returns null if it does not repeat.
-    public LocalDateTime getNextEndDateTime(LocalDateTime date){
+    //Pre: Receive any LocalDateTime.
+    //Post: Returns the immediate next event s endingDateTime, returns null if it does not repeat.
+    public LocalDateTime getNextEndingDateTime(LocalDateTime date){
         if (!this.isRepeated()) return null;
+
         LocalDateTime end = this.endingDateTime;
         while(date.isAfter(end) || date.isEqual(end)){
             end = this.getNextEventRegardDateTime(end);
         }
+
+        //end = modularizable(end, date);
+
         return end;
     }
 
@@ -66,17 +84,17 @@ public abstract class Event extends Appointment {
         return this.startDateTime;
     }
 
-    //post: Returns the ending date time of the event.
+    //Post: Returns the ending date time of the event.
     public LocalDateTime getEndingDateTime(){
         return this.endingDateTime;
     }
 
-    //Post: returns true if after the received date there is an event, false if no event.
+    //Post: Returns true if there is an event after the received date, false otherwise.
     public boolean thereIsNextEvent(LocalDateTime date){
         return this.frequency.hasNextDate(date);
     }
 
-    //Post: returns the last LocalDateTime that the event will have, if it is infinite, it will return null.
+    //Post: Returns the last repeated event s endingDateTime. If repetition is infinite, it will return null.
     public LocalDateTime getLastRepetitionEndingDateTime(){
         LocalTime finalTime = this.endingDateTime.toLocalTime();
         return this.frequency.getDeadlineDateTime(finalTime);

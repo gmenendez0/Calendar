@@ -49,7 +49,7 @@ public class PeriodTimeEventTest {
 
     //Post: test to verify if it has no repetition
     @Test
-    public void eventDon_tHaveReplay(){
+    public void eventDoesNotRepeat(){
         String title = "title of event";
         String description = "description of event";
         LocalDateTime start = LocalDateTime.of(2023,4,30,12,0,0);
