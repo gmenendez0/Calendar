@@ -28,18 +28,19 @@ public class PeriodTimeEvent extends Event {
         return visitor.visitPeriodTimeEvent(this, firstDayTime, secondDayTime);
     }
 
-//    @Override
-//    public Event nextEvent() {
-//        LocalDateTime dateTimeStartEvent = this.getStartDateTime();
-//        LocalDateTime dateTimeEndEvent = this.getEndingDateTime();
-//        if (!this.thereIsNextEvent(dateTimeStartEvent)) return null;
-//
-//        String title = this.getTitle();
-//        String description = this.getDescription();
-//        LocalDateTime dateTimeStartRepeat = this.getNextEventRegardDateTime(dateTimeStartEvent);
-//        LocalDateTime dateTimeEndRepeat = this.getNextEventRegardDateTime(dateTimeEndEvent);
-//
-//        Event eventRepeat = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
-//        return eventRepeat;
-//    }
+    //Post: returns from the next event of the current event.
+    @Override
+    public Event nextEvent() {
+        LocalDateTime dateTimeStartEvent = this.getStartDateTime();
+        LocalDateTime dateTimeEndEvent = this.getEndingDateTime();
+        if (!this.thereIsNextEvent(dateTimeStartEvent)) return null;
+
+        String title = this.getTitle();
+        String description = this.getDescription();
+        LocalDateTime dateTimeStartRepeat = this.getNextEventRegardDateTime(dateTimeStartEvent);
+        LocalDateTime dateTimeEndRepeat = this.getNextEventRegardDateTime(dateTimeEndEvent);
+
+        Event eventRepeat = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
+        return eventRepeat;
+    }
 }

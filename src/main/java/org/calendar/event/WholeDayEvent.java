@@ -29,15 +29,16 @@ public class WholeDayEvent extends Event {
         return visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);
     }
 
-//    @Override
-//    public Event nextEvent() {
-//        LocalDateTime dateTimeEvent = this.getStartDateTime();
-//        if (!this.thereIsNextEvent(dateTimeEvent)) return null;
-//
-//        String title = this.getTitle();
-//        String description = this.getDescription();
-//        LocalDate dateRepeat = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
-//        Event eventRepeat = new WholeDayEvent(title, description, dateRepeat);
-//        return eventRepeat;
-//    }
+    //Post: returns from the next event of the current event.
+    @Override
+    public Event nextEvent() {
+        LocalDateTime dateTimeEvent = this.getStartDateTime();
+        if (!this.thereIsNextEvent(dateTimeEvent)) return null;
+
+        String title = this.getTitle();
+        String description = this.getDescription();
+        LocalDate dateRepeat = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
+        Event eventRepeat = new WholeDayEvent(title, description, dateRepeat);
+        return eventRepeat;
+    }
 }

@@ -203,4 +203,61 @@ public class PeriodTimeEventTest {
         LocalDateTime repNull = event.getNextEventRegardDateTime(rep5);
         assertNull(repNull);
     }
+
+    @Test
+    public void obtainLastRepetitionEvent(){
+        String title = "title of event";
+        String description = "description of event";
+        LocalDateTime start = LocalDateTime.of(2023, 4,20, 12,0);
+        LocalDateTime end = start.plusHours(5);
+
+        Frequency frequency = new FrequencyMonthly();
+        frequency.addDeadlineWithRepetitions(5, start);
+        PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
+        event.setEventFrequency(frequency);
+
+        LocalDateTime last = LocalDateTime.of(2023, 9,20, 17,0);
+
+        assertEquals(last, event.getLastRepetitionEndingDateTime());
+    }
+
+    @Test
+    public void theImmediateNextEventStartDateTime(){
+        String title = "title of event";
+        String description = "description of event";
+        LocalDateTime start = LocalDateTime.of(2023, 4,20, 12,0);
+        LocalDateTime end = start.plusHours(5);
+
+        Frequency frequency = new FrequencyDaily(5);
+        frequency.addDeadlineWithRepetitions(5, start);
+        PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
+        event.setEventFrequency(frequency);
+
+        LocalDateTime anyDate = LocalDateTime.of(2023, 4,27, 15,0);
+        LocalDateTime immediateDateEventStart = LocalDateTime.of(2023, 4,30, 12,0);
+
+        LocalDateTime response = event.getNextStartDateTime(anyDate);
+
+        assertEquals(immediateDateEventStart, response);
+    }
+
+    @Test
+    public void theImmediateNextEventEndDateTime(){
+        String title = "title of event";
+        String description = "description of event";
+        LocalDateTime start = LocalDateTime.of(2023, 4,20, 12,0);
+        LocalDateTime end = start.plusHours(5);
+
+        Frequency frequency = new FrequencyDaily(5);
+        frequency.addDeadlineWithRepetitions(5, start);
+        PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
+        event.setEventFrequency(frequency);
+
+        LocalDateTime anyDate = LocalDateTime.of(2023, 4,27, 15,0);
+        LocalDateTime immediateDateEventEnd = LocalDateTime.of(2023, 4,30, 17,0);
+
+        LocalDateTime response = event.getNextEndingDateTime(anyDate);
+
+        assertEquals(immediateDateEventEnd, response);
+    }
 }
