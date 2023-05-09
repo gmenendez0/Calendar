@@ -39,44 +39,26 @@ public abstract class Event extends Appointment {
         return null;
     }
 
-    //Pre: ???
-    //Post: ???
-    private LocalDateTime modularizable(LocalDateTime startOrEnding, LocalDateTime date){
+    //Pre: Receives the start or end date and time of the event, and any other date and time.
+    //Post: Returns the immediate next event s dateTime, returns null if it does not repeat.
+    private LocalDateTime findNextImmediateDate(LocalDateTime startOrEnding, LocalDateTime date){
+        if (!this.isRepeated()) return null;
         while(date.isAfter(startOrEnding) || date.isEqual(startOrEnding)){
             startOrEnding = this.getNextEventRegardDateTime(startOrEnding);
         }
-
         return startOrEnding;
     }
 
     //Pre: Receive any LocalDateTime.
     //Post: Returns the immediate next event s startDateTime, returns null if it does not repeat.
-    public LocalDateTime getNextStartDateTime(LocalDateTime date){
-        if (!this.isRepeated()) return null;
-
-        LocalDateTime start = this.startDateTime;
-        while(date.isAfter(start) || date.isEqual(start)){
-            start = this.getNextEventRegardDateTime(start);
-        }
-
-        //start = modularizable(start, date);
-
-        return start;
+    public LocalDateTime getNextStartDateTime(LocalDateTime date) {
+        return findNextImmediateDate(this.startDateTime, date);
     }
 
     //Pre: Receive any LocalDateTime.
     //Post: Returns the immediate next event s endingDateTime, returns null if it does not repeat.
     public LocalDateTime getNextEndingDateTime(LocalDateTime date){
-        if (!this.isRepeated()) return null;
-
-        LocalDateTime end = this.endingDateTime;
-        while(date.isAfter(end) || date.isEqual(end)){
-            end = this.getNextEventRegardDateTime(end);
-        }
-
-        //end = modularizable(end, date);
-
-        return end;
+        return findNextImmediateDate(this.endingDateTime, date);
     }
 
     //post: Returns the start date time of the event.
