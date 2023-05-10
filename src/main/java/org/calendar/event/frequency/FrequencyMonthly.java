@@ -11,6 +11,7 @@ public class FrequencyMonthly extends Frequency {
     //Constructor.
     public FrequencyMonthly(){
         this.monthsToAdd = ONE_MONTH;
+        this.setDeadline(null);
     }
 
     //@inheritDoc

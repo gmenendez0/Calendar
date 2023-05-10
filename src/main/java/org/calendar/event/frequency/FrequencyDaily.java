@@ -10,6 +10,7 @@ public class FrequencyDaily extends Frequency {
     //Constructor.
     public FrequencyDaily(int interval){
         this.daysToAdd = interval;
+        this.setDeadline(null);
     }
 
     @Override
