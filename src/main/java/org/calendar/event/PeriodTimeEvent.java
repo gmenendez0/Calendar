@@ -3,7 +3,6 @@ package org.calendar.event;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class PeriodTimeEvent extends Event {
     public Event nextEvent() {
         LocalDateTime dateTimeStartEvent = this.getStartDateTime();
         LocalDateTime dateTimeEndEvent = this.getEndingDateTime();
-        if (!this.thereIsNextEvent(dateTimeStartEvent)) return null;
+        if (!this.thereIsNextRepetition(dateTimeStartEvent)) return null;
 
         String title = this.getTitle();
         String description = this.getDescription();

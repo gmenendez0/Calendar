@@ -236,7 +236,7 @@ public class PeriodTimeEventTest {
         LocalDateTime anyDate = LocalDateTime.of(2023, 4,27, 15,0);
         LocalDateTime immediateDateEventStart = LocalDateTime.of(2023, 4,30, 12,0);
 
-        LocalDateTime response = event.getNextStartDateTime(anyDate);
+        LocalDateTime response = event.getNextRepetitionStartDateTime(anyDate);
 
         assertEquals(immediateDateEventStart, response);
     }
@@ -256,7 +256,7 @@ public class PeriodTimeEventTest {
         LocalDateTime anyDate = LocalDateTime.of(2023, 4,27, 15,0);
         LocalDateTime immediateDateEventEnd = LocalDateTime.of(2023, 4,30, 17,0);
 
-        LocalDateTime response = event.getNextEndingDateTime(anyDate);
+        LocalDateTime response = event.getNextRepetitionEndingDateTime(anyDate);
 
         assertEquals(immediateDateEventEnd, response);
     }

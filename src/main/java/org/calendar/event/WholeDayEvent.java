@@ -9,12 +9,12 @@ import java.util.List;
 
 public class WholeDayEvent extends Event {
     final static int ONE_DAY = 1;
-    private LocalDate dateEvent;
+    private LocalDate eventDate;
 
     //Constructor.
     public WholeDayEvent(String title, String description, LocalDate dateEvent){
         super(title, description, dateEvent.atStartOfDay(), dateEvent.plusDays(ONE_DAY).atStartOfDay());
-        this.dateEvent = dateEvent;
+        this.eventDate = dateEvent;
     }
 
     //Post: Sets the startDateTime of the event and consequently the endingDateTime.
@@ -33,7 +33,7 @@ public class WholeDayEvent extends Event {
     @Override
     public Event nextEvent() {
         LocalDateTime dateTimeEvent = this.getStartDateTime();
-        if (!this.thereIsNextEvent(dateTimeEvent)) return null;
+        if (!this.thereIsNextRepetition(dateTimeEvent)) return null;
 
         String title = this.getTitle();
         String description = this.getDescription();

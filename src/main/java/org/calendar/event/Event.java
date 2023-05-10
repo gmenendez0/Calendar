@@ -16,6 +16,7 @@ public abstract class Event extends Appointment {
         super(title, description);
         this.startDateTime = startDateTime;
         this.endingDateTime = endingDateTime;
+        frequency = null;
     }
 
     //Post: Returns true if the event repeats, false otherwise.
@@ -39,25 +40,29 @@ public abstract class Event extends Appointment {
         return null;
     }
 
-    //Pre: Receives the start or end date and time of the event, and any other date and time.
-    //Post: Returns the immediate next event s dateTime, returns null if it does not repeat.
+    //Post: Returns true if firstDateTime is after or equal to secondDateTime
+    private boolean dateTimeIsAfterOrEqual(LocalDateTime firstDateTime, LocalDateTime secondDateTime){
+        return firstDateTime.isAfter(secondDateTime) || firstDateTime.isEqual(secondDateTime);
+    }
+
+    //Post: Returns the immediate next event s dateTime from the date passed, returns null if it does not repeat.
     private LocalDateTime findNextImmediateDate(LocalDateTime startOrEnding, LocalDateTime date){
         if (!this.isRepeated()) return null;
-        while(date.isAfter(startOrEnding) || date.isEqual(startOrEnding)){
+        
+        while(dateTimeIsAfterOrEqual(date, startOrEnding)){
             startOrEnding = this.getNextEventRegardDateTime(startOrEnding);
         }
+        
         return startOrEnding;
     }
 
-    //Pre: Receive any LocalDateTime.
-    //Post: Returns the immediate next event s startDateTime, returns null if it does not repeat.
-    public LocalDateTime getNextStartDateTime(LocalDateTime date) {
+    //Post: Returns the immediate next event s startDateTime from the date passed, returns null if it does not repeat.
+    public LocalDateTime getNextRepetitionStartDateTime(LocalDateTime date) {
         return findNextImmediateDate(this.startDateTime, date);
     }
 
-    //Pre: Receive any LocalDateTime.
-    //Post: Returns the immediate next event s endingDateTime, returns null if it does not repeat.
-    public LocalDateTime getNextEndingDateTime(LocalDateTime date){
+    //Post: Returns the immediate next event s endingDateTime from the date passed, returns null if it does not repeat.
+    public LocalDateTime getNextRepetitionEndingDateTime(LocalDateTime date){
         return findNextImmediateDate(this.endingDateTime, date);
     }
 
@@ -72,7 +77,7 @@ public abstract class Event extends Appointment {
     }
 
     //Post: Returns true if there is an event after the received date, false otherwise.
-    public boolean thereIsNextEvent(LocalDateTime date){
+    public boolean thereIsNextRepetition(LocalDateTime date){
         return this.frequency.hasNextDate(date);
     }
 
