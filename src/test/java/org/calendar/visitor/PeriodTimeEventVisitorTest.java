@@ -177,7 +177,7 @@ public class PeriodTimeEventVisitorTest{
         assertEquals(31, selectedAppointments.size());
     }
 
-    //Tests when an event repetition starts between first and second DateTime, but ends after.
+    //Tests when an event repetition (monthly) starts between first and second DateTime, but ends after.
     @Test
     public void RepetitionStartsBetweenEndsAfter(){
         var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
@@ -191,7 +191,7 @@ public class PeriodTimeEventVisitorTest{
         assertEquals(1, selectedAppointments.size());
     }
 
-    //Tests when an event repetition starts before first DateTime but ends between first and second DateTime.
+    //Tests when an event repetition (yearly) starts before first DateTime but ends between first and second DateTime.
     @Test
     public void RepetitionStartsBeforeEndsBetween(){
         var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
