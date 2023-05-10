@@ -96,7 +96,7 @@ public class PeriodTimeEventTest {
         PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
         Frequency frequencyEvent = new FrequencyDaily(1);
         LocalDate deadline = LocalDate.of(2023, 4,20);
-        frequencyEvent.addDeadline(deadline);
+        frequencyEvent.setDeadline(deadline);
         event.setEventFrequency(frequencyEvent);
 
         LocalDateTime day1 = event.getStartDateTime();
@@ -129,7 +129,7 @@ public class PeriodTimeEventTest {
         LocalDateTime saturday = LocalDateTime.of(2023, 4, 22, 10, 30);
 
         Frequency frequency = new FrequencyWeekly(array);
-        frequency.addDeadline(LocalDate.of(2023,4,25));
+        frequency.setDeadline(LocalDate.of(2023,4,25));
 
         PeriodTimeEvent event = new PeriodTimeEvent(title, description, start, end);
         event.setEventFrequency(frequency);

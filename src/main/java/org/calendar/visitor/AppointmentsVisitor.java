@@ -83,7 +83,6 @@ public class AppointmentsVisitor implements Visitor {
         if(lastRepetitionEndingDateTime == null) lastRepetitionEndingDateTime = LocalDateTime.of(HUGE_YEAR, JANUARY, FIRST, MID_DAY_TIME, MINUTES);
 
         if(eventTakesPlaceBetweenDates(originalEventStartDateTime, lastRepetitionEndingDateTime, firstDateTime, secondDateTime)){
-        //? Si el if da true, entonces quiere decir que las repeticiones toman lugar entre las dos fechas pedidas.
             selectAppropriateRepetitions(periodTimeEvent, selectedAppointments, firstDateTime, secondDateTime);
         }
     }

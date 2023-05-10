@@ -39,7 +39,7 @@ public class FrequencyDailyTest {
         LocalDateTime dateTime = LocalDateTime.of(2023, 4, 20,12,30,0);
         int interval = 10;
         var frequency = new FrequencyDaily(interval);
-        frequency.addDeadline(date);
+        frequency.setDeadline(date);
         LocalDateTime response = frequency.getDeadlineDateTime(time);
 
         assertEquals(response, dateTime);
@@ -50,7 +50,7 @@ public class FrequencyDailyTest {
         LocalDate date = LocalDate.of(2023, 4, 20);
         int interval = 1;
         var frequency = new FrequencyDaily(interval);
-        frequency.addDeadline(date);
+        frequency.setDeadline(date);
         LocalDateTime dateTest1 = LocalDateTime.of(2023, 4, 18,12,0,0);
         LocalDateTime dateTest2 = LocalDateTime.of(2023, 4, 19,12,0,0);
         LocalDateTime dateTest3 = LocalDateTime.of(2023, 4, 20,12,0,0);

@@ -24,7 +24,7 @@ public abstract class Frequency {
     }
 
     //Post: Adds the deadline to the event.
-    public void addDeadline(LocalDate date){
+    public void setDeadline(LocalDate date){
         this.deadline = date;
     }
 
@@ -35,7 +35,7 @@ public abstract class Frequency {
             date = this.nextEventDateTime(date);
         }
 
-        this.addDeadline(date.toLocalDate());
+        this.setDeadline(date.toLocalDate());
     }
 
     //Pre: receives the LocalTime that represents the time at which an event date ends.

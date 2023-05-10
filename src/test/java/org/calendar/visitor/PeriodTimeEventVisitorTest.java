@@ -2,6 +2,9 @@ package org.calendar.visitor;
 
 import org.calendar.appointment.Appointment;
 import org.calendar.event.PeriodTimeEvent;
+import org.calendar.event.frequency.FrequencyAnnual;
+import org.calendar.event.frequency.FrequencyDaily;
+import org.calendar.event.frequency.FrequencyMonthly;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class PeriodTimeEventVisitor{
+public class PeriodTimeEventVisitorTest{
     private AppointmentsVisitor appointmentVisitor;
     private List<Appointment> selectedAppointments = new ArrayList<>();
     private LocalDateTime firstDateTime;
@@ -145,6 +148,62 @@ public class PeriodTimeEventVisitor{
     }
 
     //* ***** REPEATED EVENTS TESTS *****
+
+    //Tests when event starts and ends before firstDateTime but repeats (monthly) between first and second dateTime.
+    @Test
+    public void EventStartsBeforeRepeatsBetween(){
+        var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
+        event.setEventFrequency(new FrequencyMonthly());
+
+        firstDateTime = LocalDateTime.of(2020,1,31,12,0,0);
+        secondDateTime = LocalDateTime.of(2020,3,3,16,0,0);
+
+        selectedAppointments = appointmentVisitor.visitPeriodTimeEvent(event, firstDateTime, secondDateTime);
+
+        assertEquals(2, selectedAppointments.size());
+    }
+
+    //Tests when event starts and repeats (daily) between first and second dateTime.
+    @Test
+    public void EventStartsAndRepeatsBetween(){
+        var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
+        event.setEventFrequency(new FrequencyDaily(1));
+
+        firstDateTime = LocalDateTime.of(2020,1,1,0,0,0);
+        secondDateTime = LocalDateTime.of(2020,1,31,23,59,59);
+
+        selectedAppointments = appointmentVisitor.visitPeriodTimeEvent(event, firstDateTime, secondDateTime);
+
+        assertEquals(31, selectedAppointments.size());
+    }
+
+    //Tests when an event repetition starts between first and second DateTime, but ends after.
+    @Test
+    public void RepetitionStartsBetweenEndsAfter(){
+        var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
+        event.setEventFrequency(new FrequencyMonthly());
+
+        firstDateTime = LocalDateTime.of(2020,2,1,11,0,0);
+        secondDateTime = LocalDateTime.of(2020,2,1,13,59,59);
+
+        selectedAppointments = appointmentVisitor.visitPeriodTimeEvent(event, firstDateTime, secondDateTime);
+
+        assertEquals(1, selectedAppointments.size());
+    }
+
+    //Tests when an event repetition starts before first DateTime but ends between first and second DateTime.
+    @Test
+    public void RepetitionStartsBeforeEndsBetween(){
+        var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
+        event.setEventFrequency(new FrequencyAnnual());
+
+        firstDateTime = LocalDateTime.of(2021,1,1,13,0,0);
+        secondDateTime = LocalDateTime.of(2021,1,1,16,0,0);
+
+        selectedAppointments = appointmentVisitor.visitPeriodTimeEvent(event, firstDateTime, secondDateTime);
+
+        assertEquals(1, selectedAppointments.size());
+    }
 }
 
 
