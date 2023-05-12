@@ -32,7 +32,7 @@ public class WholeDayEvent extends Event {
         return visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);
     }
 
-    //Post: returns from the next event of the current event.
+    //Post: Returns the immediate next repetition from the current event or Null if event is not repeated.
     @Override
     public Event getNextRepetition() {
         LocalDateTime dateTimeEvent = this.getStartDateTime();
