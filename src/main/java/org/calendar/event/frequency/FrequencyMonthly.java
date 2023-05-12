@@ -9,9 +9,9 @@ public class FrequencyMonthly extends Frequency {
     private final int monthsToAdd;
 
     //Constructor.
-    public FrequencyMonthly(){
+    public FrequencyMonthly(LocalDate deadline){
         this.monthsToAdd = ONE_MONTH;
-        this.setDeadline(null);
+        this.deadline = deadline;
     }
 
     //@inheritDoc

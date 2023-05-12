@@ -62,7 +62,7 @@ public class WholeDayEventTest {
         LocalDate now = LocalDate.of(2023,4,30);
         WholeDayEvent eventInfinity = new WholeDayEvent(title, description, now);
 
-        Frequency frequencyWithoutDeadline = new FrequencyDaily(5);
+        Frequency frequencyWithoutDeadline = new FrequencyDaily(5, null);
 
         eventInfinity.setEventFrequency(frequencyWithoutDeadline);
 

@@ -13,7 +13,7 @@ public class FrequencyMonthlyTest {
     public void monthlyFrequency(){
         LocalDateTime now = LocalDateTime.of(2023, 04, 30, 12, 30);
         LocalDateTime later = now.plus(1, ChronoUnit.MONTHS);
-        var frequency = new FrequencyMonthly();
+        var frequency = new FrequencyMonthly(null);
         LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(later, laterOfClass);
     }

@@ -13,7 +13,7 @@ public class FrequencyAnnualTest {
     public void annualFrequency(){
         LocalDateTime now = LocalDateTime.of(2023, 04, 30, 12, 30);
         LocalDateTime later = now.plus(1, ChronoUnit.YEARS);
-        var frequency = new FrequencyAnnual();
+        var frequency = new FrequencyAnnual(null);
         LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(later, laterOfClass);
     }

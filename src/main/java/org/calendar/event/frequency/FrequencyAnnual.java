@@ -9,9 +9,9 @@ public class FrequencyAnnual extends Frequency{
     private final int yearsToAdd;
 
     //Constructor.
-    public FrequencyAnnual(){
+    public FrequencyAnnual(LocalDate deadline){
         this.yearsToAdd = ONE_YEAR;
-        this.setDeadline(null);
+        this.deadline = deadline;
     }
 
     //@inheritDoc

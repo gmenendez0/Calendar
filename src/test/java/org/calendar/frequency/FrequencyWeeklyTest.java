@@ -19,7 +19,7 @@ public class FrequencyWeeklyTest {
         array.add(DayOfWeek.FRIDAY);
         LocalDateTime wednesday = LocalDateTime.of(2023, 4, 12, 10, 30);
         LocalDateTime friday = LocalDateTime.of(2023, 4, 14, 10, 30);
-        var frequency = new FrequencyWeekly(array);
+        var frequency = new FrequencyWeekly(array, null);
 
         LocalDateTime response = frequency.nextEventDateTime(wednesday);
 
@@ -35,7 +35,7 @@ public class FrequencyWeeklyTest {
         LocalDateTime tuesday = LocalDateTime.of(2023, 4, 11, 10, 30);
         LocalDateTime thursday = LocalDateTime.of(2023, 4, 13, 10, 30);
         LocalDateTime saturday = LocalDateTime.of(2023, 4, 15, 10, 30);
-        var frequency = new FrequencyWeekly(array);
+        var frequency = new FrequencyWeekly(array,null);
 
         LocalDateTime response1 = frequency.nextEventDateTime(tuesday);
         LocalDateTime response2 = frequency.nextEventDateTime(response1);
@@ -50,7 +50,7 @@ public class FrequencyWeeklyTest {
         LocalDateTime wednesday2 = LocalDateTime.of(2023, 4, 19, 10, 30);
         ArrayList<DayOfWeek> array = new ArrayList<>();
         array.add(DayOfWeek.WEDNESDAY);
-        var frequency = new FrequencyWeekly(array);
+        var frequency = new FrequencyWeekly(array, null);
 
         LocalDateTime response1 = frequency.nextEventDateTime(LocalDateTime.of(2023, 4, 5, 10, 30));
         assertEquals(wednesday1, response1);

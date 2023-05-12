@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 public abstract class Frequency {
     final int FIRST_REPETITION = 1;
-    private LocalDate deadline;
+    protected LocalDate deadline;
 
     //Post: Returns false if there is a next event, true otherwise
     protected boolean noNextEvent(LocalDate day){

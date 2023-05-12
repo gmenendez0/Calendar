@@ -17,7 +17,7 @@ public class FrequencyDailyTest {
         LocalDateTime later = now.plus(20, ChronoUnit.DAYS);
         int interval = 20;
 
-        var frequency = new FrequencyDaily(interval);
+        var frequency = new FrequencyDaily(interval, null);
 
         LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(later, laterOfClass);
@@ -27,7 +27,7 @@ public class FrequencyDailyTest {
     public void dailyWithZeroInterval(){
         LocalDateTime now = LocalDateTime.of(2023, 4, 20, 12, 30);
         int interval = 0;
-        var frequency = new FrequencyDaily(interval);
+        var frequency = new FrequencyDaily(interval, null);
         LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
         assertEquals(laterOfClass, now);
     }
@@ -38,8 +38,7 @@ public class FrequencyDailyTest {
         LocalTime time = LocalTime.of(12,30,0);
         LocalDateTime dateTime = LocalDateTime.of(2023, 4, 20,12,30,0);
         int interval = 10;
-        var frequency = new FrequencyDaily(interval);
-        frequency.setDeadline(date);
+        var frequency = new FrequencyDaily(interval, date);
         LocalDateTime response = frequency.getDeadlineDateTime(time);
 
         assertEquals(response, dateTime);
@@ -49,8 +48,7 @@ public class FrequencyDailyTest {
     public void verifyIfHasNext(){
         LocalDate date = LocalDate.of(2023, 4, 20);
         int interval = 1;
-        var frequency = new FrequencyDaily(interval);
-        frequency.setDeadline(date);
+        var frequency = new FrequencyDaily(interval, date);
         LocalDateTime dateTest1 = LocalDateTime.of(2023, 4, 18,12,0,0);
         LocalDateTime dateTest2 = LocalDateTime.of(2023, 4, 19,12,0,0);
         LocalDateTime dateTest3 = LocalDateTime.of(2023, 4, 20,12,0,0);

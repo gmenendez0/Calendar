@@ -15,9 +15,9 @@ public class FrequencyWeekly extends Frequency {
     final int ARRAY_POSITION_DIFFERENCE = 1;
 
     //Constructor.
-    public FrequencyWeekly(List<DayOfWeek> weekDays){
+    public FrequencyWeekly(List<DayOfWeek> weekDays, LocalDate deadline){
         this.weekDays = weekDays;
-        this.setDeadline(null);
+        this.deadline = deadline;
     }
 
     //Post: Returns the amount of days until next event.
