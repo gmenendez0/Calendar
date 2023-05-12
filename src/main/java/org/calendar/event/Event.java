@@ -88,5 +88,5 @@ public abstract class Event extends Appointment {
     }
 
     //Post: returns from the next event of the current event.
-    public abstract Event nextEvent();
+    public abstract Event getNextRepetition();
 }

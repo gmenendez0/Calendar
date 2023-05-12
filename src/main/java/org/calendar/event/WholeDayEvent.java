@@ -9,6 +9,9 @@ import java.util.List;
 
 public class WholeDayEvent extends Event {
     final static int ONE_DAY = 1;
+    final int ENDING_HOUR = 23;
+    final int ENDING_MINUTE = 59;
+    final int ENDING_SECOND = 59;
     private LocalDate eventDate;
 
     //Constructor.
@@ -20,7 +23,7 @@ public class WholeDayEvent extends Event {
     //Post: Sets the startDateTime of the event and consequently the endingDateTime.
     public void setStartDate(LocalDate startDate){
         this.startDateTime = startDate.atStartOfDay();
-        this.endingDateTime = startDate.plusDays(ONE_DAY).atStartOfDay();
+        this.endingDateTime = startDate.atTime(ENDING_HOUR, ENDING_MINUTE, ENDING_SECOND);
     }
 
     //@inheritDoc
@@ -31,14 +34,16 @@ public class WholeDayEvent extends Event {
 
     //Post: returns from the next event of the current event.
     @Override
-    public Event nextEvent() {
+    public Event getNextRepetition() {
         LocalDateTime dateTimeEvent = this.getStartDateTime();
         if (!this.thereIsNextRepetition(dateTimeEvent)) return null;
 
         String title = this.getTitle();
         String description = this.getDescription();
-        LocalDate dateRepeat = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
-        Event eventRepeat = new WholeDayEvent(title, description, dateRepeat);
-        return eventRepeat;
+        LocalDate updatedDate = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
+
+        var updatedEvent = new WholeDayEvent(title, description, updatedDate);
+        //! Hay que hacer que updatedEvent tenga la misma frequency que el evento actual.
+        return updatedEvent;
     }
 }

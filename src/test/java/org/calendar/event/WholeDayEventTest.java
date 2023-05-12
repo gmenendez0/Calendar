@@ -47,7 +47,7 @@ public class WholeDayEventTest {
 
         LocalDate tomorrow = now.plusDays(1);
         LocalDateTime startTomorrow = tomorrow.atStartOfDay();
-        LocalDateTime endTomorrow = tomorrow.plusDays(1).atStartOfDay();
+        LocalDateTime endTomorrow = tomorrow.atTime(23, 59, 59);
 
         event.setStartDate(tomorrow);
 

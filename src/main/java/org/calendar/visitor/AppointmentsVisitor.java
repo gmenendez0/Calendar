@@ -1,6 +1,7 @@
 package org.calendar.visitor;
 
 import org.calendar.appointment.Appointment;
+import org.calendar.event.Event;
 import org.calendar.event.PeriodTimeEvent;
 import org.calendar.event.WholeDayEvent;
 import org.calendar.task.ExpirationTimeTask;
@@ -53,37 +54,39 @@ public class AppointmentsVisitor implements Visitor {
     }
 
     //Post: Returns true in case repetition is evaluable, false otherwise.
-    private boolean repetitionIsEvaluable(PeriodTimeEvent periodTimeEvent, LocalDateTime latestCheckedEventStartDateTime, LocalDateTime latestCheckedEventEndingDateTime, LocalDateTime secondDateTime){
-        return periodTimeEvent.thereIsNextRepetition(latestCheckedEventEndingDateTime) && (latestCheckedEventStartDateTime.isBefore(secondDateTime) || latestCheckedEventStartDateTime.isEqual(secondDateTime));
+    private boolean repetitionIsEvaluable(Event event, LocalDateTime latestCheckedEventStartDateTime, LocalDateTime latestCheckedEventEndingDateTime, LocalDateTime secondDateTime){
+        return event.thereIsNextRepetition(latestCheckedEventEndingDateTime) && (latestCheckedEventStartDateTime.isBefore(secondDateTime) || latestCheckedEventStartDateTime.isEqual(secondDateTime));
     }
 
     //Post: Adds all event s repetitions that take place between firstDateTime and secondDateTime to selectedAppointments.
     //Important: "take place between" is defined at eventTakesPlaceBetweenDates post-conditions.
-    private void selectAppropriateRepetitions(PeriodTimeEvent periodTimeEvent, List<Appointment> selectedAppointments, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
-        var latestCheckedEventStartDateTime = periodTimeEvent.getStartDateTime();
-        var latestCheckedEventEndingDateTime = periodTimeEvent.getEndingDateTime();
+    private void selectAppropriateRepetitions(Event event, List<Appointment> selectedAppointments, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
+        var latestCheckedEventStartDateTime = event.getStartDateTime();
+        var latestCheckedEventEndingDateTime = event.getEndingDateTime();
 
-        while(repetitionIsEvaluable(periodTimeEvent, latestCheckedEventStartDateTime, latestCheckedEventEndingDateTime, secondDateTime)){
-            latestCheckedEventStartDateTime = periodTimeEvent.getNextRepetitionStartDateTime(latestCheckedEventEndingDateTime);
-            latestCheckedEventEndingDateTime = periodTimeEvent.getNextRepetitionEndingDateTime(latestCheckedEventEndingDateTime);
+        while(repetitionIsEvaluable(event, latestCheckedEventStartDateTime, latestCheckedEventEndingDateTime, secondDateTime)){
+            latestCheckedEventStartDateTime = event.getNextRepetitionStartDateTime(latestCheckedEventEndingDateTime);
+            latestCheckedEventEndingDateTime = event.getNextRepetitionEndingDateTime(latestCheckedEventEndingDateTime);
 
             if(eventTakesPlaceBetweenDates(latestCheckedEventStartDateTime, latestCheckedEventEndingDateTime, firstDateTime, secondDateTime)){
                selectedAppointments.add(null);  //For testing reasons.
-               //selectedAppointments.add(eventoConFechasActualizadas).
+               //selectedAppointments.add(event.getNextRepetition());
             }
+
+            //event = event.getNextRepetition();
         }
     }
 
     //Pre: Given event must repeat.
     //Post: Checks if any of the event s repetitions fit between given dates. If so, adds them to selectedAppointments.
-    private void checkRepetitions(PeriodTimeEvent periodTimeEvent, List<Appointment> selectedAppointments, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
-        var originalEventStartDateTime = periodTimeEvent.getStartDateTime();
-        var lastRepetitionEndingDateTime = periodTimeEvent.getLastRepetitionEndingDateTime();
+    private void checkRepetitions(Event event, List<Appointment> selectedAppointments, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
+        var originalEventStartDateTime = event.getStartDateTime();
+        var lastRepetitionEndingDateTime = event.getLastRepetitionEndingDateTime();
 
         if(lastRepetitionEndingDateTime == null) lastRepetitionEndingDateTime = LocalDateTime.of(HUGE_YEAR, JANUARY, FIRST, MID_DAY_TIME, MINUTES);
 
         if(eventTakesPlaceBetweenDates(originalEventStartDateTime, lastRepetitionEndingDateTime, firstDateTime, secondDateTime)){
-            selectAppropriateRepetitions(periodTimeEvent, selectedAppointments, firstDateTime, secondDateTime);
+            selectAppropriateRepetitions(event, selectedAppointments, firstDateTime, secondDateTime);
         }
     }
 
@@ -104,7 +107,11 @@ public class AppointmentsVisitor implements Visitor {
     @Override
     public List<Appointment> visitWholeDayEvent(WholeDayEvent wholeDayEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
         var selectedAppointments = new ArrayList<Appointment>();
-        System.out.println("Visiting...");
+        var eventStartTime = wholeDayEvent.getStartDateTime();
+        var eventEndingTime = wholeDayEvent.getEndingDateTime();
+
+        if(eventTakesPlaceBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime)) selectedAppointments.add(wholeDayEvent);
+        if(wholeDayEvent.isRepeated()) checkRepetitions(wholeDayEvent, selectedAppointments, firstDateTime, secondDateTime);
 
         return selectedAppointments;
     }

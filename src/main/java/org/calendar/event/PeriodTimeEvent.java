@@ -27,19 +27,20 @@ public class PeriodTimeEvent extends Event {
         return visitor.visitPeriodTimeEvent(this, firstDayTime, secondDayTime);
     }
 
-    //Post: returns from the next event of the current event.
+    //Post: Returns the immediate next repetition from the current event or Null if event is not repeated.
     @Override
-    public Event nextEvent() {
+    public Event getNextRepetition() {
         LocalDateTime dateTimeStartEvent = this.getStartDateTime();
         LocalDateTime dateTimeEndEvent = this.getEndingDateTime();
         if (!this.thereIsNextRepetition(dateTimeStartEvent)) return null;
 
         String title = this.getTitle();
         String description = this.getDescription();
-        LocalDateTime dateTimeStartRepeat = this.getNextEventRegardDateTime(dateTimeStartEvent);
-        LocalDateTime dateTimeEndRepeat = this.getNextEventRegardDateTime(dateTimeEndEvent);
+        LocalDateTime dateTimeStartUpdated = this.getNextEventRegardDateTime(dateTimeStartEvent);
+        LocalDateTime dateTimeEndUpdated = this.getNextEventRegardDateTime(dateTimeEndEvent);
 
-        Event eventRepeat = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
-        return eventRepeat;
+        var updatedEvent = new PeriodTimeEvent(title, description, dateTimeStartUpdated, dateTimeEndUpdated);
+        //! Hay que hacer que updatedEvent tenga la misma frequency que el evento actual.
+        return updatedEvent;
     }
 }

@@ -9,6 +9,9 @@ import java.util.List;
 
 public class WholeDayTask extends Task {
     final int ONE_DAY = 1;
+    final int ENDING_HOUR = 23;
+    final int ENDING_MINUTE = 59;
+    final int ENDING_SECOND = 59;
 
     private LocalDateTime startDateTime;
 
@@ -16,7 +19,7 @@ public class WholeDayTask extends Task {
     public WholeDayTask(String title, String description, LocalDate startDate) {
         super(title, description, null);
         this.startDateTime = startDate.atStartOfDay();
-        expirationDateTime = startDateTime.plusDays(ONE_DAY);
+        expirationDateTime = startDate.atTime(ENDING_HOUR, ENDING_MINUTE, ENDING_SECOND);
     }
 
     //Post: Updates the startDate and, consequentially, the expirationDateTime.
