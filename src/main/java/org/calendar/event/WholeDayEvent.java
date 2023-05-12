@@ -40,10 +40,8 @@ public class WholeDayEvent extends Event {
 
         String title = this.getTitle();
         String description = this.getDescription();
-        LocalDate updatedDate = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
-
-        var updatedEvent = new WholeDayEvent(title, description, updatedDate);
-        //! Hay que hacer que updatedEvent tenga la misma frequency que el evento actual.
-        return updatedEvent;
+        LocalDate dateRepeat = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
+        Event eventRepeat = new WholeDayEvent(title, description, dateRepeat);
+        return eventRepeat;
     }
 }
