@@ -8,15 +8,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class WholeDayEvent extends Event {
-    final static int ONE_DAY = 1;
-    final int ENDING_HOUR = 23;
-    final int ENDING_MINUTE = 59;
-    final int ENDING_SECOND = 59;
+    final static int ENDING_HOUR = 23;
+    final static int ENDING_MINUTE = 59;
+    final static int ENDING_SECOND = 59;
     private LocalDate eventDate;
 
     //Constructor.
     public WholeDayEvent(String title, String description, LocalDate dateEvent){
-        super(title, description, dateEvent.atStartOfDay(), dateEvent.plusDays(ONE_DAY).atStartOfDay());
+        super(title, description, dateEvent.atStartOfDay(), dateEvent.atTime(ENDING_HOUR,ENDING_MINUTE, ENDING_SECOND));
         this.eventDate = dateEvent;
     }
 

@@ -69,8 +69,7 @@ public class AppointmentsVisitor implements Visitor {
             latestCheckedEventEndingDateTime = event.getNextRepetitionEndingDateTime(latestCheckedEventEndingDateTime);
 
             if(eventTakesPlaceBetweenDates(latestCheckedEventStartDateTime, latestCheckedEventEndingDateTime, firstDateTime, secondDateTime)){
-               selectedAppointments.add(null);  //For testing reasons.
-               //selectedAppointments.add(event.getNextRepetition());
+               selectedAppointments.add(event.getNextRepetition());
             }
 
             event = event.getNextRepetition();
