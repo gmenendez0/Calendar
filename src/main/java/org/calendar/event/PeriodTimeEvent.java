@@ -30,16 +30,17 @@ public class PeriodTimeEvent extends Event {
     //Post: returns from the next event of the current event.
     @Override
     public Event getNextRepetition() {
-        LocalDateTime dateTimeStartEvent = this.getStartDateTime();
-        LocalDateTime dateTimeEndEvent = this.getEndingDateTime();
-        if (!this.thereIsNextRepetition(dateTimeStartEvent)) return null;
+        LocalDateTime dateTimeStartEvent = getStartDateTime();
+        if (!thereIsNextRepetition(dateTimeStartEvent)) return null;
 
-        String title = this.getTitle();
-        String description = this.getDescription();
-        LocalDateTime dateTimeStartRepeat = this.getNextEventRegardDateTime(dateTimeStartEvent);
-        LocalDateTime dateTimeEndRepeat = this.getNextEventRegardDateTime(dateTimeEndEvent);
+        String title = getTitle();
+        String description = getDescription();
+        LocalDateTime dateTimeStartRepeat = getNextEventRegardDateTime(dateTimeStartEvent);
+        LocalDateTime dateTimeEndRepeat = getNextEventRegardDateTime(getEndingDateTime());
 
-        Event eventRepeat = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
-        return eventRepeat;
+        var repeatedEvent = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
+        repeatedEvent.setEventFrequency(this.getFrequency());
+
+        return repeatedEvent;
     }
 }

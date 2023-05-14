@@ -35,13 +35,16 @@ public class WholeDayEvent extends Event {
     //Post: Returns the immediate next repetition from the current event or Null if event is not repeated.
     @Override
     public Event getNextRepetition() {
-        LocalDateTime dateTimeEvent = this.getStartDateTime();
-        if (!this.thereIsNextRepetition(dateTimeEvent)) return null;
+        LocalDateTime dateTimeEvent = getStartDateTime();
+        if (!thereIsNextRepetition(dateTimeEvent)) return null;
 
-        String title = this.getTitle();
-        String description = this.getDescription();
-        LocalDate dateRepeat = this.getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
-        Event eventRepeat = new WholeDayEvent(title, description, dateRepeat);
-        return eventRepeat;
+        String title = getTitle();
+        String description = getDescription();
+        LocalDate dateRepeat = getNextEventRegardDateTime(dateTimeEvent).toLocalDate();
+
+        var repeatedEvent = new WholeDayEvent(title, description, dateRepeat);
+        repeatedEvent.setEventFrequency(this.getFrequency());
+
+        return repeatedEvent;
     }
 }

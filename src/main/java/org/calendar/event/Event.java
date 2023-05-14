@@ -87,7 +87,8 @@ public abstract class Event extends Appointment {
         return this.frequency.getDeadlineDateTime(finalTime);
     }
 
-    protected Frequency cloneFrecuency(){
+    //Post: Returns event s frequency.
+    protected Frequency getFrequency(){
         return this.frequency;
     }
 

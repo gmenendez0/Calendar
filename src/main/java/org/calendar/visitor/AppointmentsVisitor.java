@@ -73,7 +73,7 @@ public class AppointmentsVisitor implements Visitor {
                //selectedAppointments.add(event.getNextRepetition());
             }
 
-            //event = event.getNextRepetition();
+            event = event.getNextRepetition();
         }
     }
 
