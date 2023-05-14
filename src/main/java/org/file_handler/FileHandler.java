@@ -1,12 +1,12 @@
-package org.calendar.file_handler;
-
+package org.file_handler;
 import org.calendar.appointment.Appointment;
+
 import java.util.List;
 
 public class FileHandler{
     private final FileHandlerStrategy fileHandlerStrategy;
 
-    FileHandler(FileHandlerStrategy fileHandlerStrategy){
+    public FileHandler(FileHandlerStrategy fileHandlerStrategy){
         this.fileHandlerStrategy = fileHandlerStrategy;
     }
 

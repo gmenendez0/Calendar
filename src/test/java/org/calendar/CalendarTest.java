@@ -88,4 +88,19 @@ public class CalendarTest {
         assertTrue(expectedSuccess);
         assertFalse(expectedFailure);
     }
+
+    //Tests the correct behaviour of the getAppointmentsBetween method.
+    @Test
+    public void getAppointmentsBetween(){
+        var wholeDayEvent = new WholeDayEvent("title", "desc", LocalDate.of(2020, 1, 3));
+        var firstDateTime = LocalDateTime.of(2020, 1, 1, 0,0,0);
+        var secondDateTime = LocalDateTime.of(2020, 1, 2, 0,0,0);
+
+        calendar.addAppointment(wholeDayTask);
+        calendar.addAppointment(wholeDayEvent);
+
+        var selectedAppointments = calendar.getAppointmentsBetween(firstDateTime,  secondDateTime);
+
+        assertEquals(1, selectedAppointments.size());
+    }
 }
