@@ -3,7 +3,7 @@ import org.calendar.appointment.Appointment;
 
 import java.util.List;
 
-public interface FileHandlerStrategy{
+public interface FileHandlerStrategy {
 
     //Post: Saves given data in file.
     void saveData(List<Appointment> data);

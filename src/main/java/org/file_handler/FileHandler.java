@@ -3,7 +3,7 @@ import org.calendar.appointment.Appointment;
 
 import java.util.List;
 
-public class FileHandler{
+public class FileHandler {
     private final FileHandlerStrategy fileHandlerStrategy;
 
     public FileHandler(FileHandlerStrategy fileHandlerStrategy){

@@ -4,8 +4,8 @@ import org.calendar.appointment.Appointment;
 
 import java.util.ArrayList;
 import java.util.List;
+public class JsonFileHandlerStrategy implements FileHandlerStrategy {
 
-public class JsonFileHandlerStrategy implements FileHandlerStrategy{
     //Pre: File must be in JSON format.
     //Post: @inheritDoc
     @Override
@@ -23,4 +23,5 @@ public class JsonFileHandlerStrategy implements FileHandlerStrategy{
 
         return data;
     }
+
 }
