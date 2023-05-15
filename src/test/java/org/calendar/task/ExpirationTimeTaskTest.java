@@ -17,7 +17,7 @@ public class ExpirationTimeTaskTest {
     private ExpirationTimeTask task;
 
     @Before
-    public void inicialice(){
+    public void initialize(){
         dateTime = LocalDateTime.of(2020,1,1,12,0,0);
         task = new ExpirationTimeTask("title", "description", dateTime);
     }

@@ -15,7 +15,7 @@ public class WholeDayTaskTest {
     private Appointment appointment;
 
     @Before
-    public void inicialice(){
+    public void initialize(){
         wholeDayTask = new WholeDayTask("title", "description", LocalDate.of(2020, 1, 1));
         appointment = new WholeDayTask("Hello", "Hello from Buenos Aires", LocalDate.of(2020, 1, 2));
     }

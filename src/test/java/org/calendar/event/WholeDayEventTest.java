@@ -2,6 +2,7 @@ package org.calendar.event;
 
 import org.calendar.event.frequency.Frequency;
 import org.calendar.event.frequency.FrequencyDaily;
+import org.junit.Before;
 import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,70 +10,56 @@ import static org.junit.Assert.*;
 
 public class WholeDayEventTest {
 
-    @Test
-    public void oneDayEvent(){
+    private WholeDayEvent wholeDayEvent;
+    private LocalDate dateEvent;
+
+    @Before
+    public void initialize(){
         String title = "Title";
         String description = "Description";
-        LocalDate now = LocalDate.of(2023,4,30);
-        LocalDateTime start = now.atStartOfDay();
-        LocalDateTime end = now.plusDays(1).atStartOfDay();
-
-        WholeDayEvent event = new WholeDayEvent(title, description, now);
-
-        assertEquals(start, event.getStartDateTime());
-        assertEquals(end, event.getEndingDateTime());
+        setDate();
+        this.wholeDayEvent = new WholeDayEvent(title, description, dateEvent);
     }
 
+    private void setDate(){
+        this.dateEvent = LocalDate.of(2023,4,30);
+    }
     @Test
-    public void isWholeDayEvent(){
-        String title = "Title";
-        String description = "Description";
-        LocalDate now = LocalDate.of(2023,4,30);
-        LocalDateTime start = now.atStartOfDay();
-        LocalDateTime end = now.plusDays(1).atStartOfDay();
+    public void oneDayEvent(){
+        LocalDateTime start = dateEvent.atStartOfDay();
+        LocalDateTime end = dateEvent.atTime(23,59,59);
 
-        WholeDayEvent event = new WholeDayEvent(title, description, now);
-
-        assertEquals(event.getStartDateTime(), start);    
-        assertEquals(event.getEndingDateTime(), end);
+        assertEquals(start, wholeDayEvent.getStartDateTime());
+        assertEquals(end, wholeDayEvent.getEndingDateTime());
     }
 
     @Test
     public void changeDayEvent(){
-        String title = "Title";
-        String description = "Description";
-        LocalDate now = LocalDate.of(2023,4,30);
+        LocalDate anyDate = LocalDate.of(2023, 5, 14);
+        LocalDateTime anyDateStart = anyDate.atStartOfDay();
+        LocalDateTime anyDateEnd = anyDate.atTime(23,59,59);
 
-        WholeDayEvent event = new WholeDayEvent(title, description, now);
+        wholeDayEvent.setStartDate(anyDate);
 
-        LocalDate tomorrow = now.plusDays(1);
-        LocalDateTime startTomorrow = tomorrow.atStartOfDay();
-        LocalDateTime endTomorrow = tomorrow.atTime(23, 59, 59);
+        assertEquals(anyDateStart, wholeDayEvent.getStartDateTime());
+        assertEquals(anyDateEnd, wholeDayEvent.getEndingDateTime());
 
-        event.setStartDate(tomorrow);
-
-        assertEquals(startTomorrow, event.getStartDateTime());
-        assertEquals(endTomorrow, event.getEndingDateTime());
+        setDate();
     }
 
     @Test
     public void eventInfinity(){
-        String title = "Title";
-        String description = "Description";
-        LocalDate now = LocalDate.of(2023,4,30);
-        WholeDayEvent eventInfinity = new WholeDayEvent(title, description, now);
-
         Frequency frequencyWithoutDeadline = new FrequencyDaily(5, null);
 
-        eventInfinity.setEventFrequency(frequencyWithoutDeadline);
+        wholeDayEvent.setEventFrequency(frequencyWithoutDeadline);
 
-        LocalDateTime day = eventInfinity.getStartDateTime();
+        LocalDateTime day = wholeDayEvent.getStartDateTime();
 
         // Como crear un ciclo infinito es inviable, se simula la infinidad con un ciclo muy grande.
         // Este evento se repetira un millon de veces.
         for (int i = 5; i <= 5000000; i += 5){
             LocalDateTime plusDay = day.plusDays(5);
-            LocalDateTime nextDayEvent = eventInfinity.getNextEventRegardDateTime(day);
+            LocalDateTime nextDayEvent = wholeDayEvent.getNextEventRegardDateTime(day);
             assertEquals(plusDay, nextDayEvent);
             day = nextDayEvent;
         }
