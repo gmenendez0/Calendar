@@ -89,30 +89,29 @@ public class AppointmentsVisitor implements Visitor {
         }
     }
 
-    //@inheritDoc
-    @Override
-    public List<Appointment> visitPeriodTimeEvent(PeriodTimeEvent periodTimeEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
+    //Pre: firstDateTime must be before secondDateTime.
+    //Post: Returns a list with all the events derived from the received event that take place between the received dates.
+    private List<Appointment> visitEvent(Event event, LocalDateTime firstDateTime, LocalDateTime secondDateTime){
         var selectedAppointments = new ArrayList<Appointment>();
-        var eventStartTime = periodTimeEvent.getStartDateTime();
-        var eventEndingTime = periodTimeEvent.getEndingDateTime();
+        var eventStartTime = event.getStartDateTime();
+        var eventEndingTime = event.getEndingDateTime();
 
-        if(eventTakesPlaceBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime)) selectedAppointments.add(periodTimeEvent);
-        if(periodTimeEvent.isRepeated()) checkRepetitions(periodTimeEvent, selectedAppointments, firstDateTime, secondDateTime);
+        if(eventTakesPlaceBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime)) selectedAppointments.add(event);
+        if(event.isRepeated()) checkRepetitions(event, selectedAppointments, firstDateTime, secondDateTime);
 
         return selectedAppointments;
     }
 
     //@inheritDoc
     @Override
+    public List<Appointment> visitPeriodTimeEvent(PeriodTimeEvent periodTimeEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
+        return visitEvent(periodTimeEvent, firstDateTime, secondDateTime);
+    }
+
+    //@inheritDoc
+    @Override
     public List<Appointment> visitWholeDayEvent(WholeDayEvent wholeDayEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime) {
-        var selectedAppointments = new ArrayList<Appointment>();
-        var eventStartTime = wholeDayEvent.getStartDateTime();
-        var eventEndingTime = wholeDayEvent.getEndingDateTime();
-
-        if(eventTakesPlaceBetweenDates(eventStartTime, eventEndingTime, firstDateTime, secondDateTime)) selectedAppointments.add(wholeDayEvent);
-        if(wholeDayEvent.isRepeated()) checkRepetitions(wholeDayEvent, selectedAppointments, firstDateTime, secondDateTime);
-
-        return selectedAppointments;
+        return visitEvent(wholeDayEvent, firstDateTime, secondDateTime);
     }
 
     //Pre: firstDateTime must be before secondDateTime.
