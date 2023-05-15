@@ -1,4 +1,4 @@
-package org.file_handler;
+package file_handler;
 import org.calendar.appointment.Appointment;
 
 import java.util.List;
