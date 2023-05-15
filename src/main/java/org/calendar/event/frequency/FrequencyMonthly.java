@@ -8,7 +8,6 @@ public class FrequencyMonthly extends Frequency {
     final int ONE_MONTH = 1;
     private final int monthsToAdd;
 
-    //Constructor.
     public FrequencyMonthly(LocalDate deadline){
         this.monthsToAdd = ONE_MONTH;
         this.deadline = deadline;

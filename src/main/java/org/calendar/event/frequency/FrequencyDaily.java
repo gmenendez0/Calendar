@@ -7,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 public class FrequencyDaily extends Frequency {
     private final int daysToAdd;
 
-    //Constructor.
     public FrequencyDaily(int interval, LocalDate deadline){
         this.daysToAdd = interval;
         this.deadline = deadline;

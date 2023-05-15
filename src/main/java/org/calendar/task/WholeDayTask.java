@@ -15,7 +15,6 @@ public class WholeDayTask extends Task {
 
     private LocalDateTime startDateTime;
 
-    //Constructs a WholeDayTask
     public WholeDayTask(String title, String description, LocalDate startDate) {
         super(title, description, null);
         this.startDateTime = startDate.atStartOfDay();

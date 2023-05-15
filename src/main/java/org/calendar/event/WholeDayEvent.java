@@ -13,7 +13,6 @@ public class WholeDayEvent extends Event {
     final static int ENDING_SECOND = 59;
     private LocalDate eventDate;
 
-    //Constructor.
     public WholeDayEvent(String title, String description, LocalDate dateEvent){
         super(title, description, dateEvent.atStartOfDay(), dateEvent.atTime(ENDING_HOUR,ENDING_MINUTE, ENDING_SECOND));
         this.eventDate = dateEvent;

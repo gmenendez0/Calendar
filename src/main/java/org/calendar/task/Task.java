@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 public abstract class Task extends Appointment {
     protected LocalDateTime expirationDateTime;
 
-    //Constructs a task
     public Task(String title, String description, LocalDateTime expirationDateTime) {
         super(title, description);
         this.expirationDateTime = expirationDateTime;

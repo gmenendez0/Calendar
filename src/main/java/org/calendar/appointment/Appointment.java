@@ -16,7 +16,6 @@ public abstract class Appointment{
     private boolean destroyed;
     protected final List<Alarm> alarms = new ArrayList<>();
 
-    //Constructor.
     public Appointment(String title, String description){
         this.id = NO_ID;
         this.title = title;

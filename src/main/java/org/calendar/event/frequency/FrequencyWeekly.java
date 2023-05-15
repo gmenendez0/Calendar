@@ -14,7 +14,6 @@ public class FrequencyWeekly extends Frequency {
     final int ONE_POSITION = 1;
     final int ARRAY_POSITION_DIFFERENCE = 1;
 
-    //Constructor.
     public FrequencyWeekly(List<DayOfWeek> weekDays, LocalDate deadline){
         this.weekDays = weekDays;
         this.deadline = deadline;

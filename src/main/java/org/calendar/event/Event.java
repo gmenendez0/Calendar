@@ -11,7 +11,6 @@ public abstract class Event extends Appointment {
     protected LocalDateTime endingDateTime;
     private Frequency frequency;
 
-    //Constructor
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){
         super(title, description);
         this.startDateTime = startDateTime;
