@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class WholeDayEventTest {
-
     private WholeDayEvent wholeDayEvent;
     private LocalDate dateEvent;
 
@@ -18,7 +17,7 @@ public class WholeDayEventTest {
         String title = "Title";
         String description = "Description";
         setDate();
-        this.wholeDayEvent = new WholeDayEvent(title, description, dateEvent);
+        wholeDayEvent = new WholeDayEvent(title, description, dateEvent);
     }
 
     private void setDate(){
@@ -64,5 +63,4 @@ public class WholeDayEventTest {
             day = nextDayEvent;
         }
     }
-
 }

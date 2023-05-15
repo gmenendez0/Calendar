@@ -12,10 +12,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class PeriodTimeEventTest {
-
     private PeriodTimeEvent periodTimeEvent;
     private LocalDateTime dateTimeStart;
     private LocalDateTime dateTimeEnd;
+
     @Before
     public void initialize(){
         String title = "title of event";
@@ -107,7 +107,6 @@ public class PeriodTimeEventTest {
     //Post: test to check if it returns the following event on a weekly basis.
     @Test
     public void nextEventWeekTest(){
-
         List<DayOfWeek> array = new ArrayList<>();
         array.add(DayOfWeek.TUESDAY);
         array.add(DayOfWeek.THURSDAY);
