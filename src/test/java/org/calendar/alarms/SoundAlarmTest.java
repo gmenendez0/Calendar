@@ -1,18 +1,28 @@
 package org.calendar.alarms;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 public class SoundAlarmTest {
+    private Alarm spySoundAlarm;
+
+    @Before
+    public void initialize(){
+        var trueSoundAlarm = new SoundAlarm(1, LocalDateTime.of(2000,1,31,12,0,0));
+        spySoundAlarm = spy(trueSoundAlarm);
+    }
+
     //Tests ring method.
     @Test
     public void ring() {
-/*        Alarm soundAlarm = new SoundAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
-        boolean result = soundAlarm.ring();
+        doNothing().when(spySoundAlarm).ring();
 
-        assertTrue(result);*/
+        spySoundAlarm.ring();
+        verify(spySoundAlarm, times(1)).ring();
     }
 }
