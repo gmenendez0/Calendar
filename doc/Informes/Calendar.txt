@@ -1,0 +1,47 @@
+MOSTRAR TODAS LOS EVENTOS ENTRE 1/04/23 Y 31/04/23 INCLUSIVE
+
+PRIMERO:
+Preguntar si el evento cumple alguna de las siguientes condiciones:
+A)Fecha de inicio mayor o igual a 1-04-23 y fecha de finalizacion menor o igual a 31/04/23?
+B)Fecha de inicio menor a 1-04-23 y fecha de final mayor o igual al 1-04-23 y menor o igual al 31-04-23?
+C)Fecha de inicio mayor o igual a 1-04-23 y menor o igual al 31-04-23 y fecha de final mayor a 31-04-23?
+D)Fecha de inicio menor a 1-04-23 y fecha de final mayor a 31-04-23?
+
+-Si la respuesta es SI, incluyo el evento y paso al punto 2.
+-Si la respuesta es NO, paso al punto 2
+
+Aclaraciones:
+*Los puntos A y C pueden ser simplificados en un solo statement que diga "Fecha de inicio mayor o igual a 1-04-23 y fecha de inicio menor o igual a 31/04/23?".
+*Los puntos A B y C pueden simplificarse en un solo statement que diga "Fecha de inicio o fecha de finalizacion mayor o igual a 1-04-23 y menor o igual a 31/04/23?"
+Por cuestiones de legibilidad y uso a futuro, preferimos avanzar con la opcion de dividir las opciones en A B C y D.
+
+SEGUNDO:
+Pregunto, "el evento se repite?"
+-Si la respuesta es NO, paso al siguiente evento de la lista
+-Si la respuesta es SI, paso al punto 3.
+
+TERCERO:
+Si se llegó hasta aca es que el evento original puede o no estar dentro de 1-04-23 y 31-04-23, pero se repite, entonces podria tener alguna repeticion (más) en ese rango.
+Preguntar si el evento cumple alguna de las siguientes condiciones, usando primeraRepeticion.TiempoDeInicio = A y ultimaRepeticion.TiempoDeFinalizacion = b
+A)A mayor o igual a 1-04-23 y B menor o igual a 31/04/23?
+B)A menor a 1-04-23 y B mayor o igual al 1-04-23 y menor o igual al 31-04-23?
+C)A mayor o igual a 1-04-23 y menor o igual al 31-04-23 y B mayor a 31-04-23?
+D)A menor a 1-04-23 y B mayor a 31-04-23?
+
+---TESTEADO HASTA ACA----
+
+"La fecha de inicio del evento original es menor al 1-04-23 y (La fecha de inicio de la última repeticion es menor o igual a 1-04-23 y la fecha de finalizacion mayor a 1-04-23 o La fecha de inicio de la ultima repeticion es mayor o igual a 1-04-23 y menor o igual a 31-04-23)?
+
+*Se pregunta si la fecha de inicio del evento original es menor al 1-04-23 para determinar si el evento con repeticion empieza a tomar lugar antes o despues de las fechas validas (1-4 a 31-4). Si empieza a tomar lugar despues, ninguna repetiticion estara dentro de las fechas validas. Si empieza a tomar lugar antes, es posible que alguna repeticion caiga dentro de las fechas validas.
+
+*Si lo anterior es valido, Se pregunta si algunas de las siguientes se cumplen:
+a)La fecha de inicio de la ultima repeticion es menor o igual a 1-04-23 y la fecha de finalizacion mayor a 1-04-23.
+b)La fecha de inicio de la ultima repeticion es mayor o igual a 1-04-23 y menor o igual a 31-04-23.
+
+if(fecha de inicio_evento_original < 1-04-23 && (fecha_de_inicio_ultima_repeticion <= 1-04-23 && fecha_de_finalizacion_ultima_repeticion > 1-04-23) || (fecha_de_inicio_ultima_repeticion >= 1-04-23 && fecha_de_inicio_ultima_repeticion <= 31-04-23){
+HAY QUE VER QUE SE HACE DENTRO DEL IF PARA ACOMODAR LAS FECHAS DE LA REPETICION COMO CORRESPONDA.
+-CONSIDERAR OPCIONES DE QUE HAYA MAS DE UNA REPETICION ENTRE LAS FECHAS VALIDAS
+-CONSIDERAR OPCIONES DE VISTA DE DIA, PARA ESO HABRIA QUE EMPEZAR A TOMAR EN CUENTA LAS HORAS Y NO SOLO LAS FECHAS
+}
+...
+paso a siguiente evento
