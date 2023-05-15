@@ -9,7 +9,7 @@ public class NotificationAlarm extends Alarm {
 
     //Post: Rings and sends a notification to the user.
     @Override
-    protected boolean ring() {
-        return true;
+    protected void ring() {
+        //Send notif. algorithm...
     }
 }

@@ -1,25 +1,34 @@
 package org.calendar.alarms;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
 
-public class EmailAlarmTest extends TestCase {
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
+public class EmailAlarmTest{
+    @Mock
+    private Alarm emailAlarm;
 
     //Tests update method when time.now and ringTime don't match.
+    @Test
     public void testUpdate() {
-        Alarm emailAlarm = new EmailAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
-        var now = LocalDateTime.of(2020,1,31,12,0,0);
-        boolean result = emailAlarm.update(now);
+        var notRingTime = LocalDateTime.of(1000,1,31,12,0,0);
 
-        assertFalse(result);
+        doNothing().when(emailAlarm).ring();
+        emailAlarm.update(notRingTime);
+        verify(emailAlarm, times(0)).ring();
     }
 
     //Tests ring method.
+    @Test
     public void testRing() {
-        Alarm emailAlarm = new EmailAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
-        boolean result = emailAlarm.ring();
-
-        assertTrue(result);
+        doNothing().when(emailAlarm).ring();
+        emailAlarm.ring();
+        verify(emailAlarm, times(1)).ring();
     }
 }

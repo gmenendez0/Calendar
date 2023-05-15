@@ -9,7 +9,7 @@ public class SoundAlarm extends Alarm {
 
     //Post: Rings making a sound.
     @Override
-    protected boolean ring() {
-        return true;
+    protected void ring() {
+        //Make sound algorithm...
     }
 }

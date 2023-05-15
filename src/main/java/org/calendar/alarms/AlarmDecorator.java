@@ -12,7 +12,7 @@ public abstract class AlarmDecorator extends Alarm {
 
     //@inheritDoc
     @Override
-    protected boolean ring() {
-        return alarm.ring();
+    protected void ring() {
+        alarm.ring();
     }
 }
