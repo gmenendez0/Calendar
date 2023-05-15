@@ -13,7 +13,7 @@ public class FrequencyDaily extends Frequency {
     }
 
     @Override
-    public LocalDateTime nextEventDateTime(LocalDateTime date){
+    public LocalDateTime nextRepetitionDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.daysToAdd, ChronoUnit.DAYS);
         LocalDate day = dayTime.toLocalDate();
 

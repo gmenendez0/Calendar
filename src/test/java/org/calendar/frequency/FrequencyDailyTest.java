@@ -19,7 +19,7 @@ public class FrequencyDailyTest {
 
         var frequency = new FrequencyDaily(interval, null);
 
-        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
+        LocalDateTime laterOfClass = frequency.nextRepetitionDateTime(now);
         assertEquals(later, laterOfClass);
     }
 
@@ -28,7 +28,7 @@ public class FrequencyDailyTest {
         LocalDateTime now = LocalDateTime.of(2023, 4, 20, 12, 30);
         int interval = 0;
         var frequency = new FrequencyDaily(interval, null);
-        LocalDateTime laterOfClass = frequency.nextEventDateTime(now);
+        LocalDateTime laterOfClass = frequency.nextRepetitionDateTime(now);
         assertEquals(laterOfClass, now);
     }
 
@@ -53,8 +53,8 @@ public class FrequencyDailyTest {
         LocalDateTime dateTest2 = LocalDateTime.of(2023, 4, 19,12,0,0);
         LocalDateTime dateTest3 = LocalDateTime.of(2023, 4, 20,12,0,0);
 
-        assertTrue(frequency.hasNextDate(dateTest1));
-        assertTrue(frequency.hasNextDate(dateTest2));
-        assertFalse(frequency.hasNextDate(dateTest3));
+        assertTrue(frequency.hasNextRepetition(dateTest1));
+        assertTrue(frequency.hasNextRepetition(dateTest2));
+        assertFalse(frequency.hasNextRepetition(dateTest3));
     }
 }

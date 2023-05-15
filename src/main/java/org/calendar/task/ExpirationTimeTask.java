@@ -16,7 +16,6 @@ public class ExpirationTimeTask extends Task {
         this.expirationDateTime = expirationDateTime;
     }
 
-
     //@inheritDoc
     @Override
     public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {

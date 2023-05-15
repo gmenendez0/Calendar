@@ -39,7 +39,7 @@ public class FrequencyWeekly extends Frequency {
 
     //@inheritDoc
     @Override
-    public LocalDateTime nextEventDateTime(LocalDateTime date){
+    public LocalDateTime nextRepetitionDateTime(LocalDateTime date){
         DayOfWeek day = date.getDayOfWeek();
         int dayIndexInArray = this.weekDays.indexOf(day);
 

@@ -15,7 +15,7 @@ public class FrequencyAnnual extends Frequency{
 
     //@inheritDoc
     @Override
-    public LocalDateTime nextEventDateTime(LocalDateTime date){
+    public LocalDateTime nextRepetitionDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.yearsToAdd, ChronoUnit.YEARS);
         LocalDate day = dayTime.toLocalDate();
 

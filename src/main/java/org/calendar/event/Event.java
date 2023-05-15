@@ -34,8 +34,8 @@ public abstract class Event extends Appointment {
     }
 
     //Post: Returns the next date and time of the event with respect to the date and time received, or null if there is no repetition or no next event.
-    public LocalDateTime getNextEventRegardDateTime(LocalDateTime date){
-        if(isRepeated()) return frequency.nextEventDateTime(date);
+    protected LocalDateTime getNextEventRegardDateTime(LocalDateTime date){
+        if(isRepeated()) return frequency.nextRepetitionDateTime(date);
         return null;
     }
 
@@ -77,7 +77,7 @@ public abstract class Event extends Appointment {
 
     //Post: Returns true if there is an event after the received date, false otherwise.
     public boolean thereIsNextRepetition(LocalDateTime date){
-        return this.frequency.hasNextDate(date);
+        return this.frequency.hasNextRepetition(date);
     }
 
     //Post: Returns the last repeated event s endingDateTime. If repetition is infinite, it will return null.
@@ -91,6 +91,6 @@ public abstract class Event extends Appointment {
         return this.frequency;
     }
 
-    //Post: returns from the next event of the current event.
+    //Post: returns from the next repetition of the current event.
     public abstract Event getNextRepetition();
 }

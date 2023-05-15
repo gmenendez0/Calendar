@@ -15,7 +15,7 @@ public class FrequencyMonthly extends Frequency {
 
     //@inheritDoc
     @Override
-    public LocalDateTime nextEventDateTime(LocalDateTime date){
+    public LocalDateTime nextRepetitionDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.monthsToAdd, ChronoUnit.MONTHS);
         LocalDate day = dayTime.toLocalDate();
 

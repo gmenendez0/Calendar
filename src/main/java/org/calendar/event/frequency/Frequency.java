@@ -32,7 +32,7 @@ public abstract class Frequency {
     //Post: Adds the deadline to the event, counting the number of repetitions.
     public void addDeadlineWithRepetitions(int repetitions, LocalDateTime date){
         for(int i = FIRST_REPETITION; i <= repetitions; i++){
-            date = this.nextEventDateTime(date);
+            date = this.nextRepetitionDateTime(date);
         }
 
         this.setDeadline(date.toLocalDate());
@@ -48,10 +48,10 @@ public abstract class Frequency {
     }
 
     //Post: returns true if there is a next date for the received date, false otherwise.
-    public boolean hasNextDate(LocalDateTime date) {
-        return this.nextEventDateTime(date) != null;
+    public boolean hasNextRepetition(LocalDateTime date) {
+        return this.nextRepetitionDateTime(date) != null;
     }
 
-    //Post: returns the next date with respect to the received date, or null if there is no next event.
-    public abstract LocalDateTime nextEventDateTime(LocalDateTime date);
+    //Post: returns the next repetition date with respect to the received date, or null if there is no next repetition.
+    public abstract LocalDateTime nextRepetitionDateTime(LocalDateTime date);
 }

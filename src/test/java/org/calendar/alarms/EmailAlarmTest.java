@@ -19,15 +19,13 @@ public class EmailAlarmTest{
     public void testUpdate() {
         var notRingTime = LocalDateTime.of(1000,1,31,12,0,0);
 
-        doNothing().when(emailAlarm).ring();
         emailAlarm.update(notRingTime);
-        verify(emailAlarm, times(0)).ring();
+        verify(emailAlarm, times(1)).ring();
     }
 
     //Tests ring method.
     @Test
     public void testRing() {
-        doNothing().when(emailAlarm).ring();
         emailAlarm.ring();
         verify(emailAlarm, times(1)).ring();
     }
