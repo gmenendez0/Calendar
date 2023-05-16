@@ -19,13 +19,13 @@ public class EmailAlarmTest{
         spyEmailAlarm = spy(trueEmailAlarm);
     }
 
-    //Tests update method when time.now and ringTime don't match.
+    //Tests update method when time.now and ringTime don't match. As "ring" method is not expected to be called, test shall not use "doNothing().when(spyEmailAlarm).ring()".
     @Test
     public void testUpdate() {
-        doNothing().when(spyEmailAlarm).ring();
-
         var notRingTime = LocalDateTime.of(1000,1,31,12,0,0);
+
         spyEmailAlarm.update(notRingTime);
+
         verify(spyEmailAlarm, times(0)).ring();
     }
 
@@ -35,6 +35,7 @@ public class EmailAlarmTest{
         doNothing().when(spyEmailAlarm).ring();
 
         spyEmailAlarm.ring();
+
         verify(spyEmailAlarm, times(1)).ring();
     }
 }

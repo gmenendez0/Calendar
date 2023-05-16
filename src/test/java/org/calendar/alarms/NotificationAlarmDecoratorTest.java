@@ -1,30 +1,21 @@
 package org.calendar.alarms;
 
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import java.time.LocalDateTime;
+import static org.mockito.Mockito.*;
 
-import static org.junit.Assert.*;
-
+@RunWith(MockitoJUnitRunner.class)
 public class NotificationAlarmDecoratorTest {
     //Tests ring method when decorator inner alarm != null
     @Test
     public void testRingInnerAlarmNotNull() {
-/*        Alarm soundAlarm = new SoundAlarm(1, LocalDateTime.of(2020,1,1,12,0,0));
-        Alarm notificationAlarmDecorator2 = new NotificationAlarmDecorator(1, LocalDateTime.of(2020,1,1,12,0,0), soundAlarm);
+        EmailAlarm alarmMock = mock(EmailAlarm.class);
 
-        boolean result2 = notificationAlarmDecorator2.ring();
+        var notificationAlarmDecorator = new NotificationAlarmDecorator(1, LocalDateTime.of(2000,1,31,12,0,0), alarmMock);
+        notificationAlarmDecorator.ring();
 
-        assertTrue(result2);*/
-    }
-
-    //Tests ring method when decorator inner alarm == null
-    @Test
-    public void testRingInnerAlarmNull() {
-/*        Alarm notificationAlarmDecorator = new NotificationAlarmDecorator(1, LocalDateTime.of(2020,1,1,12,0,0), null);
-
-        boolean result = notificationAlarmDecorator.ring();
-
-        assertTrue(result);*/
+        verify(alarmMock, times(1)).ring();
     }
 }
