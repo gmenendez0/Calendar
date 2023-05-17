@@ -4,8 +4,7 @@ import org.calendar.alarms.Alarm;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class Appointment{
     final int NO_ID = -1;
@@ -100,6 +99,35 @@ public abstract class Appointment{
         for (var alarm : alarms) {
             alarm.update(nowTime);
         }
+    }
+
+    private Map<String, Object> reportGeneral(){
+        Map<String, Object> report = new HashMap<>();
+        report.put("id", this.getId());
+        report.put("title", this.getTitle());
+        report.put("description", this.getDescription());
+        report.put("completed", this.isCompleted());
+        report.put("destroyed", this.isDestroyed());
+
+        if (!alarms.isEmpty()) {
+            List<List<Object>> alarmList = new ArrayList<>();
+            for (Alarm a : this.alarms) {
+                alarmList.add(a.report());
+            }
+            report.put("alarms", alarmList);
+        } else {
+            report.put("alarms", "null");
+        }
+        return report;
+    }
+
+    public abstract Map specificReport();
+
+    public Map report(){
+        Map<String, Object> report = new HashMap<>();
+        report.putAll(this.reportGeneral());
+        report.putAll(this.specificReport());
+        return report;
     }
 
     //Post: Accepts a visitor and returns the "visit" return value.

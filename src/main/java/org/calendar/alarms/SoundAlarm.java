@@ -1,6 +1,8 @@
 package org.calendar.alarms;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SoundAlarm extends Alarm {
     public SoundAlarm(int id, LocalDateTime ringDateTime){
@@ -11,5 +13,13 @@ public class SoundAlarm extends Alarm {
     @Override
     protected void ring() {
         //Make sound algorithm...
+    }
+
+    @Override
+    public List report(){
+        List<Object> report = new ArrayList<>();
+        report.add("SoundAlarm");
+        report.add(this.ringDateTime);
+        return report;
     }
 }

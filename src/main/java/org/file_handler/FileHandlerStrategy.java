@@ -1,9 +1,10 @@
 package org.file_handler;
 import org.calendar.appointment.Appointment;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface FileHandlerStrategy {
+public interface FileHandlerStrategy extends Serializable {
     //Post: Saves given data in file.
     void saveData(List<Appointment> data);
 

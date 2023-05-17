@@ -3,6 +3,7 @@ package org.calendar.event.frequency;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public class FrequencyMonthly extends Frequency {
     final int ONE_MONTH = 1;
@@ -22,5 +23,10 @@ public class FrequencyMonthly extends Frequency {
         if (super.noNextEvent(day)) return null;
 
         return dayTime;
+    }
+
+    @Override
+    public void subTypeFrequency(List<Object> report){
+        report.add("FrequencyMonthly");
     }
 }

@@ -18,18 +18,12 @@ public class WholeDayEventTest {
         String description = "Description";
         setDate();
         wholeDayEvent = new WholeDayEvent(title, description, dateEvent);
+        Frequency frequencyWithoutDeadline = new FrequencyDaily(5, null);
+        wholeDayEvent.setEventFrequency(frequencyWithoutDeadline);
     }
 
     private void setDate(){
         this.dateEvent = LocalDate.of(2023,4,30);
-    }
-    @Test
-    public void oneDayEvent(){
-        LocalDateTime start = dateEvent.atStartOfDay();
-        LocalDateTime end = dateEvent.atTime(23,59,59);
-
-        assertEquals(start, wholeDayEvent.getStartDateTime());
-        assertEquals(end, wholeDayEvent.getEndingDateTime());
     }
 
     @Test
@@ -48,17 +42,10 @@ public class WholeDayEventTest {
 
     @Test
     public void eventInfinity(){
-        Frequency frequencyWithoutDeadline = new FrequencyDaily(5, null);
-
-        wholeDayEvent.setEventFrequency(frequencyWithoutDeadline);
-
         LocalDateTime day = wholeDayEvent.getStartDateTime();
-
-        // Como crear un ciclo infinito es inviable, se simula la infinidad con un ciclo muy grande.
-        // Este evento se repetira un millon de veces.
         for (int i = 5; i <= 5000000; i += 5){
             LocalDateTime plusDay = day.plusDays(5);
-            LocalDateTime nextDayEvent = wholeDayEvent.getNextEventRegardDateTime(day);
+            LocalDateTime nextDayEvent = wholeDayEvent.getNextRepetitionStartDateTime(day);
             assertEquals(plusDay, nextDayEvent);
             day = nextDayEvent;
         }

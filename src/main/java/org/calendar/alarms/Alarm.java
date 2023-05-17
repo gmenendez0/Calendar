@@ -1,6 +1,8 @@
 package org.calendar.alarms;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Alarm {
     protected int id;
@@ -22,5 +24,9 @@ public abstract class Alarm {
     //Post: Checks if it is time to ring, and in case it is, returns true. Otherwise, returns false.
     public void update(LocalDateTime nowTime){
         if(nowTime.equals(ringDateTime)) ring();
+    }
+
+    public List<Object> report(){
+        return null;
     }
 }

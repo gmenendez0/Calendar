@@ -1,6 +1,8 @@
 package org.calendar.alarms;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationAlarm extends Alarm {
     public NotificationAlarm(int id, LocalDateTime ringDateTime){
@@ -11,5 +13,13 @@ public class NotificationAlarm extends Alarm {
     @Override
     protected void ring() {
         //Send notif. algorithm...
+    }
+
+    @Override
+    public List report(){
+        List<Object> report = new ArrayList<>();
+        report.add("NotificationAlarm");
+        report.add(this.ringDateTime);
+        return report;
     }
 }

@@ -5,6 +5,10 @@ import org.calendar.event.frequency.Frequency;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class Event extends Appointment {
     protected LocalDateTime startDateTime;
@@ -34,7 +38,7 @@ public abstract class Event extends Appointment {
     }
 
     //Post: Returns the next date and time of the event with respect to the date and time received, or null if there is no repetition or no next event.
-    protected LocalDateTime getNextEventRegardDateTime(LocalDateTime date){
+    private LocalDateTime getNextEventRegardDateTime(LocalDateTime date){
         if(isRepeated()) return frequency.nextRepetitionDateTime(date);
         return null;
     }
@@ -91,6 +95,21 @@ public abstract class Event extends Appointment {
         return this.frequency;
     }
 
+    @Override
+    public Map specificReport(){
+        Map<String, Object> report = new HashMap<>();
+        report.put("Type", "Event");
+        specificSubType(report);
+        List<LocalDateTime> duration = new ArrayList<>();
+        duration.add(this.startDateTime);
+        duration.add(this.endingDateTime);
+        report.put("Duration", duration);
+        report.put("Frequency", this.frequency.report());
+        return report;
+    }
+
     //Post: returns from the next repetition of the current event.
     public abstract Event getNextRepetition();
+
+    public abstract void specificSubType(Map<String, Object> report);
 }

@@ -5,7 +5,9 @@ import org.calendar.visitor.Visitor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class WholeDayTask extends Task {
     final int ONE_DAY = 1;
@@ -38,5 +40,12 @@ public class WholeDayTask extends Task {
     @Override
     public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         return visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);
+    }
+
+    @Override
+    public void specificSubType(Map<String, Object> report){
+        report.put("SubType", "ExpirationTimeTask");
+        List<Object> duration = new ArrayList<>();
+
     }
 }

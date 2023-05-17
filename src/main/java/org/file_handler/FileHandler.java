@@ -1,6 +1,7 @@
 package org.file_handler;
 import org.calendar.appointment.Appointment;
 
+import javax.json.JsonArray;
 import java.util.List;
 
 public class FileHandler {
@@ -13,6 +14,8 @@ public class FileHandler {
     //Post: Saves given data in given file.
     public void saveData(List<Appointment> data, String path){
         fileHandlerStrategy.saveData(data);
+
+
     }
 
     //Post: Reads given file and returns read data.

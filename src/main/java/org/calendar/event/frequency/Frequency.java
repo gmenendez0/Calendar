@@ -3,6 +3,8 @@ package org.calendar.event.frequency;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Frequency {
     final int FIRST_REPETITION = 1;
@@ -54,4 +56,13 @@ public abstract class Frequency {
 
     //Post: returns the next repetition date with respect to the received date, or null if there is no next repetition.
     public abstract LocalDateTime nextRepetitionDateTime(LocalDateTime date);
+
+    public List<Object> report(){
+        List<Object> report = new ArrayList<>();
+        this.subTypeFrequency(report);
+        report.add(this.deadline);
+        return report;
+    }
+
+    public abstract void subTypeFrequency(List<Object> report);
 }

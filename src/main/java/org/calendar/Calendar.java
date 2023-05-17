@@ -3,6 +3,7 @@ package org.calendar;
 import org.calendar.alarms.Alarm;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.AppointmentsVisitor;
+import org.file_handler.FileHandlerStrategy;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ import java.util.List;
 public class Calendar {
     final int INVALID_ID = -1;
     final int EMPTY = 0;
-
     private final List<Appointment> appointments = new ArrayList<>();
 
     public Calendar(){}

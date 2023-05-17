@@ -5,6 +5,7 @@ import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class ExpirationTimeTask extends Task {
     public ExpirationTimeTask(String title, String description, LocalDateTime expirationDateTime) {
@@ -20,5 +21,10 @@ public class ExpirationTimeTask extends Task {
     @Override
     public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         return visitor.visitExpirationTimeTask(this, firstDayTime, secondDayTime);
+    }
+
+    @Override
+    public void specificSubType(Map<String, Object> report){
+        report.put("SubType", "ExpirationTimeTask");
     }
 }

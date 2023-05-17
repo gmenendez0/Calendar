@@ -1,10 +1,14 @@
 package org.calendar.event;
 
+import org.calendar.alarms.Alarm;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PeriodTimeEvent extends Event {
     public PeriodTimeEvent(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime) {
@@ -35,12 +39,17 @@ public class PeriodTimeEvent extends Event {
 
         String title = getTitle();
         String description = getDescription();
-        LocalDateTime dateTimeStartRepeat = getNextEventRegardDateTime(dateTimeStartEvent);
-        LocalDateTime dateTimeEndRepeat = getNextEventRegardDateTime(getEndingDateTime());
+        LocalDateTime dateTimeStartRepeat = getNextRepetitionStartDateTime(dateTimeStartEvent);
+        LocalDateTime dateTimeEndRepeat = getNextRepetitionEndingDateTime(getEndingDateTime());
 
         var repeatedEvent = new PeriodTimeEvent(title, description, dateTimeStartRepeat, dateTimeEndRepeat);
         repeatedEvent.setEventFrequency(this.getFrequency());
 
         return repeatedEvent;
+    }
+
+    @Override
+    public void specificSubType(Map<String, Object> hash){
+        hash.put("SubType", "PeriodTimeEvent");
     }
 }
