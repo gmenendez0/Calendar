@@ -153,7 +153,7 @@ public class PeriodTimeEventVisitorTest{
     @Test
     public void EventStartsBeforeRepeatsBetween(){
         var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
-        event.setEventFrequency(new FrequencyMonthly(null));
+        event.setFrequency(new FrequencyMonthly(null));
 
         firstDateTime = LocalDateTime.of(2020,1,31,12,0,0);
         secondDateTime = LocalDateTime.of(2020,3,3,16,0,0);
@@ -167,7 +167,7 @@ public class PeriodTimeEventVisitorTest{
     @Test
     public void EventStartsAndRepeatsBetween(){
         var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
-        event.setEventFrequency(new FrequencyDaily(1, null));
+        event.setFrequency(new FrequencyDaily(1, null));
 
         firstDateTime = LocalDateTime.of(2020,1,1,0,0,0);
         secondDateTime = LocalDateTime.of(2020,1,31,23,59,59);
@@ -181,7 +181,7 @@ public class PeriodTimeEventVisitorTest{
     @Test
     public void RepetitionStartsBetweenEndsAfter(){
         var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
-        event.setEventFrequency(new FrequencyMonthly(null));
+        event.setFrequency(new FrequencyMonthly(null));
 
         firstDateTime = LocalDateTime.of(2020,2,1,11,0,0);
         secondDateTime = LocalDateTime.of(2020,2,1,13,59,59);
@@ -195,7 +195,7 @@ public class PeriodTimeEventVisitorTest{
     @Test
     public void RepetitionStartsBeforeEndsBetween(){
         var event = new PeriodTimeEvent("title", "desc", LocalDateTime.of(2020,1,1,12,0,0), LocalDateTime.of(2020,1,1,16,0,0));
-        event.setEventFrequency(new FrequencyAnnual(null));
+        event.setFrequency(new FrequencyAnnual(null));
 
         firstDateTime = LocalDateTime.of(2021,1,1,13,0,0);
         secondDateTime = LocalDateTime.of(2021,1,1,16,0,0);

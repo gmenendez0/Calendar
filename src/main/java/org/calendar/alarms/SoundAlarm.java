@@ -26,11 +26,4 @@ public class SoundAlarm extends Alarm {
         //Make sound algorithm...
     }
 
-    @Override
-    public List report(){
-        List<Object> report = new ArrayList<>();
-        report.add("SoundAlarm");
-        report.add(this.ringDateTime);
-        return report;
-    }
 }

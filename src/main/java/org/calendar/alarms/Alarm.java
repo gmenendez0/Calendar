@@ -40,7 +40,4 @@ public abstract class Alarm {
         if(nowTime.equals(ringDateTime)) ring();
     }
 
-    public List<Object> report(){
-        return null;
-    }
 }

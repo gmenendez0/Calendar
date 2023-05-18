@@ -8,16 +8,14 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public abstract class Appointment{
-
-    @JsonIgnore
-    final int NO_ID = -1;
-
     private int id;
     private String title;
     private String description;
     private boolean completed;
     private boolean destroyed;
     protected final List<Alarm> alarms = new ArrayList<>();
+    @JsonIgnore
+    final int NO_ID = -1;
 
     public Appointment(String title, String description){
         this.id = NO_ID;
@@ -105,35 +103,6 @@ public abstract class Appointment{
         for (var alarm : alarms) {
             alarm.update(nowTime);
         }
-    }
-
-    private Map<String, Object> reportGeneral(){
-        Map<String, Object> report = new HashMap<>();
-        report.put("id", this.getId());
-        report.put("title", this.getTitle());
-        report.put("description", this.getDescription());
-        report.put("completed", this.getCompleted());
-        report.put("destroyed", this.getDestroyed());
-
-        if (!alarms.isEmpty()) {
-            List<List<Object>> alarmList = new ArrayList<>();
-            for (Alarm a : this.alarms) {
-                alarmList.add(a.report());
-            }
-            report.put("alarms", alarmList);
-        } else {
-            report.put("alarms", "null");
-        }
-        return report;
-    }
-
-    public abstract Map specificReport();
-
-    public Map report(){
-        Map<String, Object> report = new HashMap<>();
-        report.putAll(this.reportGeneral());
-        report.putAll(this.specificReport());
-        return report;
     }
 
     //Post: Accepts a visitor and returns the "visit" return value.

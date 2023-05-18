@@ -10,6 +10,8 @@ public abstract class Frequency {
     final int FIRST_REPETITION = 1;
     protected LocalDate deadline;
 
+    public Frequency(){}
+
     //Post: Returns false if there is a next event, true otherwise
     protected boolean noNextEvent(LocalDate day){
         return (hasADeadline() && hasExceededDeadline(day));

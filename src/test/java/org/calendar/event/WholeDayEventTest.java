@@ -19,7 +19,7 @@ public class WholeDayEventTest {
         setDate();
         wholeDayEvent = new WholeDayEvent(title, description, dateEvent);
         Frequency frequencyWithoutDeadline = new FrequencyDaily(5, null);
-        wholeDayEvent.setEventFrequency(frequencyWithoutDeadline);
+        wholeDayEvent.setFrequency(frequencyWithoutDeadline);
     }
 
     private void setDate(){

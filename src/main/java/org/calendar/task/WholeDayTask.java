@@ -59,10 +59,4 @@ public class WholeDayTask extends Task {
         return visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);
     }
 
-    @Override
-    public void specificSubType(Map<String, Object> report){
-        report.put("SubType", "ExpirationTimeTask");
-        List<Object> duration = new ArrayList<>();
-
-    }
 }

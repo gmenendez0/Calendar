@@ -1,4 +1,5 @@
 package org.file_handler;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.calendar.appointment.Appointment;
 
 import java.io.Serializable;

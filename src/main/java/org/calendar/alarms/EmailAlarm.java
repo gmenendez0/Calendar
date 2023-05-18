@@ -27,13 +27,4 @@ public class EmailAlarm extends Alarm {
     protected void ring() {
         //Send mail algorithm...
     }
-
-    @Override
-    public List report(){
-        List<Object> report = new ArrayList<>();
-        report.add(this.id);
-        report.add("EmailAlarm");
-        report.add(this.ringDateTime);
-        return report;
-    }
 }

@@ -26,11 +26,4 @@ public class NotificationAlarm extends Alarm {
         //Send notif. algorithm...
     }
 
-    @Override
-    public List report(){
-        List<Object> report = new ArrayList<>();
-        report.add("NotificationAlarm");
-        report.add(this.ringDateTime);
-        return report;
-    }
 }

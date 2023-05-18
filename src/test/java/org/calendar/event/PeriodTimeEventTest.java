@@ -23,7 +23,7 @@ public class PeriodTimeEventTest {
         setDates();
         this.periodTimeEvent = new PeriodTimeEvent(title, description, dateTimeStart, dateTimeEnd);
         Frequency frequencyEvent = new FrequencyDaily(2, null);
-        periodTimeEvent.setEventFrequency(frequencyEvent);
+        periodTimeEvent.setFrequency(frequencyEvent);
     }
 
     private void setDates(){
@@ -64,7 +64,7 @@ public class PeriodTimeEventTest {
     public void nextEventDayTest(){
         LocalDate deadline = LocalDate.of(2023, 5,3);
         Frequency frequencyEvent = new FrequencyDaily(1, deadline);
-        periodTimeEvent.setEventFrequency(frequencyEvent);
+        periodTimeEvent.setFrequency(frequencyEvent);
 
         LocalDateTime day1 = periodTimeEvent.getStartDateTime();
         LocalDateTime day2 = periodTimeEvent.getNextRepetitionStartDateTime(day1);
@@ -90,7 +90,7 @@ public class PeriodTimeEventTest {
         LocalDate deadline = LocalDate.of(2023,5,9);
         periodTimeEvent.setEventStartDateTime(tuesday);
         Frequency frequency = new FrequencyWeekly(array, deadline);
-        periodTimeEvent.setEventFrequency(frequency);
+        periodTimeEvent.setFrequency(frequency);
 
         LocalDateTime day1 = periodTimeEvent.getStartDateTime();
         assertEquals(tuesday, day1);
@@ -110,7 +110,7 @@ public class PeriodTimeEventTest {
         Frequency frequency = new FrequencyAnnual(null);
         frequency.addDeadlineWithRepetitions(3, dateTimeStart);
 
-        periodTimeEvent.setEventFrequency(frequency);
+        periodTimeEvent.setFrequency(frequency);
 
         LocalDateTime day = periodTimeEvent.getStartDateTime();
         LocalDateTime rep1 = periodTimeEvent.getNextRepetitionStartDateTime(day);
@@ -129,7 +129,7 @@ public class PeriodTimeEventTest {
         Frequency frequency = new FrequencyMonthly(null);
         frequency.addDeadlineWithRepetitions(5, dateTimeStart);
 
-        periodTimeEvent.setEventFrequency(frequency);
+        periodTimeEvent.setFrequency(frequency);
 
         LocalDateTime day = periodTimeEvent.getStartDateTime();
         LocalDateTime rep1 = periodTimeEvent.getNextRepetitionStartDateTime(day);
@@ -150,7 +150,7 @@ public class PeriodTimeEventTest {
     public void obtainLastRepetitionEvent(){
         Frequency frequency = new FrequencyMonthly(null);
         frequency.addDeadlineWithRepetitions(5, dateTimeStart);
-        periodTimeEvent.setEventFrequency(frequency);
+        periodTimeEvent.setFrequency(frequency);
 
         LocalDateTime last = LocalDateTime.of(2023, 9,30, 12,0);
 
@@ -160,7 +160,7 @@ public class PeriodTimeEventTest {
     @Test
     public void theImmediateNextEventStartDateTime(){
         Frequency frequency = new FrequencyDaily(5, null);
-        periodTimeEvent.setEventFrequency(frequency);
+        periodTimeEvent.setFrequency(frequency);
 
         LocalDateTime anyDate = LocalDateTime.of(2023, 5,7, 15,0);
         LocalDateTime immediateDateEventStart = LocalDateTime.of(2023, 5,10, 12,0);
@@ -173,7 +173,7 @@ public class PeriodTimeEventTest {
     @Test
      public void theImmediateNextEventEndDateTime(){
         Frequency frequency = new FrequencyDaily(5, null);
-        periodTimeEvent.setEventFrequency(frequency);
+        periodTimeEvent.setFrequency(frequency);
 
         LocalDateTime anyDate = LocalDateTime.of(2023, 5,7, 15,0);
         LocalDateTime immediateDateEventEnd = LocalDateTime.of(2023, 5,12, 12,0);

@@ -3,6 +3,7 @@ package org.calendar;
 import org.calendar.alarms.Alarm;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.AppointmentsVisitor;
+import org.file_handler.FileHandler;
 import org.file_handler.FileHandlerStrategy;
 
 import java.time.LocalDateTime;
@@ -87,5 +88,9 @@ public class Calendar {
         if(idNotFound(appointmentId, appointments.size())) return false;
 
         return appointments.get(appointmentId).removeAlarm(alarmId);
+    }
+
+    public void saveAppointment(FileHandler fileHandler){
+        fileHandler.save(this.appointments, "calendar.json");
     }
 }

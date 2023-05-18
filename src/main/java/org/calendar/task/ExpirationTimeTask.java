@@ -36,8 +36,4 @@ public class ExpirationTimeTask extends Task {
         return visitor.visitExpirationTimeTask(this, firstDayTime, secondDayTime);
     }
 
-    @Override
-    public void specificSubType(Map<String, Object> report){
-        report.put("SubType", "ExpirationTimeTask");
-    }
 }

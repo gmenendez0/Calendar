@@ -1,14 +1,11 @@
 package org.calendar.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.calendar.appointment.Appointment;
 import org.calendar.event.frequency.Frequency;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public abstract class Event extends Appointment {
     protected LocalDateTime startDateTime;
@@ -24,6 +21,7 @@ public abstract class Event extends Appointment {
 
     public Event(){}
 
+    @JsonIgnore
     //Post: Returns true if the event repeats, false otherwise.
     public boolean isRepeated(){
          return this.frequency != null;
@@ -35,7 +33,7 @@ public abstract class Event extends Appointment {
     }
 
     //Post: Sets the event's frequency.
-    public void setEventFrequency(Frequency frequency){
+    public void setFrequency(Frequency frequency){
         this.frequency = frequency;
     }
 
@@ -77,6 +75,7 @@ public abstract class Event extends Appointment {
         return this.startDateTime;
     }
 
+
     //Post: Returns the ending date time of the event.
     public LocalDateTime getEndingDateTime(){
         return this.endingDateTime;
@@ -95,6 +94,7 @@ public abstract class Event extends Appointment {
         return this.frequency.hasNextRepetition(date);
     }
 
+    @JsonIgnore
     //Post: Returns the last repeated event s endingDateTime. If repetition is infinite, it will return null.
     public LocalDateTime getLastRepetitionEndingDateTime(){
         LocalTime finalTime = this.endingDateTime.toLocalTime();
@@ -106,21 +106,8 @@ public abstract class Event extends Appointment {
         return this.frequency;
     }
 
-    @Override
-    public Map specificReport(){
-        Map<String, Object> report = new HashMap<>();
-        report.put("Type", "Event");
-        specificSubType(report);
-        List<LocalDateTime> duration = new ArrayList<>();
-        duration.add(this.startDateTime);
-        duration.add(this.endingDateTime);
-        report.put("Duration", duration);
-        report.put("Frequency", this.frequency.report());
-        return report;
-    }
-
+    @JsonIgnore
     //Post: returns from the next repetition of the current event.
     public abstract Event getNextRepetition();
 
-    public abstract void specificSubType(Map<String, Object> report);
 }

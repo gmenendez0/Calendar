@@ -7,7 +7,6 @@ import org.calendar.visitor.Visitor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 public class WholeDayEvent extends Event {
 
@@ -58,13 +57,8 @@ public class WholeDayEvent extends Event {
         LocalDate dateRepeat = getNextRepetitionStartDateTime(dateTimeEvent).toLocalDate();
 
         var repeatedEvent = new WholeDayEvent(title, description, dateRepeat);
-        repeatedEvent.setEventFrequency(this.getFrequency());
+        repeatedEvent.setFrequency(this.getFrequency());
 
         return repeatedEvent;
-    }
-
-    @Override
-    public void specificSubType(Map<String, Object> hash){
-        hash.put("SubType", "WholeDayEvent");
     }
 }
