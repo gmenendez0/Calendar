@@ -74,7 +74,7 @@ public class WholeDayTaskTest {
     //Post: Tests the isCompleted return value.
     @Test
     public void isCompleted(){
-        var completed = appointment.isCompleted();
+        var completed = appointment.getCompleted();
 
         assertFalse(completed);
     }
@@ -82,8 +82,8 @@ public class WholeDayTaskTest {
     //Post: Tests that destroy method sets the destroyed attribute on true.
     @Test
     public void destroy(){
-        appointment.destroy();
-        var destroyed = appointment.isDestroyed();
+        appointment.setDestroyed();
+        var destroyed = appointment.getDestroyed();
 
         assertTrue(destroyed);
     }
@@ -91,7 +91,7 @@ public class WholeDayTaskTest {
     //Post: Tests the isDestroyed return value.
     @Test
     public void isDestroyed(){
-        var destroyed = appointment.isDestroyed();
+        var destroyed = appointment.getDestroyed();
 
         assertFalse(destroyed);
     }
@@ -120,7 +120,7 @@ public class WholeDayTaskTest {
     @Test
     public void setCompleted(){
         appointment.setCompleted(true);
-        var completed = appointment.isCompleted();
+        var completed = appointment.getCompleted();
 
         assertTrue(completed);
     }

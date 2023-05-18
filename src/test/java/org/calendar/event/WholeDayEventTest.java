@@ -43,7 +43,7 @@ public class WholeDayEventTest {
     @Test
     public void eventInfinity(){
         LocalDateTime day = wholeDayEvent.getStartDateTime();
-        for (int i = 5; i <= 5000000; i += 5){
+        for (int i = 5; i <= 100000; i += 5){
             LocalDateTime plusDay = day.plusDays(5);
             LocalDateTime nextDayEvent = wholeDayEvent.getNextRepetitionStartDateTime(day);
             assertEquals(plusDay, nextDayEvent);

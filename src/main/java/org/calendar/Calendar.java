@@ -28,7 +28,7 @@ public class Calendar {
         return appointments.get(id);
     }
 
-    //Pre:inicialDateTime must be before finalDateTime
+    //Pre:initialDateTime must be before finalDateTime
     //Post: Returns all non-destroyed appointments that take place at the same moment or after the inicialDateTime and before or at the same moment as the finalDateTime.
     //Example: To get all the appointments of 04/23, dates should be: inicialDateTime = 01/04/23 00:00:00 and finalDateTime = 31/04/23 23:59:59
     public List<Appointment> getAppointmentsBetween(LocalDateTime inicialDateTime, LocalDateTime finalDateTime){
@@ -37,7 +37,7 @@ public class Calendar {
         var visitor = new AppointmentsVisitor();
 
         for (var appointment : appointments) {
-            if(!appointment.isDestroyed()) {
+            if(!appointment.getDestroyed()) {
                 visitorSelectedAppointments = appointment.acceptVisitor(visitor, inicialDateTime, finalDateTime);
                 selectedAppointments.addAll(visitorSelectedAppointments);
             }
@@ -51,7 +51,7 @@ public class Calendar {
     public boolean destroyAppointment(int id){
         if(idNotFound(id, appointments.size())) return false;
 
-        appointments.get(id).destroy();
+        appointments.get(id).setDestroyed();
         return true;
     }
 

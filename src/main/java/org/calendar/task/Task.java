@@ -16,6 +16,8 @@ public abstract class Task extends Appointment {
         this.expirationDateTime = expirationDateTime;
     }
 
+    public Task(){}
+
     //Post: Returns expirationDateTime.
     public LocalDateTime getExpirationDateTime() {
         return this.expirationDateTime;

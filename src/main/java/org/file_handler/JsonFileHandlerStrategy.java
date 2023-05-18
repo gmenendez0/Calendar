@@ -12,14 +12,7 @@ public class JsonFileHandlerStrategy implements FileHandlerStrategy {
 
     private JsonObject createJsonObject(Map appData){
 
-        JsonObject data = Json.createObjectBuilder()
-                .add("Id", appData.get("id").toString())
-                .add("Title", appData.get("title").toString())
-                .add("Description", appData.get("description").toString())
-                .add("Completed", appData.get("completed").toString())
-                .add("Destroyed", appData.get("destroyed").toString())
-                .add("Alarms", appData.get("alarms").toString())
-                .build();
+
 
 
 

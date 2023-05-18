@@ -1,23 +1,51 @@
 package org.calendar.event.frequency;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class FrequencyWeekly extends Frequency {
-    private final List<DayOfWeek> weekDays;
+    private String subtype = "FrequencyWeekly";
+    private List<DayOfWeek> weekDays;
+    @JsonIgnore
     final int NUMBER_OF_DAYS = 7;
+    @JsonIgnore
     final int ZERO_DAYS = 0;
+    @JsonIgnore
     final int NOT_PRESENT = -1;
+    @JsonIgnore
     final int FIRST_INDEX = 0;
+    @JsonIgnore
     final int ONE_POSITION = 1;
+    @JsonIgnore
     final int ARRAY_POSITION_DIFFERENCE = 1;
 
     public FrequencyWeekly(List<DayOfWeek> weekDays, LocalDate deadline){
         this.weekDays = weekDays;
         this.deadline = deadline;
     }
+
+    public FrequencyWeekly(){}
+
+    public String getSubtype(){
+        return subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
+    }
+
+    public List<DayOfWeek> getWeekDays(){
+        return weekDays;
+    }
+
+    public void setWeekDays(List<DayOfWeek> weekDays){
+        this.weekDays = weekDays;
+    }
+
 
     //Post: Returns the amount of days until next event.
     private int daysToAddToDate(DayOfWeek day, DayOfWeek nextDay){

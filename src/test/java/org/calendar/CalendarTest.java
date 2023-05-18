@@ -18,7 +18,7 @@ public class CalendarTest {
     private WholeDayTask wholeDayTask;
 
     @Before
-    public void inicialice(){
+    public void initialize(){
         calendar = new Calendar();
         wholeDayTask = new WholeDayTask("title", "description", LocalDate.of(2020, 1, 1));
     }
@@ -61,7 +61,7 @@ public class CalendarTest {
         calendar.destroyAppointment(0);
         var storedAppointment = calendar.getAppointment(0);
 
-        assertTrue(storedAppointment.isDestroyed());
+        assertTrue(storedAppointment.getDestroyed());
     }
 
     //Tests the correct behaviour of the edit method.

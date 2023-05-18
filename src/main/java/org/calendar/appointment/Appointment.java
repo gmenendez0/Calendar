@@ -1,5 +1,6 @@
 package org.calendar.appointment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.calendar.alarms.Alarm;
 import org.calendar.visitor.Visitor;
 
@@ -7,7 +8,10 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public abstract class Appointment{
+
+    @JsonIgnore
     final int NO_ID = -1;
+
     private int id;
     private String title;
     private String description;
@@ -22,6 +26,8 @@ public abstract class Appointment{
         completed = false;
         destroyed = false;
     }
+
+    public Appointment(){}
 
     //Post: Sets the id.
     public void setId(int id){
@@ -49,7 +55,7 @@ public abstract class Appointment{
     }
 
     //Post: Sets the destroyed attribute as true.
-    public void destroy(){
+    public void setDestroyed(){
         destroyed = true;
     }
 
@@ -64,12 +70,12 @@ public abstract class Appointment{
     }
 
     //Post: Returns the state of the appointment. True if completed, false otherwise
-    public boolean isCompleted(){
+    public boolean getCompleted(){
         return completed;
     }
 
     //Post: Returns the state of the appointment. True if destroyed, false otherwise
-    public boolean isDestroyed(){
+    public boolean getDestroyed(){
         return destroyed;
     }
 
@@ -106,8 +112,8 @@ public abstract class Appointment{
         report.put("id", this.getId());
         report.put("title", this.getTitle());
         report.put("description", this.getDescription());
-        report.put("completed", this.isCompleted());
-        report.put("destroyed", this.isDestroyed());
+        report.put("completed", this.getCompleted());
+        report.put("destroyed", this.getDestroyed());
 
         if (!alarms.isEmpty()) {
             List<List<Object>> alarmList = new ArrayList<>();

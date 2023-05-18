@@ -11,8 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 public class PeriodTimeEvent extends Event {
+    private String subtype = "PeriodTimeEvent";
+
     public PeriodTimeEvent(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime) {
         super(title, description, startDateTime, endingDateTime);
+    }
+
+    public PeriodTimeEvent(){}
+
+    public String getSubtype(){
+        return this.subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
     }
 
     //Post: Sets the startDateTime of the event.

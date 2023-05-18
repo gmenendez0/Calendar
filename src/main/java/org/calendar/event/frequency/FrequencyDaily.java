@@ -6,11 +6,31 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class FrequencyDaily extends Frequency {
-    private final int daysToAdd;
+
+    private String subtype = "FrequencyDaily";
+    private int daysToAdd;
 
     public FrequencyDaily(int interval, LocalDate deadline){
         this.daysToAdd = interval;
         this.deadline = deadline;
+    }
+
+    public FrequencyDaily(){}
+
+    public String getSubtype(){
+        return subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
+    }
+
+    public int getDaysToAdd(){
+        return daysToAdd;
+    }
+
+    public void setDaysToAdd(int daysToAdd){
+        this.daysToAdd = daysToAdd;
     }
 
     @Override

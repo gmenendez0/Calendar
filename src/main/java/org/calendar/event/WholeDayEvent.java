@@ -1,5 +1,6 @@
 package org.calendar.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
@@ -9,14 +10,29 @@ import java.util.List;
 import java.util.Map;
 
 public class WholeDayEvent extends Event {
+
+    private String subtype = "WholeDayEvent";
+    @JsonIgnore
     final static int ENDING_HOUR = 23;
+    @JsonIgnore
     final static int ENDING_MINUTE = 59;
+    @JsonIgnore
     final static int ENDING_SECOND = 59;
     private LocalDate eventDate;
 
     public WholeDayEvent(String title, String description, LocalDate dateEvent){
         super(title, description, dateEvent.atStartOfDay(), dateEvent.atTime(ENDING_HOUR,ENDING_MINUTE, ENDING_SECOND));
         this.eventDate = dateEvent;
+    }
+
+    public WholeDayEvent(){}
+
+    public String getSubtype(){
+        return this.subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
     }
 
     //Post: Sets the startDateTime of the event and consequently the endingDateTime.

@@ -1,5 +1,7 @@
 package org.calendar.event.frequency;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -7,12 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FrequencyAnnual extends Frequency{
+
+    private String subtype = "FrequencyAnnual";
+    @JsonIgnore
     final int ONE_YEAR = 1;
-    private final int yearsToAdd;
+    @JsonIgnore
+    private int yearsToAdd;
 
     public FrequencyAnnual(LocalDate deadline){
         this.yearsToAdd = ONE_YEAR;
         this.deadline = deadline;
+    }
+
+    public FrequencyAnnual(){}
+
+    public String getSubtype(){
+        return subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
     }
 
     //@inheritDoc

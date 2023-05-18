@@ -1,5 +1,6 @@
 package org.calendar.task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.calendar.appointment.Appointment;
 import org.calendar.visitor.Visitor;
 
@@ -10,9 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 public class WholeDayTask extends Task {
+
+    private String subtype = "WholeDayTask";
+    @JsonIgnore
     final int ONE_DAY = 1;
+    @JsonIgnore
     final int ENDING_HOUR = 23;
+    @JsonIgnore
     final int ENDING_MINUTE = 59;
+    @JsonIgnore
     final int ENDING_SECOND = 59;
 
     private LocalDateTime startDateTime;
@@ -21,6 +28,16 @@ public class WholeDayTask extends Task {
         super(title, description, null);
         this.startDateTime = startDate.atStartOfDay();
         expirationDateTime = startDate.atTime(ENDING_HOUR, ENDING_MINUTE, ENDING_SECOND);
+    }
+
+    public WholeDayTask(){}
+
+    public String getSubtype(){
+        return this.subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
     }
 
     //Post: Updates the startDate and, consequentially, the expirationDateTime.

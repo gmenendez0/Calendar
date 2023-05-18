@@ -8,8 +8,21 @@ import java.util.List;
 import java.util.Map;
 
 public class ExpirationTimeTask extends Task {
+
+    private String subtype = "ExpirationTimeTask";
+
     public ExpirationTimeTask(String title, String description, LocalDateTime expirationDateTime) {
         super(title, description, expirationDateTime);
+    }
+
+    public ExpirationTimeTask(){}
+
+    public String getSubtype(){
+        return this.subtype;
+    }
+
+    public void setSubtype(String subtype){
+        this.subtype = subtype;
     }
 
     //Post: Sets the expirationDateTime.

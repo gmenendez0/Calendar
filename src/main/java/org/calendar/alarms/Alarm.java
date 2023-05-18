@@ -13,9 +13,23 @@ public abstract class Alarm {
         this.ringDateTime = ringDateTime;
     }
 
+    public Alarm(){}
+
     //Post: Returns the id
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public LocalDateTime getRingDateTime() {
+        return ringDateTime;
+    }
+
+    public void setRingDateTime(LocalDateTime ringDateTime){
+        this.ringDateTime = ringDateTime;
     }
 
     //Post: Rings the alarm. Returns true if it's called (for testing reasons).

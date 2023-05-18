@@ -22,6 +22,8 @@ public abstract class Event extends Appointment {
         frequency = null;
     }
 
+    public Event(){}
+
     //Post: Returns true if the event repeats, false otherwise.
     public boolean isRepeated(){
          return this.frequency != null;
@@ -54,6 +56,7 @@ public abstract class Event extends Appointment {
         
         while(dateTimeIsAfterOrEqual(date, startOrEnding)){
             startOrEnding = this.getNextEventRegardDateTime(startOrEnding);
+            if (startOrEnding == null) return null;
         }
         
         return startOrEnding;
@@ -77,6 +80,14 @@ public abstract class Event extends Appointment {
     //Post: Returns the ending date time of the event.
     public LocalDateTime getEndingDateTime(){
         return this.endingDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public void setEndingDateTime(LocalDateTime endingDateTime) {
+        this.endingDateTime = endingDateTime;
     }
 
     //Post: Returns true if there is an event after the received date, false otherwise.
