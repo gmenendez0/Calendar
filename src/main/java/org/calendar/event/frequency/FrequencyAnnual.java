@@ -42,8 +42,4 @@ public class FrequencyAnnual extends Frequency{
         return date.plus(this.yearsToAdd, ChronoUnit.YEARS);
     }
 
-    @Override
-    public void subTypeFrequency(List<Object> report){
-        report.add("FrequencyAnnual");
-    }
 }

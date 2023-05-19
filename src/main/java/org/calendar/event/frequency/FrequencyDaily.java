@@ -43,9 +43,4 @@ public class FrequencyDaily extends Frequency {
         return dayTime;
     }
 
-    @Override
-    public void subTypeFrequency(List<Object> report){
-        report.add("FrequencyDaily");
-        report.add(this.daysToAdd);
-    }
 }

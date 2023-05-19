@@ -1,6 +1,7 @@
 package org.calendar.event;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.calendar.appointment.Appointment;
 import org.calendar.event.frequency.Frequency;
 
@@ -10,7 +11,7 @@ import java.time.LocalTime;
 public abstract class Event extends Appointment {
     protected LocalDateTime startDateTime;
     protected LocalDateTime endingDateTime;
-    private Frequency frequency;
+    protected Frequency frequency;
 
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){
         super(title, description);
@@ -27,15 +28,12 @@ public abstract class Event extends Appointment {
          return this.frequency != null;
     }
 
+    @JsonIgnore
     //Post: Sets frequency to null.
     public void setNoRepeat(){
         this.frequency = null;
     }
 
-    //Post: Sets the event's frequency.
-    public void setFrequency(Frequency frequency){
-        this.frequency = frequency;
-    }
 
     //Post: Returns the next date and time of the event with respect to the date and time received, or null if there is no repetition or no next event.
     private LocalDateTime getNextEventRegardDateTime(LocalDateTime date){
@@ -101,13 +99,11 @@ public abstract class Event extends Appointment {
         return this.frequency.getDeadlineDateTime(finalTime);
     }
 
-    //Post: Returns event s frequency.
-    protected Frequency getFrequency(){
-        return this.frequency;
-    }
-
     @JsonIgnore
     //Post: returns from the next repetition of the current event.
     public abstract Event getNextRepetition();
+
+    public abstract Frequency getFrequency();
+    public abstract void setFrequency(Frequency frequency);
 
 }

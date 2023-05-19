@@ -21,8 +21,9 @@ public class JsonFileHandlerStrategy implements FileHandlerStrategy {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         try {
-            String json = objectMapper.writeValueAsString(data);
+            String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
             System.out.println(json);
+
         } catch (JsonProcessingException ex) {
             System.out.println(ex);
             return;

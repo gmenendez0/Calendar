@@ -1,5 +1,7 @@
 package org.calendar.event.frequency;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Frequency {
+    @JsonIgnore
     final int FIRST_REPETITION = 1;
     protected LocalDate deadline;
 
@@ -51,6 +54,10 @@ public abstract class Frequency {
         return null;
     }
 
+    public LocalDate getDeadline(){
+        return this.deadline;
+    }
+
     //Post: returns true if there is a next date for the received date, false otherwise.
     public boolean hasNextRepetition(LocalDateTime date) {
         return this.nextRepetitionDateTime(date) != null;
@@ -59,12 +66,4 @@ public abstract class Frequency {
     //Post: returns the next repetition date with respect to the received date, or null if there is no next repetition.
     public abstract LocalDateTime nextRepetitionDateTime(LocalDateTime date);
 
-    public List<Object> report(){
-        List<Object> report = new ArrayList<>();
-        this.subTypeFrequency(report);
-        report.add(this.deadline);
-        return report;
-    }
-
-    public abstract void subTypeFrequency(List<Object> report);
 }

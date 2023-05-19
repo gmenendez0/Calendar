@@ -98,6 +98,10 @@ public abstract class Appointment{
         return isRemoved;
     }
 
+    public List<Alarm> getAlarms(){
+        return alarms;
+    }
+
     //Post: Orders the alarms to check if it is time to ring or not.
     public void checkAlarms(LocalDateTime nowTime){
         for (var alarm : alarms) {

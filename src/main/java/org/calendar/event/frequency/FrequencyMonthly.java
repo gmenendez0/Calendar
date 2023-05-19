@@ -40,8 +40,4 @@ public class FrequencyMonthly extends Frequency {
         return dayTime;
     }
 
-    @Override
-    public void subTypeFrequency(List<Object> report){
-        report.add("FrequencyMonthly");
-    }
 }

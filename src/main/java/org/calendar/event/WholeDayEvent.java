@@ -2,6 +2,7 @@ package org.calendar.event;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.calendar.appointment.Appointment;
+import org.calendar.event.frequency.Frequency;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDate;
@@ -38,6 +39,17 @@ public class WholeDayEvent extends Event {
     public void setStartDate(LocalDate startDate){
         this.startDateTime = startDate.atStartOfDay();
         this.endingDateTime = startDate.atTime(ENDING_HOUR, ENDING_MINUTE, ENDING_SECOND);
+    }
+
+    //Post: Sets the event's frequency.
+    public void setFrequency(Frequency frequency){
+        this.frequency = frequency;
+    }
+
+
+    //Post: Returns event s frequency.
+    public Frequency getFrequency(){
+        return this.frequency;
     }
 
     //@inheritDoc

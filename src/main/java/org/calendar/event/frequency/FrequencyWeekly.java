@@ -82,9 +82,4 @@ public class FrequencyWeekly extends Frequency {
         return date.plusDays(numberOfDays);
     }
 
-    @Override
-    public void subTypeFrequency(List<Object> report){
-        report.add("FrequencyWeekly");
-        report.add(this.weekDays);
-    }
 }

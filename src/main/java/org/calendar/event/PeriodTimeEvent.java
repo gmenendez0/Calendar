@@ -1,6 +1,7 @@
 package org.calendar.event;
 
 import org.calendar.appointment.Appointment;
+import org.calendar.event.frequency.Frequency;
 import org.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,17 @@ public class PeriodTimeEvent extends Event {
     //Post: Sets the endingDateTime of the event.
     public void setEventEndingDateTime(LocalDateTime EventEndingDateTime){
         this.endingDateTime = EventEndingDateTime;
+    }
+
+    //Post: Sets the event's frequency.
+    public void setFrequency(Frequency frequency){
+        this.frequency = frequency;
+    }
+
+
+    //Post: Returns event s frequency.
+    public Frequency getFrequency(){
+        return this.frequency;
     }
 
     //@inheritDoc
