@@ -1,0 +1,20 @@
+package org.calendar.frequency;
+
+import calendar_org.calendar.event.frequency.FrequencyMonthly;
+import org.junit.Test;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+import static org.junit.Assert.assertEquals;
+
+public class FrequencyMonthlyTest {
+    @Test
+    public void monthlyFrequency(){
+        LocalDateTime now = LocalDateTime.of(2023, 4, 30, 12, 30);
+        LocalDateTime later = now.plus(1, ChronoUnit.MONTHS);
+        var frequency = new FrequencyMonthly(null);
+        LocalDateTime laterOfClass = frequency.nextRepetitionDateTime(now);
+        assertEquals(later, laterOfClass);
+    }
+}
