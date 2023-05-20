@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.time.LocalDateTime;
 
+//tags for json deserialization
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "subtype")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ExpirationTimeTask.class, name = "ExpirationTimeTask"),
@@ -28,6 +29,8 @@ public abstract class Task extends Appointment {
         super();
     }
 
+    //Post: getter needed for persistence.
+    @Override
     public String getType(){
         return type;
     }

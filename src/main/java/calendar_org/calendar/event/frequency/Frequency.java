@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//tags for json deserialization
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "subtype")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = FrequencyAnnual.class, name = "FrequencyAnnual"),
@@ -64,6 +65,7 @@ public abstract class Frequency {
         return null;
     }
 
+    //Post: getter needed for persistence
     public LocalDate getDeadline(){
         return this.deadline;
     }

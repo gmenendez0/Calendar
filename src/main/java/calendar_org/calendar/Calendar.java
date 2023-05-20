@@ -12,7 +12,7 @@ import java.util.List;
 public class Calendar {
     final int INVALID_ID = -1;
     final int EMPTY = 0;
-    private final List<Appointment> appointments = new ArrayList<>();
+    private List<Appointment> appointments = new ArrayList<>();
 
     public Calendar(){}
 
@@ -89,11 +89,16 @@ public class Calendar {
         return appointments.get(appointmentId).removeAlarm(alarmId);
     }
 
+    //Pre: receives an object of class 'FileHandler' that it will use to save the records to the file received in the second parameter.
+    //Post: the file with the class records is created or edited.
     public void saveAppointment(FileHandler fileHandler, String path){
         fileHandler.save(this.appointments, path);
     }
 
+    //Pre: receives an object of class 'FileHandler' which it will use to read the records in the file received in the second parameter.
+    //Post: returns a list of appointments.
     public List<Appointment> readAppointmentFile(FileHandler fileHandler, String path){
-        return fileHandler.read(path);
+        this.appointments = fileHandler.read(path);
+        return this.appointments;
     }
 }

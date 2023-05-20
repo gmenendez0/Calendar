@@ -1,5 +1,7 @@
 package org.calendar.alarms;
 
+import calendar_org.calendar.alarms.EmailAlarmDecorator;
+import calendar_org.calendar.alarms.NotificationAlarm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;

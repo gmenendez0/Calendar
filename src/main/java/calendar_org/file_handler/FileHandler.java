@@ -15,13 +15,9 @@ public class FileHandler {
 
     //Post: Saves given data in given file.
     public void save(List<Appointment> data, String path){
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
         try {
-            BufferedOutputStream obj  = new BufferedOutputStream(
-                    new FileOutputStream(path)
-            );
-            fileHandlerStrategy.saveData(data, path, objectMapper, obj);
+            BufferedOutputStream obj  = new BufferedOutputStream(new FileOutputStream(path));
+            fileHandlerStrategy.saveData(data, obj);
             obj.close();
         } catch (IOException ex) {
             return;
@@ -30,11 +26,9 @@ public class FileHandler {
 
     //Post: Reads given file and returns read data.
     public List<Appointment> read(String path){
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
         try {
             BufferedInputStream obj = new BufferedInputStream(new FileInputStream(path));
-            List<Appointment> arrAppointment = fileHandlerStrategy.readData(objectMapper, obj, path);
+            List<Appointment> arrAppointment = fileHandlerStrategy.readData(obj);
             obj.close();
             return arrAppointment;
         } catch (IOException ex) {

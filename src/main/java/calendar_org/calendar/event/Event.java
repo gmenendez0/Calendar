@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+//tags for json deserialization
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "subtype")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = PeriodTimeEvent.class, name = "PeriodTimeEvent"),
@@ -20,7 +21,6 @@ public abstract class Event extends Appointment {
     protected LocalDateTime startDateTime;
     protected LocalDateTime endingDateTime;
     protected Frequency frequency;
-
     protected String type = "Event";
 
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){
@@ -34,6 +34,8 @@ public abstract class Event extends Appointment {
         super();
     }
 
+    //Post: getter needed for persistence.
+    @Override
     public String getType(){
         return type;
     }
@@ -95,10 +97,12 @@ public abstract class Event extends Appointment {
         return this.endingDateTime;
     }
 
+    //Post: setter needed for persistence.
     public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
 
+    //Post: setter needed for persistence.
     public void setEndingDateTime(LocalDateTime endingDateTime) {
         this.endingDateTime = endingDateTime;
     }
@@ -119,7 +123,10 @@ public abstract class Event extends Appointment {
     //Post: returns from the next repetition of the current event.
     public abstract Event getNextRepetition();
 
+    //Post: getter needed for persistence.
     public abstract Frequency getFrequency();
+
+    //Post: setter needed for persistence.
     public abstract void setFrequency(Frequency frequency);
 
 }

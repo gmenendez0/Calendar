@@ -9,7 +9,7 @@ public class EmailAlarmDecorator extends AlarmDecorator {
 
     //Post: Makes the "alarm" attribute ring and also sends email to the user.
     @Override
-    protected void ring(){
+    public void ring(){
         if(alarm != null) alarm.ring();
         //Send mail algorithm...
     }

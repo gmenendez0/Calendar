@@ -16,10 +16,12 @@ public class PeriodTimeEvent extends Event {
 
     public PeriodTimeEvent(){}
 
+    //Post: getter needed for persistence.
     public String getSubtype(){
         return this.subtype;
     }
 
+    //Post: setter needed for persistence.
     public void setSubtype(String subtype){
         this.subtype = subtype;
     }
@@ -39,8 +41,7 @@ public class PeriodTimeEvent extends Event {
         this.frequency = frequency;
     }
 
-
-    //Post: Returns event s frequency.
+    //Post: Returns event's frequency.
     public Frequency getFrequency(){
         return this.frequency;
     }

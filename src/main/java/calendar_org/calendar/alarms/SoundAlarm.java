@@ -10,17 +10,19 @@ public class SoundAlarm extends Alarm {
 
     public SoundAlarm(){}
 
+    //Post: getter needed for persistence
     public String getSubtype() {
         return subtype;
     }
 
+    //Post: setter needed for persistence
     public void setSubtype(String subtype){
         this.subtype = subtype;
     }
 
     //Post: Rings making a sound.
     @Override
-    protected void ring() {
+    public void ring() {
         //Make sound algorithm...
     }
 

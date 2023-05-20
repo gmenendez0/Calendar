@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface FileHandlerStrategy extends Serializable {
     //Post: Saves given data in file.
-    void saveData(List<Appointment> data, String path, ObjectMapper objectMapper, BufferedOutputStream obj);
+    void saveData(List<Appointment> data, BufferedOutputStream obj);
 
     //Post: Reads given file and returns read data.
-    List<Appointment> readData(ObjectMapper objectMapper, BufferedInputStream obj, String path);
+    List<Appointment> readData(BufferedInputStream obj);
 }

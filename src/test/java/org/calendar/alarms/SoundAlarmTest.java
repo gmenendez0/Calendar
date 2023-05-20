@@ -1,5 +1,7 @@
 package org.calendar.alarms;
 
+import calendar_org.calendar.alarms.Alarm;
+import calendar_org.calendar.alarms.SoundAlarm;
 import org.junit.Before;
 import org.junit.Test;
 

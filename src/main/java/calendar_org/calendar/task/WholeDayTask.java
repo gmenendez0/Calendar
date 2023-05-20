@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class WholeDayTask extends Task {
-
     private String subtype = "WholeDayTask";
     @JsonIgnore
     final int ONE_DAY = 1;
@@ -30,10 +29,12 @@ public class WholeDayTask extends Task {
 
     public WholeDayTask(){}
 
+    //Post: getter needed for persistence.
     public String getSubtype(){
         return this.subtype;
     }
 
+    //Post: setter needed for persistence.
     public void setSubtype(String subtype){
         this.subtype = subtype;
     }
@@ -41,7 +42,6 @@ public class WholeDayTask extends Task {
     //Post: Updates the startDate and, consequentially, the expirationDateTime.
     public void setStartDate(LocalDate startDate) {
         this.startDateTime = startDate.atStartOfDay();
-
         LocalDate endDate = startDate.plusDays(ONE_DAY);
         this.expirationDateTime = endDate.atStartOfDay();
     }

@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
+//tags for json deserialization
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "subtype")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Event.class, name = "PeriodTimeEvent"),
@@ -111,6 +112,7 @@ public abstract class Appointment implements Serializable {
         return isRemoved;
     }
 
+    //Post: getter needed for persistence
     public List<Alarm> getAlarms(){
         return alarms;
     }
@@ -122,6 +124,8 @@ public abstract class Appointment implements Serializable {
         }
     }
 
+    //Post: getter needed for persistence.
+    public abstract String getType();
     //Post: Accepts a visitor and returns the "visit" return value.
     public abstract List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
 }

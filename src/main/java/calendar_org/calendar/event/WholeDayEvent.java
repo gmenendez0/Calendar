@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class WholeDayEvent extends Event {
-
     private String subtype = "WholeDayEvent";
     @JsonIgnore
     final static int ENDING_HOUR = 23;
@@ -27,10 +26,12 @@ public class WholeDayEvent extends Event {
 
     public WholeDayEvent(){}
 
+    //Post: getter needed for persistence.
     public String getSubtype(){
         return this.subtype;
     }
 
+    //Post: setter needed for persistence.
     public void setSubtype(String subtype){
         this.subtype = subtype;
     }
@@ -45,7 +46,6 @@ public class WholeDayEvent extends Event {
     public void setFrequency(Frequency frequency){
         this.frequency = frequency;
     }
-
 
     //Post: Returns event s frequency.
     public Frequency getFrequency(){

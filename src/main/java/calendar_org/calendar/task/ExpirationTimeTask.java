@@ -16,10 +16,12 @@ public class ExpirationTimeTask extends Task {
 
     public ExpirationTimeTask(){}
 
+    //Post: getter needed for persistence.
     public String getSubtype(){
         return this.subtype;
     }
 
+    //Post: setter needed for persistence.
     public void setSubtype(String subtype){
         this.subtype = subtype;
     }
