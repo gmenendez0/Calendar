@@ -14,13 +14,13 @@ public class FileHandler {
     }
 
     //Post: Saves given data in given file.
-    public void save(List<Appointment> data, String path){
+    public void save(List<Appointment> data, String path) throws IOException {
         try {
             BufferedOutputStream obj  = new BufferedOutputStream(new FileOutputStream(path));
             fileHandlerStrategy.saveData(data, obj);
             obj.close();
         } catch (IOException ex) {
-            return;
+            throw ex;
         }
     }
 

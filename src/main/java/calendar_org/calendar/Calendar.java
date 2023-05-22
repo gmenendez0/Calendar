@@ -5,6 +5,7 @@ import calendar_org.calendar.appointment.Appointment;
 import calendar_org.calendar.visitor.AppointmentsVisitor;
 import calendar_org.file_handler.FileHandler;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class Calendar {
 
     //Pre: receives an object of class 'FileHandler' that it will use to save the records to the file received in the second parameter.
     //Post: the file with the class records is created or edited.
-    public void saveAppointment(FileHandler fileHandler, String path){
+    public void saveAppointment(FileHandler fileHandler, String path) throws IOException {
         fileHandler.save(this.appointments, path);
     }
 

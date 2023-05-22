@@ -21,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
 // LOS TEST SE DEBEN REALIZAR EN ORDEN!!
 
 public class FileHandlerTest {
-    private final String pathJSON = "calendar.json";
+    private final String pathJSON = "src/main/resources/appointment.json";
     private Calendar calendar;
     private FileHandler fileHandler;
 
@@ -59,7 +60,7 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void saveTest(){
+    public void saveTest() throws IOException {
         calendar.saveAppointment(fileHandler, pathJSON);
         File file = new File(pathJSON);
         assertTrue(file.exists());
@@ -84,7 +85,7 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void addNewAppointment(){
+    public void addNewAppointment() throws IOException{
         Event evento2 = new WholeDayEvent("Navidad", "Prueba con evento anual", LocalDate.of(2023,12,25));
         Frequency frecuencia2 = new FrequencyAnnual();
         evento2.setFrequency(frecuencia2);
