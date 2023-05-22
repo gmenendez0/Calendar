@@ -1,6 +1,6 @@
 package org.calendar.frequency;
 
-import calendar_org.calendar.event.frequency.FrequencyAnnual;
+import org.calendar.event.frequency.FrequencyAnnual;
 import org.junit.Test;
 
 import java.time.LocalDateTime;

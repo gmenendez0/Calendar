@@ -1,11 +1,10 @@
 package org.calendar.visitor;
 
-import calendar_org.calendar.appointment.Appointment;
-import calendar_org.calendar.event.WholeDayEvent;
-import calendar_org.calendar.event.frequency.FrequencyAnnual;
-import calendar_org.calendar.event.frequency.FrequencyDaily;
-import calendar_org.calendar.event.frequency.FrequencyMonthly;
-import calendar_org.calendar.visitor.AppointmentsVisitor;
+import org.calendar.appointment.Appointment;
+import org.calendar.event.WholeDayEvent;
+import org.calendar.event.frequency.FrequencyAnnual;
+import org.calendar.event.frequency.FrequencyDaily;
+import org.calendar.event.frequency.FrequencyMonthly;
 import org.junit.Before;
 import org.junit.Test;
 

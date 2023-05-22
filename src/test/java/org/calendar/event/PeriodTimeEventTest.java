@@ -1,7 +1,6 @@
 package org.calendar.event;
 
-import calendar_org.calendar.event.PeriodTimeEvent;
-import calendar_org.calendar.event.frequency.*;
+import org.calendar.event.frequency.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.time.DayOfWeek;

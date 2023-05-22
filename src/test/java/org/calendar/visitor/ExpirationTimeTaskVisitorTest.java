@@ -1,8 +1,7 @@
 package org.calendar.visitor;
 
-import calendar_org.calendar.appointment.Appointment;
-import calendar_org.calendar.task.ExpirationTimeTask;
-import calendar_org.calendar.visitor.AppointmentsVisitor;
+import org.calendar.appointment.Appointment;
+import org.calendar.task.ExpirationTimeTask;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package org.calendar.frequency;
 
-import calendar_org.calendar.event.frequency.FrequencyWeekly;
+import org.calendar.event.frequency.FrequencyWeekly;
 import org.junit.Test;
 
 import java.time.DayOfWeek;

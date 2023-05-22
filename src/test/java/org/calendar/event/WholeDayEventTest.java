@@ -1,8 +1,7 @@
 package org.calendar.event;
 
-import calendar_org.calendar.event.WholeDayEvent;
-import calendar_org.calendar.event.frequency.Frequency;
-import calendar_org.calendar.event.frequency.FrequencyDaily;
+import org.calendar.event.frequency.Frequency;
+import org.calendar.event.frequency.FrequencyDaily;
 import org.junit.Before;
 import org.junit.Test;
 import java.time.LocalDate;

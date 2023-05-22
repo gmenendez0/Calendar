@@ -1,11 +1,10 @@
 package org.calendar;
 
-import calendar_org.calendar.Calendar;
-import calendar_org.calendar.alarms.Alarm;
-import calendar_org.calendar.alarms.NotificationAlarm;
-import calendar_org.calendar.event.WholeDayEvent;
-import calendar_org.calendar.task.ExpirationTimeTask;
-import calendar_org.calendar.task.WholeDayTask;
+import org.calendar.alarms.Alarm;
+import org.calendar.alarms.NotificationAlarm;
+import org.calendar.event.WholeDayEvent;
+import org.calendar.task.ExpirationTimeTask;
+import org.calendar.task.WholeDayTask;
 import org.junit.Before;
 import org.junit.Test;
 
