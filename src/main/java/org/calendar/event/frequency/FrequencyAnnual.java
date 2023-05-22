@@ -21,16 +21,6 @@ public class FrequencyAnnual extends Frequency{
 
     public FrequencyAnnual(){}
 
-    //Post: getter needed for persistence.
-    public String getSubtype(){
-        return subtype;
-    }
-
-    //Post: setter needed for persistence.
-    public void setSubtype(String subtype){
-        this.subtype = subtype;
-    }
-
     //@inheritDoc
     @Override
     public LocalDateTime nextRepetitionDateTime(LocalDateTime date){

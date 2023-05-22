@@ -13,16 +13,6 @@ public class EmailAlarm extends Alarm {
     //Empty constructor for persistence (Jackson).
     public EmailAlarm(){}
 
-    //Post: getter needed for persistence.
-    public String getSubtype() {
-        return subtype;
-    }
-
-    //Post: getter needed for persistence.
-    public void setSubtype(String subtype){
-        this.subtype = subtype;
-    }
-
     //Post: Rings and sends an email to the user.
     @Override
     public void ring() {

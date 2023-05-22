@@ -11,16 +11,6 @@ public class SoundAlarm extends Alarm {
     //Empty constructor for persistence (Jackson).
     public SoundAlarm(){}
 
-    //Post: getter needed for persistence
-    public String getSubtype() {
-        return subtype;
-    }
-
-    //Post: setter needed for persistence
-    public void setSubtype(String subtype){
-        this.subtype = subtype;
-    }
-
     //Post: Rings making a sound.
     @Override
     public void ring() {

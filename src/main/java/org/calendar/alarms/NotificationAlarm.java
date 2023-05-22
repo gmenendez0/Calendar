@@ -11,16 +11,6 @@ public class NotificationAlarm extends Alarm {
     //Empty constructor for persistence (Jackson).
     public NotificationAlarm(){}
 
-    //Post: getter needed for persistence
-    public String getSubtype() {
-        return subtype;
-    }
-
-    //Post: setter needed for persistence
-    public void setSubtype(String subtype){
-        this.subtype = subtype;
-    }
-
     //Post: Rings and sends a notification to the user.
     @Override
     public void ring() {

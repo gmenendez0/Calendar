@@ -7,6 +7,8 @@ public class EmailAlarmDecorator extends AlarmDecorator {
         super(id, ringDateTime, alarm);
     }
 
+    public EmailAlarmDecorator(){}
+
     //Post: Makes the "alarm" attribute ring and also sends email to the user.
     @Override
     public void ring(){

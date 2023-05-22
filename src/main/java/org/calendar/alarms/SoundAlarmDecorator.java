@@ -7,6 +7,8 @@ public class SoundAlarmDecorator extends AlarmDecorator {
         super(id, ringDateTime, alarm);
     }
 
+    public SoundAlarmDecorator(){}
+
     //Post: Rings making a sound and makes the "alarm" attribute ring.
     @Override
     public void ring(){
