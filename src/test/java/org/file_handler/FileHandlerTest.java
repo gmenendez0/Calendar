@@ -10,6 +10,7 @@ import org.calendar.event.PeriodTimeEvent;
 import org.calendar.event.WholeDayEvent;
 import org.calendar.event.frequency.Frequency;
 import org.calendar.event.frequency.FrequencyAnnual;
+import org.calendar.event.frequency.FrequencyDaily;
 import org.calendar.event.frequency.FrequencyMonthly;
 import org.calendar.task.Task;
 import org.calendar.task.WholeDayTask;
@@ -60,32 +61,32 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void saveTest(){
-        calendar.saveAppointment(fileHandler, pathJSON);
+    public void testA_saveTest() throws IOException{
+        this.calendar.saveAppointments(fileHandler, pathJSON);
         File file = new File(pathJSON);
         assertTrue(file.exists());
         assertTrue(file.isFile());
     }
 
-    private void amountInTheFile(int amount){
-        List<Appointment> jsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
+    private void amountInTheFile(int amount) throws IOException {
+        List<Appointment> jsonAppointment = calendar.recoverAppointments(fileHandler, pathJSON);
         assertEquals(amount, jsonAppointment.size());
     }
 
     @Test
-    public void sameAmountSavedAndRetrieved(){
+    public void testB_sameAmountSavedAndRetrieved() throws IOException {
         amountInTheFile(2);
     }
 
     @Test
-    public void checkTypes(){
-        List<Appointment> jsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
+    public void testC_checkTypes() throws IOException {
+        List<Appointment> jsonAppointment = calendar.recoverAppointments(fileHandler, pathJSON);
         assertEquals("Task", jsonAppointment.get(0).getType());
         assertEquals("Event", jsonAppointment.get(1).getType());
     }
 
     @Test
-    public void addNewAppointment(){
+    public void testD_addNewAppointment() throws IOException {
         Event evento2 = new WholeDayEvent("Navidad", "Prueba con evento anual", LocalDate.of(2023,12,25));
         Frequency frecuencia2 = new FrequencyAnnual();
         evento2.setFrequency(frecuencia2);
@@ -100,19 +101,19 @@ public class FileHandlerTest {
         calendar.addAppointment(evento3);
         calendar.addAppointment(evento4);
 
-        calendar.saveAppointment(fileHandler, pathJSON);
+        calendar.saveAppointments(fileHandler, pathJSON);
         File file = new File(pathJSON);
         assertTrue(file.exists());
     }
 
     @Test
-    public void newSameAmountSavedAndRetrieved(){
+    public void testE_newSameAmountSavedAndRetrieved() throws IOException {
         amountInTheFile(5);
     }
 
     @Test
-    public void verifyTitleOfTheNewAppointment(){
-        List<Appointment> newJsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
+    public void testF_verifyTitleOfTheNewAppointment() throws IOException {
+        List<Appointment> newJsonAppointment = calendar.recoverAppointments(fileHandler, pathJSON);
 
         assertEquals("TAREAAA", newJsonAppointment.get(0).getTitle());
         assertEquals("EVENTO", newJsonAppointment.get(1).getTitle());
@@ -123,8 +124,8 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void verifyDescriptionOfTheNewAppointment(){
-        List<Appointment> newJsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
+    public void testG_verifyDescriptionOfTheNewAppointment() throws IOException {
+        List<Appointment> newJsonAppointment = calendar.recoverAppointments(fileHandler, pathJSON);
 
         assertEquals("Descripcion de la tarea", newJsonAppointment.get(0).getDescription());
         assertEquals("Prueba de Json", newJsonAppointment.get(1).getDescription());
@@ -135,8 +136,8 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void verifySubtypesOfTheNewAppointment(){
-        List<Appointment> newJsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
+    public void testH_verifySubtypesOfTheNewAppointment() throws IOException {
+        List<Appointment> newJsonAppointment = calendar.recoverAppointments(fileHandler, pathJSON);
 
         assertEquals("Task", newJsonAppointment.get(0).getType());
         assertEquals("Event", newJsonAppointment.get(1).getType());
