@@ -99,7 +99,8 @@ public class Calendar {
 
     //Pre: receives an object of class 'FileHandler' which it will use to read the records in the file received in the second parameter.
     //Post: returns a list of appointments.
-    public void recoverAppointments(FileHandler fileHandler, String path) throws IOException{
+    public List<Appointment> recoverAppointments(FileHandler fileHandler, String path) throws IOException {
         this.appointments = fileHandler.read(path);
+        return appointments;
     }
 }

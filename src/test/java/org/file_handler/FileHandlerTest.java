@@ -31,19 +31,17 @@ import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FileHandlerTest {
-    private final String pathJSON = "src/main/resources/appointment.json";
+    private final String pathJSON = "calendar.json";
     private Calendar calendar;
     private FileHandler fileHandler;
-
-    private List<Appointment> jsonAppointment;
 
     @Before
     public void initialize(){
 
         calendar = new Calendar();
 
-        Event evento1 = new PeriodTimeEvent("EVENTO", "Prueba de Json", LocalDateTime.of(2023,5,18,20,30,10),
-                LocalDateTime.of(2023,5,18,20,30,10).plusDays(10));
+        Event evento1 = new PeriodTimeEvent("EVENTO", "Prueba de Json", LocalDateTime.of(2023,05,18,20,30,10),
+                LocalDateTime.of(2023,05,18,20,30,10).plusDays(10));
         Frequency frecuencia1 = new FrequencyMonthly(LocalDate.of(2025, 5,28));
         evento1.setFrequency(frecuencia1);
 
@@ -61,86 +59,90 @@ public class FileHandlerTest {
         fileHandler = new FileHandler(j);
     }
 
-    private void getAppointmentList(){
-        jsonAppointment = calendar.getAppointmentsBetween(LocalDateTime.of(2023,5,1,0,0,0), LocalDateTime.of(2023,6,1,0,0,0));
-    }
-
     @Test
-    public void testA_saveTest() throws IOException {
-        calendar.saveAppointments(fileHandler, pathJSON);
+    public void saveTest(){
+        calendar.saveAppointment(fileHandler, pathJSON);
         File file = new File(pathJSON);
         assertTrue(file.exists());
         assertTrue(file.isFile());
     }
 
-    private void amountInTheFile(int amount) throws IOException{
-        calendar.recoverAppointments(fileHandler, pathJSON);
-        getAppointmentList();
+    private void amountInTheFile(int amount){
+        List<Appointment> jsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
         assertEquals(amount, jsonAppointment.size());
     }
 
     @Test
-    public void testB_sameAmountSavedAndRetrieved() throws IOException{
+    public void sameAmountSavedAndRetrieved(){
         amountInTheFile(2);
     }
 
     @Test
-    public void testC_checkTypes() throws IOException{
-        calendar.recoverAppointments(fileHandler, pathJSON);
+    public void checkTypes(){
+        List<Appointment> jsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
         assertEquals("Task", jsonAppointment.get(0).getType());
         assertEquals("Event", jsonAppointment.get(1).getType());
     }
 
     @Test
-    public void testD_addNewAppointment() throws IOException{
-        Event evento2 = new WholeDayEvent("Anual", "Prueba con evento anual", LocalDate.of(2023,5,10));
+    public void addNewAppointment(){
+        Event evento2 = new WholeDayEvent("Navidad", "Prueba con evento anual", LocalDate.of(2023,12,25));
         Frequency frecuencia2 = new FrequencyAnnual();
         evento2.setFrequency(frecuencia2);
 
-        Event evento3 = new WholeDayEvent("SIN", "FRECUENCIA", LocalDate.of(2023,5,25));
+        Event evento3 = new WholeDayEvent("Diario", "Es un evento diario", LocalDate.of(2023,6,25));
+        Frequency frecuencia3 = new FrequencyDaily(1,LocalDate.of(2023,6,30));
+        evento3.setFrequency(frecuencia3);
+
+        Event evento4 = new WholeDayEvent("SIN", "FRECUENCIA", LocalDate.of(2023,5,18));
 
         calendar.addAppointment(evento2);
         calendar.addAppointment(evento3);
+        calendar.addAppointment(evento4);
 
-        calendar.saveAppointments(fileHandler, pathJSON);
+        calendar.saveAppointment(fileHandler, pathJSON);
         File file = new File(pathJSON);
         assertTrue(file.exists());
     }
 
     @Test
-    public void testE_newSameAmountSavedAndRetrieved() throws IOException{
-        amountInTheFile(4);
+    public void newSameAmountSavedAndRetrieved(){
+        amountInTheFile(5);
     }
 
     @Test
-    public void testF_verifyTitleOfTheNewAppointment() throws IOException{
-        calendar.recoverAppointments(fileHandler, pathJSON);
+    public void verifyTitleOfTheNewAppointment(){
+        List<Appointment> newJsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
 
-        assertEquals("Anual", jsonAppointment.get(0).getTitle());
-        assertEquals("EVENTO", jsonAppointment.get(1).getTitle());
-        assertEquals("TAREAAA", jsonAppointment.get(2).getTitle());
-        assertEquals("SIN", jsonAppointment.get(3).getTitle());
-    }
-
-    @Test
-    public void testG_verifyDescriptionOfTheNewAppointment() throws IOException{
-        calendar.recoverAppointments(fileHandler, pathJSON);
-
-        assertEquals("Prueba con evento anual", jsonAppointment.get(0).getDescription());
-        assertEquals("Prueba de Json", jsonAppointment.get(1).getDescription());
-        assertEquals("Descripcion de la tarea", jsonAppointment.get(2).getDescription());
-        assertEquals("FRECUENCIA", jsonAppointment.get(3).getDescription());
+        assertEquals("TAREAAA", newJsonAppointment.get(0).getTitle());
+        assertEquals("EVENTO", newJsonAppointment.get(1).getTitle());
+        assertEquals("Navidad", newJsonAppointment.get(2).getTitle());
+        assertEquals("Diario", newJsonAppointment.get(3).getTitle());
+        assertEquals("SIN", newJsonAppointment.get(4).getTitle());
 
     }
 
     @Test
-    public void testH_verifySubtypesOfTheNewAppointment() throws IOException{
-        calendar.recoverAppointments(fileHandler, pathJSON);
+    public void verifyDescriptionOfTheNewAppointment(){
+        List<Appointment> newJsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
 
-        assertEquals("Event", jsonAppointment.get(0).getType());
-        assertEquals("Event", jsonAppointment.get(1).getType());
-        assertEquals("Task", jsonAppointment.get(2).getType());
-        assertEquals("Event", jsonAppointment.get(4).getType());
+        assertEquals("Descripcion de la tarea", newJsonAppointment.get(0).getDescription());
+        assertEquals("Prueba de Json", newJsonAppointment.get(1).getDescription());
+        assertEquals("Prueba con evento anual", newJsonAppointment.get(2).getDescription());
+        assertEquals("Es un evento diario", newJsonAppointment.get(3).getDescription());
+        assertEquals("FRECUENCIA", newJsonAppointment.get(4).getDescription());
+
+    }
+
+    @Test
+    public void verifySubtypesOfTheNewAppointment(){
+        List<Appointment> newJsonAppointment = calendar.readAppointmentFile(fileHandler, pathJSON);
+
+        assertEquals("Task", newJsonAppointment.get(0).getType());
+        assertEquals("Event", newJsonAppointment.get(1).getType());
+        assertEquals("Event", newJsonAppointment.get(2).getType());
+        assertEquals("Event", newJsonAppointment.get(3).getType());
+        assertEquals("Event", newJsonAppointment.get(4).getType());
 
     }
 }
