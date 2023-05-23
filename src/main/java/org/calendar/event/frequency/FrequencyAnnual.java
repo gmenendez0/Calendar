@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class FrequencyAnnual extends Frequency{
 
-    private String subtype = "FrequencyAnnual";
+    private final String subtype = "FrequencyAnnual";
     @JsonIgnore
     final int ONE_YEAR = 1;
     @JsonIgnore
@@ -19,6 +19,7 @@ public class FrequencyAnnual extends Frequency{
         this.deadline = deadline;
     }
 
+    //Empty constructor for persistence (Jackson).
     public FrequencyAnnual(){}
 
     //@inheritDoc

@@ -7,6 +7,7 @@ public class SoundAlarmDecorator extends AlarmDecorator {
         super(id, ringDateTime, alarm);
     }
 
+    //Empty constructor for persistence (Jackson).
     public SoundAlarmDecorator(){}
 
     //Post: Rings making a sound and makes the "alarm" attribute ring.

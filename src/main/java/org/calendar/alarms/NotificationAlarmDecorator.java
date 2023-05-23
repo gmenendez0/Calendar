@@ -7,6 +7,7 @@ public class NotificationAlarmDecorator extends AlarmDecorator {
         super(id, ringDateTime, alarm);
     }
 
+    //Empty constructor for persistence (Jackson).
     public NotificationAlarmDecorator(){}
 
     //Post: Makes the "alarm" attribute ring and also sends a notification to the user.

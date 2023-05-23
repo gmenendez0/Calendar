@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class FrequencyMonthly extends Frequency {
-    private String subtype = "FrequencyMonthly";
+    private final String subtype = "FrequencyMonthly";
     @JsonIgnore
     final int ONE_MONTH = 1;
     @JsonIgnore
@@ -18,6 +18,7 @@ public class FrequencyMonthly extends Frequency {
         this.deadline = deadline;
     }
 
+    //Empty constructor for persistence (Jackson).
     public FrequencyMonthly(){}
 
     //@inheritDoc

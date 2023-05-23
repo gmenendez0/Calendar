@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class FrequencyWeekly extends Frequency {
-    private String subtype = "FrequencyWeekly";
+    private final String subtype = "FrequencyWeekly";
     private List<DayOfWeek> weekDays;
     @JsonIgnore
     final int NUMBER_OF_DAYS = 7;
@@ -28,6 +28,7 @@ public class FrequencyWeekly extends Frequency {
         this.deadline = deadline;
     }
 
+    //Empty constructor for persistence (Jackson).
     public FrequencyWeekly(){}
 
     //Post: getter needed for persistence.

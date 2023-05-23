@@ -7,18 +7,15 @@
   "alarms" : [ {
     "subtype" : "NotificationAlarm",
     "id" : 0,
-    "ringDateTime" : [ 10, 10, 10, 10, 10, 10 ],
-    "subtype" : "NotificationAlarm"
+    "ringDateTime" : [ 10, 10, 10, 10, 10, 10 ]
   }, {
     "subtype" : "EmailAlarm",
     "id" : 1,
-    "ringDateTime" : [ 10, 10, 10, 10, 15, 10 ],
-    "subtype" : "EmailAlarm"
+    "ringDateTime" : [ 10, 10, 10, 10, 15, 10 ]
   }, {
     "subtype" : "SoundAlarm",
     "id" : 2,
-    "ringDateTime" : [ 10, 10, 10, 10, 20, 10 ],
-    "subtype" : "SoundAlarm"
+    "ringDateTime" : [ 10, 10, 10, 10, 20, 10 ]
   } ],
   "expirationDateTime" : [ 2023, 5, 20, 23, 59, 59 ],
   "type" : "Task",
@@ -35,54 +32,8 @@
   "endingDateTime" : [ 2023, 5, 28, 20, 30, 10 ],
   "frequency" : {
     "subtype" : "FrequencyMonthly",
-    "deadline" : [ 2025, 5, 28 ],
-    "subtype" : "FrequencyMonthly"
+    "deadline" : [ 2025, 5, 28 ]
   },
   "type" : "Event",
   "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 2,
-  "title" : "Navidad",
-  "description" : "Prueba con evento anual",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 12, 25, 0, 0 ],
-  "endingDateTime" : [ 2023, 12, 25, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyAnnual",
-    "deadline" : null,
-    "subtype" : "FrequencyAnnual"
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent"
-}, {
-  "id" : 3,
-  "title" : "Diario",
-  "description" : "Es un evento diario",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 25, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 25, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyDaily",
-    "deadline" : [ 2023, 6, 30 ],
-    "subtype" : "FrequencyDaily",
-    "daysToAdd" : 1
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent"
-}, {
-  "id" : 4,
-  "title" : "SIN",
-  "description" : "FRECUENCIA",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 5, 18, 0, 0 ],
-  "endingDateTime" : [ 2023, 5, 18, 23, 59, 59 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "WholeDayEvent"
 } ]

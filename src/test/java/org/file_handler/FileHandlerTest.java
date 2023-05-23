@@ -10,7 +10,6 @@ import org.calendar.event.PeriodTimeEvent;
 import org.calendar.event.WholeDayEvent;
 import org.calendar.event.frequency.Frequency;
 import org.calendar.event.frequency.FrequencyAnnual;
-import org.calendar.event.frequency.FrequencyDaily;
 import org.calendar.event.frequency.FrequencyMonthly;
 import org.calendar.task.Task;
 import org.calendar.task.WholeDayTask;
@@ -43,7 +42,7 @@ public class FileHandlerTest {
 
         calendar = new Calendar();
 
-        Event evento1 = new PeriodTimeEvent("EVENTO", "Prueba de Json", LocalDateTime.of(2023,05,18,20,30,10),
+        Event evento1 = new PeriodTimeEvent("EVENTO", "Prueba de Json", LocalDateTime.of(2023,5,18,20,30,10),
                 LocalDateTime.of(2023,5,18,20,30,10).plusDays(10));
         Frequency frecuencia1 = new FrequencyMonthly(LocalDate.of(2025, 5,28));
         evento1.setFrequency(frecuencia1);
@@ -63,7 +62,7 @@ public class FileHandlerTest {
     }
 
     private void getAppointmentList(){
-        jsonAppointment = calendar.getAppointmentsBetween(LocalDateTime.of(2023,5,1,00,00,00), LocalDateTime.of(2023,6,1,00,00,00));
+        jsonAppointment = calendar.getAppointmentsBetween(LocalDateTime.of(2023,5,1,0,0,0), LocalDateTime.of(2023,6,1,0,0,0));
     }
 
     @Test

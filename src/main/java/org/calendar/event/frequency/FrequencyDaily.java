@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class FrequencyDaily extends Frequency {
-    private String subtype = "FrequencyDaily";
+    private final String subtype = "FrequencyDaily";
     private int daysToAdd;
 
     public FrequencyDaily(int interval, LocalDate deadline){
@@ -13,6 +13,7 @@ public class FrequencyDaily extends Frequency {
         this.deadline = deadline;
     }
 
+    //Empty constructor for persistence (Jackson).
     public FrequencyDaily(){}
 
     //Post: getter needed for persistence.
