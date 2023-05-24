@@ -2,6 +2,8 @@ package org.calendar;
 
 import org.calendar.alarms.Alarm;
 import org.calendar.appointment.Appointment;
+import org.calendar.event.Event;
+import org.calendar.task.Task;
 import org.calendar.visitor.AppointmentsVisitor;
 import org.file_handler.FileHandler;
 
@@ -33,18 +35,17 @@ public class Calendar {
     //Pre:initialDateTime must be before finalDateTime
     //Post: Returns all non-destroyed appointments that take place at the same moment or after the inicialDateTime and before or at the same moment as the finalDateTime.
     //Example: To get all the appointments of 04/23, dates should be: inicialDateTime = 01/04/23 00:00:00 and finalDateTime = 31/04/23 23:59:59
-    public List<Appointment> getAppointmentsBetween(LocalDateTime inicialDateTime, LocalDateTime finalDateTime){
+    public List<Appointment> getAppointmentsBetween(LocalDateTime initialDateTime, LocalDateTime finalDateTime){
         List<Appointment> selectedAppointments = new ArrayList<>();
         List<Appointment> visitorSelectedAppointments;
         var visitor = new AppointmentsVisitor();
 
         for (var appointment : appointments) {
             if(!appointment.getDestroyed()) {
-                visitorSelectedAppointments = appointment.acceptVisitor(visitor, inicialDateTime, finalDateTime);
+                visitorSelectedAppointments = appointment.acceptVisitor(visitor, initialDateTime, finalDateTime);
                 selectedAppointments.addAll(visitorSelectedAppointments);
             }
         }
-
         return selectedAppointments;
     }
 
@@ -99,8 +100,7 @@ public class Calendar {
 
     //Pre: receives an object of class 'FileHandler' which it will use to read the records in the file received in the second parameter.
     //Post: returns a list of appointments.
-    public List<Appointment> recoverAppointments(FileHandler fileHandler, String path) throws IOException {
+    public void recoverAppointments(FileHandler fileHandler, String path) throws IOException{
         this.appointments = fileHandler.read(path);
-        return appointments;
     }
 }

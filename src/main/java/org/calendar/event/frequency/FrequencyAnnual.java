@@ -29,6 +29,7 @@ public class FrequencyAnnual extends Frequency{
         LocalDate day = dayTime.toLocalDate();
 
         if (super.noNextEvent(day)) return null;
+        if (dayTime.isEqual(date)) return null;
 
         return date.plus(this.yearsToAdd, ChronoUnit.YEARS);
     }

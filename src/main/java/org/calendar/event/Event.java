@@ -63,27 +63,23 @@ public abstract class Event extends Appointment {
     private boolean dateTimeIsAfterOrEqual(LocalDateTime firstDateTime, LocalDateTime secondDateTime){
         return firstDateTime.isAfter(secondDateTime) || firstDateTime.isEqual(secondDateTime);
     }
-    @JsonIgnore
+
     //Post: Returns the immediate next event s dateTime from the date passed, returns null if it does not repeat.
     private LocalDateTime findNextImmediateDate(LocalDateTime startOrEnding, LocalDateTime date){
         if (!this.isRepeated()) return null;
-        
         while(dateTimeIsAfterOrEqual(date, startOrEnding)){
             startOrEnding = this.getNextEventRegardDateTime(startOrEnding);
-
             if (startOrEnding == null) return null;
         }
         
         return startOrEnding;
     }
 
-    @JsonIgnore
     //Post: Returns the immediate next event s startDateTime from the date passed, returns null if it does not repeat.
     public LocalDateTime getNextRepetitionStartDateTime(LocalDateTime date) {
         return findNextImmediateDate(this.startDateTime, date);
     }
 
-    @JsonIgnore
     //Post: Returns the immediate next event s endingDateTime from the date passed, returns null if it does not repeat.
     public LocalDateTime getNextRepetitionEndingDateTime(LocalDateTime date){
         return findNextImmediateDate(this.endingDateTime, date);

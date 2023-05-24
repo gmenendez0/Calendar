@@ -26,8 +26,8 @@ public class FrequencyMonthly extends Frequency {
     public LocalDateTime nextRepetitionDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.monthsToAdd, ChronoUnit.MONTHS);
         LocalDate day = dayTime.toLocalDate();
-
         if (super.noNextEvent(day)) return null;
+        if (dayTime.isEqual(date)) return null;
 
         return dayTime;
     }

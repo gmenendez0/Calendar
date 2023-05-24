@@ -73,7 +73,7 @@ public class FrequencyWeekly extends Frequency {
         LocalDate datePlus = date.plusDays(numberOfDays).toLocalDate();
 
         if(noNextEvent(datePlus)) return null;
-
+        if(date.toLocalDate().isEqual(datePlus)) return null;
         return date.plusDays(numberOfDays);
     }
 

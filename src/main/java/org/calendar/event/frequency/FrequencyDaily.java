@@ -32,7 +32,7 @@ public class FrequencyDaily extends Frequency {
         LocalDate day = dayTime.toLocalDate();
 
         if (super.noNextEvent(day)) return null;
-
+        if (dayTime.isEqual(date) && this.daysToAdd != 0) return null;
         return dayTime;
     }
 
