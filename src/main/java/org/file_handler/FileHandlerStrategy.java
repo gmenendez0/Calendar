@@ -9,5 +9,5 @@ public interface FileHandlerStrategy extends Serializable {
     void saveData(List<Appointment> data, BufferedOutputStream obj) throws IOException;
 
     //Post: Reads given file and returns read data.
-    List<Appointment> readData(BufferedInputStream obj) throws IOException;
+    List<Appointment> loadData(BufferedInputStream obj) throws IOException;
 }

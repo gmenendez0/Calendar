@@ -1,5 +1,6 @@
 package org.file_handler;
 import org.calendar.appointment.Appointment;
+import org.file_handler.exceptions.SerializationInJsonException;
 
 import java.io.*;
 import java.util.List;
@@ -16,19 +17,19 @@ public class FileHandler {
             BufferedOutputStream obj  = new BufferedOutputStream(new FileOutputStream(path));
             fileHandlerStrategy.saveData(data, obj);
             obj.close();
-        } catch (IOException ex) {
+        } catch (FileNotFoundException | SerializationInJsonException ex) {
             throw ex;
         }
     }
 
     //Post: Reads given file and returns read data.
-    public List<Appointment> read(String path) throws IOException{
+    public List<Appointment> load(String path) throws IOException{
         try {
             BufferedInputStream obj = new BufferedInputStream(new FileInputStream(path));
-            List<Appointment> arrAppointment = fileHandlerStrategy.readData(obj);
+            List<Appointment> arrAppointment = fileHandlerStrategy.loadData(obj);
             obj.close();
             return arrAppointment;
-        } catch (IOException ex) {
+        } catch (FileNotFoundException | SerializationInJsonException ex) {
             throw ex;
         }
     }
