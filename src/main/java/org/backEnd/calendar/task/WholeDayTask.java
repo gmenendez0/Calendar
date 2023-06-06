@@ -10,6 +10,7 @@ import java.util.List;
 
 public class WholeDayTask extends Task {
     private String subtype = "WholeDayTask";
+
     @JsonIgnore
     final int ONE_DAY = 1;
     @JsonIgnore

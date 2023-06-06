@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.MenuButton?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Settings">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Support" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="btn, btn-success, strong" text="+ Create" />
+
+                  <Region HBox.hgrow="ALWAYS" />
+
+                  <Button mnemonicParsing="false" styleClass="btn, btn-warning, strong" text="Prev" />
+                  <Button mnemonicParsing="false" styleClass="btn, btn-warning, strong" text="Next" />
+                  <MenuButton text="Monthly" styleClass="split-menu-btn, split-menu-btn-primary">
+                      <items>
+                          <MenuItem text="Daily" />
+                          <MenuItem text="Weekly" />
+                          <MenuItem text="Monthly" />
+                      </items>
+                  </MenuButton>
+                  <Label fx:id="monthIndicator" alignment="CENTER" prefHeight="30.0" prefWidth="180.0" styleClass="h4, strong" text="June 2023" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <TreeView prefHeight="695.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Calendar Pre-Alpha" />
+         </children>
+         <padding>
+            <Insets top="2.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <center>
+      <ListView fx:id="appointmentList" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

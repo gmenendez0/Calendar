@@ -19,7 +19,7 @@ public class JsonFileHandlerStrategy implements FileHandlerStrategy {
     //Pre: receives a list of appointments that will be output to a '.json' file represented by the other BufferedOutputStream parameter.
     //Post: the file with the class records is created or edited.
     @Override
-    public void saveData(List<Appointment> data, BufferedOutputStream obj) throws SerializationInJsonException{
+    public void saveData(List<Appointment> data, BufferedOutputStream obj) throws IOException{
         try {
             objectMapper.writeValue(obj, data);
         } catch (IOException ex) {
@@ -30,7 +30,7 @@ public class JsonFileHandlerStrategy implements FileHandlerStrategy {
     //Pre: receives the '.json' file represented by the other BufferedOutputStream parameter.
     //Post: returns a list of appointments from the '.json' file.
     @Override
-    public List<Appointment> loadData(BufferedInputStream obj) throws SerializationInJsonException {
+    public List<Appointment> loadData(BufferedInputStream obj) throws IOException{
         var data = new ArrayList<Appointment>();
         try{
             data = objectMapper.readValue(obj, new TypeReference<>() {});
