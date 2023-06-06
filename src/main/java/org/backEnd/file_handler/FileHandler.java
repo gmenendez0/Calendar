@@ -18,7 +18,7 @@ public class FileHandler {
     }
 
     //Post: Reads given file and returns read data.
-    public List<Appointment> load(String path) throws IOException{
+    public List<Appointment> load(String path) throws IOException {
         BufferedInputStream obj = new BufferedInputStream(new FileInputStream(path));
         List<Appointment> arrAppointment = fileHandlerStrategy.loadData(obj);
         obj.close();
