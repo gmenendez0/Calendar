@@ -36,4 +36,31 @@
   },
   "type" : "Event",
   "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 2,
+  "title" : "Anual",
+  "description" : "Prueba con evento anual",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 5, 10, 0, 0 ],
+  "endingDateTime" : [ 2023, 5, 10, 23, 59, 59 ],
+  "frequency" : {
+    "subtype" : "FrequencyAnnual",
+    "deadline" : null
+  },
+  "type" : "Event",
+  "subtype" : "WholeDayEvent"
+}, {
+  "id" : 3,
+  "title" : "SIN",
+  "description" : "FRECUENCIA",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 5, 25, 0, 0 ],
+  "endingDateTime" : [ 2023, 5, 25, 23, 59, 59 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "WholeDayEvent"
 } ]
