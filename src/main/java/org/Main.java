@@ -35,13 +35,18 @@ public class Main extends Application {
         root = homeController.getHomeRoot();
 
         setUpStage(root, stage);
+    }
+
+    @Override
+    public void stop() throws Exception{
         //closeCalendar(calendar);
+        super.stop();
     }
 
     //? FOR TESTING PURPOSES ONLY
     private void fillCalendar(Calendar calendar){
         //? FOR TESTING PURPOSES ONLY
-        var periodTimeEvent = new PeriodTimeEvent("periodTimeEvent", "desc", LocalDateTime.now(), LocalDateTime.now().plusDays(1));
+        var periodTimeEvent = new PeriodTimeEvent("periodTimeEvent ", "desc", LocalDateTime.now(), LocalDateTime.now().plusDays(1));
         var wholeDayEvent = new WholeDayEvent("wholeDayEvent", "desc", LocalDateTime.now().toLocalDate());
         var wholeDayTask = new WholeDayTask("wholeDayTask", "desc", LocalDateTime.now().toLocalDate());
         var expirationTimeTask = new ExpirationTimeTask("expirationTimeTask", "desc", LocalDateTime.now().plusDays(0));
