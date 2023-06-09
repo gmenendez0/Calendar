@@ -54,6 +54,16 @@ public class WholeDayEvent extends Event {
         return this.frequency;
     }
 
+    //Post: Sets the event's eventDate.
+    public void setEventDate(LocalDate eventDate){
+        this.eventDate = eventDate;
+    }
+
+    //Post: Returns event s eventDate.
+    public LocalDate getEventDate(){
+        return this.eventDate;
+    }
+
     //@inheritDoc
     @Override
     public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
@@ -82,7 +92,6 @@ public class WholeDayEvent extends Event {
     public String formatToString(){
         String isCompleted = "No";
         if(isCompleted()) isCompleted = "Yes";
-
         return this.getTitle() + "   " + "Event date: " + this.eventDate.toString() + "   Completed: " + isCompleted;
     }
 }

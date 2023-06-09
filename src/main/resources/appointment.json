@@ -1,66 +1,47 @@
 [ {
   "id" : 0,
-  "title" : "TAREAAA",
-  "description" : "Descripcion de la tarea",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : 0,
-    "ringDateTime" : [ 10, 10, 10, 10, 10, 10 ]
-  }, {
-    "subtype" : "EmailAlarm",
-    "id" : 1,
-    "ringDateTime" : [ 10, 10, 10, 10, 15, 10 ]
-  }, {
-    "subtype" : "SoundAlarm",
-    "id" : 2,
-    "ringDateTime" : [ 10, 10, 10, 10, 20, 10 ]
-  } ],
-  "expirationDateTime" : [ 2023, 5, 20, 23, 59, 59 ],
-  "type" : "Task",
-  "subtype" : "WholeDayTask",
-  "startDateTime" : [ 2023, 5, 20, 0, 0 ]
-}, {
-  "id" : 1,
-  "title" : "EVENTO",
-  "description" : "Prueba de Json",
+  "title" : "periodTimeEvent ",
+  "description" : "desc",
   "completed" : false,
   "destroyed" : false,
   "alarms" : [ ],
-  "startDateTime" : [ 2023, 5, 18, 20, 30, 10 ],
-  "endingDateTime" : [ 2023, 5, 28, 20, 30, 10 ],
-  "frequency" : {
-    "subtype" : "FrequencyMonthly",
-    "deadline" : [ 2025, 5, 28 ]
-  },
+  "startDateTime" : [ 2023, 6, 9, 0, 13, 44, 202918200 ],
+  "endingDateTime" : [ 2023, 6, 10, 0, 13, 44, 203915800 ],
+  "frequency" : null,
   "type" : "Event",
   "subtype" : "PeriodTimeEvent"
 }, {
-  "id" : 2,
-  "title" : "Anual",
-  "description" : "Prueba con evento anual",
+  "id" : 1,
+  "title" : "wholeDayEvent",
+  "description" : "desc",
   "completed" : false,
   "destroyed" : false,
   "alarms" : [ ],
-  "startDateTime" : [ 2023, 5, 10, 0, 0 ],
-  "endingDateTime" : [ 2023, 5, 10, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyAnnual",
-    "deadline" : null
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent"
-}, {
-  "id" : 3,
-  "title" : "SIN",
-  "description" : "FRECUENCIA",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 5, 25, 0, 0 ],
-  "endingDateTime" : [ 2023, 5, 25, 23, 59, 59 ],
+  "startDateTime" : [ 2023, 6, 9, 0, 0 ],
+  "endingDateTime" : [ 2023, 6, 9, 23, 59, 59 ],
   "frequency" : null,
   "type" : "Event",
-  "subtype" : "WholeDayEvent"
+  "subtype" : "WholeDayEvent",
+  "eventDate" : [ 2023, 6, 9 ]
+}, {
+  "id" : 2,
+  "title" : "wholeDayTask",
+  "description" : "desc",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 9, 23, 59, 59 ],
+  "type" : "Task",
+  "subtype" : "WholeDayTask",
+  "startDateTime" : [ 2023, 6, 9, 0, 0 ]
+}, {
+  "id" : 3,
+  "title" : "expirationTimeTask",
+  "description" : "desc",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 9, 0, 13, 44, 203915800 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
 } ]

@@ -53,6 +53,11 @@ public class WholeDayTask extends Task {
         return this.startDateTime;
     }
 
+    //Post: Returns startDateTime of the event.
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
     //@inheritDoc
     @Override
     public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
