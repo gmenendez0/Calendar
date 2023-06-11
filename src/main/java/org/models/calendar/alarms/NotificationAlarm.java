@@ -18,4 +18,7 @@ public class NotificationAlarm extends Alarm {
         //Send notif. algorithm...
     }
 
+    public String toString(){
+        return "Alarm Type: " + subtype + " and it will ring in " + this.ringDateTime.toString();
+    }
 }

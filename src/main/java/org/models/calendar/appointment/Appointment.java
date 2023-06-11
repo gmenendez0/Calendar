@@ -123,6 +123,10 @@ public abstract class Appointment implements Serializable {
         return alarms;
     }
 
+    public boolean withAlarms(){
+        return !alarms.isEmpty();
+    }
+
     //Post: Orders the alarms to check if it is time to ring or not.
     public void checkAlarms(LocalDateTime nowTime){
         for (var alarm : alarms) {
@@ -137,4 +141,7 @@ public abstract class Appointment implements Serializable {
 
     //Post: Returns a string with all the crucial appointment's info.
     public abstract String formatToString();
+
+    //Post: Returns a list with the complete data of the appointment.
+    public abstract Map<String, String> dataToMapOfString();
 }

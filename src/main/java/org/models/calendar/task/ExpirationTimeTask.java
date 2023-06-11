@@ -1,10 +1,14 @@
 package org.models.calendar.task;
 
+import org.models.calendar.alarms.Alarm;
 import org.models.calendar.visitor.Visitor;
 import org.models.calendar.appointment.Appointment;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ExpirationTimeTask extends Task {
 
@@ -45,6 +49,28 @@ public class ExpirationTimeTask extends Task {
         String isCompleted = "No";
         if(isCompleted()) isCompleted = "Yes";
 
-        return this.getTitle() + "   " + "Task expiration date-time: " + this.getExpirationDateTime().toString() + "   Completed: " + isCompleted;
+        return this.getTitle() + "   " + "\n Task expiration date-time: " + this.getExpirationDateTime().toString() + "\n Completed: " + isCompleted;
+    }
+
+    @Override
+    public Map<String, String> dataToMapOfString(){
+
+        Map<String, String> hashData = new HashMap<>();
+
+        hashData.put("Title", this.getTitle());
+        hashData.put("Description", this.getDescription());
+        hashData.put("Type", this.getType());
+        hashData.put("DateImportant", "Expiration Date: " + this.getExpirationDateTime().toString());
+        if (this.withAlarms()){
+            String listAlarms = "";
+            for (Alarm alarm : this.getAlarms()) {
+                listAlarms += alarm.toString() + "\n";
+            }
+            hashData.put("Alarms", listAlarms);
+        } else {
+            hashData.put("Alarms", "This task has no alarms.");
+        }
+
+        return hashData;
     }
 }

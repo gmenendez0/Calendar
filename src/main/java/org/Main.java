@@ -50,10 +50,10 @@ public class Main extends Application {
     //? FOR TESTING PURPOSES ONLY
     private void fillCalendar(Calendar calendar) throws IOException {
         //? FOR TESTING PURPOSES ONLY
-        var periodTimeEvent = new PeriodTimeEvent("periodTimeEvent ", "desc", LocalDateTime.now(), LocalDateTime.now().plusDays(1));
-        var wholeDayEvent = new WholeDayEvent("wholeDayEvent", "desc", LocalDateTime.now().toLocalDate());
-        var wholeDayTask = new WholeDayTask("wholeDayTask", "desc", LocalDateTime.now().toLocalDate());
-        var expirationTimeTask = new ExpirationTimeTask("expirationTimeTask", "desc", LocalDateTime.now().plusDays(0));
+        var periodTimeEvent = new PeriodTimeEvent("AAAAAAAAA", "Primer Descripcion", LocalDateTime.now(), LocalDateTime.now().plusDays(1));
+        var wholeDayEvent = new WholeDayEvent("Evento del tipo: wholeDayEvent", "Segunda Descripcion", LocalDateTime.now().toLocalDate());
+        var wholeDayTask = new WholeDayTask("Tarea del tipo: wholeDayTask", "Tercera Descripcion", LocalDateTime.now().toLocalDate());
+        var expirationTimeTask = new ExpirationTimeTask("Tarea del tipo: expirationTimeTask", "Cuarta Descripcion", LocalDateTime.now().plusDays(0));
         calendar.addAppointment(periodTimeEvent);
         calendar.addAppointment(wholeDayEvent);
         calendar.addAppointment(wholeDayTask);

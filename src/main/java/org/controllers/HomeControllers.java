@@ -2,17 +2,27 @@ package org.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 import org.models.calendar.Calendar;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeControllers{
     final int FIRST_DAY_OF_MONTH = 1;
@@ -30,7 +40,7 @@ public class HomeControllers{
     final int DAILY_BUTTON = 0;
 
     @FXML
-    private ListView<String> appointmentList;
+    private ListView<Text> appointmentList;
 
     @FXML
     private Button createButton;
@@ -46,6 +56,33 @@ public class HomeControllers{
 
     @FXML
     private Label dateIndicator;
+
+    @FXML
+    private Stage detailsStage = new Stage();
+
+    @FXML
+    private Label titleWindow;
+
+    @FXML
+    private Text titleAppointment;
+
+    @FXML
+    private Text descriptionAppointment;
+
+    @FXML
+    private Text typeAppointment;
+
+    @FXML
+    private Text dateImportantAppointment;
+
+    @FXML
+    private Text alarmsListAppointment;
+
+    @FXML
+    private Text titleFrequencyAppointment;
+
+    @FXML
+    private Text frequencyAppointment;
 
     private LocalDateTime shownDate;
 
@@ -82,20 +119,32 @@ public class HomeControllers{
     //Post: Updates the appointment list shown in the view with the appointments between the given dates.
     private void updateRenderedAppointmentList(LocalDateTime start, LocalDateTime end){
         var appointmentsToRender = getAppointmentsBetweenStringFormatted(start, end);
+
         appointmentList.setItems(appointmentsToRender);
     }
 
-    //Post: Returns an observable list of appointments between the given dates in string format.
-    private ObservableList<String> getAppointmentsBetweenStringFormatted(LocalDateTime start, LocalDateTime end){
+    //Post: Returns an observable list of appointments between the given dates in text format.
+    private ObservableList<Text> getAppointmentsBetweenStringFormatted(LocalDateTime start, LocalDateTime end){
         var appointments = calendar.getAppointmentsBetween(start, end);
-        List<String> stringFormattedAppointments = new ArrayList<>();
+        ObservableList<Text> appointmentsToRender = FXCollections.observableArrayList();
 
+        Integer idNum = 0;
         for(var appointment : appointments){
-            stringFormattedAppointments.add(appointment.formatToString());
-        }
-
-        ObservableList<String> appointmentsToRender = FXCollections.observableArrayList();
-        appointmentsToRender.addAll(stringFormattedAppointments);
+            Text text = new Text(appointment.formatToString());
+            text.setId(idNum.toString());
+            text.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    try {
+                        setUpViewDetailsConfig(Integer.parseInt(text.getId()), start, end);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            appointmentsToRender.add(text);
+            idNum++;
+        };
 
         return appointmentsToRender;
     }
@@ -206,5 +255,33 @@ public class HomeControllers{
             updateRenderedAppointmentList(shownDate.toLocalDate().atStartOfDay(), shownDate.toLocalDate().atTime(FINAL_HOUR, FINAL_MINUTE, FINAL_SECOND));
             dateIndicator.setText(shownDate.toLocalDate().getDayOfWeek().toString() + " " + shownDate.toLocalDate().toString());
         });
+    }
+
+    private void setUpViewDetailsConfig(Integer id, LocalDateTime start, LocalDateTime end) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/details.fxml"));
+        fxmlLoader.setController(this);
+        Scene secondScene = new Scene(fxmlLoader.load());
+        secondScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        detailsStage.setScene(secondScene);
+        detailsStage.show();
+
+        completeDetailsStage(calendar.getAppointmentsBetween(start, end).get(id).dataToMapOfString());
+    }
+
+    private void addFrequencyInDetails(Map<String, String> data){
+        if(data.get("Type") == "Event"){
+            titleFrequencyAppointment.setText("Frequency");
+            frequencyAppointment.setText(data.get("Frequency"));
+        }
+    }
+
+    private void completeDetailsStage(Map<String, String> data){
+        titleWindow.setText(data.get("Title"));
+        titleAppointment.setText(data.get("Title"));
+        descriptionAppointment.setText(data.get("Description"));
+        typeAppointment.setText(data.get("Type"));
+        dateImportantAppointment.setText(data.get("DateImportant"));
+        alarmsListAppointment.setText(data.get("Alarms"));
+        addFrequencyInDetails(data);
     }
 }

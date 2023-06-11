@@ -77,4 +77,8 @@ public class FrequencyWeekly extends Frequency {
         return date.plusDays(numberOfDays);
     }
 
+    public String toString(){
+        return "The frequency type is Weekly and your deadline is " + this.deadline.toString() + ".\n The days that repeat are: " + this.getWeekDays().toString();
+    }
+
 }

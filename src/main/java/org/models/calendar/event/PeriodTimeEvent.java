@@ -1,11 +1,13 @@
 package org.models.calendar.event;
 
+import org.models.calendar.alarms.Alarm;
 import org.models.calendar.event.frequency.Frequency;
 import org.models.calendar.visitor.Visitor;
 import org.models.calendar.appointment.Appointment;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PeriodTimeEvent extends Event {
     private String subtype = "PeriodTimeEvent";
@@ -77,6 +79,35 @@ public class PeriodTimeEvent extends Event {
         String isCompleted = "No";
         if(isCompleted()) isCompleted = "Yes";
 
-        return this.getTitle() + "   " + "Event start date-time: " + this.getStartDateTime().toString() + "   Event ending date-time: " + getEndingDateTime().toString() + "   Completed: " + isCompleted;
+        return this.getTitle() + "   " + "\n Event start date-time: " + this.getStartDateTime().toString() + "\n Event ending date-time: " + getEndingDateTime().toString() + "\n Completed: " + isCompleted;
+    }
+
+    @Override
+    public Map<String, String> dataToMapOfString(){
+
+        Map<String, String> hashData = new HashMap<>();
+
+        hashData.put("Title", this.getTitle());
+        hashData.put("Description", this.getDescription());
+        hashData.put("Type", this.type);
+        hashData.put("DateImportant", "Initial Date: " + this.getStartDateTime().toString()
+                                     + "\nFinal Date: " + this.getEndingDateTime().toString());
+        if (this.withAlarms()){
+            String listAlarms = "";
+            for (Alarm alarm : this.getAlarms()) {
+                listAlarms += alarm.toString() + "\n";
+            }
+            hashData.put("Alarms", listAlarms);
+        } else {
+            hashData.put("Alarms", "This event has no alarms.");
+        }
+
+        if (this.isRepeated()){
+            hashData.put("Frequency", this.getFrequency().toString());
+        } else {
+            hashData.put("Frequency", "This event has no frequency.");
+        }
+
+        return hashData;
     }
 }

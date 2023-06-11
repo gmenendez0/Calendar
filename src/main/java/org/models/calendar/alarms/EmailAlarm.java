@@ -18,4 +18,8 @@ public class EmailAlarm extends Alarm {
     public void ring() {
         //Send mail algorithm...
     }
+
+    public String toString(){
+        return "Alarm Type: " + subtype + " and it will ring in " + this.ringDateTime.toString();
+    }
 }
