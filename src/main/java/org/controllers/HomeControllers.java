@@ -14,14 +14,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import org.models.calendar.Calendar;
+import org.models.calendar.event.Event;
+import org.models.calendar.event.PeriodTimeEvent;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class HomeControllers{
@@ -31,6 +29,8 @@ public class HomeControllers{
     final int ONE_WEEK = 7;
     final int ONE_MONTH = 1;
 
+    final int FIRST_HOUR = 1;
+    final int FIRST_MINUTE = 1;
     final int FINAL_SECOND = 59;
     final int FINAL_MINUTE = 59;
     final int FINAL_HOUR = 23;
@@ -38,6 +38,9 @@ public class HomeControllers{
     final int MONTHLY_BUTTON = 2;
     final int WEEKLY_BUTTON = 1;
     final int DAILY_BUTTON = 0;
+
+    @FXML
+    private Stage secondStage = new Stage();
 
     @FXML
     private ListView<Text> appointmentList;
@@ -56,9 +59,6 @@ public class HomeControllers{
 
     @FXML
     private Label dateIndicator;
-
-    @FXML
-    private Stage detailsStage = new Stage();
 
     @FXML
     private Label titleWindow;
@@ -83,6 +83,132 @@ public class HomeControllers{
 
     @FXML
     private Text frequencyAppointment;
+
+    @FXML
+    private Spinner<Integer> hourStartEvent;
+
+    @FXML
+    private Spinner<Integer> minuteStartEvent;
+
+    @FXML
+    private Spinner<Integer> hourEndEvent;
+
+    @FXML
+    private Spinner<Integer> minuteEndEvent;
+
+    @FXML
+    private Spinner<Integer> hourStartTask;
+
+    @FXML
+    private Spinner<Integer> minuteStartTask;
+
+    @FXML
+    private Pane dateTimeEndEvent;
+
+    @FXML
+    private Pane timeStartEvent;
+
+    @FXML
+    private Pane paneCheckDaily;
+
+    @FXML
+    private Pane paneCheckWeekly;
+
+    @FXML
+    private Pane timeStartTask;
+
+    @FXML
+    private CheckBox checkWholeDayEvent;
+
+    @FXML
+    private CheckBox checkWholeDayTask;
+
+    @FXML
+    private RadioButton checkDaily;
+
+    @FXML
+    private RadioButton checkWeekly;
+
+    @FXML
+    private RadioButton checkMonthly;
+
+    @FXML
+    private RadioButton checkAnnual;
+
+    @FXML
+    private ToggleGroup groupFrequency = new ToggleGroup();
+
+    @FXML
+    private ToggleGroup groupAlarms = new ToggleGroup();
+
+    @FXML
+    private ToggleGroup groupTypesAlarms = new ToggleGroup();
+
+    @FXML
+    private RadioButton checkNotificationAlarm;
+
+    @FXML
+    private RadioButton checkSoundAlarm;
+
+    @FXML
+    private RadioButton checkEmailAlarm;
+
+    @FXML
+    private RadioButton checkAbsolute;
+
+    @FXML
+    private RadioButton checkRelative;
+
+    @FXML
+    private DatePicker dateAlarm;
+
+    @FXML
+    private Spinner<Integer> hourAlarm;
+    @FXML
+    private Spinner<Integer> minuteAlarm;
+
+    @FXML
+    private TextField eventTitle;
+
+    @FXML
+    private TextField descriptionEvent;
+
+    @FXML
+    private DatePicker startDateEvent;
+
+    @FXML
+    private DatePicker endDateEvent;
+
+    @FXML
+    private CheckBox checkMonday;
+
+    @FXML
+    private CheckBox checkTuesday;
+
+    @FXML
+    private CheckBox checkWednesday;
+
+    @FXML
+    private CheckBox checkThursday;
+
+    @FXML
+    private CheckBox checkFriday;
+
+    @FXML
+    private CheckBox checkSaturday;
+
+    @FXML
+    private CheckBox checkSunday;
+
+    @FXML
+    private Button btnCreateEvent;
+
+    @FXML
+    private Button btnCreateTask;
+
+    @FXML
+    private Button btnCreateAlarm;
+
 
     private LocalDateTime shownDate;
 
@@ -159,7 +285,13 @@ public class HomeControllers{
 
     //Post: Sets the "create" button behavior.
     private void createButtonClicked(){
-        createButton.setOnAction(actionEvent -> System.out.println("Create button clicked"));
+        createButton.setOnAction(actionEvent -> {
+            try {
+                setupViewCreateAppointment();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     //Post: Sets the "prev" button behavior.
@@ -262,8 +394,7 @@ public class HomeControllers{
         fxmlLoader.setController(this);
         Scene secondScene = new Scene(fxmlLoader.load());
         secondScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        detailsStage.setScene(secondScene);
-        detailsStage.show();
+        secondStage.setScene(secondScene);
 
         completeDetailsStage(calendar.getAppointmentsBetween(start, end).get(id).dataToMapOfString());
     }
@@ -283,5 +414,92 @@ public class HomeControllers{
         dateImportantAppointment.setText(data.get("DateImportant"));
         alarmsListAppointment.setText(data.get("Alarms"));
         addFrequencyInDetails(data);
+        secondStage.show();
     }
+
+    private void setupViewCreateAppointment() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/create.fxml"));
+        fxmlLoader.setController(this);
+        Scene thirdScene = new Scene(fxmlLoader.load());
+        thirdScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+        secondStage.setScene(thirdScene);
+
+        configEventInCreateView();
+    }
+
+    private void configToggleCheckFrequency(){
+        checkDaily.setToggleGroup(groupFrequency);
+        checkWeekly.setToggleGroup(groupFrequency);
+        checkMonthly.setToggleGroup(groupFrequency);
+        checkAnnual.setToggleGroup(groupFrequency);
+
+        paneCheckDaily.visibleProperty().bindBidirectional(checkDaily.selectedProperty());
+        paneCheckWeekly.visibleProperty().bindBidirectional(checkWeekly.selectedProperty());
+    }
+
+    private void configToggleCheckTypesAlarm(){
+        checkSoundAlarm.setToggleGroup(groupTypesAlarms);
+        checkNotificationAlarm.setToggleGroup(groupTypesAlarms);
+        checkEmailAlarm.setToggleGroup(groupTypesAlarms);
+    }
+
+    private void configToggleCheckAlarm(){
+        checkAbsolute.setSelected(true);
+        checkAbsolute.setToggleGroup(groupAlarms);
+        checkRelative.setToggleGroup(groupAlarms);
+        dateAlarm.disableProperty().bindBidirectional(checkRelative.selectedProperty());
+    }
+
+    private void configPaneCheck(){
+        dateTimeEndEvent.visibleProperty().bindBidirectional(checkWholeDayEvent.selectedProperty());
+        timeStartEvent.visibleProperty().bindBidirectional(checkWholeDayEvent.selectedProperty());
+        timeStartTask.visibleProperty().bindBidirectional(checkWholeDayTask.selectedProperty());
+        configToggleCheckFrequency();
+        configToggleCheckAlarm();
+        configToggleCheckTypesAlarm();
+    }
+
+    private void configSpinnerIntegerValue(){
+        SpinnerValueFactory<Integer> factoryHourEventStart = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_HOUR, FINAL_HOUR, FIRST_HOUR);
+        SpinnerValueFactory<Integer> factoryMinuteEventStart = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_MINUTE, FINAL_MINUTE, FIRST_MINUTE);
+        SpinnerValueFactory<Integer> factoryHourEventEnd = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_HOUR, FINAL_HOUR, FIRST_HOUR);
+        SpinnerValueFactory<Integer> factoryMinuteEventEnd = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_MINUTE, FINAL_MINUTE, FIRST_MINUTE);
+        SpinnerValueFactory<Integer> factoryHourTask = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_HOUR, FINAL_HOUR, FIRST_HOUR);
+        SpinnerValueFactory<Integer> factoryMinuteTask = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_MINUTE, FINAL_MINUTE, FIRST_MINUTE);
+        SpinnerValueFactory<Integer> factoryHourAlarm = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_HOUR, FINAL_HOUR, FIRST_HOUR);
+        SpinnerValueFactory<Integer> factoryMinuteAlarm = new SpinnerValueFactory.IntegerSpinnerValueFactory(FIRST_MINUTE, FINAL_MINUTE, FIRST_MINUTE);
+
+        hourStartEvent.setValueFactory(factoryHourEventStart);
+        hourEndEvent.setValueFactory(factoryHourEventEnd);
+        hourStartTask.setValueFactory(factoryHourTask);
+        hourAlarm.setValueFactory(factoryHourAlarm);
+
+        minuteStartEvent.setValueFactory(factoryMinuteEventStart);
+        minuteEndEvent.setValueFactory(factoryMinuteEventEnd);
+        minuteStartTask.setValueFactory(factoryMinuteTask);
+        minuteAlarm.setValueFactory(factoryMinuteAlarm);
+    }
+
+    private void configEventInCreateView(){
+        configPaneCheck();
+        configSpinnerIntegerValue();
+        createButtonEvent();
+        secondStage.show();
+    }
+
+    private void createPeriodTimeEvent(){
+        Event newEvent = new PeriodTimeEvent();
+    }
+
+    private void createButtonEvent(){
+        btnCreateEvent.setOnAction(actionEvent -> {
+            Boolean isPeriodTimeEvent = checkWholeDayEvent.isSelected();
+            if (isPeriodTimeEvent) {
+                createPeriodTimeEvent();
+            } else {
+
+            }
+        });
+    }
+
 }

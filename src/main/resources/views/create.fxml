@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <tabs>
+        <Tab text="New Event">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e6e8e6;">
+                    <children>
+                        <Text fill="#710404" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="strong" text="New Title:" wrappingWidth="67.7366943359375" />
+                        <TextField fx:id="eventTitle" layoutX="130.0" layoutY="14.0" promptText="New Title" />
+                        <Text fill="#710404" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="strong" text="New Description:" wrappingWidth="105.336669921875" />
+                        <TextField id="descriptionEvent" fx:id="descriptionEvent" layoutX="130.0" layoutY="53.0" promptText="New Description" />
+                        <CheckBox id="checkWholeDay" fx:id="checkWholeDayEvent" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Specify dates and time of the Event" />
+                        <DatePicker id="startDateTimeEvent" fx:id="startDateEvent" layoutX="67.0" layoutY="134.0" />
+                        <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Important Date's:" wrappingWidth="107.7366943359375" />
+                        <Text fill="#710404" layoutX="28.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="70.93670654296875" />
+                        <Text fill="#710404" layoutX="13.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequency:" wrappingWidth="107.7366943359375" />
+                        <Pane id="paneCheckDaily" fx:id="paneCheckDaily" layoutX="124.0" layoutY="222.0" prefHeight="78.0" prefWidth="166.0">
+                            <children>
+                                <Text fill="#710404" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interval Days:" wrappingWidth="107.7366943359375" />
+                                <Spinner id="intervalDaysValue" fx:id="intervalDaysValue" editable="true" layoutX="98.0" layoutY="26.0" prefHeight="26.0" prefWidth="54.0" />
+                            </children>
+                        </Pane>
+                        <Pane id="paneCheckWeekly" fx:id="paneCheckWeekly" layoutX="111.0" layoutY="243.0" prefHeight="114.0" prefWidth="282.0">
+                            <children>
+                                <Text fill="#710404" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Week Days:" wrappingWidth="107.7366943359375" />
+                                <CheckBox fx:id="checkMonday" layoutX="91.0" layoutY="7.0" mnemonicParsing="false" text="Monday" />
+                                <CheckBox fx:id="checkTuesday" layoutX="198.0" layoutY="7.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Tuesday" />
+                                <CheckBox fx:id="checkWednesday" layoutX="91.0" layoutY="31.0" mnemonicParsing="false" text="Wednesday" />
+                                <CheckBox fx:id="checkThursday" layoutX="198.0" layoutY="31.0" mnemonicParsing="false" text="Thursday" />
+                                <CheckBox fx:id="checkFriday" layoutX="91.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="77.0" text="Friday" />
+                                <CheckBox fx:id="checkSaturday" layoutX="199.0" layoutY="57.0" mnemonicParsing="false" text="Saturday" />
+                                <CheckBox fx:id="checkSunday" layoutX="144.0" layoutY="83.0" mnemonicParsing="false" text="Sunday" />
+                            </children>
+                        </Pane>
+                        <Pane id="dateTimeEndEvent" fx:id="dateTimeEndEvent" layoutX="290.0" layoutY="122.0" prefHeight="99.0" prefWidth="291.0">
+                            <children>
+                                <Text fill="#710404" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" wrappingWidth="70.93670654296875" />
+                                <DatePicker id="endDateTimeEvent" fx:id="endDateEvent" layoutX="80.0" layoutY="11.0" prefHeight="13.0" prefWidth="175.0" />
+                                <Text fill="#710404" layoutX="24.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour:" textAlignment="CENTER" wrappingWidth="50.13665771484375" />
+                                <Spinner id="hourEndEvent" fx:id="hourEndEvent" layoutX="80.0" layoutY="47.0" prefHeight="26.0" prefWidth="54.0" />
+                                <Text fill="#710404" layoutX="134.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minute:" textAlignment="CENTER" wrappingWidth="70.93670654296875" />
+                                <Spinner id="minuteEndEvent" fx:id="minuteEndEvent" layoutX="201.0" layoutY="47.0" prefHeight="26.0" prefWidth="54.0" />
+                            </children>
+                        </Pane>
+                        <Pane id="timeStartEvent" fx:id="timeStartEvent" layoutX="19.0" layoutY="164.0" prefHeight="44.0" prefWidth="264.0">
+                            <children>
+                                <Text fill="#710404" layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour:" wrappingWidth="34.936676025390625" />
+                                <Spinner id="hourStartEvent" fx:id="hourStartEvent" layoutX="49.0" layoutY="9.0" prefHeight="26.0" prefWidth="54.0" />
+                                <Text fill="#710404" layoutX="103.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minute:" textAlignment="CENTER" wrappingWidth="70.93670654296875" />
+                                <Spinner id="minuteStartEvent" fx:id="minuteStartEvent" layoutX="174.0" layoutY="9.0" prefHeight="26.0" prefWidth="54.0" />
+                            </children>
+                        </Pane>
+                        <Button fx:id="btnCreateEvent" layoutX="494.0" layoutY="13.0" mnemonicParsing="false" styleClass="btn-success" text="Create"/>
+                        <RadioButton fx:id="checkDaily" layoutX="23.0" layoutY="252.0" mnemonicParsing="false" text="Daily" />
+                        <RadioButton fx:id="checkWeekly" layoutX="23.0" layoutY="282.0" mnemonicParsing="false" text="Weekly" />
+                        <RadioButton fx:id="checkMonthly" layoutX="24.0" layoutY="311.0" mnemonicParsing="false" text="Monthly" />
+                        <RadioButton fx:id="checkAnnual" layoutX="24.0" layoutY="339.0" mnemonicParsing="false" text="Annual" />
+                    </children></AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="New Task">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e6e8e6;">
+                    <children>
+                        <Text fill="#710404" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="strong" text="New Title:" wrappingWidth="67.7366943359375" />
+                        <TextField id="eventTitle" fx:id="taskTitle" layoutX="130.0" layoutY="14.0" promptText="New Title" />
+                        <Text fill="#710404" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="strong" text="New Description:" wrappingWidth="105.336669921875" />
+                        <TextField id="descriptionEvent" fx:id="descriptionTask" layoutX="130.0" layoutY="53.0" promptText="New Description" />
+                        <CheckBox id="checkWholeDay" fx:id="checkWholeDayTask" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" text="Expiration Time" />
+                        <DatePicker id="startDateTimeEvent" fx:id="startDateTask" layoutX="67.0" layoutY="134.0" />
+                        <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Important Date's:" wrappingWidth="107.7366943359375" />
+                        <Text fill="#710404" layoutX="28.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="70.93670654296875" />
+                        <Pane id="timeStartEvent" fx:id="timeStartTask" layoutX="19.0" layoutY="164.0" prefHeight="44.0" prefWidth="264.0">
+                            <children>
+                                <Text fill="#710404" layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour:" wrappingWidth="34.936676025390625" />
+                                <Spinner id="hourStartEvent" fx:id="hourStartTask" layoutX="49.0" layoutY="9.0" prefHeight="26.0" prefWidth="54.0" />
+                                <Text fill="#710404" layoutX="103.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minute:" textAlignment="CENTER" wrappingWidth="70.93670654296875" />
+                                <Spinner id="minuteStartEvent" fx:id="minuteStartTask" layoutX="174.0" layoutY="9.0" prefHeight="26.0" prefWidth="54.0" />
+                            </children>
+                        </Pane>
+                        <Button id="btnCreate" fx:id="btnCreateTask" layoutX="494.0" layoutY="13.0" mnemonicParsing="false" styleClass="btn-success" text="Create" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Alarms">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e6e8e6;">
+                    <children>
+                        <Pane layoutX="14.0" layoutY="75.0" prefHeight="137.0" prefWidth="322.0" style="-fx-background-color: #f2e2e1;">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="74.0" styleClass="h4" text="Date:" textFill="#8a0e0e">
+                                    <font>
+                                        <Font name="Comic Sans MS" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="14.0" layoutY="52.0" prefHeight="38.0" prefWidth="74.0" text="Time:" textFill="#8a0e0e" />
+                                <DatePicker fx:id="dateAlarm" layoutX="119.0" layoutY="21.0" />
+                                <Text layoutX="119.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour:" wrappingWidth="36.31524658203125" />
+                                <Spinner id="hourEndEvent" fx:id="hourAlarm" layoutX="166.0" layoutY="58.0" prefHeight="26.0" prefWidth="54.0" />
+                                <Text layoutX="111.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minute:" wrappingWidth="43.51526641845703" />
+                                <Spinner id="hourEndEvent" fx:id="minuteAlarm" layoutX="166.0" layoutY="96.0" prefHeight="26.0" prefWidth="54.0" />
+                            </children>
+                        </Pane>
+                        <Button fx:id="btnCreateAlarm" layoutX="489.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-success" text="Create" />
+                        <RadioButton fx:id="checkNotificationAlarm" layoutX="418.0" layoutY="75.0" mnemonicParsing="false" text="Notification" textFill="RED">
+                            <font>
+                                <Font name="Times New Roman" size="14.0" />
+                            </font>
+                        </RadioButton>
+                        <RadioButton fx:id="checkSoundAlarm" layoutX="418.0" layoutY="134.0" mnemonicParsing="false" text="Sound" textFill="RED">
+                            <font>
+                                <Font name="Times New Roman" size="14.0" />
+                            </font>
+                        </RadioButton>
+                        <RadioButton fx:id="checkEmailAlarm" layoutX="419.0" layoutY="193.0" mnemonicParsing="false" text="Email" textFill="RED">
+                            <font>
+                                <Font name="Times New Roman" size="14.0" />
+                            </font>
+                        </RadioButton>
+                        <RadioButton fx:id="checkRelative" layoutX="159.0" layoutY="18.0" mnemonicParsing="false" text="Relative time" />
+                        <RadioButton fx:id="checkAbsolute" layoutX="28.0" layoutY="18.0" mnemonicParsing="false" text="Absolute time" />
+                        <Text layoutX="159.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How long before the event/task" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
