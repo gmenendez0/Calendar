@@ -14,6 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ComboBox?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <tabs>
         <Tab text="New Event">
@@ -24,18 +25,18 @@
                         <TextField fx:id="eventTitle" layoutX="130.0" layoutY="14.0" promptText="New Title" />
                         <Text fill="#710404" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="strong" text="New Description:" wrappingWidth="105.336669921875" />
                         <TextField id="descriptionEvent" fx:id="descriptionEvent" layoutX="130.0" layoutY="53.0" promptText="New Description" />
-                        <CheckBox id="checkWholeDay" fx:id="checkWholeDayEvent" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Specify dates and time of the Event" />
+                        <CheckBox id="" fx:id="checkPeriodTimeEvent" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Specify dates and time of the Event" />
                         <DatePicker id="startDateTimeEvent" fx:id="startDateEvent" layoutX="67.0" layoutY="134.0" />
                         <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Important Date's:" wrappingWidth="107.7366943359375" />
                         <Text fill="#710404" layoutX="28.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="70.93670654296875" />
                         <Text fill="#710404" layoutX="13.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequency:" wrappingWidth="107.7366943359375" />
-                        <Pane id="paneCheckDaily" fx:id="paneCheckDaily" layoutX="124.0" layoutY="222.0" prefHeight="78.0" prefWidth="166.0">
+                        <Pane id="paneCheckDaily" fx:id="paneCheckDaily" layoutX="234.0" layoutY="230.0" prefHeight="78.0" prefWidth="166.0" visible="false">
                             <children>
                                 <Text fill="#710404" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interval Days:" wrappingWidth="107.7366943359375" />
-                                <Spinner id="intervalDaysValue" fx:id="intervalDaysValue" editable="true" layoutX="98.0" layoutY="26.0" prefHeight="26.0" prefWidth="54.0" />
+                                <Spinner id="intervalDaysValue" fx:id="intervalDaysValue" editable="false" layoutX="98.0" layoutY="26.0" prefHeight="26.0" prefWidth="54.0" />
                             </children>
                         </Pane>
-                        <Pane id="paneCheckWeekly" fx:id="paneCheckWeekly" layoutX="111.0" layoutY="243.0" prefHeight="114.0" prefWidth="282.0">
+                        <Pane id="paneCheckWeekly" fx:id="paneCheckWeekly" layoutX="189.0" layoutY="242.0" prefHeight="114.0" prefWidth="282.0" visible="false">
                             <children>
                                 <Text fill="#710404" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Week Days:" wrappingWidth="107.7366943359375" />
                                 <CheckBox fx:id="checkMonday" layoutX="91.0" layoutY="7.0" mnemonicParsing="false" text="Monday" />
@@ -57,6 +58,9 @@
                                 <Spinner id="minuteEndEvent" fx:id="minuteEndEvent" layoutX="201.0" layoutY="47.0" prefHeight="26.0" prefWidth="54.0" />
                             </children>
                         </Pane>
+                        <Spinner fx:id="spinnerFrequency" layoutX="25.0" layoutY="257.0" />
+                        <DatePicker fx:id="deadLinePicker" layoutX="25.0" layoutY="321.0" prefHeight="26.0" prefWidth="150.0" />
+                        <Label layoutX="25.0" layoutY="300.0" text="Event's deadline:" textFill="#710404" />
                         <Pane id="timeStartEvent" fx:id="timeStartEvent" layoutX="19.0" layoutY="164.0" prefHeight="44.0" prefWidth="264.0">
                             <children>
                                 <Text fill="#710404" layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hour:" wrappingWidth="34.936676025390625" />
@@ -66,10 +70,6 @@
                             </children>
                         </Pane>
                         <Button fx:id="btnCreateEvent" layoutX="494.0" layoutY="13.0" mnemonicParsing="false" styleClass="btn-success" text="Create"/>
-                        <RadioButton fx:id="checkDaily" layoutX="23.0" layoutY="252.0" mnemonicParsing="false" text="Daily" />
-                        <RadioButton fx:id="checkWeekly" layoutX="23.0" layoutY="282.0" mnemonicParsing="false" text="Weekly" />
-                        <RadioButton fx:id="checkMonthly" layoutX="24.0" layoutY="311.0" mnemonicParsing="false" text="Monthly" />
-                        <RadioButton fx:id="checkAnnual" layoutX="24.0" layoutY="339.0" mnemonicParsing="false" text="Annual" />
                     </children></AnchorPane>
             </content>
         </Tab>
@@ -118,24 +118,10 @@
                             </children>
                         </Pane>
                         <Button fx:id="btnCreateAlarm" layoutX="489.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-success" text="Create" />
-                        <RadioButton fx:id="checkNotificationAlarm" layoutX="418.0" layoutY="75.0" mnemonicParsing="false" text="Notification" textFill="RED">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
-                        </RadioButton>
-                        <RadioButton fx:id="checkSoundAlarm" layoutX="418.0" layoutY="134.0" mnemonicParsing="false" text="Sound" textFill="RED">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
-                        </RadioButton>
-                        <RadioButton fx:id="checkEmailAlarm" layoutX="419.0" layoutY="193.0" mnemonicParsing="false" text="Email" textFill="RED">
-                            <font>
-                                <Font name="Times New Roman" size="14.0" />
-                            </font>
-                        </RadioButton>
                         <RadioButton fx:id="checkRelative" layoutX="159.0" layoutY="18.0" mnemonicParsing="false" text="Relative time" />
                         <RadioButton fx:id="checkAbsolute" layoutX="28.0" layoutY="18.0" mnemonicParsing="false" text="Absolute time" />
                         <Text layoutX="159.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How long before the event/task" />
+                        <ComboBox fx:id="comboBoxAlarms" layoutX="388.0" layoutY="97.0" prefWidth="150.0" />
                     </children>
                 </AnchorPane>
             </content>
