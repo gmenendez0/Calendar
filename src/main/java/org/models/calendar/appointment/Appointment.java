@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.models.calendar.alarms.Alarm;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.models.calendar.visitor.detailsVisitor.detailsVisitor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -129,10 +130,10 @@ public abstract class Appointment implements Serializable {
     public abstract List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
 
     //Post: Accepts a visitor and returns the "visit" return value.
-    public abstract String acceptVisitorDetailsFrequency(Visitor visitor);
+    public abstract String acceptVisitorDetailsFrequency(detailsVisitor visitor);
 
     //Post: Accepts a visitor and returns the "visit" return value.
-    public abstract String acceptVisitorDetailsDates(Visitor visitor);
+    public abstract String acceptVisitorDetailsDates(detailsVisitor visitor);
 
     //Post: Returns a string with all the crucial appointment's info.
     public abstract String formatToString();

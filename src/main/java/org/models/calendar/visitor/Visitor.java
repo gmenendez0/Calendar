@@ -28,9 +28,4 @@ public interface Visitor {
     //Post: Returns a list with all the events derived from the received event that take place between the received dates.
     List<Appointment> visitExpirationTimeTask(ExpirationTimeTask expirationTimeTask, LocalDateTime firstDateTime, LocalDateTime secondDateTime);
 
-    String detailsOfFrequencyEvent(Frequency frequency);
-
-    String detailsOfDatesEvent(LocalDateTime start, LocalDateTime end);
-    String detailsOfDatesTask(LocalDateTime expirationDateTime);
-
 }

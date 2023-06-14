@@ -41,7 +41,8 @@ public class AppointmentCreateControllers {
     final int INDEX_TAB_ALARM = 2;
     private Calendar calendar;
     private Appointment appointmentCreated;
-    private final NotificationAlarmsControllers notificationAlarmsControllers = new NotificationAlarmsControllers();
+    private final AppointmentAlarmsControllers appointmentAlarmsControllers = new AppointmentAlarmsControllers();
+    private final MessageControllers messageControllers = new MessageControllers();
     private LocalDateTime dateAppointmentStart;
     @FXML
     private final Stage createStage = new Stage();
@@ -251,30 +252,39 @@ public class AppointmentCreateControllers {
     }
 
     private Event createPeriodTimeEvent(String title, String description){
-        int hourStart = hourStartEvent.getValue();
-        int minuteStart = minuteStartEvent.getValue();
-        LocalDate startDate = startDateEvent.getValue();
-        LocalTime startTime = LocalTime.of(hourStart, minuteStart);
-        LocalDateTime startDateTime = startDate.atTime(startTime);
+        try{
+            int hourStart = hourStartEvent.getValue();
+            int minuteStart = minuteStartEvent.getValue();
+            LocalDate startDate = startDateEvent.getValue();
+            LocalTime startTime = LocalTime.of(hourStart, minuteStart);
+            LocalDateTime startDateTime = startDate.atTime(startTime);
 
-        int hourEnd = hourEndEvent.getValue();
-        int minuteEnd = minuteEndEvent.getValue();
-        LocalDate endDate = endDateEvent.getValue();
-        LocalTime endTime = LocalTime.of(hourEnd, minuteEnd);
-        LocalDateTime endDateTime = endDate.atTime(endTime);
+            int hourEnd = hourEndEvent.getValue();
+            int minuteEnd = minuteEndEvent.getValue();
+            LocalDate endDate = endDateEvent.getValue();
+            LocalTime endTime = LocalTime.of(hourEnd, minuteEnd);
+            LocalDateTime endDateTime = endDate.atTime(endTime);
 
-        return new PeriodTimeEvent(title, description, startDateTime, endDateTime);
+            return new PeriodTimeEvent(title, description, startDateTime, endDateTime);
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     private Event createWholeDayEvent(String title, String description){
-        LocalDate startDate = startDateEvent.getValue();
-        return new WholeDayEvent(title, description, startDate);
+        try{
+            LocalDate startDate = startDateEvent.getValue();
+            return new WholeDayEvent(title, description, startDate);
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     private void createButtonEvent(){
         btnCreateEvent.setOnAction(actionEvent -> {
             Event newEvent;
             String title = eventTitle.getText();
+            if (title.chars().count() > 60)  messageControllers.error("The title must not exceed 60 characters");
             String description = descriptionEvent.getText();
 
             boolean isPeriodTimeEvent = checkPeriodTimeEvent.isSelected();
@@ -283,6 +293,8 @@ public class AppointmentCreateControllers {
             } else {
                 newEvent = createWholeDayEvent(title, description);
             }
+
+            if(newEvent == null) messageControllers.error("You cannot create an event without the required date/time");
 
             Frequency newFrequency = addFrequencyNewEvent();
             if(addFrequencyNewEvent() != null) newEvent.setFrequency(newFrequency);
@@ -301,24 +313,34 @@ public class AppointmentCreateControllers {
     }
 
     private Task createExpirationTimeTask(String title, String description){
-        int hourTask = hourStartTask.getValue();
-        int minuteTask = minuteStartTask.getValue();
-        LocalTime timeTask = LocalTime.of(hourTask, minuteTask);
-        LocalDate dateTask = startDateTask.getValue();
-        LocalDateTime dateTimeTask = dateTask.atTime(timeTask);
+        try {
+            int hourTask = hourStartTask.getValue();
+            int minuteTask = minuteStartTask.getValue();
+            LocalTime timeTask = LocalTime.of(hourTask, minuteTask);
+            LocalDate dateTask = startDateTask.getValue();
+            LocalDateTime dateTimeTask = dateTask.atTime(timeTask);
 
-        return new ExpirationTimeTask(title, description, dateTimeTask);
+            return new ExpirationTimeTask(title, description, dateTimeTask);
+        } catch (NullPointerException ex) {
+            return null;
+        }
+
     }
 
     private Task createWholeDayTask(String title, String description) {
-        LocalDate dateTask = startDateTask.getValue();
-        return new WholeDayTask(title, description, dateTask);
+        try{
+            LocalDate dateTask = startDateTask.getValue();
+            return new WholeDayTask(title, description, dateTask);
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     private void createButtonTask(){
         btnCreateTask.setOnAction(actionEvent -> {
             Task newTask;
             String title = taskTitle.getText();
+            if (title.chars().count() > 60) messageControllers.error("The title must not exceed 60 characters");
             String description = descriptionTask.getText();
             boolean isWholeDayTask = checkWholeDayTask.isSelected();
             if (isWholeDayTask) {
@@ -326,6 +348,7 @@ public class AppointmentCreateControllers {
             } else {
                 newTask = createExpirationTimeTask(title, description);
             }
+            if (newTask == null) messageControllers.error("You cannot create a task without the required date/time");
             this.dateAppointmentStart = newTask.getExpirationDateTime();
             this.appointmentCreated = newTask;
             enableAlarmTab();
@@ -333,45 +356,41 @@ public class AppointmentCreateControllers {
     }
 
     private LocalDateTime configRingDateTime(){
-        int hour = hourAlarm.getValue();
-        int minute = minuteAlarm.getValue();
-        if (checkAbsolute.isSelected()) {
-            LocalDate date = dateAlarm.getValue();
-            return date.atTime(hour, minute);
+        try {
+            int hour = hourAlarm.getValue();
+            int minute = minuteAlarm.getValue();
+            if (checkAbsolute.isSelected()) {
+                LocalDate date = dateAlarm.getValue();
+                return date.atTime(hour, minute);
+            }
+            return this.dateAppointmentStart.minusHours(hour).minusMinutes(minute);
+        } catch (NullPointerException ex) {
+            messageControllers.error("You cannot create an alarm without the required date/time");
         }
-        return this.dateAppointmentStart.minusHours(hour).minusMinutes(minute);
+        return null;
     }
 
-    private void createAlarm(String type) throws IOException {
+    private void createAlarm(String type) {
         LocalDateTime ringDateTime = configRingDateTime();
-        Alarm newAlarm = null;
-        if(type == null) {
-            notificationAlarmsControllers.error("You must select an alarm type");
-            createStage.close();
-            return;
-        }
-        switch(type) {
-            case "Email":
-                newAlarm = new EmailAlarm(appointmentCreated.getId(), ringDateTime);
-                break;
-            case "Notification":
-                newAlarm = new NotificationAlarm(appointmentCreated.getId(), ringDateTime);
-                notificationAlarmsControllers.activeNotification(newAlarm, calendar, newAlarm.getId());
-                break;
-            case "Sound":
-                newAlarm = new SoundAlarm(appointmentCreated.getId(), ringDateTime);
-                break;
-        }
+        if (ringDateTime == null) return;
+        Alarm newAlarm = switch (type) {
+            case "Email" -> new EmailAlarm(appointmentCreated.getId(), ringDateTime);
+            case "Notification" -> new NotificationAlarm(appointmentCreated.getId(), ringDateTime);
+            case "Sound" -> new SoundAlarm(appointmentCreated.getId(), ringDateTime);
+            default -> null;
+        };
+        appointmentAlarmsControllers.active(newAlarm, calendar);
         this.appointmentCreated.addAlarm(newAlarm);
+        messageControllers.success("Added an alarm to " + appointmentCreated.getType());
     }
 
     private void createButtonAlarms(){
         btnCreateAlarm.setOnAction(actionEvent -> {
             String type = comboBoxAlarms.getValue();
-            try {
+            if(type == null) {
+                messageControllers.error("You must select an alarm type");
+            } else {
                 createAlarm(type);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         });
     }
@@ -379,7 +398,10 @@ public class AppointmentCreateControllers {
     private void addAppointmentToCalendar(){
         createStage.setOnCloseRequest(event -> {
             event.consume();
-            if (appointmentCreated != null) calendar.addAppointment(appointmentCreated);
+            if (appointmentCreated != null) {
+                calendar.addAppointment(appointmentCreated);
+                messageControllers.success("The " + appointmentCreated.getType() + " was created correctly");
+            }
             createStage.close();
         });
     }

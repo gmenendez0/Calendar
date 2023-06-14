@@ -11,6 +11,7 @@ import org.models.calendar.Calendar;
 import org.models.calendar.alarms.Alarm;
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.visitor.AppointmentsVisitor;
+import org.models.calendar.visitor.detailsVisitor.DetailsAppointmentVisitor;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -19,7 +20,7 @@ import java.util.List;
 public class AppointmentDetailsControllers {
 
     private final Stage detailsStage = new Stage();
-    private AppointmentsVisitor visitor = new AppointmentsVisitor();
+    private DetailsAppointmentVisitor visitor = new DetailsAppointmentVisitor();
     @FXML
     private Text titleFrequencyAppointment;
     @FXML
