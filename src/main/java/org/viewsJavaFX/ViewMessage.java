@@ -14,13 +14,13 @@ public class ViewMessage {
         Pane paneMessage = new Pane();
         paneMessage.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
         paneMessage.setMinSize(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-        paneMessage.setPrefSize(335.0, 47.0);
+        paneMessage.setPrefSize(400.0, 50.0);
         paneMessage.setStyle("-fx-background-color: "+ color +";");
 
         Label labelError = new Label();
         labelError.setLayoutX(13.0);
         labelError.setLayoutY(13.0);
-        labelError.setPrefSize(450.0, 21.0);
+        labelError.setPrefSize(400.0, 21.0);
         labelError.setText(message);
         labelError.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         Font font = new Font("Impact", 16.0);

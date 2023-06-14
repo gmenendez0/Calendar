@@ -335,7 +335,7 @@ public class CreateAppointmentControllers {
     }
 
     private void errorCreateAppointment() {
-        messageControllers.error("You cannot create an appointment without the required date/time");
+        messageControllers.error("The required date and/or time is missing");
     }
 
     private void createButtonEvent(){
@@ -420,7 +420,7 @@ public class CreateAppointmentControllers {
 
             return this.dateAppointmentStart.minusHours(hour).minusMinutes(minute);
         } catch (NullPointerException ex) {
-            messageControllers.error("You cannot create an alarm without the required date/time");
+            messageControllers.error("The required date and/or time is missing");
         }
         return null;
     }
