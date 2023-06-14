@@ -15,29 +15,32 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AppointmentAlarmsControllers {
-
     private final Timer timer = new Timer();
+
     private final MessageControllers messageControllers = new MessageControllers();
 
     @FXML
     private final Stage notificationStage = new Stage();
+
     @FXML
     private Pane paneNotification;
+
     @FXML
     private Label labelNotification;
 
-
     private Scene configNotificationStage() {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/appointmentCreate.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/createAppointment.fxml"));
             fxmlLoader.setController(this);
             return new Scene(fxmlLoader.load());
         } catch (IOException ex) {
             messageControllers.error("Failed to import '.fxml' file.");
         }
+
         notificationStage.close();
         return null;
     }
+
     private void showNotificationAlarm(Calendar calendar, int id) {
         Appointment appointmentActive = calendar.getAppointment(id);
         Scene notificationScene = configNotificationStage();
@@ -53,6 +56,7 @@ public class AppointmentAlarmsControllers {
                 //if(alarm.update(LocalDateTime.now())) showNotificationAlarm(calendar, alarm.getId());
             }
         };
+
         final int TIME = 60000;
         timer.schedule(timerTask, 0, TIME);
     }

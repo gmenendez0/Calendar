@@ -49,4 +49,8 @@ public abstract class Alarm {
         if(nowTime.equals(ringDateTime)) ring();
     }
 
+    //Post: Returns true if it is time to ring, false otherwise.
+    public boolean checkTime(LocalDateTime nowTime){
+        return nowTime.equals(ringDateTime);
+    }
 }

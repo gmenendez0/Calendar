@@ -2,7 +2,7 @@ package org.models.calendar.event;
 
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.event.frequency.Frequency;
-import org.models.calendar.visitor.Visitor;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
@@ -66,7 +66,7 @@ public class WholeDayEvent extends Event {
 
     //@inheritDoc
     @Override
-    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+    public List<Appointment> acceptVisitor(GetAppointmentsBetweenVisitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         return visitor.visitWholeDayEvent(this, firstDayTime, secondDayTime);
     }
 

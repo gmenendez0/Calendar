@@ -2,12 +2,12 @@ package org.models.calendar.appointment;
 
 import org.models.calendar.event.Event;
 import org.models.calendar.task.Task;
-import org.models.calendar.visitor.Visitor;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.models.calendar.alarms.Alarm;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.models.calendar.visitor.detailsVisitor.detailsVisitor;
+import org.models.calendar.visitor.details.AppointmentDetailsVisitor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -127,13 +127,13 @@ public abstract class Appointment implements Serializable {
     //Post: getter needed for persistence.
     public abstract String getType();
     //Post: Accepts a visitor and returns the "visit" return value.
-    public abstract List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
+    public abstract List<Appointment> acceptVisitor(GetAppointmentsBetweenVisitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
 
     //Post: Accepts a visitor and returns the "visit" return value.
-    public abstract String acceptVisitorDetailsFrequency(detailsVisitor visitor);
+    public abstract String acceptVisitorDetailsFrequency(AppointmentDetailsVisitor visitor);
 
     //Post: Accepts a visitor and returns the "visit" return value.
-    public abstract String acceptVisitorDetailsDates(detailsVisitor visitor);
+    public abstract String acceptVisitorDetailsDates(AppointmentDetailsVisitor visitor);
 
     //Post: Returns a string with all the crucial appointment's info.
     public abstract String formatToString();

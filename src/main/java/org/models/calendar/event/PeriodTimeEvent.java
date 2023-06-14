@@ -1,14 +1,11 @@
 package org.models.calendar.event;
 
-import org.models.calendar.alarms.Alarm;
 import org.models.calendar.event.frequency.Frequency;
-import org.models.calendar.visitor.AppointmentsVisitor;
-import org.models.calendar.visitor.Visitor;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
 import org.models.calendar.appointment.Appointment;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PeriodTimeEvent extends Event {
     private String subtype = "PeriodTimeEvent";
@@ -52,7 +49,7 @@ public class PeriodTimeEvent extends Event {
 
     //@inheritDoc
     @Override
-    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+    public List<Appointment> acceptVisitor(GetAppointmentsBetweenVisitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         return visitor.visitPeriodTimeEvent(this, firstDayTime, secondDayTime);
     }
 

@@ -7,6 +7,7 @@ import org.models.calendar.event.frequency.FrequencyDaily;
 import org.models.calendar.event.frequency.FrequencyMonthly;
 import org.junit.Before;
 import org.junit.Test;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitorImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,14 +17,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class WholeDayEventVisitorTest{
-    private AppointmentsVisitor appointmentVisitor;
+    private GetAppointmentsBetweenVisitorImpl appointmentVisitor;
     private List<Appointment> selectedAppointments = new ArrayList<>();
     private LocalDateTime firstDateTime;
     private LocalDateTime secondDateTime;
 
     @Before
     public void initialize() {
-        appointmentVisitor = new AppointmentsVisitor();
+        appointmentVisitor = new GetAppointmentsBetweenVisitorImpl();
     }
 
     //* ***** NON-REPEATED-EVENTS-TESTS *****

@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.models.calendar.appointment.Appointment;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.models.calendar.visitor.AppointmentsVisitor;
-import org.models.calendar.visitor.Visitor;
-import org.models.calendar.visitor.detailsVisitor.detailsVisitor;
+import org.models.calendar.visitor.details.AppointmentDetailsVisitor;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -110,12 +108,12 @@ public abstract class Event extends Appointment {
     }
 
     @Override
-    public String acceptVisitorDetailsDates(detailsVisitor visitor) {
+    public String acceptVisitorDetailsDates(AppointmentDetailsVisitor visitor) {
         return visitor.detailsOfDatesEvent(this.getStartDateTime(), this.endingDateTime);
     }
 
     @Override
-    public String acceptVisitorDetailsFrequency(detailsVisitor visitor){
+    public String acceptVisitorDetailsFrequency(AppointmentDetailsVisitor visitor){
         if (!this.isRepeated()) return "This event has not frequency.";
         return visitor.detailsOfFrequencyEvent(frequency);
     }

@@ -30,8 +30,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentCreateControllers {
-
+public class createAppointmentControllers{
     final int ONE_DAY = 1;
     final int ZERO_HOUR = 0;
     final int FIRST_HOUR = 1;
@@ -39,106 +38,156 @@ public class AppointmentCreateControllers {
     final int FINAL_MINUTE = 59;
     final int FINAL_HOUR = 23;
     final int INDEX_TAB_ALARM = 2;
+
     private Calendar calendar;
+
     private Appointment appointmentCreated;
+
     private final AppointmentAlarmsControllers appointmentAlarmsControllers = new AppointmentAlarmsControllers();
+
     private final MessageControllers messageControllers = new MessageControllers();
+
     private LocalDateTime dateAppointmentStart;
+
     @FXML
     private final Stage createStage = new Stage();
+
     @FXML
     private TabPane tabPaneCreate;
+
     @FXML
     private Tab tabEvent;
+
     @FXML
     private Tab tabTask;
+
     @FXML
     private Tab tabAlarm;
+
     @FXML
     private Spinner<Integer> hourStartEvent;
+
     @FXML
     private Spinner<Integer> minuteStartEvent;
+
     @FXML
     private Spinner<Integer> hourEndEvent;
+
     @FXML
     private Spinner<Integer> minuteEndEvent;
+
     @FXML
     private Spinner<Integer> hourStartTask;
+
     @FXML
     private Spinner<Integer> minuteStartTask;
+
     @FXML
     private Pane dateTimeEndEvent;
+
     @FXML
     private Pane timeStartEvent;
+
     @FXML
     private Pane paneCheckDaily;
+
     @FXML
     private Pane paneCheckWeekly;
+
     @FXML
     private Pane timeStartTask;
+
     @FXML
     private CheckBox checkPeriodTimeEvent;
+
     @FXML
     private CheckBox checkWholeDayTask;
+
     @FXML
     private final ToggleGroup groupAlarms = new ToggleGroup();
+
     @FXML
     private RadioButton checkAbsolute;
+
     @FXML
     private RadioButton checkRelative;
+
     @FXML
     private DatePicker dateAlarm;
+
     @FXML
     private Spinner<Integer> hourAlarm;
+
     @FXML
     private Spinner<Integer> minuteAlarm;
+
     @FXML
     private Spinner<Integer> intervalDaysValue;
+
     @FXML
     private TextField eventTitle;
+
     @FXML
     private TextField descriptionEvent;
+
     @FXML
     private DatePicker startDateEvent;
+
     @FXML
     private DatePicker endDateEvent;
+
     @FXML
     private CheckBox checkMonday;
+
     @FXML
     private CheckBox checkTuesday;
+
     @FXML
     private CheckBox checkWednesday;
+
     @FXML
     private CheckBox checkThursday;
+
     @FXML
     private CheckBox checkFriday;
+
     @FXML
     private CheckBox checkSaturday;
+
     @FXML
     private CheckBox checkSunday;
+
     @FXML
     private Button btnCreateEvent;
+
     @FXML
     private Button btnCreateTask;
+
     @FXML
     private Button btnCreateAlarm;
+
     @FXML
     private Spinner<String> spinnerFrequency;
+
     @FXML
     private DatePicker deadLinePicker;
+
     @FXML
     private TextField taskTitle;
+
     @FXML
     private TextField descriptionTask;
+
     @FXML
     private DatePicker startDateTask;
+
     @FXML
     private ComboBox<String> comboBoxAlarms;
 
     public void setupViewCreateAppointment(Calendar calendar) throws IOException {
         this.calendar = calendar;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/appointmentCreate.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/createAppointment.fxml"));
         fxmlLoader.setController(this);
         Scene thirdScene = new Scene(fxmlLoader.load());
         thirdScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
@@ -233,6 +282,7 @@ public class AppointmentCreateControllers {
     private Frequency addFrequencyNewEvent(){
         Frequency newFrequency;
         LocalDate deadline = deadLinePicker.getValue();
+
         switch (spinnerFrequency.getValue()) {
             case "Daily" -> {
                 int interval = intervalDaysValue.getValue();
@@ -248,6 +298,7 @@ public class AppointmentCreateControllers {
                 return null;
             }
         }
+
         return newFrequency;
     }
 
@@ -288,6 +339,7 @@ public class AppointmentCreateControllers {
             String description = descriptionEvent.getText();
 
             boolean isPeriodTimeEvent = checkPeriodTimeEvent.isSelected();
+
             if (isPeriodTimeEvent) {
                 newEvent = createPeriodTimeEvent(title, description);
             } else {
@@ -340,14 +392,18 @@ public class AppointmentCreateControllers {
         btnCreateTask.setOnAction(actionEvent -> {
             Task newTask;
             String title = taskTitle.getText();
+
             if (title.chars().count() > 60) messageControllers.error("The title must not exceed 60 characters");
+
             String description = descriptionTask.getText();
             boolean isWholeDayTask = checkWholeDayTask.isSelected();
+
             if (isWholeDayTask) {
                 newTask = createWholeDayTask(title, description);
             } else {
                 newTask = createExpirationTimeTask(title, description);
             }
+
             if (newTask == null) messageControllers.error("You cannot create a task without the required date/time");
             this.dateAppointmentStart = newTask.getExpirationDateTime();
             this.appointmentCreated = newTask;
@@ -359,10 +415,12 @@ public class AppointmentCreateControllers {
         try {
             int hour = hourAlarm.getValue();
             int minute = minuteAlarm.getValue();
+
             if (checkAbsolute.isSelected()) {
                 LocalDate date = dateAlarm.getValue();
                 return date.atTime(hour, minute);
             }
+
             return this.dateAppointmentStart.minusHours(hour).minusMinutes(minute);
         } catch (NullPointerException ex) {
             messageControllers.error("You cannot create an alarm without the required date/time");
@@ -373,12 +431,14 @@ public class AppointmentCreateControllers {
     private void createAlarm(String type) {
         LocalDateTime ringDateTime = configRingDateTime();
         if (ringDateTime == null) return;
+
         Alarm newAlarm = switch (type) {
             case "Email" -> new EmailAlarm(appointmentCreated.getId(), ringDateTime);
             case "Notification" -> new NotificationAlarm(appointmentCreated.getId(), ringDateTime);
             case "Sound" -> new SoundAlarm(appointmentCreated.getId(), ringDateTime);
             default -> null;
         };
+
         appointmentAlarmsControllers.active(newAlarm, calendar);
         this.appointmentCreated.addAlarm(newAlarm);
         messageControllers.success("Added an alarm to " + appointmentCreated.getType());
@@ -387,6 +447,7 @@ public class AppointmentCreateControllers {
     private void createButtonAlarms(){
         btnCreateAlarm.setOnAction(actionEvent -> {
             String type = comboBoxAlarms.getValue();
+
             if(type == null) {
                 messageControllers.error("You must select an alarm type");
             } else {

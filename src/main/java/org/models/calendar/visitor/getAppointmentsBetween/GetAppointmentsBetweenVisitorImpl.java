@@ -1,10 +1,9 @@
-package org.models.calendar.visitor;
+package org.models.calendar.visitor.getAppointmentsBetween;
 
 import org.models.calendar.event.Event;
 import org.models.calendar.event.WholeDayEvent;
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.event.PeriodTimeEvent;
-import org.models.calendar.event.frequency.Frequency;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.models.calendar.task.WholeDayTask;
 
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentsVisitor implements Visitor {
+public class GetAppointmentsBetweenVisitorImpl implements GetAppointmentsBetweenVisitor{
     final int HUGE_YEAR = 20000;
     final int JANUARY = 1;
     final int FIRST = 1;

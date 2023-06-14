@@ -1,10 +1,10 @@
-package org.models.calendar.visitor.detailsVisitor;
+package org.models.calendar.visitor.details;
 
 import org.models.calendar.event.frequency.Frequency;
 
 import java.time.LocalDateTime;
 
-public class DetailsAppointmentVisitor implements detailsVisitor{
+public class AppointmentDetailsVisitorImpl implements AppointmentDetailsVisitor{
     @Override
     public String detailsOfFrequencyEvent(Frequency frequency) {
         return frequency.toString();

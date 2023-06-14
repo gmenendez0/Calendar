@@ -56,12 +56,12 @@ public class HomeControllers{
 
     private final AppointmentDetailsControllers appointmentDetailsControllers;
 
-    private final AppointmentCreateControllers appointmentCreateControllers;
+    private final createAppointmentControllers createAppointmentControllers;
 
-    public HomeControllers(Calendar calendar, AppointmentDetailsControllers appointmentDetailsControllers, AppointmentCreateControllers appointmentCreateControllers){
+    public HomeControllers(Calendar calendar, AppointmentDetailsControllers appointmentDetailsControllers, createAppointmentControllers createAppointmentControllers){
         this.calendar = calendar;
         this.appointmentDetailsControllers = appointmentDetailsControllers;
-        this.appointmentCreateControllers = appointmentCreateControllers;
+        this.createAppointmentControllers = createAppointmentControllers;
     }
 
     //Post: Set-ups home view and returns its root.
@@ -101,9 +101,11 @@ public class HomeControllers{
         ObservableList<Text> appointmentsToRender = FXCollections.observableArrayList();
 
         int idNum = 0;
+
         for(var appointment : appointments){
             Text text = new Text(appointment.formatToString());
             text.setId(Integer.toString(idNum));
+
             text.setOnMouseClicked(mouseEvent -> {
                 try {
                     appointmentDetailsControllers.setUpViewDetailsConfig(Integer.parseInt(text.getId()), start, end, calendar);
@@ -111,6 +113,7 @@ public class HomeControllers{
                     throw new RuntimeException(e);
                 }
             });
+
             appointmentsToRender.add(text);
             idNum++;
         }
@@ -130,7 +133,7 @@ public class HomeControllers{
     private void createButtonClicked(){
         createButton.setOnAction(actionEvent -> {
             try {
-                appointmentCreateControllers.setupViewCreateAppointment(calendar);
+                createAppointmentControllers.setupViewCreateAppointment(calendar);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

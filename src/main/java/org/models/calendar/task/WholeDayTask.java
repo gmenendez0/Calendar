@@ -1,6 +1,6 @@
 package org.models.calendar.task;
 
-import org.models.calendar.visitor.Visitor;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
 import org.models.calendar.appointment.Appointment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -60,7 +60,7 @@ public class WholeDayTask extends Task {
 
     //@inheritDoc
     @Override
-    public List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
+    public List<Appointment> acceptVisitor(GetAppointmentsBetweenVisitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime) {
         return visitor.visitWholeDayTask(this, firstDayTime, secondDayTime);
     }
 

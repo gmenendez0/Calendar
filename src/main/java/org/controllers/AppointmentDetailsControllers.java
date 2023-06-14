@@ -10,8 +10,7 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import org.models.calendar.Calendar;
 import org.models.calendar.alarms.Alarm;
 import org.models.calendar.appointment.Appointment;
-import org.models.calendar.visitor.AppointmentsVisitor;
-import org.models.calendar.visitor.detailsVisitor.DetailsAppointmentVisitor;
+import org.models.calendar.visitor.details.AppointmentDetailsVisitorImpl;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -20,7 +19,9 @@ import java.util.List;
 public class AppointmentDetailsControllers {
 
     private final Stage detailsStage = new Stage();
-    private DetailsAppointmentVisitor visitor = new DetailsAppointmentVisitor();
+
+    private final AppointmentDetailsVisitorImpl visitor = new AppointmentDetailsVisitorImpl();
+
     @FXML
     private Text titleFrequencyAppointment;
     @FXML
@@ -51,13 +52,11 @@ public class AppointmentDetailsControllers {
     private String writeAlarms(Appointment appointment){
         List<Alarm> listAlarm = appointment.getAlarms();
         if(listAlarm.isEmpty()) return "This " + appointment.getType() + " has not alarms.";
-        return listAlarm.stream().map(a -> a.toString()).reduce("", (a, b) -> a + " " + b + "\n");
+        return listAlarm.stream().map(Object::toString).reduce("", (a, b) -> a + " " + b + "\n");
     }
 
     private void addFrequencyInDetails(Appointment appointment){
-        if(appointment.getType().equals("Event")){
-            titleFrequencyAppointment.setText("Frequency");
-        }
+        if(appointment.getType().equals("Event")) titleFrequencyAppointment.setText("Frequency");
         frequencyAppointment.setText(appointment.acceptVisitorDetailsFrequency(visitor));
     }
 

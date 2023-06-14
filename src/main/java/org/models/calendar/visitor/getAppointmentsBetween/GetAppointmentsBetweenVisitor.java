@@ -1,17 +1,15 @@
-package org.models.calendar.visitor;
+package org.models.calendar.visitor.getAppointmentsBetween;
 
-import org.models.calendar.alarms.Alarm;
 import org.models.calendar.event.WholeDayEvent;
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.event.PeriodTimeEvent;
-import org.models.calendar.event.frequency.Frequency;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.models.calendar.task.WholeDayTask;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface Visitor {
+public interface GetAppointmentsBetweenVisitor{
     //Pre: firstDateTime must be before secondDateTime.
     //Post: Returns a list with all the tasks derived from the received task that take place between the received dates.
     List<Appointment> visitPeriodTimeEvent(PeriodTimeEvent periodTimeEvent, LocalDateTime firstDateTime, LocalDateTime secondDateTime);

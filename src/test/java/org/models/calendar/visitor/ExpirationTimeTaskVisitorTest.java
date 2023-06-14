@@ -4,6 +4,7 @@ import org.models.calendar.appointment.Appointment;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.junit.Before;
 import org.junit.Test;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitorImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,14 +13,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ExpirationTimeTaskVisitorTest{
-    private AppointmentsVisitor appointmentVisitor;
+    private GetAppointmentsBetweenVisitorImpl appointmentVisitor;
     private List<Appointment> selectedAppointments = new ArrayList<>();
     private LocalDateTime firstDateTime;
     private LocalDateTime secondDateTime;
 
     @Before
     public void initialize() {
-        appointmentVisitor = new AppointmentsVisitor();
+        appointmentVisitor = new GetAppointmentsBetweenVisitorImpl();
     }
 
     //Tests when taskDateTime is not within firstDateTime and secondDateTime range.

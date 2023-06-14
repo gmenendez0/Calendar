@@ -1,7 +1,7 @@
 package org.models.calendar.task;
 
 import org.models.calendar.appointment.Appointment;
-import org.models.calendar.visitor.AppointmentsVisitor;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitorImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +44,7 @@ public class ExpirationTimeTaskTest {
     //Post: Tests that acceptVisitor method behaves correctly.
     @Test
     public void acceptVisitor(){
-        var visitor = new AppointmentsVisitor();
+        var visitor = new GetAppointmentsBetweenVisitorImpl();
         var firstDateTime = LocalDateTime.of(2019,1,15,0,0,0);
         var secondDateTime = LocalDateTime.of(2021,1,31,12,0,0);
 

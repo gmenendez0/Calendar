@@ -2,7 +2,7 @@ package org.models.calendar;
 
 import org.models.calendar.alarms.Alarm;
 import org.models.calendar.appointment.Appointment;
-import org.models.calendar.visitor.AppointmentsVisitor;
+import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitorImpl;
 import org.models.file_handler.FileHandler;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class Calendar {
     public List<Appointment> getAppointmentsBetween(LocalDateTime initialDateTime, LocalDateTime finalDateTime){
         List<Appointment> selectedAppointments = new ArrayList<>();
         List<Appointment> visitorSelectedAppointments;
-        var visitor = new AppointmentsVisitor();
+        var visitor = new GetAppointmentsBetweenVisitorImpl();
 
         for (var appointment : appointments) {
             if(!appointment.getDestroyed()) {
