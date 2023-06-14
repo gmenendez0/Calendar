@@ -117,11 +117,12 @@
                                 <Spinner id="hourEndEvent" fx:id="minuteAlarm" layoutX="166.0" layoutY="96.0" prefHeight="26.0" prefWidth="54.0" />
                             </children>
                         </Pane>
-                        <Button fx:id="btnCreateAlarm" layoutX="489.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-success" text="Add alarm" />
+                        <Button fx:id="btnCreateAlarm" layoutX="412.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-success" text="Add alarm" />
                         <RadioButton fx:id="checkRelative" layoutX="159.0" layoutY="18.0" mnemonicParsing="false" text="Relative time" />
                         <RadioButton fx:id="checkAbsolute" layoutX="28.0" layoutY="18.0" mnemonicParsing="false" text="Absolute time" />
                         <Text layoutX="159.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How long before the event/task" />
                         <ComboBox fx:id="comboBoxAlarms" layoutX="388.0" layoutY="97.0" prefWidth="150.0" />
+                        <Button fx:id="btnFinish" layoutX="505.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-danger" text="Finish" />
                     </children>
                 </AnchorPane>
             </content>

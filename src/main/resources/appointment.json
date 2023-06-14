@@ -206,4 +206,57 @@
   "frequency" : null,
   "type" : "Event",
   "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 15,
+  "title" : "gesgeega",
+  "description" : "fwa",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 17, 1, 1 ],
+  "endingDateTime" : [ 2023, 6, 20, 1, 1 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 16,
+  "title" : "Probar notif de alarm",
+  "description" : "desc",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ {
+    "subtype" : "NotificationAlarm",
+    "id" : -1,
+    "ringDateTime" : [ 2023, 6, 29, 23, 50 ]
+  }, {
+    "subtype" : "SoundAlarm",
+    "id" : -1,
+    "ringDateTime" : [ 2023, 6, 29, 23, 45 ]
+  }, {
+    "subtype" : "EmailAlarm",
+    "id" : -1,
+    "ringDateTime" : [ 2023, 6, 29, 23, 55 ]
+  } ],
+  "startDateTime" : [ 2023, 6, 30, 0, 0 ],
+  "endingDateTime" : [ 2023, 6, 30, 23, 59, 59 ],
+  "frequency" : {
+    "subtype" : "FrequencyAnnual",
+    "deadline" : [ 2034, 6, 30 ]
+  },
+  "type" : "Event",
+  "subtype" : "WholeDayEvent",
+  "eventDate" : [ 2023, 6, 30 ]
+}, {
+  "id" : 17,
+  "title" : "Titulo",
+  "description" : "Finish completado",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 18, 0, 0 ],
+  "endingDateTime" : [ 2023, 6, 18, 23, 59, 59 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "WholeDayEvent",
+  "eventDate" : [ 2023, 6, 18 ]
 } ]

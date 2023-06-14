@@ -18,8 +18,8 @@ import java.util.List;
 
 public class AppointmentDetailsControllers {
 
+    private final MessageControllers messageControllers = new MessageControllers();
     private final Stage detailsStage = new Stage();
-
     private final AppointmentDetailsVisitorImpl visitor = new AppointmentDetailsVisitorImpl();
 
     @FXML
@@ -39,14 +39,18 @@ public class AppointmentDetailsControllers {
     @FXML
     private Text alarmsListAppointment;
 
-    public void setUpViewDetailsConfig(Integer id, LocalDateTime start, LocalDateTime end, Calendar calendar) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/appointmentDetails.fxml"));
-        fxmlLoader.setController(this);
-        Scene secondScene = new Scene(fxmlLoader.load());
-        secondScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        detailsStage.setScene(secondScene);
+    public void setUpViewDetailsConfig(Integer id, LocalDateTime start, LocalDateTime end, Calendar calendar) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/appointmentDetails.fxml"));
+            fxmlLoader.setController(this);
+            Scene secondScene = new Scene(fxmlLoader.load());
+            secondScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            detailsStage.setScene(secondScene);
 
-        completeDetailsStage(calendar.getAppointmentsBetween(start, end).get(id));
+            completeDetailsStage(calendar.getAppointmentsBetween(start, end).get(id));
+        } catch (IOException ex) {
+            messageControllers.warningFile("Not found: 'appointmentDetails.fxml'");
+        }
     }
 
     private String writeAlarms(Appointment appointment){

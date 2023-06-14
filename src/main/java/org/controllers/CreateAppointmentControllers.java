@@ -30,7 +30,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class createAppointmentControllers{
+public class CreateAppointmentControllers {
     final int ONE_DAY = 1;
     final int ZERO_HOUR = 0;
     final int FIRST_HOUR = 1;
@@ -184,16 +184,22 @@ public class createAppointmentControllers{
     @FXML
     private ComboBox<String> comboBoxAlarms;
 
-    public void setupViewCreateAppointment(Calendar calendar) throws IOException {
+    @FXML
+    private Button btnFinish;
+
+    public void setupViewCreateAppointment(Calendar calendar) {
         this.calendar = calendar;
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/createAppointment.fxml"));
-        fxmlLoader.setController(this);
-        Scene thirdScene = new Scene(fxmlLoader.load());
-        thirdScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-        createStage.setScene(thirdScene);
-
-        configEventInCreateView();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/createAppointment.fxml"));
+            fxmlLoader.setController(this);
+            Scene thirdScene = new Scene(fxmlLoader.load());
+            thirdScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+            createStage.setScene(thirdScene);
+            configEventInCreateView();
+        }
+        catch (IOException ex) {
+            messageControllers.warningFile("Not found: 'createAppointment.fxml'");
+        }
     }
 
     private void configSpinnerFrequency(){
@@ -263,7 +269,8 @@ public class createAppointmentControllers{
         createButtonEvent();
         createButtonTask();
         createButtonAlarms();
-        addAppointmentToCalendar();
+        closeStageCreate();
+        configFinishButton();
         createStage.show();
     }
 
@@ -302,58 +309,95 @@ public class createAppointmentControllers{
         return newFrequency;
     }
 
-    private Event createPeriodTimeEvent(String title, String description){
-        try{
-            int hourStart = hourStartEvent.getValue();
-            int minuteStart = minuteStartEvent.getValue();
-            LocalDate startDate = startDateEvent.getValue();
-            LocalTime startTime = LocalTime.of(hourStart, minuteStart);
-            LocalDateTime startDateTime = startDate.atTime(startTime);
+    private Event createPeriodTimeEvent(String title, String description) throws NullPointerException{
+        int hourStart = hourStartEvent.getValue();
+        int minuteStart = minuteStartEvent.getValue();
+        LocalDate startDate = startDateEvent.getValue();
+        LocalTime startTime = LocalTime.of(hourStart, minuteStart);
+        LocalDateTime startDateTime = startDate.atTime(startTime);
 
-            int hourEnd = hourEndEvent.getValue();
-            int minuteEnd = minuteEndEvent.getValue();
-            LocalDate endDate = endDateEvent.getValue();
-            LocalTime endTime = LocalTime.of(hourEnd, minuteEnd);
-            LocalDateTime endDateTime = endDate.atTime(endTime);
+        int hourEnd = hourEndEvent.getValue();
+        int minuteEnd = minuteEndEvent.getValue();
+        LocalDate endDate = endDateEvent.getValue();
+        LocalTime endTime = LocalTime.of(hourEnd, minuteEnd);
+        LocalDateTime endDateTime = endDate.atTime(endTime);
 
-            return new PeriodTimeEvent(title, description, startDateTime, endDateTime);
-        } catch (NullPointerException ex) {
-            return null;
-        }
+        return new PeriodTimeEvent(title, description, startDateTime, endDateTime);
     }
 
-    private Event createWholeDayEvent(String title, String description){
-        try{
-            LocalDate startDate = startDateEvent.getValue();
-            return new WholeDayEvent(title, description, startDate);
-        } catch (NullPointerException ex) {
-            return null;
-        }
+    private Event createWholeDayEvent(String title, String description) throws NullPointerException{
+        LocalDate startDate = startDateEvent.getValue();
+        return new WholeDayEvent(title, description, startDate);
+    }
+
+    private void verifyCharacterInTitle(String title){
+        if (title.chars().count() > 60)  messageControllers.error("The title must not exceed 60 characters");
+    }
+
+    private void errorCreateAppointment() {
+        messageControllers.error("You cannot create an appointment without the required date/time");
     }
 
     private void createButtonEvent(){
         btnCreateEvent.setOnAction(actionEvent -> {
             Event newEvent;
             String title = eventTitle.getText();
-            if (title.chars().count() > 60)  messageControllers.error("The title must not exceed 60 characters");
+            verifyCharacterInTitle(title);
             String description = descriptionEvent.getText();
+            try {
+                if (checkPeriodTimeEvent.isSelected()) {
+                    newEvent = createPeriodTimeEvent(title, description);
+                } else {
+                    newEvent = createWholeDayEvent(title, description);
+                }
 
-            boolean isPeriodTimeEvent = checkPeriodTimeEvent.isSelected();
+                Frequency newFrequency = addFrequencyNewEvent();
+                if(newFrequency != null) newEvent.setFrequency(newFrequency);
 
-            if (isPeriodTimeEvent) {
-                newEvent = createPeriodTimeEvent(title, description);
-            } else {
-                newEvent = createWholeDayEvent(title, description);
+                this.dateAppointmentStart = newEvent.getStartDateTime();
+                this.appointmentCreated = newEvent;
+                enableAlarmTab();
+            } catch (NullPointerException ex) {
+                errorCreateAppointment();
             }
 
-            if(newEvent == null) messageControllers.error("You cannot create an event without the required date/time");
+        });
+    }
 
-            Frequency newFrequency = addFrequencyNewEvent();
-            if(addFrequencyNewEvent() != null) newEvent.setFrequency(newFrequency);
+    private Task createExpirationTimeTask(String title, String description) throws NullPointerException{
+        int hourTask = hourStartTask.getValue();
+        int minuteTask = minuteStartTask.getValue();
+        LocalTime timeTask = LocalTime.of(hourTask, minuteTask);
+        LocalDate dateTask = startDateTask.getValue();
+        LocalDateTime dateTimeTask = dateTask.atTime(timeTask);
 
-            this.dateAppointmentStart = newEvent.getStartDateTime();
-            this.appointmentCreated = newEvent;
-            enableAlarmTab();
+        return new ExpirationTimeTask(title, description, dateTimeTask);
+    }
+
+    private Task createWholeDayTask(String title, String description) throws NullPointerException{
+        LocalDate dateTask = startDateTask.getValue();
+        return new WholeDayTask(title, description, dateTask);
+    }
+
+    private void createButtonTask(){
+        btnCreateTask.setOnAction(actionEvent -> {
+            Task newTask;
+            String title = taskTitle.getText();
+            verifyCharacterInTitle(title);
+            String description = descriptionTask.getText();
+            try {
+                if (checkWholeDayTask.isSelected()) {
+                    newTask = createWholeDayTask(title, description);
+                } else {
+                    newTask = createExpirationTimeTask(title, description);
+                }
+                this.dateAppointmentStart = newTask.getExpirationDateTime();
+                this.appointmentCreated = newTask;
+                enableAlarmTab();
+            } catch (NullPointerException ex) {
+                errorCreateAppointment();
+            }
+
         });
     }
 
@@ -362,53 +406,6 @@ public class createAppointmentControllers{
         tabTask.setDisable(true);
         tabAlarm.setDisable(false);
         tabPaneCreate.getSelectionModel().select(INDEX_TAB_ALARM);
-    }
-
-    private Task createExpirationTimeTask(String title, String description){
-        try {
-            int hourTask = hourStartTask.getValue();
-            int minuteTask = minuteStartTask.getValue();
-            LocalTime timeTask = LocalTime.of(hourTask, minuteTask);
-            LocalDate dateTask = startDateTask.getValue();
-            LocalDateTime dateTimeTask = dateTask.atTime(timeTask);
-
-            return new ExpirationTimeTask(title, description, dateTimeTask);
-        } catch (NullPointerException ex) {
-            return null;
-        }
-
-    }
-
-    private Task createWholeDayTask(String title, String description) {
-        try{
-            LocalDate dateTask = startDateTask.getValue();
-            return new WholeDayTask(title, description, dateTask);
-        } catch (NullPointerException ex) {
-            return null;
-        }
-    }
-
-    private void createButtonTask(){
-        btnCreateTask.setOnAction(actionEvent -> {
-            Task newTask;
-            String title = taskTitle.getText();
-
-            if (title.chars().count() > 60) messageControllers.error("The title must not exceed 60 characters");
-
-            String description = descriptionTask.getText();
-            boolean isWholeDayTask = checkWholeDayTask.isSelected();
-
-            if (isWholeDayTask) {
-                newTask = createWholeDayTask(title, description);
-            } else {
-                newTask = createExpirationTimeTask(title, description);
-            }
-
-            if (newTask == null) messageControllers.error("You cannot create a task without the required date/time");
-            this.dateAppointmentStart = newTask.getExpirationDateTime();
-            this.appointmentCreated = newTask;
-            enableAlarmTab();
-        });
     }
 
     private LocalDateTime configRingDateTime(){
@@ -439,7 +436,7 @@ public class createAppointmentControllers{
             default -> null;
         };
 
-        appointmentAlarmsControllers.active(newAlarm, calendar);
+        if (type.equals("Notification")) appointmentAlarmsControllers.active(newAlarm, calendar);
         this.appointmentCreated.addAlarm(newAlarm);
         messageControllers.success("Added an alarm to " + appointmentCreated.getType());
     }
@@ -457,12 +454,23 @@ public class createAppointmentControllers{
     }
 
     private void addAppointmentToCalendar(){
+        calendar.addAppointment(appointmentCreated);
+        messageControllers.success("The " + appointmentCreated.getType() + " was created correctly");
+    }
+
+    private void closeStageCreate(){
         createStage.setOnCloseRequest(event -> {
             event.consume();
             if (appointmentCreated != null) {
-                calendar.addAppointment(appointmentCreated);
-                messageControllers.success("The " + appointmentCreated.getType() + " was created correctly");
+                addAppointmentToCalendar();
             }
+            createStage.close();
+        });
+    }
+
+    private void configFinishButton(){
+        btnFinish.setOnAction(event -> {
+            addAppointmentToCalendar();
             createStage.close();
         });
     }

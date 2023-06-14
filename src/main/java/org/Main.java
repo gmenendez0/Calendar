@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.controllers.createAppointmentControllers;
+import org.controllers.CreateAppointmentControllers;
 import org.controllers.AppointmentDetailsControllers;
 import org.controllers.HomeControllers;
 import org.kordamp.bootstrapfx.BootstrapFX;
@@ -33,7 +33,7 @@ public class Main extends Application {
         initializeCalendar(calendar);
 
         var detailsController = new AppointmentDetailsControllers();
-        var createControllers = new createAppointmentControllers();
+        var createControllers = new CreateAppointmentControllers();
         var homeController = new HomeControllers(calendar, detailsController, createControllers);
         root = homeController.getHomeRoot();
 

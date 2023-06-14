@@ -56,9 +56,9 @@ public class HomeControllers{
 
     private final AppointmentDetailsControllers appointmentDetailsControllers;
 
-    private final createAppointmentControllers createAppointmentControllers;
+    private final CreateAppointmentControllers createAppointmentControllers;
 
-    public HomeControllers(Calendar calendar, AppointmentDetailsControllers appointmentDetailsControllers, createAppointmentControllers createAppointmentControllers){
+    public HomeControllers(Calendar calendar, AppointmentDetailsControllers appointmentDetailsControllers, CreateAppointmentControllers createAppointmentControllers){
         this.calendar = calendar;
         this.appointmentDetailsControllers = appointmentDetailsControllers;
         this.createAppointmentControllers = createAppointmentControllers;
@@ -95,6 +95,10 @@ public class HomeControllers{
         appointmentList.setItems(appointmentsToRender);
     }
 
+    private void setEventDetails(Text appointmentText, LocalDateTime start, LocalDateTime end){
+        appointmentText.setOnMouseClicked(mouseEvent -> appointmentDetailsControllers.setUpViewDetailsConfig(Integer.parseInt(appointmentText.getId()), start, end, calendar));
+    }
+
     //Post: Returns an observable list of appointments between the given dates in text format.
     private ObservableList<Text> getAppointmentsBetweenStringFormatted(LocalDateTime start, LocalDateTime end){
         var appointments = calendar.getAppointmentsBetween(start, end);
@@ -105,15 +109,7 @@ public class HomeControllers{
         for(var appointment : appointments){
             Text text = new Text(appointment.formatToString());
             text.setId(Integer.toString(idNum));
-
-            text.setOnMouseClicked(mouseEvent -> {
-                try {
-                    appointmentDetailsControllers.setUpViewDetailsConfig(Integer.parseInt(text.getId()), start, end, calendar);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
+            setEventDetails(text, start, end);
             appointmentsToRender.add(text);
             idNum++;
         }
@@ -131,13 +127,7 @@ public class HomeControllers{
 
     //Post: Sets the "create" button behavior.
     private void createButtonClicked(){
-        createButton.setOnAction(actionEvent -> {
-            try {
-                createAppointmentControllers.setupViewCreateAppointment(calendar);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        createButton.setOnAction(actionEvent -> createAppointmentControllers.setupViewCreateAppointment(calendar));
     }
 
     //Post: Sets the "prev" button behavior.

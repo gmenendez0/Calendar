@@ -11,6 +11,7 @@ import org.models.calendar.alarms.Alarm;
 import org.models.calendar.appointment.Appointment;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,7 +54,8 @@ public class AppointmentAlarmsControllers {
         TimerTask timerTask = new TimerTask() {
         @Override
             public void run() {
-                //if(alarm.update(LocalDateTime.now())) showNotificationAlarm(calendar, alarm.getId());
+                if(alarm.checkTime(LocalDateTime.now())) { showNotificationAlarm(calendar, alarm.getId());
+            }
             }
         };
 
