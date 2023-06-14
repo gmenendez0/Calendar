@@ -461,9 +461,7 @@ public class CreateAppointmentControllers {
     private void closeStageCreate(){
         createStage.setOnCloseRequest(event -> {
             event.consume();
-            if (appointmentCreated != null) {
-                addAppointmentToCalendar();
-            }
+            if (appointmentCreated != null) addAppointmentToCalendar();
             createStage.close();
         });
     }

@@ -1,6 +1,6 @@
 package org.controllers;
 
-import org.viewsJavaFX.ViewMessage;
+import org.views.ViewMessage;
 
 public class MessageControllers {
     private final ViewMessage viewMessage = new ViewMessage();

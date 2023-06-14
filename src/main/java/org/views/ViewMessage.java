@@ -1,4 +1,4 @@
-package org.viewsJavaFX;
+package org.views;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

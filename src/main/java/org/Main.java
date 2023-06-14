@@ -17,7 +17,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
+
 public class Main extends Application {
+    final int WIDTH_RESOLUTION = 1920;
+
+    final int HEIGHT_RESOLUTION = 1080;
 
     private Calendar calendar;
 
@@ -46,8 +50,9 @@ public class Main extends Application {
         super.stop();
     }
 
+    //Post: Set up the stage.
     private void setUpStage(Parent root, Stage stage){
-        Scene scene = new Scene(root, 960, 540);
+        Scene scene = new Scene(root, WIDTH_RESOLUTION, HEIGHT_RESOLUTION);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setScene(scene);
         stage.sizeToScene();
@@ -55,7 +60,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    //Post: initialize the calendar with the appointments saved in the file.
+    //Post: Initializes calendar with saved appointments.
     private void initializeCalendar(Calendar calendar) throws IOException{
         var objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -65,7 +70,7 @@ public class Main extends Application {
         calendar.recoverAppointments(fileHandler, "src/main/resources/appointment.json");
     }
 
-    //Post: Calls method to save the appointments in the file and closes calendar.
+    //Post: Calls method to save the appointments and closes calendar.
     private void closeCalendar(Calendar calendar) throws IOException{
         var objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

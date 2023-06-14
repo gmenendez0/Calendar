@@ -16,6 +16,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AppointmentAlarmsControllers {
+    final int TIME = 60000;
+
     private final Timer timer = new Timer();
 
     private final MessageControllers messageControllers = new MessageControllers();
@@ -52,14 +54,12 @@ public class AppointmentAlarmsControllers {
 
     public void active(Alarm alarm, Calendar calendar){
         TimerTask timerTask = new TimerTask() {
-        @Override
+            @Override
             public void run() {
-                if(alarm.checkTime(LocalDateTime.now())) { showNotificationAlarm(calendar, alarm.getId());
-            }
+                if(alarm.checkTime(LocalDateTime.now())) showNotificationAlarm(calendar, alarm.getId());
             }
         };
 
-        final int TIME = 60000;
         timer.schedule(timerTask, 0, TIME);
     }
 }
