@@ -10,7 +10,7 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import org.models.calendar.Calendar;
 import org.models.calendar.alarms.Alarm;
 import org.models.calendar.appointment.Appointment;
-import org.models.calendar.visitor.details.AppointmentDetailsVisitorImpl;
+import org.models.calendar.visitor.appointment_details.AppointmentDetailsVisitorImpl;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

@@ -4,7 +4,7 @@ import org.models.calendar.appointment.Appointment;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.junit.Before;
 import org.junit.Test;
-import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitorImpl;
+import org.models.calendar.visitor.get_appointments_between.GetAppointmentsBetweenVisitorImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

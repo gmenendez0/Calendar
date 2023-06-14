@@ -3,7 +3,7 @@ package org.models.calendar.task;
 import org.models.calendar.appointment.Appointment;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.models.calendar.visitor.details.AppointmentDetailsVisitor;
+import org.models.calendar.visitor.appointment_details.AppointmentDetailsVisitor;
 
 import java.time.LocalDateTime;
 

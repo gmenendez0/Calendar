@@ -2,12 +2,12 @@ package org.models.calendar.appointment;
 
 import org.models.calendar.event.Event;
 import org.models.calendar.task.Task;
-import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
+import org.models.calendar.visitor.get_appointments_between.GetAppointmentsBetweenVisitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.models.calendar.alarms.Alarm;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.models.calendar.visitor.details.AppointmentDetailsVisitor;
+import org.models.calendar.visitor.appointment_details.AppointmentDetailsVisitor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

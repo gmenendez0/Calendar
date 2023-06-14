@@ -1,7 +1,7 @@
 package org.models.calendar.task;
 
 import org.models.calendar.appointment.Appointment;
-import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitorImpl;
+import org.models.calendar.visitor.get_appointments_between.GetAppointmentsBetweenVisitorImpl;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
 package org.models.calendar.event;
 
 import org.models.calendar.event.frequency.Frequency;
-import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
+import org.models.calendar.visitor.get_appointments_between.GetAppointmentsBetweenVisitor;
 import org.models.calendar.appointment.Appointment;
 
 import java.time.LocalDateTime;

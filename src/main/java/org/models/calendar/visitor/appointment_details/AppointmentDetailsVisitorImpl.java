@@ -1,4 +1,4 @@
-package org.models.calendar.visitor.details;
+package org.models.calendar.visitor.appointment_details;
 
 import org.models.calendar.event.frequency.Frequency;
 

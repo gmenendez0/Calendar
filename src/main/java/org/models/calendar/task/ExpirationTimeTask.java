@@ -1,6 +1,6 @@
 package org.models.calendar.task;
 
-import org.models.calendar.visitor.getAppointmentsBetween.GetAppointmentsBetweenVisitor;
+import org.models.calendar.visitor.get_appointments_between.GetAppointmentsBetweenVisitor;
 import org.models.calendar.appointment.Appointment;
 
 import java.time.LocalDateTime;
