@@ -3,6 +3,7 @@ package org.models.calendar.task;
 import org.models.calendar.appointment.Appointment;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.models.calendar.visitor.Visitor;
 
 import java.time.LocalDateTime;
 
@@ -36,5 +37,14 @@ public abstract class Task extends Appointment {
     //Post: Returns expirationDateTime.
     public LocalDateTime getExpirationDateTime() {
         return this.expirationDateTime;
+    }
+
+    @Override
+    public String acceptVisitorDetailsDates(Visitor visitor) {
+        return visitor.detailsOfDatesTask(this.getExpirationDateTime());
+    }
+    @Override
+    public String acceptVisitorDetailsFrequency(Visitor visitor){
+        return "Tasks are infrequent.";
     }
 }

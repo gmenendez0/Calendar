@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.ComboBox?>
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPaneCreate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <tabs>
-        <Tab text="New Event">
+        <Tab text="New Event" fx:id="tabEvent">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e6e8e6;">
                     <children>
@@ -25,9 +25,9 @@
                         <TextField fx:id="eventTitle" layoutX="130.0" layoutY="14.0" promptText="New Title" />
                         <Text fill="#710404" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="strong" text="New Description:" wrappingWidth="105.336669921875" />
                         <TextField id="descriptionEvent" fx:id="descriptionEvent" layoutX="130.0" layoutY="53.0" promptText="New Description" />
-                        <CheckBox id="" fx:id="checkPeriodTimeEvent" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Specify dates and time of the Event" />
+                        <CheckBox id="" fx:id="checkPeriodTimeEvent" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Specify dates and times of the Event" />
                         <DatePicker id="startDateTimeEvent" fx:id="startDateEvent" layoutX="67.0" layoutY="134.0" />
-                        <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Important Date's:" wrappingWidth="107.7366943359375" />
+                        <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date's:" wrappingWidth="107.7366943359375" />
                         <Text fill="#710404" layoutX="28.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="70.93670654296875" />
                         <Text fill="#710404" layoutX="13.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequency:" wrappingWidth="107.7366943359375" />
                         <Pane id="paneCheckDaily" fx:id="paneCheckDaily" layoutX="234.0" layoutY="230.0" prefHeight="78.0" prefWidth="166.0" visible="false">
@@ -73,7 +73,7 @@
                     </children></AnchorPane>
             </content>
         </Tab>
-        <Tab text="New Task">
+        <Tab text="New Task" fx:id="tabTask">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e6e8e6;">
                     <children>
@@ -83,7 +83,7 @@
                         <TextField id="descriptionEvent" fx:id="descriptionTask" layoutX="130.0" layoutY="53.0" promptText="New Description" />
                         <CheckBox id="checkWholeDay" fx:id="checkWholeDayTask" layoutX="130.0" layoutY="94.0" mnemonicParsing="false" text="Expiration Time" />
                         <DatePicker id="startDateTimeEvent" fx:id="startDateTask" layoutX="67.0" layoutY="134.0" />
-                        <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Important Date's:" wrappingWidth="107.7366943359375" />
+                        <Text fill="#710404" layoutX="13.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date's:" wrappingWidth="107.7366943359375" />
                         <Text fill="#710404" layoutX="28.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="70.93670654296875" />
                         <Pane id="timeStartEvent" fx:id="timeStartTask" layoutX="19.0" layoutY="164.0" prefHeight="44.0" prefWidth="264.0">
                             <children>
@@ -98,7 +98,7 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab text="Alarms">
+        <Tab text="Add alarms" fx:id="tabAlarm" disable="true">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e6e8e6;">
                     <children>
@@ -117,7 +117,7 @@
                                 <Spinner id="hourEndEvent" fx:id="minuteAlarm" layoutX="166.0" layoutY="96.0" prefHeight="26.0" prefWidth="54.0" />
                             </children>
                         </Pane>
-                        <Button fx:id="btnCreateAlarm" layoutX="489.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-success" text="Create" />
+                        <Button fx:id="btnCreateAlarm" layoutX="489.0" layoutY="14.0" mnemonicParsing="false" styleClass="btn-success" text="Add alarm" />
                         <RadioButton fx:id="checkRelative" layoutX="159.0" layoutY="18.0" mnemonicParsing="false" text="Relative time" />
                         <RadioButton fx:id="checkAbsolute" layoutX="28.0" layoutY="18.0" mnemonicParsing="false" text="Absolute time" />
                         <Text layoutX="159.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How long before the event/task" />

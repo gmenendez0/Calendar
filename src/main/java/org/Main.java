@@ -6,21 +6,16 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.controllers.CreateControllers;
-import org.controllers.DetailsControllers;
+import org.controllers.AppointmentCreateControllers;
+import org.controllers.AppointmentDetailsControllers;
 import org.controllers.HomeControllers;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import org.models.calendar.Calendar;
-import org.models.calendar.event.PeriodTimeEvent;
-import org.models.calendar.event.WholeDayEvent;
-import org.models.calendar.task.ExpirationTimeTask;
-import org.models.calendar.task.WholeDayTask;
 import org.models.file_handler.FileHandler;
 import org.models.file_handler.JsonFileHandlerStrategy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class Main extends Application {
 
@@ -35,10 +30,10 @@ public class Main extends Application {
         Parent root;
         calendar = new Calendar();
 
-        fillCalendar(calendar);
+        initializeCalendar(calendar);
 
-        var detailsController = new DetailsControllers();
-        var createControllers = new CreateControllers();
+        var detailsController = new AppointmentDetailsControllers();
+        var createControllers = new AppointmentCreateControllers();
         var homeController = new HomeControllers(calendar, detailsController, createControllers);
         root = homeController.getHomeRoot();
 
@@ -49,21 +44,6 @@ public class Main extends Application {
     public void stop() throws Exception{
         closeCalendar(calendar);
         super.stop();
-    }
-
-    //? FOR TESTING PURPOSES ONLY
-    private void fillCalendar(Calendar calendar) throws IOException {
-        //? FOR TESTING PURPOSES ONLY
-        var periodTimeEvent = new PeriodTimeEvent("AAAAAAAAA", "Primer Descripcion", LocalDateTime.now(), LocalDateTime.now().plusDays(1));
-        var wholeDayEvent = new WholeDayEvent("Evento del tipo: wholeDayEvent", "Segunda Descripcion", LocalDateTime.now().toLocalDate());
-        var wholeDayTask = new WholeDayTask("Tarea del tipo: wholeDayTask", "Tercera Descripcion", LocalDateTime.now().toLocalDate());
-        var expirationTimeTask = new ExpirationTimeTask("Tarea del tipo: expirationTimeTask", "Cuarta Descripcion", LocalDateTime.now().plusDays(0));
-        calendar.addAppointment(periodTimeEvent);
-        calendar.addAppointment(wholeDayEvent);
-        calendar.addAppointment(wholeDayTask);
-        calendar.addAppointment(expirationTimeTask);
-        initializeCalendar(calendar);
-        //? FOR TESTING PURPOSES ONLY
     }
 
     private void setUpStage(Parent root, Stage stage){

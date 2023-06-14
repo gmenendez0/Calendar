@@ -2,25 +2,17 @@ package org.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.kordamp.bootstrapfx.BootstrapFX;
 import org.models.calendar.Calendar;
-import org.models.calendar.event.Event;
-import org.models.calendar.event.PeriodTimeEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 public class HomeControllers{
     final int FIRST_DAY_OF_MONTH = 1;
@@ -62,14 +54,14 @@ public class HomeControllers{
 
     private final Calendar calendar;
 
-    private final DetailsControllers detailsControllers;
+    private final AppointmentDetailsControllers appointmentDetailsControllers;
 
-    private final CreateControllers createControllers;
+    private final AppointmentCreateControllers appointmentCreateControllers;
 
-    public HomeControllers(Calendar calendar, DetailsControllers detailsControllers, CreateControllers createControllers){
+    public HomeControllers(Calendar calendar, AppointmentDetailsControllers appointmentDetailsControllers, AppointmentCreateControllers appointmentCreateControllers){
         this.calendar = calendar;
-        this.detailsControllers = detailsControllers;
-        this.createControllers = createControllers;
+        this.appointmentDetailsControllers = appointmentDetailsControllers;
+        this.appointmentCreateControllers = appointmentCreateControllers;
     }
 
     //Post: Set-ups home view and returns its root.
@@ -114,7 +106,7 @@ public class HomeControllers{
             text.setId(Integer.toString(idNum));
             text.setOnMouseClicked(mouseEvent -> {
                 try {
-                    detailsControllers.setUpViewDetailsConfig(Integer.parseInt(text.getId()), start, end, calendar);
+                    appointmentDetailsControllers.setUpViewDetailsConfig(Integer.parseInt(text.getId()), start, end, calendar);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -138,7 +130,7 @@ public class HomeControllers{
     private void createButtonClicked(){
         createButton.setOnAction(actionEvent -> {
             try {
-                createControllers.setupViewCreateAppointment(calendar);
+                appointmentCreateControllers.setupViewCreateAppointment(calendar);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

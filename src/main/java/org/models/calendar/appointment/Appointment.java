@@ -123,25 +123,18 @@ public abstract class Appointment implements Serializable {
         return alarms;
     }
 
-    public boolean withAlarms(){
-        return !alarms.isEmpty();
-    }
-
-    //Post: Orders the alarms to check if it is time to ring or not.
-    public void checkAlarms(LocalDateTime nowTime){
-        for (var alarm : alarms) {
-            alarm.update(nowTime);
-        }
-    }
-
     //Post: getter needed for persistence.
     public abstract String getType();
     //Post: Accepts a visitor and returns the "visit" return value.
     public abstract List<Appointment> acceptVisitor(Visitor visitor, LocalDateTime firstDayTime, LocalDateTime secondDayTime);
 
+    //Post: Accepts a visitor and returns the "visit" return value.
+    public abstract String acceptVisitorDetailsFrequency(Visitor visitor);
+
+    //Post: Accepts a visitor and returns the "visit" return value.
+    public abstract String acceptVisitorDetailsDates(Visitor visitor);
+
     //Post: Returns a string with all the crucial appointment's info.
     public abstract String formatToString();
 
-    //Post: Returns a list with the complete data of the appointment.
-    public abstract Map<String, String> dataToMapOfString();
 }

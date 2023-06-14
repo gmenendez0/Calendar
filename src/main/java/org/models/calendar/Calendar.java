@@ -49,11 +49,10 @@ public class Calendar {
 
     //Pre: ID Must not be a negative number.
     //Post: Destroys the appointment with the given ID. Returns true in case of success, false otherwise.
-    public boolean destroyAppointment(int id){
-        if(idNotFound(id, appointments.size())) return false;
+    public void destroyAppointment(int id){
+        if(idNotFound(id, appointments.size())) return;
 
         appointments.get(id).setDestroyed();
-        return true;
     }
 
     //Post: Returns true if there is not an appointment with the ID received, false otherwise.

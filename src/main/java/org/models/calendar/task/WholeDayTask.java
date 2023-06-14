@@ -1,16 +1,12 @@
 package org.models.calendar.task;
 
-import org.models.calendar.alarms.Alarm;
 import org.models.calendar.visitor.Visitor;
 import org.models.calendar.appointment.Appointment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WholeDayTask extends Task {
     private String subtype = "WholeDayTask";
@@ -76,27 +72,5 @@ public class WholeDayTask extends Task {
         if(isCompleted()) isCompleted = "Yes";
 
         return this.getTitle() + "   " + "\n Task date: " + this.getStartDateTime().toLocalDate().toString() + "\n Completed: " + isCompleted;
-    }
-
-    @Override
-    public Map<String, String> dataToMapOfString(){
-
-        Map<String, String> hashData = new HashMap<>();
-
-        hashData.put("Title", this.getTitle());
-        hashData.put("Description", this.getDescription());
-        hashData.put("Type", this.getType());
-        hashData.put("DateImportant", "Initial Date: " + this.getStartDateTime().toString() + "\nExpiration Date: " + this.getExpirationDateTime().toString());
-        if (this.withAlarms()){
-            String listAlarms = "";
-            for (Alarm alarm : this.getAlarms()) {
-                listAlarms += alarm.toString() + "\n";
-            }
-            hashData.put("Alarms", listAlarms);
-        } else {
-            hashData.put("Alarms", "This task has no alarms.");
-        }
-
-        return hashData;
     }
 }

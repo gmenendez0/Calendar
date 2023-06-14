@@ -4,6 +4,7 @@ import org.models.calendar.event.Event;
 import org.models.calendar.event.WholeDayEvent;
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.event.PeriodTimeEvent;
+import org.models.calendar.event.frequency.Frequency;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.models.calendar.task.WholeDayTask;
 
@@ -141,4 +142,20 @@ public class AppointmentsVisitor implements Visitor {
 
         return selectedAppointments;
     }
+
+    @Override
+    public String detailsOfFrequencyEvent(Frequency frequency) {
+        return frequency.toString();
+    }
+
+    @Override
+    public String detailsOfDatesEvent(LocalDateTime start, LocalDateTime end){
+        return "The Event starts on " + start + " and ends on " + end;
+    }
+
+    @Override
+    public String detailsOfDatesTask(LocalDateTime expirationDateTime){
+        return "The Expiration date of the alarm is " + expirationDateTime;
+    }
+
 }

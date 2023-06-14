@@ -1,6 +1,5 @@
 package org.models.calendar.event;
 
-import org.models.calendar.alarms.Alarm;
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.event.frequency.Frequency;
 import org.models.calendar.visitor.Visitor;
@@ -8,10 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WholeDayEvent extends Event {
     private String subtype = "WholeDayEvent";
@@ -97,32 +93,5 @@ public class WholeDayEvent extends Event {
         String isCompleted = "No";
         if(isCompleted()) isCompleted = "Yes";
         return this.getTitle() + "   " + "\n Event date: " + this.eventDate.toString() + "\n Completed: " + isCompleted;
-    }
-
-    @Override
-    public Map<String, String> dataToMapOfString(){
-
-        Map<String, String> hashData = new HashMap<>();
-
-        hashData.put("Title", this.getTitle());
-        hashData.put("Description", this.getDescription());
-        hashData.put("Type", this.type);
-        hashData.put("DateImportant", "Event Date: " + this.eventDate.toString());
-        if (this.withAlarms()){
-            String listAlarms = "";
-            for (Alarm alarm : this.getAlarms()) {
-                listAlarms += alarm.toString() + "\n";
-            }
-            hashData.put("Alarms", listAlarms);
-        } else {
-            hashData.put("Alarms", "This event has no alarms.");
-        }
-        if (this.isRepeated()){
-            hashData.put("Frequency", this.getFrequency().toString());
-        } else {
-            hashData.put("Frequency", "This event has no frequency.");
-        }
-
-        return hashData;
     }
 }
