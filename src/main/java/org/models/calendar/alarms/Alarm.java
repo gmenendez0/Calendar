@@ -44,7 +44,7 @@ public abstract class Alarm {
     //Post: Rings the alarm. Returns true if it's called (for testing reasons).
     public abstract void ring();
 
-    //Post: Checks if it is time to ring, and in case it is, returns true. Otherwise, returns false.
+    //Post: Checks if it is time to ring. If it is time to ring, rings the alarm.
     public void update(LocalDateTime nowTime){
         if(nowTime.equals(ringDateTime)) ring();
     }
