@@ -26,6 +26,7 @@ public class FrequencyDaily extends Frequency {
         this.daysToAdd = daysToAdd;
     }
 
+    //@inheritDoc
     @Override
     public LocalDateTime nextRepetitionDateTime(LocalDateTime date){
         LocalDateTime dayTime = date.plus(this.daysToAdd, ChronoUnit.DAYS);

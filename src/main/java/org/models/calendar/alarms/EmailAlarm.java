@@ -3,7 +3,6 @@ package org.models.calendar.alarms;
 import java.time.LocalDateTime;
 
 public class EmailAlarm extends Alarm {
-
     private final String subtype = "EmailAlarm";
 
     public EmailAlarm(int id, LocalDateTime ringDateTime){

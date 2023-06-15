@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class FrequencyMonthly extends Frequency {
-    private final String subtype = "FrequencyMonthly";
     @JsonIgnore
     final int ONE_MONTH = 1;
     @JsonIgnore
     private int monthsToAdd;
+
+    private final String subtype = "FrequencyMonthly";
 
     public FrequencyMonthly(LocalDate deadline){
         this.monthsToAdd = ONE_MONTH;

@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class FrequencyWeekly extends Frequency {
-    private final String subtype = "FrequencyWeekly";
-    private List<DayOfWeek> weekDays;
     @JsonIgnore
     final int NUMBER_OF_DAYS = 7;
     @JsonIgnore
@@ -22,6 +20,10 @@ public class FrequencyWeekly extends Frequency {
     final int ONE_POSITION = 1;
     @JsonIgnore
     final int ARRAY_POSITION_DIFFERENCE = 1;
+
+    private final String subtype = "FrequencyWeekly";
+
+    private List<DayOfWeek> weekDays;
 
     public FrequencyWeekly(List<DayOfWeek> weekDays, LocalDate deadline){
         this.weekDays = weekDays;

@@ -324,9 +324,14 @@ public class CreateAppointmentControllers {
         return newFrequency;
     }
 
+    //Post: Returns true if entered date combination is invalid, false otherwise.
+    private boolean dateCombinationIsInvalid(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return (startDateTime.isAfter(endDateTime) || startDateTime.isEqual(endDateTime));
+    }
+
     //Post: checks if the beginning does not exceed the end, in that case it throws an exception
     private void compareDatesAndTimes(LocalDateTime start, LocalDateTime end) throws EventTimeException {
-        if (start.isAfter(end) || start.isEqual(end)) throw new EventTimeException("The start of the event cannot exceed the end");
+        if (dateCombinationIsInvalid(start, end)) throw new EventTimeException("The start of the event cannot exceed the end");
     }
 
     //Post: Creates a new periodTimeEvent with the data entered by the user.
@@ -392,7 +397,6 @@ public class CreateAppointmentControllers {
             } catch (EventTimeException ex) {
                 errorCreateAppointment(ex.getMessage());
             }
-
         });
     }
 
@@ -461,25 +465,33 @@ public class CreateAppointmentControllers {
             return this.dateAppointmentStart.minusHours(hour).minusMinutes(minute);
         } catch (NullPointerException ex) {
             messageControllers.error("The required date and/or time is missing");
+            return null;
         }
-
-        return null;
     }
 
-    //Post: Create corresponding alarm.
+    //Post: Returns the corresponding alarm according to the received string type.
+    private Alarm getCorrespondingAlarm(String type, LocalDateTime ringDateTime){
+        Alarm newAlarm;
+
+        switch(type){
+            case "Email" -> newAlarm = new EmailAlarm(idAlarm, ringDateTime);
+            case "Notification" -> newAlarm = new NotificationAlarm(idAlarm, ringDateTime);
+            case "Sound" -> newAlarm = new SoundAlarm(idAlarm, ringDateTime);
+            default -> newAlarm = null;
+        }
+
+        return newAlarm;
+    }
+
+    //Post: Creates corresponding alarm.
     private void createAlarm(String type) {
         LocalDateTime ringDateTime = configRingDateTime();
         if (ringDateTime == null) return;
 
-        Alarm newAlarm = switch (type) {
-            case "Email" -> new EmailAlarm(idAlarm, ringDateTime);
-            case "Notification" -> new NotificationAlarm(idAlarm, ringDateTime);
-            case "Sound" -> new SoundAlarm(idAlarm, ringDateTime);
-            default -> null;
-        };
+        Alarm newAlarm = getCorrespondingAlarm(type, ringDateTime);
+        if (type.equals("Notification")) appointmentAlarmsControllers.activateTimer(newAlarm, appointmentCreated);
+        appointmentCreated.addAlarm(newAlarm);
 
-        if (type.equals("Notification")) appointmentAlarmsControllers.active(newAlarm, appointmentCreated);
-        this.appointmentCreated.addAlarm(newAlarm);
         idAlarm++;
         messageControllers.success("Added an alarm to " + appointmentCreated.getType());
     }
@@ -512,7 +524,7 @@ public class CreateAppointmentControllers {
         });
     }
 
-    //Post: button when the user wants to finish the creation.
+    //Post: Configs finishButton behaviour.
     private void configFinishButton(){
         btnFinish.setOnAction(event -> {
             addAppointmentToCalendar();

@@ -19,8 +19,11 @@ import java.time.LocalTime;
 
 public abstract class Event extends Appointment {
     protected LocalDateTime startDateTime;
+
     protected LocalDateTime endingDateTime;
+
     protected Frequency frequency;
+
     protected final String type = "Event";
 
     public Event(String title, String description, LocalDateTime startDateTime, LocalDateTime endingDateTime){

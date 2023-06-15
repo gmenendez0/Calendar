@@ -17,12 +17,12 @@ public class AppointmentAlarmsControllers {
     }
 
     //Post: activates the timer that controls when the alarm sounds.
-    public void active(Alarm alarm, Appointment appointment){
+    public void activateTimer(Alarm alarm, Appointment appointment){
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                boolean EQUAL_TIME = alarm.checkTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-                if(EQUAL_TIME) {
+                boolean isTimeToRing = alarm.checkTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+                if(isTimeToRing) {
                     showNotificationAlarm(appointment);
                     stop();
                 }

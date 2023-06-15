@@ -23,14 +23,20 @@ import java.util.*;
 })
 
 public abstract class Appointment implements Serializable {
-    private int id;
-    private String title;
-    private String description;
-    private boolean completed;
-    private boolean destroyed;
-    protected final List<Alarm> alarms = new ArrayList<>();
     @JsonIgnore
     final int NO_ID = -1;
+
+    private int id;
+
+    private String title;
+
+    private String description;
+
+    private boolean completed;
+
+    private boolean destroyed;
+
+    protected final List<Alarm> alarms = new ArrayList<>();
 
     public Appointment(String title, String description){
         this.id = NO_ID;

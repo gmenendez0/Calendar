@@ -1,454 +1,68 @@
 [ {
   "id" : 0,
-  "title" : "Hola Mundo!!!!!",
-  "description" : "Primer Descripcion",
+  "title" : "TAREAAA",
+  "description" : "Descripcion de la tarea",
   "completed" : false,
   "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 11, 0, 24, 53, 501545900 ],
-  "endingDateTime" : [ 2023, 6, 12, 0, 24, 53, 502543400 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
+  "alarms" : [ {
+    "subtype" : "NotificationAlarm",
+    "id" : 0,
+    "ringDateTime" : [ 10, 10, 10, 10, 10, 10 ]
+  }, {
+    "subtype" : "EmailAlarm",
+    "id" : 1,
+    "ringDateTime" : [ 10, 10, 10, 10, 15, 10 ]
+  }, {
+    "subtype" : "SoundAlarm",
+    "id" : 2,
+    "ringDateTime" : [ 10, 10, 10, 10, 20, 10 ]
+  } ],
+  "expirationDateTime" : [ 2023, 5, 20, 23, 59, 59 ],
+  "type" : "Task",
+  "subtype" : "WholeDayTask",
+  "startDateTime" : [ 2023, 5, 20, 0, 0 ]
 }, {
   "id" : 1,
-  "title" : "Evento del tipo: wholeDayEvent",
-  "description" : "AAAAfwABUHIFWABIWFGAB AWFWAFBNOIWAFBNAWFAWFfwe",
+  "title" : "EVENTO",
+  "description" : "Prueba de Json",
   "completed" : false,
   "destroyed" : false,
   "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 11, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 11, 23, 59, 59 ],
-  "frequency" : null,
+  "startDateTime" : [ 2023, 5, 18, 20, 30, 10 ],
+  "endingDateTime" : [ 2023, 5, 28, 20, 30, 10 ],
+  "frequency" : {
+    "subtype" : "FrequencyMonthly",
+    "deadline" : [ 2025, 5, 28 ]
+  },
   "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 11 ]
+  "subtype" : "PeriodTimeEvent"
 }, {
   "id" : 2,
-  "title" : "Tarea del tipo: wholeDayTask",
-  "description" : "Tercera Descripcion",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 11, 23, 59, 59 ],
-  "type" : "Task",
-  "subtype" : "WholeDayTask",
-  "startDateTime" : [ 2023, 6, 11, 0, 0 ]
-}, {
-  "id" : 3,
-  "title" : "Tarea del tipo: expirationTimeTask",
-  "description" : "Cuarta Descripcion",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 11, 0, 24, 53, 502543400 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 4,
-  "title" : "Titulo",
-  "description" : "Descripcion",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 2, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 2, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyDaily",
-    "deadline" : [ 2023, 6, 11 ],
-    "daysToAdd" : 3
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 2 ]
-}, {
-  "id" : 5,
-  "title" : "Titulo",
-  "description" : "Descripcion",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : 0,
-    "ringDateTime" : [ 2023, 6, 15, 2, 1 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 13, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 13, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyDaily",
-    "deadline" : [ 2023, 6, 10 ],
-    "daysToAdd" : 1
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 9 ]
-}, {
-  "id" : 6,
-  "title" : "Tarea de Pueba",
-  "description" : "Esta tarea sería la primera creada con el calendario terminado",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "SoundAlarm",
-    "id" : 0,
-    "ringDateTime" : [ 2023, 6, 5, 23, 44, 59 ]
-  }, {
-    "subtype" : "NotificationAlarm",
-    "id" : 1,
-    "ringDateTime" : [ 2023, 6, 5, 23, 39, 59 ]
-  } ],
-  "expirationDateTime" : [ 2023, 6, 5, 23, 59, 59 ],
-  "type" : "Task",
-  "subtype" : "WholeDayTask",
-  "startDateTime" : [ 2023, 6, 5, 0, 0 ]
-}, {
-  "id" : 8,
-  "title" : "titulo",
-  "description" : "desc",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 13, 23, 4 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 13, 23, 5 ],
-  "endingDateTime" : [ 2023, 6, 14, 0, 0 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 8,
-  "title" : "titulo",
-  "description" : "desc",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 13, 23, 4 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 13, 23, 5 ],
-  "endingDateTime" : [ 2023, 6, 14, 0, 0 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 9,
-  "title" : "neasonlfg",
-  "description" : "efamsnpgm",
+  "title" : "Anual",
+  "description" : "Prueba con evento anual",
   "completed" : false,
   "destroyed" : false,
   "alarms" : [ ],
   "startDateTime" : [ 2023, 5, 10, 0, 0 ],
   "endingDateTime" : [ 2023, 5, 10, 23, 59, 59 ],
-  "frequency" : null,
+  "frequency" : {
+    "subtype" : "FrequencyAnnual",
+    "deadline" : null
+  },
   "type" : "Event",
   "subtype" : "WholeDayEvent",
   "eventDate" : [ 2023, 5, 10 ]
 }, {
-  "id" : 10,
-  "title" : "dwnaio",
-  "description" : "fnmwsaop",
+  "id" : 3,
+  "title" : "SIN",
+  "description" : "FRECUENCIA",
   "completed" : false,
   "destroyed" : false,
   "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 1, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 11,
-  "title" : "fwq",
-  "description" : "fwqa",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 23, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 12,
-  "title" : "Prueba de notificacion",
-  "description" : "De beria salir una noti",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "SoundAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 14, 1, 0 ]
-  }, {
-    "subtype" : "NotificationAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 14, 0, 0 ]
-  } ],
-  "expirationDateTime" : [ 2023, 6, 14, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 13,
-  "title" : "wda",
-  "description" : "daw",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 9, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 14,
-  "title" : "a",
-  "description" : "a",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 2, 1, 1 ],
-  "endingDateTime" : [ 2023, 6, 8, 1, 1 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 15,
-  "title" : "gesgeega",
-  "description" : "fwa",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 17, 1, 1 ],
-  "endingDateTime" : [ 2023, 6, 20, 1, 1 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 16,
-  "title" : "Probar notif de alarm",
-  "description" : "desc",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 29, 23, 50 ]
-  }, {
-    "subtype" : "SoundAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 29, 23, 45 ]
-  }, {
-    "subtype" : "EmailAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 29, 23, 55 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 30, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 30, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyAnnual",
-    "deadline" : [ 2034, 6, 30 ]
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 30 ]
-}, {
-  "id" : 17,
-  "title" : "Titulo",
-  "description" : "Finish completado",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 18, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 18, 23, 59, 59 ],
+  "startDateTime" : [ 2023, 5, 25, 0, 0 ],
+  "endingDateTime" : [ 2023, 5, 25, 23, 59, 59 ],
   "frequency" : null,
   "type" : "Event",
   "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 18 ]
-}, {
-  "id" : 18,
-  "title" : "Prueba si recarga al crear",
-  "description" : "b jwfikoaq",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 22, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 19,
-  "title" : "Actualiza Home",
-  "description" : "A ver si actualiza el home al agregar esta tarea",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 16, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 20,
-  "title" : "wfnioqa",
-  "description" : "fnwikpao",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 29, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 21,
-  "title" : "Tarea de Hoyu",
-  "description" : "mwfgoqap",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 14, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 22,
-  "title" : "Evento de hoy",
-  "description" : "fwa",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 14, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 14, 23, 59, 59 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 14 ]
-}, {
-  "id" : 25,
-  "title" : "Prueba def Alarma",
-  "description" : "Espero que funcione",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 15, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 25,
-  "title" : "Prueba def Alarma",
-  "description" : "Espero que funcione",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 15, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 25,
-  "title" : "Prueba def Alarma",
-  "description" : "Espero que funcione",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "expirationDateTime" : [ 2023, 6, 15, 1, 1 ],
-  "type" : "Task",
-  "subtype" : "ExpirationTimeTask"
-}, {
-  "id" : 26,
-  "title" : "",
-  "description" : "",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 23, 2, 1 ],
-  "endingDateTime" : [ 2023, 6, 23, 3, 1 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 27,
-  "title" : "dwa",
-  "description" : "fwa",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : -1,
-    "ringDateTime" : [ 2023, 6, 14, 21, 6 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 14, 21, 7 ],
-  "endingDateTime" : [ 2023, 6, 30, 1, 1 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 28,
-  "title" : "b sdnk",
-  "description" : "nefvgio",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : 0,
-    "ringDateTime" : [ 2023, 6, 14, 22, 26 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 14, 22, 27 ],
-  "endingDateTime" : [ 2023, 6, 15, 1, 1 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 29,
-  "title" : "Titulo",
-  "description" : "nwfaoi",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ {
-    "subtype" : "NotificationAlarm",
-    "id" : 0,
-    "ringDateTime" : [ 2023, 6, 14, 22, 48 ]
-  } ],
-  "startDateTime" : [ 2023, 6, 14, 22, 49 ],
-  "endingDateTime" : [ 2023, 6, 22, 1, 1 ],
-  "frequency" : null,
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 30,
-  "title" : "",
-  "description" : "",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 15, 1, 1 ],
-  "endingDateTime" : [ 2023, 6, 17, 1, 1 ],
-  "frequency" : {
-    "subtype" : "FrequencyDaily",
-    "deadline" : [ 2023, 6, 15 ],
-    "daysToAdd" : 5
-  },
-  "type" : "Event",
-  "subtype" : "PeriodTimeEvent"
-}, {
-  "id" : 31,
-  "title" : "Semanalmente",
-  "description" : "fngwiqo",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 15, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 15, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyWeekly",
-    "deadline" : [ 2023, 6, 28 ],
-    "weekDays" : [ "MONDAY", "TUESDAY", "WEDNESDAY" ]
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 15 ]
-}, {
-  "id" : 32,
-  "title" : "",
-  "description" : "",
-  "completed" : false,
-  "destroyed" : false,
-  "alarms" : [ ],
-  "startDateTime" : [ 2023, 6, 16, 0, 0 ],
-  "endingDateTime" : [ 2023, 6, 16, 23, 59, 59 ],
-  "frequency" : {
-    "subtype" : "FrequencyMonthly",
-    "deadline" : [ 2023, 6, 16 ]
-  },
-  "type" : "Event",
-  "subtype" : "WholeDayEvent",
-  "eventDate" : [ 2023, 6, 16 ]
+  "eventDate" : [ 2023, 5, 25 ]
 } ]

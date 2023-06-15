@@ -32,6 +32,7 @@ public class JsonFileHandlerStrategy implements FileHandlerStrategy {
     @Override
     public List<Appointment> loadData(BufferedInputStream obj) throws IOException{
         var data = new ArrayList<Appointment>();
+
         try{
             data = objectMapper.readValue(obj, new TypeReference<>() {});
             return data;

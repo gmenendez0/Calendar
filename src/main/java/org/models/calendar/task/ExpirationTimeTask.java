@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ExpirationTimeTask extends Task {
-
     private String subtype = "ExpirationTimeTask";
 
     public ExpirationTimeTask(String title, String description, LocalDateTime expirationDateTime) {

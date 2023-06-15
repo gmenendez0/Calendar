@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class DetailsVisitorDatesTaskTest {
-    private AppointmentDetailsVisitor visitor = new AppointmentDetailsVisitorImpl();
+    private final AppointmentDetailsVisitor visitor = new AppointmentDetailsVisitorImpl();
 
     @Test
     public void visitorInExpirationTimeTaskTest(){

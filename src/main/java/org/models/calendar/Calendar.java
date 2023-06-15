@@ -13,6 +13,7 @@ import java.util.List;
 public class Calendar {
     final int INVALID_ID = -1;
     final int EMPTY = 0;
+
     private List<Appointment> appointments = new ArrayList<>();
 
     //Empty constructor for persistence (Jackson).

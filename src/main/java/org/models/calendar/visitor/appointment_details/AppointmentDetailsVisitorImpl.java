@@ -5,7 +5,6 @@ import org.models.calendar.event.frequency.Frequency;
 import java.time.LocalDateTime;
 
 public class AppointmentDetailsVisitorImpl implements AppointmentDetailsVisitor{
-
     //Post: return the frequency details in string format.
     //@inheritDoc
     @Override

@@ -10,13 +10,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class WholeDayEvent extends Event {
-    private String subtype = "WholeDayEvent";
     @JsonIgnore
     final static int ENDING_HOUR = 23;
     @JsonIgnore
     final static int ENDING_MINUTE = 59;
     @JsonIgnore
     final static int ENDING_SECOND = 59;
+
+    private String subtype = "WholeDayEvent";
 
     private LocalDate eventDate;
 

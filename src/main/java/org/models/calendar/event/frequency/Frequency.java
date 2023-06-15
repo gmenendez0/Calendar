@@ -20,6 +20,7 @@ import java.time.LocalTime;
 public abstract class Frequency {
     @JsonIgnore
     final int FIRST_REPETITION = 1;
+
     protected LocalDate deadline;
 
     public Frequency(){}
