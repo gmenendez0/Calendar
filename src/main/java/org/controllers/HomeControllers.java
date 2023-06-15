@@ -97,10 +97,12 @@ public class HomeControllers{
         appointmentList.setItems(appointmentsToRender);
     }
 
+    //Post: the event is configured to see details of the appointment
     private void setEventDetails(GridPane appointmentText, LocalDateTime start, LocalDateTime end){
         appointmentText.setOnMouseClicked(mouseEvent -> appointmentDetailsControllers.setUpViewDetailsConfig(Integer.parseInt(appointmentText.getId()), start, end, calendar));
     }
 
+    //Post: the container for the text that will be displayed in the Home of the calendar is created
     private GridPane createContainerForText(Appointment appointment, int id){
         GridPane containerText = new GridPane();
         Text text = new Text(appointment.formatToString());
@@ -134,6 +136,7 @@ public class HomeControllers{
         timeSelectorButtonClicked();
     }
 
+    //Post: when the creation stage is closed, the appointment list is updated
     private void closeSecondStage(){
         secondStage.setOnHidden(eventHidden -> setUpInitialHomeView());
     }

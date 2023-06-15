@@ -1,4 +1,4 @@
-package org.models.calendar.visitor;
+package org.models.calendar.visitor.getAppointmentsBetweenVisitor;
 
 import org.models.calendar.appointment.Appointment;
 import org.models.calendar.event.WholeDayEvent;

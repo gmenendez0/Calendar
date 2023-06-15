@@ -3,6 +3,9 @@ package org.controllers;
 import org.views.ViewMessage;
 
 public class MessageControllers {
+
+    //For different situations, there is a notification message
+
     private final ViewMessage viewMessage = new ViewMessage();
 
     private void configMessageStage(String color, String message) {

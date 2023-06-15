@@ -39,6 +39,8 @@ public class AppointmentDetailsControllers {
     @FXML
     private Text alarmsListAppointment;
 
+    //Pre: receives the id of the clicked appointment, the start and end date, and the calendar to search for the appointment.
+    //Post: set the scene to display or a file warning.
     public void setUpViewDetailsConfig(Integer id, LocalDateTime start, LocalDateTime end, Calendar calendar) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/appointmentDetails.fxml"));
@@ -53,17 +55,20 @@ public class AppointmentDetailsControllers {
         }
     }
 
+    //Post: write the detail of the appointment alarms
     private String writeAlarms(Appointment appointment){
         List<Alarm> listAlarm = appointment.getAlarms();
         if(listAlarm.isEmpty()) return "This " + appointment.getType() + " has not alarms.";
         return listAlarm.stream().map(Object::toString).reduce("", (a, b) -> a + " " + b + "\n");
     }
 
+    //Post: write the detail of the appointment frequency
     private void addFrequencyInDetails(Appointment appointment){
         if(appointment.getType().equals("Event")) titleFrequencyAppointment.setText("Frequency");
         frequencyAppointment.setText(appointment.acceptVisitorDetailsFrequency(visitor));
     }
 
+    //Post: write the detail of the appointment data
     private void completeDetailsStage(Appointment appointment){
         titleWindow.setText(appointment.getTitle());
         titleAppointment.setText(appointment.getTitle());

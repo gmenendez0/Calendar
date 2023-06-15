@@ -386,4 +386,69 @@
   "frequency" : null,
   "type" : "Event",
   "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 29,
+  "title" : "Titulo",
+  "description" : "nwfaoi",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ {
+    "subtype" : "NotificationAlarm",
+    "id" : 0,
+    "ringDateTime" : [ 2023, 6, 14, 22, 48 ]
+  } ],
+  "startDateTime" : [ 2023, 6, 14, 22, 49 ],
+  "endingDateTime" : [ 2023, 6, 22, 1, 1 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 30,
+  "title" : "",
+  "description" : "",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 15, 1, 1 ],
+  "endingDateTime" : [ 2023, 6, 17, 1, 1 ],
+  "frequency" : {
+    "subtype" : "FrequencyDaily",
+    "deadline" : [ 2023, 6, 15 ],
+    "daysToAdd" : 5
+  },
+  "type" : "Event",
+  "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 31,
+  "title" : "Semanalmente",
+  "description" : "fngwiqo",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 15, 0, 0 ],
+  "endingDateTime" : [ 2023, 6, 15, 23, 59, 59 ],
+  "frequency" : {
+    "subtype" : "FrequencyWeekly",
+    "deadline" : [ 2023, 6, 28 ],
+    "weekDays" : [ "MONDAY", "TUESDAY", "WEDNESDAY" ]
+  },
+  "type" : "Event",
+  "subtype" : "WholeDayEvent",
+  "eventDate" : [ 2023, 6, 15 ]
+}, {
+  "id" : 32,
+  "title" : "",
+  "description" : "",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 16, 0, 0 ],
+  "endingDateTime" : [ 2023, 6, 16, 23, 59, 59 ],
+  "frequency" : {
+    "subtype" : "FrequencyMonthly",
+    "deadline" : [ 2023, 6, 16 ]
+  },
+  "type" : "Event",
+  "subtype" : "WholeDayEvent",
+  "eventDate" : [ 2023, 6, 16 ]
 } ]

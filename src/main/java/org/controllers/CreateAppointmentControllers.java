@@ -21,7 +21,7 @@ import org.models.calendar.event.frequency.*;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.models.calendar.task.Task;
 import org.models.calendar.task.WholeDayTask;
-import org.models.exceptions.CalendarException;
+import org.controllers.exceptions.EventTimeException;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -189,6 +189,7 @@ public class CreateAppointmentControllers {
     @FXML
     private Button btnFinish;
 
+    //Post: start the stage configuration and the creation of the scene or a file warning.
     public void setupViewCreateAppointment(Calendar calendar, Stage createStage) {
         this.calendar = calendar;
         this.createStage = createStage;
@@ -205,6 +206,7 @@ public class CreateAppointmentControllers {
         }
     }
 
+    //Post: start the general configuration of the scene
     private void configEventInCreateView(){
         configPaneCheck();
         configSpinnerIntegerValue();
@@ -218,6 +220,7 @@ public class CreateAppointmentControllers {
         createStage.show();
     }
 
+    //Post: adds the options to the frequency spinner
     private void configSpinnerFrequency(){
         ObservableList<String> typesFrequency = FXCollections.observableArrayList("Without frequency", "Daily", "Weekly", "Monthly", "Annual");
         SpinnerValueFactory<String> factoryTypesFrequency = new SpinnerValueFactory.ListSpinnerValueFactory<>(typesFrequency);
@@ -233,6 +236,7 @@ public class CreateAppointmentControllers {
         });
     }
 
+    //Post: configure the alarm checkboxes. If one is enabled, the other is disabled.
     private void configToggleCheckAlarm(){
         checkAbsolute.setSelected(true);
         checkAbsolute.setToggleGroup(groupAlarms);
@@ -240,6 +244,7 @@ public class CreateAppointmentControllers {
         dateAlarm.disableProperty().bindBidirectional(checkRelative.selectedProperty());
     }
 
+    //Post: configure the checkboxes to create options according to their duration
     private void configPaneCheck(){
         dateTimeEndEvent.visibleProperty().bindBidirectional(checkPeriodTimeEvent.selectedProperty());
         timeStartEvent.visibleProperty().bindBidirectional(checkPeriodTimeEvent.selectedProperty());
@@ -248,18 +253,22 @@ public class CreateAppointmentControllers {
         configToggleCheckAlarm();
     }
 
+    //Post: the factory is created to configure the hour spinners
     private SpinnerValueFactory<Integer> createFactoryHour(){
         return new SpinnerValueFactory.IntegerSpinnerValueFactory(ZERO_HOUR, FINAL_HOUR, FIRST_HOUR);
     }
 
+    //Post: the factory is created to configure the minute spinners
     private SpinnerValueFactory<Integer> createFactoryMinute(){
         return new SpinnerValueFactory.IntegerSpinnerValueFactory(ZERO_HOUR, FINAL_MINUTE, FIRST_MINUTE);
     }
 
+    //Post: the factory is created to configure the day spinners
     private SpinnerValueFactory<Integer> createFactoryDay(){
         return new SpinnerValueFactory.IntegerSpinnerValueFactory(ONE_DAY, Integer.MAX_VALUE, ONE_DAY);
     }
 
+    //Post: each spinner is added its respective factory
     private void configSpinnerIntegerValue(){
         hourStartEvent.setValueFactory(createFactoryHour());
         hourEndEvent.setValueFactory(createFactoryHour());
@@ -274,10 +283,12 @@ public class CreateAppointmentControllers {
         intervalDaysValue.setValueFactory(createFactoryDay());
     }
 
+    //Post: the options are added to the alarm comboBox
     private void configComboBoxAlarms(){
         comboBoxAlarms.setItems(FXCollections.observableArrayList("Notification", "Sound", "Email"));
     }
 
+    //Post: add which days of the week were chosen for the frequency
     private List<DayOfWeek> obtainListDaysOfTheWeek(){
         List<DayOfWeek> arrayWeek = new ArrayList<>();
         if (checkMonday.isSelected()) arrayWeek.add(DayOfWeek.MONDAY);
@@ -313,11 +324,12 @@ public class CreateAppointmentControllers {
         return newFrequency;
     }
 
-    private void compareDatesAndTimes(LocalDateTime start, LocalDateTime end) throws CalendarException{
-        if (start.isAfter(end)) throw new CalendarException("The start of the event cannot exceed the end");
+    //Post: checks if the beginning does not exceed the end, in that case it throws an exception
+    private void compareDatesAndTimes(LocalDateTime start, LocalDateTime end) throws EventTimeException {
+        if (start.isAfter(end) || start.isEqual(end)) throw new EventTimeException("The start of the event cannot exceed the end");
     }
 
-    private Event createPeriodTimeEvent(String title, String description) throws NullPointerException, CalendarException {
+    private Event createPeriodTimeEvent(String title, String description) throws NullPointerException, EventTimeException {
         int hourStart = hourStartEvent.getValue();
         int minuteStart = minuteStartEvent.getValue();
         LocalDate startDate = startDateEvent.getValue();
@@ -340,14 +352,17 @@ public class CreateAppointmentControllers {
         return new WholeDayEvent(title, description, startDate);
     }
 
+    //Post: check if the title does not exceed 60 characters, in that case an exception is thrown
     private void verifyCharacterInTitle(String title){
-        if (title.chars().count() > MAX_NUM_CHARACTER)  messageControllers.error("The title must not exceed 60 characters");
+        if (title.chars().count() > MAX_NUM_CHARACTER) messageControllers.error("The title must not exceed 60 characters");
     }
 
+    //Post: an error message is thrown with a custom text
     private void errorCreateAppointment(String message) {
         messageControllers.error(message);
     }
 
+    //Post: the event is added to the button to create events
     private void createButtonEvent(){
         btnCreateEvent.setOnAction(actionEvent -> {
             Event newEvent;
@@ -369,13 +384,14 @@ public class CreateAppointmentControllers {
                 enableAlarmTab();
             } catch (NullPointerException ex) {
                 errorCreateAppointment("The required date and/or time is missing");
-            } catch (CalendarException ex) {
+            } catch (EventTimeException ex) {
                 errorCreateAppointment(ex.getMessage());
             }
 
         });
     }
 
+    //Post: returns the created task.
     private Task createExpirationTimeTask(String title, String description) throws NullPointerException{
         int hourTask = hourStartTask.getValue();
         int minuteTask = minuteStartTask.getValue();
@@ -386,11 +402,13 @@ public class CreateAppointmentControllers {
         return new ExpirationTimeTask(title, description, dateTimeTask);
     }
 
+    //Post: returns the created task.
     private Task createWholeDayTask(String title, String description) throws NullPointerException{
         LocalDate dateTask = startDateTask.getValue();
         return new WholeDayTask(title, description, dateTask);
     }
 
+    //Post: the task is added to the button to create task
     private void createButtonTask(){
         btnCreateTask.setOnAction(actionEvent -> {
             Task newTask;
@@ -413,6 +431,7 @@ public class CreateAppointmentControllers {
         });
     }
 
+    //Post: the tabs of the tabPane are configured so that the alarm is configured after the event or task is created
     private void enableAlarmTab(){
         tabEvent.setDisable(true);
         tabTask.setDisable(true);
@@ -420,6 +439,7 @@ public class CreateAppointmentControllers {
         tabPaneCreate.getSelectionModel().select(INDEX_TAB_ALARM);
     }
 
+    //Post: the LocalDateTime is returned with the hour and minutes marked in the spinner to create the alarm
     private LocalDateTime configRingDateTime(){
         try {
             int hour = hourAlarm.getValue();
@@ -437,6 +457,7 @@ public class CreateAppointmentControllers {
         return null;
     }
 
+    //Post: alarm is created.
     private void createAlarm(String type) {
         LocalDateTime ringDateTime = configRingDateTime();
         if (ringDateTime == null) return;
@@ -454,6 +475,7 @@ public class CreateAppointmentControllers {
         messageControllers.success("Added an alarm to " + appointmentCreated.getType());
     }
 
+    //Post: the event is added to create alarms
     private void createButtonAlarms(){
         btnCreateAlarm.setOnAction(actionEvent -> {
             String type = comboBoxAlarms.getValue();
@@ -466,11 +488,13 @@ public class CreateAppointmentControllers {
         });
     }
 
+    //Post: the created appointment is added to the calendar
     private void addAppointmentToCalendar(){
         calendar.addAppointment(appointmentCreated);
         messageControllers.success("The " + appointmentCreated.getType() + " was created correctly");
     }
 
+    //Post: event when the stage closes
     private void closeStageCreate(){
         createStage.setOnCloseRequest(event -> {
             if (appointmentCreated != null) {
@@ -481,6 +505,7 @@ public class CreateAppointmentControllers {
         });
     }
 
+    //Post: button when the user wants to finish the creation.
     private void configFinishButton(){
         btnFinish.setOnAction(event -> {
             addAppointmentToCalendar();
