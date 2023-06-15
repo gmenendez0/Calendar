@@ -216,7 +216,6 @@ public class CreateAppointmentControllers {
         createButtonAlarms();
         closeStageCreate();
         configFinishButton();
-        //configDatePickerEvent();
         createStage.show();
     }
 
@@ -301,6 +300,7 @@ public class CreateAppointmentControllers {
         return arrayWeek;
     }
 
+    //Post: Returns the frequency according to users selected option
     private Frequency addFrequencyNewEvent(){
         Frequency newFrequency;
         LocalDate deadline = deadLinePicker.getValue();
@@ -329,7 +329,8 @@ public class CreateAppointmentControllers {
         if (start.isAfter(end) || start.isEqual(end)) throw new EventTimeException("The start of the event cannot exceed the end");
     }
 
-    private Event createPeriodTimeEvent(String title, String description) throws NullPointerException, EventTimeException {
+    //Post: Creates a new periodTimeEvent with the data entered by the user.
+    private Event createPeriodTimeEvent(String title, String description) throws EventTimeException {
         int hourStart = hourStartEvent.getValue();
         int minuteStart = minuteStartEvent.getValue();
         LocalDate startDate = startDateEvent.getValue();
@@ -347,6 +348,7 @@ public class CreateAppointmentControllers {
         return new PeriodTimeEvent(title, description, startDateTime, endDateTime);
     }
 
+    //Post: Creates a new wholeDayEvent with the data entered by the user.
     private Event createWholeDayEvent(String title, String description) throws NullPointerException{
         LocalDate startDate = startDateEvent.getValue();
         return new WholeDayEvent(title, description, startDate);
@@ -362,6 +364,12 @@ public class CreateAppointmentControllers {
         messageControllers.error(message);
     }
 
+    //Post: Returns the corresponding event according to the user's choice
+    private Event createCorrespondingEvent(String title, String description) throws EventTimeException{
+        if (checkPeriodTimeEvent.isSelected()) return createPeriodTimeEvent(title, description);
+        return createWholeDayEvent(title, description);
+    }
+
     //Post: the event is added to the button to create events
     private void createButtonEvent(){
         btnCreateEvent.setOnAction(actionEvent -> {
@@ -369,12 +377,9 @@ public class CreateAppointmentControllers {
             String title = eventTitle.getText();
             verifyCharacterInTitle(title);
             String description = descriptionEvent.getText();
+
             try {
-                if (checkPeriodTimeEvent.isSelected()) {
-                    newEvent = createPeriodTimeEvent(title, description);
-                } else {
-                    newEvent = createWholeDayEvent(title, description);
-                }
+                newEvent = createCorrespondingEvent(title, description);
 
                 Frequency newFrequency = addFrequencyNewEvent();
                 if(newFrequency != null) newEvent.setFrequency(newFrequency);
@@ -408,6 +413,12 @@ public class CreateAppointmentControllers {
         return new WholeDayTask(title, description, dateTask);
     }
 
+    //Post: Creates the corresponding task according to users selected option.
+    private Task getCorrespondingTask(String title, String description){
+        if (checkWholeDayTask.isSelected()) return createWholeDayTask(title, description);
+        return createExpirationTimeTask(title, description);
+    }
+
     //Post: the task is added to the button to create task
     private void createButtonTask(){
         btnCreateTask.setOnAction(actionEvent -> {
@@ -415,19 +426,16 @@ public class CreateAppointmentControllers {
             String title = taskTitle.getText();
             verifyCharacterInTitle(title);
             String description = descriptionTask.getText();
+
             try {
-                if (checkWholeDayTask.isSelected()) {
-                    newTask = createWholeDayTask(title, description);
-                } else {
-                    newTask = createExpirationTimeTask(title, description);
-                }
+                newTask = getCorrespondingTask(title, description);
+
                 this.dateAppointmentStart = newTask.getExpirationDateTime();
                 this.appointmentCreated = newTask;
                 enableAlarmTab();
             } catch (NullPointerException ex) {
                 errorCreateAppointment("The required date and/or time is missing");
             }
-
         });
     }
 
@@ -454,10 +462,11 @@ public class CreateAppointmentControllers {
         } catch (NullPointerException ex) {
             messageControllers.error("The required date and/or time is missing");
         }
+
         return null;
     }
 
-    //Post: alarm is created.
+    //Post: Create corresponding alarm.
     private void createAlarm(String type) {
         LocalDateTime ringDateTime = configRingDateTime();
         if (ringDateTime == null) return;
@@ -497,9 +506,7 @@ public class CreateAppointmentControllers {
     //Post: event when the stage closes
     private void closeStageCreate(){
         createStage.setOnCloseRequest(event -> {
-            if (appointmentCreated != null) {
-                addAppointmentToCalendar();
-            }
+            if (appointmentCreated != null) addAppointmentToCalendar();
             createStage.close();
             appointmentCreated = null;
         });
