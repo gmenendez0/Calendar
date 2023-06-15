@@ -41,7 +41,7 @@ Finally, a very simple GUI was incorporated following the MVC architecture patte
 <img src="https://github.com/gmenendez0/Calendar/blob/main/doc/FileHandler/UML_File_Handler_Class_Diagram.png" alt="fileHandler class_diagram">
 
 ## GUI’s class diagram
-<img src="" alt="GUI class_diagram">
+<img src="https://github.com/gmenendez0/Calendar/blob/main/doc/GUI/GUI_Class_Diagram.drawio.png" alt="GUI class_diagram">
 
 ## OOP patterns used
 - Strategy
