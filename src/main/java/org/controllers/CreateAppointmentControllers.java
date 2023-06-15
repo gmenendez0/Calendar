@@ -194,7 +194,7 @@ public class CreateAppointmentControllers {
         this.calendar = calendar;
         this.createStage = createStage;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/createAppointment.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLviews/createAppointment.fxml"));
             fxmlLoader.setController(this);
             Scene thirdScene = new Scene(fxmlLoader.load());
             thirdScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());

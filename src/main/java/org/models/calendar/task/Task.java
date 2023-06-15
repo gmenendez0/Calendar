@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 
 public abstract class Task extends Appointment {
     protected LocalDateTime expirationDateTime;
+
     private final String type = "Task";
 
     public Task(String title, String description, LocalDateTime expirationDateTime) {
@@ -39,12 +40,15 @@ public abstract class Task extends Appointment {
         return this.expirationDateTime;
     }
 
+    //@inheritDoc
     @Override
     public String acceptVisitorDetailsDates(AppointmentDetailsVisitor visitor) {
         return visitor.detailsOfDatesTask(this.getExpirationDateTime());
     }
+
+    //@inheritDoc
     @Override
     public String acceptVisitorDetailsFrequency(AppointmentDetailsVisitor visitor){
-        return "Tasks are infrequent.";
+        return "";
     }
 }

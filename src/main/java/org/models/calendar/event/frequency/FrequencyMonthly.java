@@ -32,6 +32,7 @@ public class FrequencyMonthly extends Frequency {
         return dayTime;
     }
 
+    //@inheritDoc
     public String toString(){
         return "The frequency type is Monthly and your deadline is " + this.deadline.toString();
     }

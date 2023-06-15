@@ -76,4 +76,7 @@ public abstract class Frequency {
     //Post: returns the next repetition date with respect to the received date, or null if there is no next repetition.
     public abstract LocalDateTime nextRepetitionDateTime(LocalDateTime date);
 
+    //Post: Returns a string representation of the frequency
+    public abstract String toString();
+
 }

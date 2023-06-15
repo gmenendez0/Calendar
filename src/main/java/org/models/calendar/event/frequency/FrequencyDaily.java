@@ -36,6 +36,7 @@ public class FrequencyDaily extends Frequency {
         return dayTime;
     }
 
+    //@inheritDoc
     public String toString(){
         return "The frequency type is Daily and your deadline is " + this.deadline.toString() + ".\n Repeats every " + this.getDaysToAdd() + " days.";
     }

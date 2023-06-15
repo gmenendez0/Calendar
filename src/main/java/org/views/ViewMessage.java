@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 public class ViewMessage {
     @FXML
     private Stage messageStage = new Stage();
+
+    //Post: Creates error message.
     public void createMessage(String color, String message){
         Pane paneMessage = new Pane();
         paneMessage.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);

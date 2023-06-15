@@ -18,6 +18,7 @@ public class SoundAlarm extends Alarm {
         //Make sound algorithm...
     }
 
+    //Post: Returns a string representation of the alarm.
     public String toString(){
         return "Alarm Type: " + subtype + " | Ring Time: " + this.ringDateTime.toString();
     }

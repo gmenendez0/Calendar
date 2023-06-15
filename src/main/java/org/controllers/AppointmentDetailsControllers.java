@@ -43,7 +43,7 @@ public class AppointmentDetailsControllers {
     //Post: set the scene to display or a file warning.
     public void setUpViewDetailsConfig(Integer id, LocalDateTime start, LocalDateTime end, Calendar calendar) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/appointmentDetails.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLviews/appointmentDetails.fxml"));
             fxmlLoader.setController(this);
             Scene secondScene = new Scene(fxmlLoader.load());
             secondScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
@@ -58,7 +58,7 @@ public class AppointmentDetailsControllers {
     //Post: write the detail of the appointment alarms
     private String writeAlarms(Appointment appointment){
         List<Alarm> listAlarm = appointment.getAlarms();
-        if(listAlarm.isEmpty()) return "This " + appointment.getType() + " has not alarms.";
+        if(listAlarm.isEmpty()) return "This " + appointment.getType() + " has no alarms.";
         return listAlarm.stream().map(Object::toString).reduce("", (a, b) -> a + " " + b + "\n");
     }
 

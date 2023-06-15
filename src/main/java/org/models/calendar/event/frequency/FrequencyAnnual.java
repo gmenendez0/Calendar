@@ -34,6 +34,7 @@ public class FrequencyAnnual extends Frequency{
         return date.plus(this.yearsToAdd, ChronoUnit.YEARS);
     }
 
+    //@inheritDoc
     public String toString(){
         return "The frequency type is Annual and your deadline is " + this.deadline.toString();
     }

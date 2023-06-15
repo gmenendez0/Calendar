@@ -107,32 +107,34 @@ public abstract class Event extends Appointment {
         this.endingDateTime = endingDateTime;
     }
 
+    //@inheritDoc
     @Override
     public String acceptVisitorDetailsDates(AppointmentDetailsVisitor visitor) {
         return visitor.detailsOfDatesEvent(this.getStartDateTime(), this.endingDateTime);
     }
 
+    //@inheritDoc
     @Override
     public String acceptVisitorDetailsFrequency(AppointmentDetailsVisitor visitor){
-        if (!this.isRepeated()) return "This event has not frequency.";
+        if (!this.isRepeated()) return "This event does not repeat.";
         return visitor.detailsOfFrequencyEvent(frequency);
     }
 
-    @JsonIgnore
     //Post: Returns true if there is an event after the received date, false otherwise.
+    @JsonIgnore
     public boolean thereIsNextRepetition(LocalDateTime date){
         return this.frequency.hasNextRepetition(date);
     }
 
-    @JsonIgnore
     //Post: Returns the last repeated event s endingDateTime. If repetition is infinite, it will return null.
+    @JsonIgnore
     public LocalDateTime getLastRepetitionEndingDateTime(){
         LocalTime finalTime = this.endingDateTime.toLocalTime();
         return this.frequency.getDeadlineDateTime(finalTime);
     }
 
-    @JsonIgnore
     //Post: returns from the next repetition of the current event.
+    @JsonIgnore
     public abstract Event getNextRepetition();
 
     //Post: getter needed for persistence.

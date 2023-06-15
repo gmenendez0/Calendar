@@ -85,7 +85,7 @@ public class HomeControllers{
 
     //Post: Returns the root of the home view.
     private Parent getRoot() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLviews/home.fxml"));
         loader.setController(this);
         return loader.load();
     }
