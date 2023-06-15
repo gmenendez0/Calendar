@@ -15,8 +15,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class DetailsVisitorFrequencyEventTest {
-
     private Event event = new WholeDayEvent();
+
     private AppointmentDetailsVisitor visitor = new AppointmentDetailsVisitorImpl();
 
     @Test

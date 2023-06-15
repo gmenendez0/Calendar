@@ -18,7 +18,7 @@ public class DetailsVisitorDatesTaskTest {
 
     @Test
     public void visitorInExpirationTimeTaskTest(){
-        String expected = "The Expiration date of the alarm is 2023-06-14T00:00";
+        String expected = "The task expires on 2023-06-14T00:00.";
         LocalDateTime expiration = LocalDateTime.of(2023, 6, 14, 00,00);
         Task task = new ExpirationTimeTask("Title", "Description", expiration);
         String response = task.acceptVisitorDetailsDates(visitor);
@@ -27,7 +27,7 @@ public class DetailsVisitorDatesTaskTest {
 
     @Test
     public void visitorInWholeDayTaskTest(){
-        String expected = "The Expiration date of the alarm is 2023-06-15T23:59:59";
+        String expected = "The task expires on 2023-06-15T23:59:59.";
         LocalDate now = LocalDate.of(2023, 6, 15);
         Task task = new WholeDayTask("Title", "Description", now);
         String response = task.acceptVisitorDetailsDates(visitor);
