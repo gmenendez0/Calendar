@@ -21,6 +21,7 @@ import org.models.calendar.event.frequency.*;
 import org.models.calendar.task.ExpirationTimeTask;
 import org.models.calendar.task.Task;
 import org.models.calendar.task.WholeDayTask;
+import org.models.exceptions.CalendarException;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -38,7 +39,8 @@ public class CreateAppointmentControllers {
     final int FINAL_MINUTE = 59;
     final int FINAL_HOUR = 23;
     final int INDEX_TAB_ALARM = 2;
-
+    final int MAX_NUM_CHARACTER = 60;
+    private int idAlarm = 0;
     private Calendar calendar;
 
     private Appointment appointmentCreated;
@@ -50,7 +52,7 @@ public class CreateAppointmentControllers {
     private LocalDateTime dateAppointmentStart;
 
     @FXML
-    private final Stage createStage = new Stage();
+    private Stage createStage;
 
     @FXML
     private TabPane tabPaneCreate;
@@ -187,8 +189,9 @@ public class CreateAppointmentControllers {
     @FXML
     private Button btnFinish;
 
-    public void setupViewCreateAppointment(Calendar calendar) {
+    public void setupViewCreateAppointment(Calendar calendar, Stage createStage) {
         this.calendar = calendar;
+        this.createStage = createStage;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/createAppointment.fxml"));
             fxmlLoader.setController(this);
@@ -200,6 +203,19 @@ public class CreateAppointmentControllers {
         catch (IOException ex) {
             messageControllers.warningFile("Not found: 'createAppointment.fxml'");
         }
+    }
+
+    private void configEventInCreateView(){
+        configPaneCheck();
+        configSpinnerIntegerValue();
+        configComboBoxAlarms();
+        createButtonEvent();
+        createButtonTask();
+        createButtonAlarms();
+        closeStageCreate();
+        configFinishButton();
+        //configDatePickerEvent();
+        createStage.show();
     }
 
     private void configSpinnerFrequency(){
@@ -262,18 +278,6 @@ public class CreateAppointmentControllers {
         comboBoxAlarms.setItems(FXCollections.observableArrayList("Notification", "Sound", "Email"));
     }
 
-    private void configEventInCreateView(){
-        configPaneCheck();
-        configSpinnerIntegerValue();
-        configComboBoxAlarms();
-        createButtonEvent();
-        createButtonTask();
-        createButtonAlarms();
-        closeStageCreate();
-        configFinishButton();
-        createStage.show();
-    }
-
     private List<DayOfWeek> obtainListDaysOfTheWeek(){
         List<DayOfWeek> arrayWeek = new ArrayList<>();
         if (checkMonday.isSelected()) arrayWeek.add(DayOfWeek.MONDAY);
@@ -309,7 +313,11 @@ public class CreateAppointmentControllers {
         return newFrequency;
     }
 
-    private Event createPeriodTimeEvent(String title, String description) throws NullPointerException{
+    private void compareDatesAndTimes(LocalDateTime start, LocalDateTime end) throws CalendarException{
+        if (start.isAfter(end)) throw new CalendarException("The start of the event cannot exceed the end");
+    }
+
+    private Event createPeriodTimeEvent(String title, String description) throws NullPointerException, CalendarException {
         int hourStart = hourStartEvent.getValue();
         int minuteStart = minuteStartEvent.getValue();
         LocalDate startDate = startDateEvent.getValue();
@@ -322,6 +330,8 @@ public class CreateAppointmentControllers {
         LocalTime endTime = LocalTime.of(hourEnd, minuteEnd);
         LocalDateTime endDateTime = endDate.atTime(endTime);
 
+        compareDatesAndTimes(startDateTime, endDateTime);
+
         return new PeriodTimeEvent(title, description, startDateTime, endDateTime);
     }
 
@@ -331,11 +341,11 @@ public class CreateAppointmentControllers {
     }
 
     private void verifyCharacterInTitle(String title){
-        if (title.chars().count() > 60)  messageControllers.error("The title must not exceed 60 characters");
+        if (title.chars().count() > MAX_NUM_CHARACTER)  messageControllers.error("The title must not exceed 60 characters");
     }
 
-    private void errorCreateAppointment() {
-        messageControllers.error("The required date and/or time is missing");
+    private void errorCreateAppointment(String message) {
+        messageControllers.error(message);
     }
 
     private void createButtonEvent(){
@@ -358,7 +368,9 @@ public class CreateAppointmentControllers {
                 this.appointmentCreated = newEvent;
                 enableAlarmTab();
             } catch (NullPointerException ex) {
-                errorCreateAppointment();
+                errorCreateAppointment("The required date and/or time is missing");
+            } catch (CalendarException ex) {
+                errorCreateAppointment(ex.getMessage());
             }
 
         });
@@ -395,7 +407,7 @@ public class CreateAppointmentControllers {
                 this.appointmentCreated = newTask;
                 enableAlarmTab();
             } catch (NullPointerException ex) {
-                errorCreateAppointment();
+                errorCreateAppointment("The required date and/or time is missing");
             }
 
         });
@@ -430,14 +442,15 @@ public class CreateAppointmentControllers {
         if (ringDateTime == null) return;
 
         Alarm newAlarm = switch (type) {
-            case "Email" -> new EmailAlarm(appointmentCreated.getId(), ringDateTime);
-            case "Notification" -> new NotificationAlarm(appointmentCreated.getId(), ringDateTime);
-            case "Sound" -> new SoundAlarm(appointmentCreated.getId(), ringDateTime);
+            case "Email" -> new EmailAlarm(idAlarm, ringDateTime);
+            case "Notification" -> new NotificationAlarm(idAlarm, ringDateTime);
+            case "Sound" -> new SoundAlarm(idAlarm, ringDateTime);
             default -> null;
         };
 
-        if (type.equals("Notification")) appointmentAlarmsControllers.active(newAlarm, calendar);
+        if (type.equals("Notification")) appointmentAlarmsControllers.active(newAlarm, appointmentCreated);
         this.appointmentCreated.addAlarm(newAlarm);
+        idAlarm++;
         messageControllers.success("Added an alarm to " + appointmentCreated.getType());
     }
 
@@ -460,11 +473,11 @@ public class CreateAppointmentControllers {
 
     private void closeStageCreate(){
         createStage.setOnCloseRequest(event -> {
-            event.consume();
             if (appointmentCreated != null) {
                 addAppointmentToCalendar();
             }
             createStage.close();
+            appointmentCreated = null;
         });
     }
 
@@ -472,6 +485,7 @@ public class CreateAppointmentControllers {
         btnFinish.setOnAction(event -> {
             addAppointmentToCalendar();
             createStage.close();
+            appointmentCreated = null;
         });
     }
 }

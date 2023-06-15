@@ -259,4 +259,131 @@
   "type" : "Event",
   "subtype" : "WholeDayEvent",
   "eventDate" : [ 2023, 6, 18 ]
+}, {
+  "id" : 18,
+  "title" : "Prueba si recarga al crear",
+  "description" : "b jwfikoaq",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 22, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 19,
+  "title" : "Actualiza Home",
+  "description" : "A ver si actualiza el home al agregar esta tarea",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 16, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 20,
+  "title" : "wfnioqa",
+  "description" : "fnwikpao",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 29, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 21,
+  "title" : "Tarea de Hoyu",
+  "description" : "mwfgoqap",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 14, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 22,
+  "title" : "Evento de hoy",
+  "description" : "fwa",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 14, 0, 0 ],
+  "endingDateTime" : [ 2023, 6, 14, 23, 59, 59 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "WholeDayEvent",
+  "eventDate" : [ 2023, 6, 14 ]
+}, {
+  "id" : 25,
+  "title" : "Prueba def Alarma",
+  "description" : "Espero que funcione",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 15, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 25,
+  "title" : "Prueba def Alarma",
+  "description" : "Espero que funcione",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 15, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 25,
+  "title" : "Prueba def Alarma",
+  "description" : "Espero que funcione",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "expirationDateTime" : [ 2023, 6, 15, 1, 1 ],
+  "type" : "Task",
+  "subtype" : "ExpirationTimeTask"
+}, {
+  "id" : 26,
+  "title" : "",
+  "description" : "",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ ],
+  "startDateTime" : [ 2023, 6, 23, 2, 1 ],
+  "endingDateTime" : [ 2023, 6, 23, 3, 1 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 27,
+  "title" : "dwa",
+  "description" : "fwa",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ {
+    "subtype" : "NotificationAlarm",
+    "id" : -1,
+    "ringDateTime" : [ 2023, 6, 14, 21, 6 ]
+  } ],
+  "startDateTime" : [ 2023, 6, 14, 21, 7 ],
+  "endingDateTime" : [ 2023, 6, 30, 1, 1 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "PeriodTimeEvent"
+}, {
+  "id" : 28,
+  "title" : "b sdnk",
+  "description" : "nefvgio",
+  "completed" : false,
+  "destroyed" : false,
+  "alarms" : [ {
+    "subtype" : "NotificationAlarm",
+    "id" : 0,
+    "ringDateTime" : [ 2023, 6, 14, 22, 26 ]
+  } ],
+  "startDateTime" : [ 2023, 6, 14, 22, 27 ],
+  "endingDateTime" : [ 2023, 6, 15, 1, 1 ],
+  "frequency" : null,
+  "type" : "Event",
+  "subtype" : "PeriodTimeEvent"
 } ]

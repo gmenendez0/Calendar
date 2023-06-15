@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.models.calendar.Calendar;
+import org.models.calendar.appointment.Appointment;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -33,7 +35,7 @@ public class HomeControllers{
     private Stage secondStage = new Stage();
 
     @FXML
-    private ListView<Text> appointmentList;
+    private ListView<GridPane> appointmentList;
 
     @FXML
     private Button createButton;
@@ -95,22 +97,29 @@ public class HomeControllers{
         appointmentList.setItems(appointmentsToRender);
     }
 
-    private void setEventDetails(Text appointmentText, LocalDateTime start, LocalDateTime end){
+    private void setEventDetails(GridPane appointmentText, LocalDateTime start, LocalDateTime end){
         appointmentText.setOnMouseClicked(mouseEvent -> appointmentDetailsControllers.setUpViewDetailsConfig(Integer.parseInt(appointmentText.getId()), start, end, calendar));
     }
 
+    private GridPane createContainerForText(Appointment appointment, int id){
+        GridPane containerText = new GridPane();
+        Text text = new Text(appointment.formatToString());
+        containerText.setId(Integer.toString(id));
+        GridPane.setFillWidth(text, true);
+        containerText.add(text, 0, 0);
+        return containerText;
+    }
+
     //Post: Returns an observable list of appointments between the given dates in text format.
-    private ObservableList<Text> getAppointmentsBetweenStringFormatted(LocalDateTime start, LocalDateTime end){
+    private ObservableList<GridPane> getAppointmentsBetweenStringFormatted(LocalDateTime start, LocalDateTime end){
         var appointments = calendar.getAppointmentsBetween(start, end);
-        ObservableList<Text> appointmentsToRender = FXCollections.observableArrayList();
+        ObservableList<GridPane> appointmentsToRender = FXCollections.observableArrayList();
 
         int idNum = 0;
-
         for(var appointment : appointments){
-            Text text = new Text(appointment.formatToString());
-            text.setId(Integer.toString(idNum));
-            setEventDetails(text, start, end);
-            appointmentsToRender.add(text);
+            GridPane gridPane = createContainerForText(appointment, idNum);
+            setEventDetails(gridPane, start, end);
+            appointmentsToRender.add(gridPane);
             idNum++;
         }
 
@@ -125,9 +134,14 @@ public class HomeControllers{
         timeSelectorButtonClicked();
     }
 
+    private void closeSecondStage(){
+        secondStage.setOnHidden(eventHidden -> setUpInitialHomeView());
+    }
+
     //Post: Sets the "create" button behavior.
     private void createButtonClicked(){
-        createButton.setOnAction(actionEvent -> createAppointmentControllers.setupViewCreateAppointment(calendar));
+        createButton.setOnAction(actionEvent -> createAppointmentControllers.setupViewCreateAppointment(calendar, secondStage));
+        closeSecondStage();
     }
 
     //Post: Sets the "prev" button behavior.

@@ -3,7 +3,7 @@ package org.models.file_handler;
 import org.models.calendar.appointment.Appointment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.models.exceptions.file_handler.SerializationInJsonException;
+import org.models.exceptions.SerializationInJsonException;
 
 import java.io.*;
 import java.util.ArrayList;

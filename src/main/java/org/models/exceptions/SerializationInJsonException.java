@@ -1,4 +1,4 @@
-package org.models.exceptions.file_handler;
+package org.models.exceptions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 public class SerializationInJsonException extends JsonProcessingException {

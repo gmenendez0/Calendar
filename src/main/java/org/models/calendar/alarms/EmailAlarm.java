@@ -20,6 +20,6 @@ public class EmailAlarm extends Alarm {
     }
 
     public String toString(){
-        return "Alarm Type: " + subtype + " and it will ring in " + this.ringDateTime.toString();
+        return "Alarm Type: " + subtype + " | Ring Time: " + this.ringDateTime.toString();
     }
 }
