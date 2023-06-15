@@ -7,11 +7,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class ViewMessage {
+public class Message{
     @FXML
     private Stage messageStage = new Stage();
 
-    //Post: Creates error message.
+    //Post: Sets up the default message view.
     public void createMessage(String color, String message){
         Pane paneMessage = new Pane();
         paneMessage.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
