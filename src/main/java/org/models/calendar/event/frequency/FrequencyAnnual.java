@@ -36,6 +36,7 @@ public class FrequencyAnnual extends Frequency{
 
     //@inheritDoc
     public String toString(){
-        return "The frequency type is Annual and your deadline is " + this.deadline.toString();
+        if(this.hasADeadline()) return "The frequency type is Annual and your deadline is " + this.deadline.toString();
+        return "The frequency type is Annual.";
     }
 }
